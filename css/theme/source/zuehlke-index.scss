@@ -1,0 +1,113 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,800,700,600);
+
+@font-face {
+  font-family: "Zuehlke";
+  src: url("../../../lib/font/zuehlke/zuehlke-webfont.eot?") format("eot"),
+  url("../../../lib/font/zuehlke/zuehlke-webfont.woff2") format("woff2"),
+  url("../../../lib/font/zuehlke/zuehlke-webfont.woff") format("woff"),
+  url("../../../lib/font/zuehlke/zuehlke-webfont.ttf") format("truetype"),
+  url("../../../lib/font/zuehlke/zuehlke-webfont.svg") format("svg");
+}
+
+$zuehlkeOrange: #ff820a;
+$tileBackground: rgba(50, 50, 50, .8);
+$mainMargin: 15px;
+$logoSize: 8vw;
+$minLogoSize: 100px;
+$maxLogoSize: 200px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', 'sans-serif';
+  display: flex;
+  background-size: cover;
+  background: url('../../../img/bg.jpg') center, center;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: $minLogoSize + $mainMargin $mainMargin 0;
+
+  &::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: $logoSize;
+    width: $logoSize;
+    height: $logoSize;
+    min-width: $minLogoSize;
+    min-height: $minLogoSize;
+    max-width: $maxLogoSize;
+    max-height: $maxLogoSize;
+
+    background: url('../../img/zuehlke_logo.jpg');
+    background-size: contain;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Zuehlke', 'sans-serif';
+    color: $zuehlkeOrange;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  header {
+    flex-basis: 100%;
+    margin: $mainMargin;
+    background-color: $tileBackground;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  section {
+    flex-basis: calc(25% - 2 * #{$mainMargin});
+    min-width: 200px;
+    color: white;
+    margin: $mainMargin;
+    border-radius: 5px;
+    flex-grow: 1;
+    background: $tileBackground;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 15px 15px 15px rgba(0, 0, 0, .4);
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      text-decoration: none;
+      color: inherit;
+      padding: $mainMargin;
+
+      &:visited {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    h2 {
+      margin: 0 0 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+  }
+}
