@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>09 Form | Essential React</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg" />
+    <link rel="stylesheet" href="../dist/reset.css" />
+    <link rel="stylesheet" href="../dist/reveal.css" />
+    <link rel="stylesheet" href="../css/theme/zuehlke.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="deck-slide">
+          <h1>
+            Essential React <br />
+            09 Form
+          </h1>
+        </section>
+
+        <section>
+          <section>
+            <h2>Different Form Tags</h2>
+            <ul>
+              <li>input / textarea</li>
+              <li>select</li>
+              <li>checkbox</li>
+              <li>radio</li>
+            </ul>
+          </section>
+          <section>
+            <h2>input / textarea</h2>
+            <pre>
+              <code class="hljs html" data-trim contenteditable data-noescape>
+                &lt;input
+                    value={value}
+                    onChange={e => { setValue(e.target.value) }}
+                /&gt
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>select</h2>
+            <pre>
+              <code class="hljs html" data-trim contenteditable data-noescape>
+                &lt;select
+                  value={value}
+                  onChange={e => { setValue(e.target.value) }}
+                &gt;
+                  &lt;option value="grapefruit"&gt;Grapefruit&lt;/option&gt;
+                  &lt;option value="lime"&gt;Lime&lt;/option&gt;
+                &lt;/select&gt;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>checkbox</h2>
+            <pre>
+              <code class="hljs html" data-trim contenteditable data-noescape>
+                &lt;input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={(e) => { setChecked(e.target.checked) }} /&gt;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>radio</h2>
+            <pre>
+              <code class="hljs html" data-trim contenteditable data-noescape>
+                &lt;input
+                  type="radio"
+                  name="preference"
+                  value="tomato"
+                  checked={option === "tomato"}
+                  onChange={(e) => { setOption(e.target.value) }}
+                /&gt;
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Controlled vs. Uncontrolled</h2>
+          </section>
+          <section>
+            <h2>Controlled</h2>
+            <p>Update state with each change event</p>
+            <pre>
+                <code class="hljs html" data-trim contenteditable data-noescape>
+                    &lt;input
+                      value={value}
+                      onChange={e => { setValue(e.target.value) }}
+                    /&gt
+                </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>Uncontrolled</h2>
+            <p>Read values only on blur / submit</p>
+            <pre>
+                <code class="hljs html" data-trim contenteditable data-noescape>
+                    &lt;input
+                      defaultValue={value}
+                    /&gt
+                </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Form Libraries</h2>
+          <p>Form handling can be quite repetitive, the usage of a helper library should therefore be considered.</p>
+          <ul>
+            <li>React Hook Form</li>
+            <li>Formik</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
