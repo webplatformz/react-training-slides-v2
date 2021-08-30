@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>03 Demo App | Essential React</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>Essential React <br/>
+                03 Demo App</h1>
+        </section>
+
+        <section>
+            <h2>Overview</h2>
+            <p>Simple Application to see different features in action using the open PokeAPI.</p>
+        </section>
+
+        <section>
+            <section>
+                <h2>PokeAPI</h2>
+                <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">
+                    Documentation
+                </a>
+            </section>
+            <section>
+                <h2>List</h2>
+                <a href="https://pokeapi.co/api/v2/pokemon?limit=5" target="_blank" rel="noopener noreferrer">
+                    https://pokeapi.co/api/v2/pokemon?limit=5
+                </a>
+                <pre>
+                    <code class="hljs json" data-trim contenteditable data-noescape>
+                        {
+                            "count": 1118,
+                            "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
+                            "previous": null,
+                            "results": [
+                                {
+                                    "name": "bulbasaur",
+                                    "url": "https://pokeapi.co/api/v2/pokemon/1/"
+                                },
+                                ...
+                            ]
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Detail</h2>
+                <a href="https://pokeapi.co/api/v2/pokemon/bulbasaur" target="_blank" rel="noopener noreferrer">
+                    https://pokeapi.co/api/v2/pokemon/bulbasaur
+                </a>
+                <pre>
+                    <code class="hljs json" data-trim contenteditable data-noescape>
+                        {
+                            "name": "bulbasaur",
+                            sprites: {
+                                "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png",
+                                ...
+                            },
+                            ...
+                        }
+                    </code>
+                </pre>
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="../dist/reveal.js"></script>
+<script src="../plugin/notes/notes.js"></script>
+<script src="../plugin/markdown/markdown.js"></script>
+<script src="../plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+    });
+</script>
+</body>
+</html>
