@@ -27,7 +27,241 @@
             07 Data Fetching
           </h1>
         </section>
-        
+        <section>
+          <section>
+            <p>We want to show a list of pokemon in our app</p>
+            <p><img src="../img/data_fetching_goal.png" /></p>
+          </section>
+          <section>
+            <p>
+              <a
+                href="https://pokeapi.co/api/v2/pokemon?limit=5"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://pokeapi.co/api/v2/pokemon?limit=5
+              </a>
+            </p>
+            <pre>
+            <code class="hljs json" data-trim data-noescape>
+                {
+                  "count": 1118,
+                  "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
+                  "previous": null,
+                  "results": [
+                    {
+                      "name": "bulbasaur",
+                      "url": "https://pokeapi.co/api/v2/pokemon/1/"
+                    },
+                    &hellip;
+                  ]
+                }
+            </code>
+        </pre>
+          </section>
+        </section>
+        <section>
+          <section><h2>What to use for data fetching?</h2></section>
+          <section>
+            <ul>
+              <li>React does <em>not</em> provide data fetching</li>
+              <li><span class="warn">fetch:</span> standard browser API</li>
+              <li>&hellip; or any data fetching library</li>
+            </ul>
+          </section>
+          <section>
+            <pre>
+            <code class="hljs typescript" data-trim data-noescape>
+                // Send the request and wait for the response
+                const response = await fetch('http://example.com/data');
+
+                // Did we get a response status code other than 2XX?
+                if (!response.ok) {
+                  throw new Error("Could not fetch data!");
+                }
+
+                // Deserialize the JSON response body
+                const data = await response.json();
+            </code>
+        </pre>
+          </section>
+        </section>
+        <section>
+          <section><h2>How do we use fetch in React?</h2></section>
+          <section>
+            <p>Does this work?</p>
+            <pre><code class="hljs jsx" data-trim data-line-numbers="|2,5">
+               function MyComponent() {
+                 const response = await fetch('/user');
+                 if (!response.ok) throw new Error('Could not fetch data!');   
+
+                 const user = await response.json();   
+                 
+                 return &lt;p&gt;{user.name}&lt;/p&gt;;
+               }        
+            </code></pre>
+            <p class="fragment">
+              <span class="warn">Does not work!</span> &ndash; The render
+              function is not async.
+            </p>
+          </section>
+          <section>
+            <p>Well, how about this?</p>
+            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12">
+               function MyComponent() {
+                 let user;
+
+                 fetch('/user').then(response => {
+                   if (!response.ok) throw new Error('Could not fetch data!');
+
+                   response.json().then(u => {
+                     user = u;
+                   });
+                 });   
+                 
+                 return &lt;p&gt;{user?.name}&lt;/p&gt;;
+               }</code></pre>
+            <p class="fragment">
+              <span class="warn">Does not work!</span> &ndash; When the promise
+              resolves, the render function already ran.
+            </p>
+          </section>
+          <section>
+            <p>
+              Fetching data asynchronously requires state management &rarr;
+              <span class="warn">useState</span>
+            </p>
+
+            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12">
+              function MyComponent() {
+                const [user, setUser] = useState();
+
+                fetch('/user').then(response => {
+                  if (!response.ok) throw new Error('Could not fetch data!');
+
+                  response.json().then(u => {
+                    setState(u);
+                  });
+                });   
+                
+                return &lt;p&gt;{user?.name}&lt;/p&gt;;
+              }</code></pre>
+
+              <p class="fragment">
+                <span class="warn">Works &ndash; but still bad!</span> &ndash; Side effects should not be executed in the render function.
+              </p>
+          </section>
+          <section>
+            <p>Why we should <em>not</em> run side effects in the render function</p>
+            <ul>
+              <li class="fragment">We don't want the side effect to execute with every render.</li>
+              <li class="fragment">The render function might be executed anytime &ndash; we don't control it.</li>
+              <li class="fragment">In the render function we just want to render and not spend computing on other tasks.</li>
+            </ul>
+          </section>
+          <section>
+            <p>The <span class="warn">useEffect</span> hook</p>
+            <pre>
+              <code class="hljs jsx" data-trim data-noescape>
+                 import { useEffect } from "react";
+
+                 &hellip;
+
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   }, [dependency1, dependency2]);
+              </code>
+          </pre>
+          </section>
+          <section data-auto-animate>
+            <p data-id="code"><pre><code class="hljs jsx" data-trim data-noescape data-line-numbers="|5">
+              
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   }, [dependency1, dependency2]);
+              </code></pre></p>
+              <p>The effect is executed initially and whenever a dependency changes.</p>
+          </section>
+          <section data-auto-animate>
+            <p data-id="code"><pre><code class="hljs jsx" data-trim data-noescape data-line-numbers="5">
+              
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   }, []);
+              </code></pre></p>
+              <p>When passing an empty array, the effect is executed only on first render.</p>
+          </section>
+          <section data-auto-animate>
+            <p data-id="code"><pre><code class="hljs jsx" data-trim data-noescape data-line-numbers="5">
+              
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   });
+              </code></pre></p>
+              <p>If no depencencies are passed, the effect is executed with every render.</p>
+          </section>
+          <section>
+            <p>Let's call this API correctly!</p>
+            <p><pre><code class="hljs jsx" data-trim data-line-numbers="|4-12|12|">
+              function MyComponent() {
+                const [user, setUser] = useState();
+
+                useEffect(() => {
+                  fetch('/user').then(response => {
+                    if (!response.ok) throw new Error('Could not fetch data!');
+  
+                    response.json().then(u => {
+                      setState(u);
+                    });
+                  }); 
+                }, []);
+                
+                return &lt;p&gt;{user?.name}&lt;/p&gt;;
+              }
+              </code></pre></p>
+
+              <p class="fragment"><em>Wait&hellip;</em> but what about <span class="warn">async-await?</span></p>
+          </section>
+          <section>
+            <p>We cannot make the passed function async because</p>
+            <p><pre><code class="hljs jsx" data-trim data-line-numbers="|4-12|12|">
+              function MyComponent() {
+                const [user, setUser] = useState();
+
+                useEffect(() => {
+                  fetch('/user').then(response => {
+                    if (!response.ok) throw new Error('Could not fetch data!');
+  
+                    response.json().then(u => {
+                      setState(u);
+                    });
+                  }); 
+                }, []);
+                
+                return &lt;p&gt;{user?.name}&lt;/p&gt;;
+              }
+              </code></pre></p>
+
+              <p class="fragment"><em>Wait&hellip;</em> but what about <span class="warn">async-await?</span></p>
+          </section>
+        </section>
+        <section>
+          <h2>Exercise</h2>
+
+          <p>Show a list of pokemon.</p>
+          <p><img src="../img/data_fetching_goal.png" /></p>
+        </section>
+        <section>
+          <h2>Unsubscribe</h2>
+        </section>
       </div>
     </div>
 
