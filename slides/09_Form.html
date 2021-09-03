@@ -108,7 +108,7 @@
 
           <section>
             <h2>Uncontrolled</h2>
-            <p>Read values only on blur / submit</p>
+            <p>Read values only on blur / submit to prevent needless re-renders.</p>
             <pre>
                 <code class="hljs html" data-trim contenteditable data-noescape>
                     &lt;input
@@ -116,16 +116,40 @@
                     /&gt
                 </code>
             </pre>
+            <div class="fragment tip">
+              To leverage uncontrolled form fields, using a library is advised
+            </div>
           </section>
         </section>
 
         <section>
-          <h2>Form Libraries</h2>
-          <p>Form handling can be quite repetitive, the usage of a helper library should therefore be considered.</p>
-          <ul>
-            <li>React Hook Form</li>
-            <li>Formik</li>
-          </ul>
+          <section>
+            <h2>Form Libraries</h2>
+            <p>Form handling can be quite repetitive, the usage of a helper library should therefore be considered.</p>
+            <ul>
+              <li>React Hook Form</li>
+              <li>Formik</li>
+            </ul>
+          </section>
+          <section>
+            <h2>React Hook Form</h2>
+            <pre>
+              <code class="hljs javascript" data-trim contenteditable data-noescape>
+                const {
+                  register,
+                  handleSubmit,
+                } = useForm();
+              </code>
+            </pre>
+            <pre>
+              <code class="hljs html" data-trim contenteditable data-noescape>
+                &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+                  &lt;input defaultValue="test" {...register("example")} /&gt;
+                  &lt;input type="submit" /&gt;
+                &lt;/form&gt;
+              </code>
+            </pre>
+          </section>
         </section>
       </div>
     </div>
