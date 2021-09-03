@@ -41,6 +41,10 @@
                 </pre>
             </section>
             <section>
+                <h2>Exercise</h2>
+                <p>TODO</p>
+            </section>
+            <section>
                 <h3>Apply / Use component in a consumer</h3>
                 <p>Multiline JSX should always be wrapped in braces. Single line doesn't.</p>
                 <span class="code">App.tsx</span>
@@ -55,6 +59,11 @@
                         export default App;
                     </code>
                 </pre>
+                <div class="fragment tip">Don't build monoliths. Split your components!</div>
+            </section>
+            <section>
+                <h2>Exercise</h2>
+                <p>TODO</p>
             </section>
         </section>
         <section>
@@ -134,27 +143,45 @@
                 </pre>
             </section>
             <section>
-            <h2>Cheat Sheet</h2>
-            <ul>
-                <li><span class="code">getBy*</span> - verify that an element/node is present at this very moment. Throws an error fi element/node is not found.</li>
-                <li><span class="code">queryBy*</span>  - similar to <span class="code">getBy*</span>, but will not throw an error if the element/node is absent.</li>
-                <li><span class="code">findBy*</span>  - verify that an element will be present, e.g. upon completion of an asynchronous API-Call</li>
-            </ul>
-            <p><a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries here</a></p>
-        </section>
+                <h2>Cheat Sheet</h2>
+                <ul>
+                    <li><span class="code">getBy*</span> - verify that an element/node is present at this very moment.
+                        Throws an error fi element/node is not found.
+                    </li>
+                    <li><span class="code">queryBy*</span> - similar to <span class="code">getBy*</span>, but will not
+                        throw an error if the element/node is absent.
+                    </li>
+                    <li><span class="code">findBy*</span> - verify that an element will be present, e.g. upon completion
+                        of an asynchronous API-Call
+                    </li>
+                </ul>
+                <p><a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries
+                    here</a></p>
+            </section>
+            <section>
+                <h2>Exercise</h2>
+                <p>TODO</p>
+            </section>
         </section>
         <section>
-            <h2>Virtual DOM</h2>
-            <p>Replacing and rendering the whole real DOM is costly!</p>
-            <p>Virtual DOM is a representation of the actual DOM</p>
-            <p>Its purpose is to identify which parts of the real DOM need to be changed upon changes, by comparing the
-                new virtual DOM result against the previous one.</p>
-            <p>The delta then gets applied on the real DOM.<br/>E.g. only one element gets updated within a long list
-                instead of the whole list.</p>
+            <section>
+                <h2>Virtual DOM</h2>
+                <img src="../img/virtual-dom.png" style="max-width: 70%"/>
+                <a href="https://www.oreilly.com/library/view/learning-react-native/9781491929049/ch02.html" target="_blank"
+                   rel="noopener noreferrer">https://www.oreilly.com/library/view/learning-react-native/9781491929049/ch02.html</a>
+            </section>
+            <section>
+                <h3>Summary</h3>
+                <p class="fragment">Replacing and rendering the whole real DOM is costly!</p>
+                <p class="fragment">Virtual DOM is a representation of the actual DOM</p>
+                <p class="fragment">Its purpose is to identify which parts of the real DOM need to be changed upon changes, by comparing the new virtual DOM result against the previous one.</p>
+                <p class="fragment">The delta then gets applied on the real DOM.<br/>E.g. only one element gets updated within a long list instead of the whole list.</p>
+            </section>
         </section>
         <section>
             <h2>List</h2>
-            <p>To render a list, we apply the <span class="code">map</span> function on a list to produce HTML-Elements</p>
+            <p>To render a list, we apply the <span class="code">map</span> function on a list to produce HTML-Elements
+            </p>
             <p>Each list item shall have a unique <span class="code">key</span></p>
             <pre>
                 <code class="hljs javascript" data-trim data-noescape>
@@ -174,8 +201,11 @@
         <section>
             <h2>Exercise</h2>
             <ol>
-                <li>Create a (hard-coded) <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of Pokémons</a></li>
-                <li>The representation of the list item shall be rendered in a different dumb component than the list itself</li>
+                <li>Create a (hard-coded) <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of
+                    Pokémon</a></li>
+                <li>The representation of the list item shall be rendered in a different dumb component than the list
+                    itself
+                </li>
                 <li>Stretch-Goal: Test your components with React-Testing-Library</li>
             </ol>
         </section>

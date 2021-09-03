@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>12 Various | Essential React</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>Essential React <br/>
+                12 Various</h1>
+        </section>
+        <section>
+            <h2>browserslist</h2>
+            <p>The browserslist configuration controls the outputted JavaScript so that the emitted code will be
+                compatible with the browsers specified.</p>
+            <p>Polyfills still need to be added manually!</p>
+        </section>
+        <section>
+            <h2>ESLint configuration</h2>
+            <p>Multiple configurations and plugins can be configured in the <span class="code">extends</span> field
+                value.</p>
+            <p>If multiple configurations or plugins specify contradicting values for the same rule, the latter will
+                be applied.</p>
+            <p>Rules can be overridden in the <span class="code">rules</span> field value.</p>
+        </section>
+    </div>
+</div>
+
+<script src="../dist/reveal.js"></script>
+<script src="../plugin/notes/notes.js"></script>
+<script src="../plugin/markdown/markdown.js"></script>
+<script src="../plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>
