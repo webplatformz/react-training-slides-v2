@@ -37,16 +37,16 @@
             </section>
             <section>
                 <h3><span class="warn">useContext</span> hook</h3>
-                <p>Must be created through <span class="code">React.createContext(&hellip;)</span></p>
-                <p>Must be provided in an ancestor component through <span class="code"></span></p>
-                <pre>
+                <p class="fragment">Must be created through <span class="code">React.createContext(&hellip;)</span></p>
+                <p class="fragment">Must be provided in an ancestor component through <span class="code"></span></p>
+                <pre class="fragment">
                     <code class="hljs html" data-trim data-noescape>
                         &lt;YourContext.Provider value={&hellip;}&gt;
                             &hellip; &lt;!-- child components --&gt;
                         &lt;YourContext.Provider&gt;
                     </code>
                 </pre>
-                <p>Can be consumed within any descendant component through <span class="code">useContext(YourContext)</span></p>
+                <p class="fragment">Can be consumed within any descendant component through <span class="code">useContext(YourContext)</span></p>
             </section>
         </section>
         <section>
@@ -62,7 +62,7 @@
                 <h2>Solution</h2>
                 <p> <span class="code">user.context.ts</span></p>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         import { createContext } from "react";
 
                         type UserContextValue = {
@@ -83,7 +83,7 @@
                 <h3>Solution continued</h3>
                 <p> <span class="code">Profile.tsx</span></p>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         import { useContext } from "react";
                         import UserContext from "../../service/user/user.context";
 
@@ -108,7 +108,7 @@
                 <h3>Solution continued</h3>
                 <p> <span class="code">App.tsx</span></p>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         import { useContext } from "react";
                         import UserContext from "../../service/user/user.context";
 
@@ -129,7 +129,6 @@
                     </code>
                 </pre>
             </section>
-
         </section>
         <section>
             <section>
@@ -145,9 +144,9 @@
             </section>
             <section>
                 <h3><span class="warn">useReducer</span> hook</h3>
-                <p>Takes a reducer function and an initial state</p>
-                <p>Returns an array with two values, the current state and a dispatch function</p>
-                <pre>
+                <p class="fragment">Takes a reducer function and an initial state</p>
+                <p class="fragment">Returns an array with two values, the current state and a dispatch function</p>
+                <pre class="fragment">
                     <code class="hljs html" data-trim data-noescape>
                         const [state, dispatch] = useReducer(reducer, initialState);
                     </code>
