@@ -179,6 +179,51 @@
                 <li>Stretch-Goal: Test your components with React-Testing-Library</li>
             </ol>
         </section>
+        <section>
+            <section>
+                <h2>Solution</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        import PokeListEntry from "../../components/poke-list-entry/PokeListEntry";
+
+                        function PokeList() {
+                          const pokemons = [&hellip;];
+                          return (
+                            &lt;&gt;
+                              {pokemons.map((pokemon) => (
+                                &lt;PokeListEntry
+                                    key={pokemon.name}
+                                    name={pokemon.name}
+                                /&gt;
+                              ))}
+                            &lt;/&gt;
+                          );
+                        }
+
+                        export default PokeList;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        type Props = {
+                          name: string;
+                        };
+
+                        function PokeListEntry({ name }: Props) {
+                          return (
+                            &lt;div&gt;
+                              {name}
+                            &lt;/div&gt;
+                          );
+                        }
+
+                        export default PokeListEntry;
+                    </code>
+                </pre>
+            </section>
+        </section>
     </div>
 </div>
 
