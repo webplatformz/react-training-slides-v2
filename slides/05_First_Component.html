@@ -95,7 +95,9 @@
                 <pre>
                     <code class="hljs javascript" data-trim data-noescape>
                       it('should render correct name', () => {
-                        const { getByText } = render(<Greeting name="React Master" />);
+                        const { getByText } = render(
+                            &lt;Greeting name="React Master" /&gt;
+                        );
                         expect(getByText("Hello React Master")).toBeInTheDocument();
                       });
                     </code>
@@ -111,7 +113,7 @@
                         };
 
                         function Greeting({name = 'World'}: Props) {
-                            return <div>Hello {name}</div>;
+                            return &lt;div&gt;Hello {name}&lt;/div&gt;;
                         }
 
                         export default Greeting;
@@ -125,7 +127,7 @@
                     <code class="hljs javascript" data-trim data-noescape>
                       it('should render correct name', () => {
                         const name = 'React Master';
-                        const { getByText } = render(<Greeting name={name} />);
+                        const { getByText } = render(&lt;Greeting name={name} /&gt;);
                         expect(getByText(`Hello ${name}`)).toBeInTheDocument();
                       });
                     </code>
@@ -152,7 +154,30 @@
         </section>
         <section>
             <h2>List</h2>
-            <p>TODO</p>
+            <p>To render a list, we apply the <span class="code">map</span> function on a list to produce HTML-Elements</p>
+            <p>Each list item shall have a unique <span class="code">key</span></p>
+            <pre>
+                <code class="hljs javascript" data-trim data-noescape>
+                    function List() {
+                        const items = ['Apple', 'Orange', 'Mango'];
+                        return (
+                            &lt;ul&gt;
+                                {items.map(item => &lt;li key={item}&gt;{item}&lt;/li&gt;)}
+                            &lt;/ul&gt;
+                        )
+                    }
+
+                    export default List;
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h2>Exercise</h2>
+            <ol>
+                <li>Create a (hard-coded) list of Pokémons</li>
+                <li>The representation of the list item shall be rendered in a different dumb component than the list itself</li>
+                <li>Stretch-Goal: Test your components with React-Testing-Library</li>
+            </ol>
         </section>
     </div>
 </div>
