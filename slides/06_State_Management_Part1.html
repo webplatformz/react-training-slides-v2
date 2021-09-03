@@ -29,16 +29,16 @@
         </section>
         <section>
           <p>Let's build an app!</p>
-          <img src="../img/state_management_part_1_goal.png">
+          <img src="../img/state_management_part_1_goal.png" />
 
           <p>How can this be achieved?</p>
         </section>
         <section>
           <section>
-            <p>
-              The <span class="warn">useState</span> hook for component-level
-              state management
-            </p>
+            <h2>How to handle component-level state</h2>
+          </section>
+          <section>
+            <p><span class="warn">useState</span> hook</p>
             <pre>
                 <code class="hljs jsx" data-trim contenteditable data-noescape>
 import { useState } from "react";
@@ -65,7 +65,7 @@ import { useState } from "react";
             </pre>
             <ul>
               <li>The variable contains the current value</li>
-              <li>The set<em>XY</em> function updates the state</li>
+              <li>The <span class="warn">set<em>XY</em></span> function updates the state</li>
             </ul>
           </section>
           <section>
@@ -93,21 +93,52 @@ import { useState } from "react";
           </section>
         </section>
         <section>
-          <h2>Simple Input</h2>
+          <section><h2>How to handle input</h2></section>
+          <section>
+            <p>The <span class="warn">onChange</span> prop is a function which is
+            called when the input is changed.</p>
 
-          TODO
+            <pre>
+            <code class="hljs jsx" data-trim contenteditable data-noescape>
+  &lt;input
+    type="text"
+    onChange={(event) => {
+
+      // Do something
+
+    }} /&gt;
+            </code>
+        </pre>
+          </section>
+          <section>
+            <pre>
+            <code class="hljs jsx" data-trim contenteditable data-noescape>
+  &lt;input
+    type="text"
+    onChange={(event) => {
+
+      console.log(event.target.value);
+      
+    }} /&gt;
+            </code>
+        </pre>
+
+           <p>Use <span class="warn">event.target.value</span> to access the value which was entered.</p>
+          </section>
         </section>
         <section>
           <h2>Exercise</h2>
 
-          <p><img src="../img/state_management_part_1_goal.png"></p>
+          <p><img src="../img/state_management_part_1_goal.png" /></p>
           <ul>
             <li>Allow the user to enter their name</li>
-            <li>The entered name is displayed as a greeting on the application</li>
+            <li>
+              The entered name is displayed as a greeting on the application
+            </li>
           </ul>
-
         </section>
         <section>
+          <h2>Solution</h2>
           TODO update with actual app code
           <pre>
                 <code class="hljs jsx" data-trim contenteditable data-noescape>
@@ -133,6 +164,17 @@ function MyComponent() {
         <section>
           <h2>Synthetic Events</h2>
           TODO
+        </section>
+        <section>
+          <h2>Recap</h2>
+
+          <p>We learned&hellip;</p>
+
+          <ul>
+            <li>How to handle component-level state with <span class="warn">useState</span></li>
+            <li>How to handle input</li>
+            <li>What Synthetic Events are</li>
+          </ul>
         </section>
       </div>
     </div>
