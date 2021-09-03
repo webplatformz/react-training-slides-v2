@@ -40,43 +40,40 @@
           <section>
             <p><span class="warn">useState</span> hook</p>
             <pre>
-                <code class="hljs jsx" data-trim contenteditable data-noescape>
+                <code class="hljs jsx" data-trim data-line-numbers="1,5"><script type="text/template">
 import { useState } from "react";
 
-&hellip;
+function MyComponent() {
 
   const [name, setName] = useState();
-                 </code>
+
+  // …
+}
+</script></code>
             </pre>
           </section>
           <section>
             <pre>
-                <code class="hljs jsx" data-trim contenteditable data-noescape>
+                <code class="hljs jsx" data-trim><script type="text/template">
     const [age, setAge] = useState();
 
-    &hellip;
-
-    &lt;p&gt;Age: {age}&lt;/p&gt;
+    // The variable contains the current state value
+    <p>Age: {age}</p>
      
-    &hellip;
-
+    // The set* function updates the state
     setAge(19);
-                 </code>
+  </script></code>
             </pre>
-            <ul>
-              <li>The variable contains the current value</li>
-              <li>The <span class="warn">set<em>XY</em></span> function updates the state</li>
-            </ul>
           </section>
           <section>
             <pre>
-                <code class="hljs jsx" data-trim contenteditable data-noescape>
+                <code class="hljs jsx" data-trim><script type="text/template">
                   const [name, setName] = useState();
                   
                   const [age, setAge] = useState();
                   
                   const [favoriteMeal, setFavoriteMeal] = useState();
-                 </code>
+                </script></code>
             </pre>
             <p>
               The array destructuring makes it easy to use multiple states in a
@@ -85,86 +82,131 @@ import { useState } from "react";
           </section>
           <section>
             <pre>
-                <code class="hljs jsx" data-trim contenteditable data-noescape>
+                <code class="hljs jsx" data-trim><script type="text/template">
     const [color, setColor] = useState("blue");
-                 </code>
+  </script></code>
             </pre>
-            <p>Default value can be passed</p>
+            <p>Default value can be passed into <em>useState</em></p>
           </section>
         </section>
         <section>
           <section><h2>How to handle input</h2></section>
           <section>
-            <p>The <span class="warn">onChange</span> prop is a function which is
-            called when the input is changed.</p>
+            <p>
+              The <span class="warn">onChange</span> prop is a function which is
+              called when the input is changed.
+            </p>
 
             <pre>
-            <code class="hljs jsx" data-trim contenteditable data-noescape>
-  &lt;input
+            <code class="hljs jsx" data-trim><script type="text/template">
+  <input
     type="text"
     onChange={(event) => {
 
       // Do something
 
-    }} /&gt;
-            </code>
+    }} />
+  </script></code>
         </pre>
           </section>
           <section>
             <pre>
-            <code class="hljs jsx" data-trim contenteditable data-noescape>
-  &lt;input
+            <code class="hljs jsx" data-trim><script type="text/template">
+  <input
     type="text"
     onChange={(event) => {
 
       console.log(event.target.value);
       
-    }} /&gt;
-            </code>
+    }} />
+  </script></code>
         </pre>
 
-           <p>Use <span class="warn">event.target.value</span> to access the value which was entered.</p>
+            <p>
+              Use <span class="warn">event.target.value</span> to access the
+              value which was entered.
+            </p>
           </section>
         </section>
         <section>
           <h2>Exercise</h2>
 
           <p><img src="../img/state_management_part_1_goal.png" /></p>
-          <ul>
+          <ol>
             <li>Allow the user to enter their name</li>
             <li>
               The entered name is displayed as a greeting on the application
             </li>
-          </ul>
+          </ol>
         </section>
         <section>
           <h2>Solution</h2>
-          TODO update with actual app code
-          <pre>
-                <code class="hljs jsx" data-trim contenteditable data-noescape>
+          <pre><code class="hljs jsx" data-trim data-line-numbers="|4,11-14"><script type="text/template">
+import { useState } from "react";
+
+function Profile() {
+  const [username, setUsername] = useState();
+
+  return (<>
+    <label htmlFor="username">Username</label>
+    <input
+      type="text"
+      id="username"
+      value={username}
+      onChange={(e) => {
+        setUsername(e.target.value);
+      }}
+    />
+  </>);
+}</script></code></pre>
+        </section>
+        <section>
+          <section>
+            <h2>About Hooks</h2>
+
+            <p>
+              Before Hooks were introduced in 2019, features like state
+              management required the use of <em>class components</em>.
+            </p>
+
+            <p>
+              With Hooks these features can be used in function components. This
+              makes the code <span class="warn">simpler</span> and
+              <span class="warn">better reusable</span>.
+            </p>
+          </section>
+          <section>
+            <h3>Common hooks</h3>
+            <ul>
+              <li>useState</li>
+              <li>useEffect</li>
+              <li>useContext</li>
+              <li>useReducer</li>
+              <li>&hellip;</li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="hljs jsx" data-trim data-line-numbers="5"><script type="text/template">
 import { useState } from "react";
 
 function MyComponent() {
-  const [name, setName] = useState();
 
-  return (&lt;&gt;
-    &lt;p&gt;
-      Enter your name:
-      &lt;input
-        type="text"
-        onChange={(e) => setName(e.target.value)} /&gt;
-    &lt;/p&gt;
+  const [color, setColor] = useState("blue");
 
-    &lt;h1&gt;Hello, {name}&lt;/h1&gt;
-  &lt;/&gt;);
+  // …
 }
-                </code>
-            </pre>
-        </section>
-        <section>
-          <h2>About Hooks</h2>
-
-          TODO
+</script></code></pre>
+            <p>The hook function is called in the render function.</p>
+            <p>Depending on the hook, it may have parameters and may provide a return value to access the provided functionality.</p>
+          </section>
+          <section>
+            <h3>Rules of Hooks</h3>
+            <ul>
+              <li>Only call Hooks at the <span class="warn">top level</span> (not inside loops, conditions, or nested functions)</li>
+              <li>Only call Hooks from <span class="warn">React function components</span> or <span class="warn">custom Hooks</span></li>
+            </ul>
+            <p>The <span class="code">eslint-plugin-react-hooks</span> enforces these rules.</p>
+          </section>
         </section>
         <section>
           <h2>Synthetic Events</h2>
@@ -176,10 +218,16 @@ function MyComponent() {
           <p>We learned&hellip;</p>
 
           <ul>
-            <li>How to handle component-level state with <span class="warn">useState</span></li>
+            <li>
+              How to handle component-level state with
+              <span class="warn">useState</span>
+            </li>
             <li>How to handle input</li>
             <li>What Synthetic Events are</li>
           </ul>
+        </section>
+        <section class="deck-slide">
+          <h1>Questions?</h1>
         </section>
       </div>
     </div>

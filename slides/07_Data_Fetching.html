@@ -29,8 +29,10 @@
         </section>
         <section>
           <section>
+            <p> TODO Test in narrower screens</p>
             <p>We want to show a list of pokemon in our app</p>
             <p><img src="../img/data_fetching_goal.png" /></p>
+            <p>TODO we already have a list in the app, we just want to load it.</p>
           </section>
           <section>
             <p>
@@ -140,7 +142,7 @@
                   if (!response.ok) throw new Error('Could not fetch data!');
 
                   response.json().then(u => {
-                    setState(u);
+                    setUser(u);
                   });
                 });   
                 
@@ -219,7 +221,7 @@
                     if (!response.ok) throw new Error('Could not fetch data!');
   
                     response.json().then(u => {
-                      setState(u);
+                      setUser(u);
                     });
                   }); 
                 }, []);
@@ -241,7 +243,7 @@
                     if (!response.ok) throw new Error('Could not fetch data!');
   
                     response.json().then(u => {
-                      setState(u);
+                      setUser(u);
                     });
                   }); 
                 }, []);
@@ -254,6 +256,9 @@
           </section>
         </section>
         <section>
+          TODO custom hook
+        </section>
+        <section>
           <h2>Exercise</h2>
 
           <p>Show a list of pokemon.</p>
@@ -261,6 +266,9 @@
         </section>
         <section>
           <h2>Unsubscribe</h2>
+        </section>
+        <section class="deck-slide">
+            <h1>Questions?</h1>
         </section>
       </div>
     </div>
