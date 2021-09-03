@@ -22,11 +22,141 @@
                 05 First Component</h1>
         </section>
         <section>
+            <section>
+                <h2>Simple React Component</h2>
+                <p>A dumb component having hard-coded state</p>
+                <span class="code">Greeting.tsx</span>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        const NAME = 'World';
+
+                        function Greeting() {
+                            return (
+                                &lt;div&gt;Hello {NAME}&lt;/div&gt;
+                            );
+                        }
+
+                        export default Greeting;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Apply / Use component in a consumer</h3>
+                <p>Multiline JSX should always be wrapped in braces. Single line doesn't.</p>
+                <span class="code">App.tsx</span>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        import 'Greeting' from './greeting';
+
+                        function App() {
+                            return &lt;Greeting/&gt;;
+                        }
+
+                        export default App;
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Testing / React-Testing-Library</h2>
+                <p>Our components can be tested using the React Testing Library</p>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        $ npm install --save-dev @testing-library/react
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Testing our dumb component</h2>
+                <span class="code">Greeting.test.tsx</span>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        import { render } from '@testing-library/react';
+                        import Greeting from './Greeting';
+
+                        describe('Greeting', () => {
+                          it('should render "Hello World"', () => {
+                            const { getByText } = render(&lt;Greeting/&gt;);
+                            expect(getByText('Hello World')).toBeInTheDocument();
+                          });
+                        });
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>TDD - Test Driven Development</h2>
+                <p>It is a good practice to conduct TDD wherever possible</p>
+                <p>Let us amend the component such that we can set the name through an input property</p>
+            </section>
+            <section>
+                <h3>Add new test case</h3>
+                <span class="code">Greeting.test.tsx</span>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                      it('should render correct name', () => {
+                        const { getByText } = render(<Greeting name="React Master" />);
+                        expect(getByText("Hello React Master")).toBeInTheDocument();
+                      });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Implement / Make the test green</h3>
+                <span class="code">Greeting.tsx</span>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        type Props = {
+                            name?: string;
+                        };
+
+                        function Greeting({name = 'World'}: Props) {
+                            return <div>Hello {name}</div>;
+                        }
+
+                        export default Greeting;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Refactor</h3>
+                <p>Refactor your code such that it is extensible and easy to understand</p>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                      it('should render correct name', () => {
+                        const name = 'React Master';
+                        const { getByText } = render(<Greeting name={name} />);
+                        expect(getByText(`Hello ${name}`)).toBeInTheDocument();
+                      });
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <h2>Cheat Sheet</h2>
+            <ul>
+                <li><span class="code">getBy*</span> - verify that an element/node is present at this very moment. Throws an error fi element/node is not found.</li>
+                <li><span class="code">queryBy*</span>  - similar to <span class="code">getBy*</span>, but will not throw an error if the element/node is absent.</li>
+                <li><span class="code">findBy*</span>  - verify that an element will be present, e.g. upon completion of an asynchronous API-Call</li>
+            </ul>
+            <p><a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries here</a></p>
+        </section>
+        <section>
             <h2>Virtual DOM</h2>
             <p>Replacing and rendering the whole real DOM is costly!</p>
             <p>Virtual DOM is a representation of the actual DOM</p>
-            <p>Its purpose is to identify which parts of the real DOM need to be changed upon changes, by comparing the new virtual DOM result against the previous one.</p>
-            <p>The delta then gets applied on the real DOM.<br/>E.g. only one element gets updated within a long list instead of the whole list.</p>
+            <p>Its purpose is to identify which parts of the real DOM need to be changed upon changes, by comparing the
+                new virtual DOM result against the previous one.</p>
+            <p>The delta then gets applied on the real DOM.<br/>E.g. only one element gets updated within a long list
+                instead of the whole list.</p>
+        </section>
+        <section>
+            <h2>List</h2>
+            <p>TODO</p>
         </section>
     </div>
 </div>
@@ -43,7 +173,7 @@
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
     });
 </script>
 </body>
