@@ -30,6 +30,45 @@
         <section>
           <section>
             <h1>
+              Modern CSS
+            </h1>
+            <p>IE11 is ☠</p>
+            <p>New CSS features are supported in all evergreen browsers</p>
+          </section>
+          <section>
+            <h2>CSS Custom Properties</h2>
+            <h4>aka Variables</h4>
+            <pre>
+              <code class="hljs css" data-trim contenteditable data-noescape>
+                :root {
+                  --primary-theme-color: #ff0;
+                }
+
+                .someSelector {
+                  background: var(--primary-theme-color);
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>CSS Grid</h2>
+            <p>No need for flexbox grid</p>
+            <pre>
+              <code class="hljs css" data-trim contenteditable data-noescape>
+                .root {
+                  display: grid;
+                }
+              </code>
+            </pre>
+            <div class="fragment tip">
+              CSS flexbox layout is still a good option, just not for everything.
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>
               CSS Modules
             </h1>
             <p>Locally scoped CSS</p>
@@ -77,15 +116,22 @@
             </ul>
           </section>
           <section>
-            <p>New CSS features are supported in all evergreen browsers</p>
+            <h2>Mixin</h2>
             <pre>
-              <code class="hljs css" data-trim contenteditable data-noescape>
-                :root {
-                  --primary-theme-color: #ff0;
+              <code class="hljs scss" data-trim contenteditable data-noescape>
+                @mixin mobile-only {
+                  @media (max-width: $mobile-width) {
+                    @content;
+                  }
                 }
-
-                .someSelector {
-                  background: var(--primary-theme-color);
+              </code>
+            </pre>
+            <pre>
+              <code class="hljs scss" data-trim contenteditable data-noescape>
+                .root {
+                  @include mobile {
+                    display: none;
+                  }
                 }
               </code>
             </pre>
