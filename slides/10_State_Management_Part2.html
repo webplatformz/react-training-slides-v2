@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>05 First Component | Essential React</title>
+    <title>10 State Management Part 2 | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg">
     <link rel="stylesheet" href="../dist/reset.css">
@@ -20,6 +20,162 @@
         <section class="deck-slide">
             <h1>Essential React <br/>
                 10 State Management Part 2</h1>
+        </section>
+        <section>
+            <section>
+                <h2>How to handle application wide state?</h2>
+            </section>
+            <section>
+                <h3>Applying contexts</h3>
+                <p>Any JavaScript object can be the value of a context.</p>
+                <ul>
+                    <li>Theme</li>
+                    <li>A JSON object</li>
+                    <li>An object having fields being functions</li>
+                    <li>&hellip;</li>
+                </ul>
+            </section>
+            <section>
+                <h3><span class="warn">useContext</span> hook</h3>
+                <p>Must be created through <span class="code">React.createContext(&hellip;)</span></p>
+                <p>Must be provided in an ancestor component through <span class="code"></span></p>
+                <pre>
+                    <code class="hljs html" data-trim data-noescape>
+                        &lt;YourContext.Provider value={&hellip;}&gt;
+                            &hellip; &lt;!-- child components --&gt;
+                        &lt;YourContext.Provider&gt;
+                    </code>
+                </pre>
+                <p>Can be consumed within any descendant component through <span class="code">useContext(YourContext)</span></p>
+            </section>
+        </section>
+        <section>
+            <h2>Exercise</h2>
+            <ul>
+                <li>Enhance the profile component by replacing the useState with useContext</li>
+                <li>Hint 1: Provide the context in the <span class="code">App.tsx</span></li>
+                <li>Hint 2: The value of the context can rely on values of other hooks</li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Solution</h2>
+                <p> <span class="code">user.context.ts</span></p>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        import { createContext } from "react";
+
+                        type UserContextValue = {
+                          username: string;
+                          setUsername: (username: string) => void;
+                        };
+
+                        const UserContext = createContext&lt;UserContextValue&gt;({
+                          username: "",
+                          setUsername: () => {}
+                        });
+
+                        export default UserContext;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Solution continued</h3>
+                <p> <span class="code">Profile.tsx</span></p>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        import { useContext } from "react";
+                        import UserContext from "../../service/user/user.context";
+
+                        function Profile() {
+                          const [name, setName] = useContext(UserContext);
+
+                          return (&lt;&gt;
+                            &lt;p&gt;
+                              Enter your name:
+                              &lt;input
+                                type="text"
+                                onChange={(e) => setName(e.target.value)} /&gt;
+                            &lt;/p&gt;
+
+                            &lt;h1&gt;Hello, {name}&lt;/h1&gt;
+                          &lt;/&gt;);
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Solution continued</h3>
+                <p> <span class="code">App.tsx</span></p>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        import { useContext } from "react";
+                        import UserContext from "../../service/user/user.context";
+
+                        export default function App() {
+                          const [username, setUsername] = useState("");
+
+                          return (
+                            &lt;UserContext.Provider
+                                    value={{
+                                    username,
+                                    setUsername
+                                    }}
+                            &gt;
+                              &hellip;
+                            &lt;/UserContext.Provider&gt;
+                          );
+                        }
+                    </code>
+                </pre>
+            </section>
+
+        </section>
+        <section>
+            <section>
+                <h2>How to handle more complex state updates?</h2>
+            </section>
+            <section>
+                <h3>Applying reducers</h3>
+                <ul>
+                    <li>Can be standalone within a single component</li>
+                    <li>Can be used together with useContext</li>
+                    <li>&hellip;</li>
+                </ul>
+            </section>
+            <section>
+                <h3><span class="warn">useReducer</span> hook</h3>
+                <p>Takes a reducer function and an initial state</p>
+                <p>Returns an array with two values, the current state and a dispatch function</p>
+                <pre>
+                    <code class="hljs html" data-trim data-noescape>
+                        const [state, dispatch] = useReducer(reducer, initialState);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Reducer function</h3>
+                <p class="fragment">Is called with two parameters</p>
+                <ol>
+                    <li class="fragment">The current state</li>
+                    <li class="fragment">The action the reducer has been called with</li>
+                </ol>
+                <pre class="fragment">
+                    <code class="hljs javascript" data-trim data-noescape>
+                        function reducer(state, action) {
+                          switch (action.type) {
+                            case 'increment':
+                              return {count: state.count + 1};
+                            case 'decrement':
+                              return {count: state.count - 1};
+                            default:
+                              throw new Error();
+                          }
+                        }
+                    </code>
+                </pre>
+                <div class="fragment tip">Never manipulate the existing state reference. Always return a new state object!</div>
+            </section>
         </section>
     </div>
 </div>
