@@ -40,7 +40,7 @@
           <section>
             <h2>input / textarea</h2>
             <pre>
-              <code class="hljs html" data-trim contenteditable data-noescape>
+              <code class="hljs html" data-trim data-noescape>
                 &lt;input
                     value={value}
                     onChange={e => { setValue(e.target.value) }}
@@ -51,7 +51,7 @@
           <section>
             <h2>select</h2>
             <pre>
-              <code class="hljs html" data-trim contenteditable data-noescape>
+              <code class="hljs html" data-trim data-noescape>
                 &lt;select
                   value={value}
                   onChange={e => { setValue(e.target.value) }}
@@ -65,7 +65,7 @@
           <section>
             <h2>checkbox</h2>
             <pre>
-              <code class="hljs html" data-trim contenteditable data-noescape>
+              <code class="hljs html" data-trim data-noescape>
                 &lt;input
                   type="checkbox"
                   checked={checked}
@@ -76,7 +76,7 @@
           <section>
             <h2>radio</h2>
             <pre>
-              <code class="hljs html" data-trim contenteditable data-noescape>
+              <code class="hljs html" data-trim data-noescape>
                 &lt;input
                   type="radio"
                   name="preference"
@@ -97,7 +97,7 @@
             <h2>Controlled</h2>
             <p>Update state with each change event</p>
             <pre>
-                <code class="hljs html" data-trim contenteditable data-noescape>
+                <code class="hljs html" data-trim data-noescape>
                     &lt;input
                       value={value}
                       onChange={e => { setValue(e.target.value) }}
@@ -110,7 +110,7 @@
             <h2>Uncontrolled</h2>
             <p>Read values only on blur / submit to prevent needless re-renders.</p>
             <pre>
-                <code class="hljs html" data-trim contenteditable data-noescape>
+                <code class="hljs html" data-trim data-noescape>
                     &lt;input
                       defaultValue={value}
                     /&gt
@@ -134,7 +134,7 @@
           <section>
             <h2>React Hook Form</h2>
             <pre>
-              <code class="hljs javascript" data-trim contenteditable data-noescape>
+              <code class="hljs javascript" data-trim data-noescape>
                 const {
                   register,
                   handleSubmit,
@@ -142,7 +142,7 @@
               </code>
             </pre>
             <pre>
-              <code class="hljs html" data-trim contenteditable data-noescape>
+              <code class="hljs html" data-trim data-noescape>
                 &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
                   &lt;input defaultValue="test" {...register("example")} /&gt;
                   &lt;input type="submit" /&gt;

@@ -39,7 +39,7 @@
             <h2>CSS Custom Properties</h2>
             <h4>aka Variables</h4>
             <pre>
-              <code class="hljs css" data-trim contenteditable data-noescape>
+              <code class="hljs css" data-trim data-noescape>
                 :root {
                   --primary-theme-color: #ff0;
                 }
@@ -54,7 +54,7 @@
             <h2>CSS Grid</h2>
             <p>No need for flexbox grid</p>
             <pre>
-              <code class="hljs css" data-trim contenteditable data-noescape>
+              <code class="hljs css" data-trim data-noescape>
                 .root {
                   display: grid;
                 }
@@ -75,25 +75,25 @@
           </section>
           <section>
             <pre>
-              <code class="hljs css" data-trim contenteditable data-noescape>
+              <code class="hljs css" data-trim data-noescape>
                 .root { color: red; }
               </code>
             </pre>
             <p>to</p>
             <pre>
-              <code class="hljs css" data-trim contenteditable data-noescape>
+              <code class="hljs css" data-trim data-noescape>
                 .root-h2l5l { color: red; }
               </code>
             </pre>
           </section>
           <section>
             <pre>
-              <code class="hljs javascript" data-trim contenteditable data-noescape>
+              <code class="hljs javascript" data-trim data-noescape>
                 import styles from './Component.module.scss';
               </code>
             </pre>
             <pre>
-              <code class="hljs html" data-trim contenteditable data-noescape>
+              <code class="hljs html" data-trim data-noescape>
                 &lt;div className={styles.root} /&gt;
               </code>
             </pre>
@@ -118,7 +118,7 @@
           <section>
             <h2>Mixin</h2>
             <pre>
-              <code class="hljs scss" data-trim contenteditable data-noescape>
+              <code class="hljs scss" data-trim data-noescape>
                 @mixin mobile-only {
                   @media (max-width: $mobile-width) {
                     @content;
@@ -127,7 +127,7 @@
               </code>
             </pre>
             <pre>
-              <code class="hljs scss" data-trim contenteditable data-noescape>
+              <code class="hljs scss" data-trim data-noescape>
                 .root {
                   @include mobile {
                     display: none;

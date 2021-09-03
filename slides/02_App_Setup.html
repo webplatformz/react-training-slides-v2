@@ -55,14 +55,14 @@
             <section>
                 <h2>JSX</h2>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         const header = React.createElement(
                             'h1', {}, 'Hello World'
                         );
                     </code>
                 </pre>
                 <pre class="fragment">
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         const header = &lt;h1&gt;Hello World&lt;/h1&gt;
                     </code>
                 </pre>
@@ -73,7 +73,7 @@
                 <h2>JSX</h2>
                 <p>You can use any JS expression within curly braces</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         const name = 'John Wayne';
 
                         const header = &lt;h1&gt;Hello, {name}&lt;/h1&gt;
@@ -89,7 +89,7 @@
                 <h2>JSX</h2>
                 <p>JSX is an expression too.</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim data-noescape>
                         function getGreeting(user) {
                             if (user) {
                                 return &lt;h1&gt;Hello, {formatName(name)}&lt;/h1&gt;
@@ -99,7 +99,7 @@
                     </code>
                 </pre>
                 <pre>
-                    <code class="hljs html" data-trim contenteditable data-noescape>
+                    <code class="hljs html" data-trim data-noescape>
                         &lt;div className="header"&gt;
                             {getGreeting(user)}
                         &lt;/div&gt;
@@ -111,13 +111,13 @@
                 <p>JSX uses <span class="code">camelCase</span> for DOM element properties, e.g. <span class="code">class</span>
                     becomes <span class="code">className</span></p>
                 <pre>
-                    <code class="hljs html" data-trim contenteditable data-noescape>
+                    <code class="hljs html" data-trim data-noescape>
                         regular HTML
                         &lt;div class="header"&gt;hello, world!&lt;/div&gt;
                     </code>
                 </pre>
                 <pre>
-                    <code class="hljs html" data-trim contenteditable data-noescape>
+                    <code class="hljs html" data-trim data-noescape>
                         JSX
                         &lt;div className="header"&gt;hello, world!&lt;/div&gt;
                     </code>
