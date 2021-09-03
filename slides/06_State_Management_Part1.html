@@ -28,19 +28,88 @@
           </h1>
         </section>
         <section>
-          TODO Use Case -- what do we want to achieve?
+          <p>Let's build an app!</p>
+          <img src="../img/state_management_part_1_goal.png">
+
+          <p>How can this be achieved?</p>
         </section>
         <section>
           <section>
             <p>
-              Besides rendering, React provides a basic state management
-              functionality.
+              The <span class="warn">useState</span> hook for component-level
+              state management
             </p>
+            <pre>
+                <code class="hljs jsx" data-trim contenteditable data-noescape>
+import { useState } from "react";
 
-            <p>useState</p>
+&hellip;
+
+    const [name, setName] = useState();
+                 </code>
+            </pre>
           </section>
           <section>
             <pre>
+                <code class="hljs jsx" data-trim contenteditable data-noescape>
+    const [age, setAge] = useState();
+
+    &hellip;
+
+    &lt;p&gt;Age: {age}&lt;/p&gt;
+     
+    &hellip;
+
+    setAge(19);
+                 </code>
+            </pre>
+            <ul>
+              <li>The variable contains the current value</li>
+              <li>The set<em>XY</em> function updates the state</li>
+            </ul>
+          </section>
+          <section>
+            <pre>
+                <code class="hljs jsx" data-trim contenteditable data-noescape>
+                  const [name, setName] = useState();
+                  
+                  const [age, setAge] = useState();
+                  
+                  const [favoriteMeal, setFavoriteMeal] = useState();
+                 </code>
+            </pre>
+            <p>
+              The array destructuring makes it easy to use multiple states in a
+              component
+            </p>
+          </section>
+          <section>
+            <pre>
+                <code class="hljs jsx" data-trim contenteditable data-noescape>
+    const [color, setColor] = useState("blue");
+                 </code>
+            </pre>
+            <p>Default value can be passed</p>
+          </section>
+        </section>
+        <section>
+          <h2>Simple Input</h2>
+
+          TODO
+        </section>
+        <section>
+          <h2>Exercise</h2>
+
+          <p><img src="../img/state_management_part_1_goal.png"></p>
+          <ul>
+            <li>Allow the user to enter their name</li>
+            <li>The entered name is displayed as a greeting on the application</li>
+          </ul>
+
+        </section>
+        <section>
+          TODO update with actual app code
+          <pre>
                 <code class="hljs jsx" data-trim contenteditable data-noescape>
 import { useState } from "react";
 
@@ -60,9 +129,7 @@ function MyComponent() {
 }
                 </code>
             </pre>
-          </section>
         </section>
-        <section></section>
         <section>
           <h2>Synthetic Events</h2>
           TODO
