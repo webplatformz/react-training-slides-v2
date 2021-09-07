@@ -29,23 +29,18 @@
         </section>
         <section>
           <section>
-            <p> TODO Test in narrower screens</p>
-            <p>We want to show a list of pokemon in our app</p>
             <p><img src="../img/data_fetching_goal.png" /></p>
-            <p>TODO we already have a list in the app, we just want to load it.</p>
+            <p class="fragment">Where do we get this data from?</p>
           </section>
           <section>
-            <p>
-              <a
-                href="https://pokeapi.co/api/v2/pokemon?limit=5"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                https://pokeapi.co/api/v2/pokemon?limit=5
-              </a>
-            </p>
-            <pre>
-            <code class="hljs json" data-trim data-noescape>
+            <h2>PokeAPI</h2>
+            <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">
+                Documentation
+            </a>
+        </section>
+          <section>
+            <h3>List of Pokemon</h3>
+            <pre><code class="hljs json" data-trim data-line-numbers="|5-13"><script type="text/template">
                 {
                   "count": 1118,
                   "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
@@ -55,11 +50,23 @@
                       "name": "bulbasaur",
                       "url": "https://pokeapi.co/api/v2/pokemon/1/"
                     },
-                    &hellip;
+                    {
+                      "name": "ivysaur",
+                      "url":"https://pokeapi.co/api/v2/pokemon/2/"
+                    },
+                    …
                   ]
                 }
-            </code>
-        </pre>
+              </script></code></pre>
+        <p>
+          <a
+            href="https://pokeapi.co/api/v2/pokemon?limit=5"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GET https://pokeapi.co/api/v2/pokemon?limit=5
+          </a>
+        </p>
           </section>
         </section>
         <section>
@@ -67,15 +74,17 @@
           <section>
             <ul>
               <li>React does <em>not</em> provide data fetching</li>
-              <li><span class="warn">fetch:</span> standard browser API</li>
+              <li><span class="warn">Fetch:</span> standard browser API</li>
               <li>&hellip; or any data fetching library</li>
             </ul>
           </section>
           <section>
-            <pre>
-            <code class="hljs typescript" data-trim data-noescape>
+            <h3>Fetch</h3>
+            <pre><code class="hljs typescript" data-trim data-line-numbers="1-4|6-9|11-12|"><script type="text/template">
                 // Send the request and wait for the response
-                const response = await fetch('http://example.com/data');
+                const response = await fetch(
+                  'https://example.com/data'
+                );
 
                 // Did we get a response status code other than 2XX?
                 if (!response.ok) {
@@ -84,24 +93,23 @@
 
                 // Deserialize the JSON response body
                 const data = await response.json();
-            </code>
-        </pre>
+              </script></code></pre>
           </section>
         </section>
         <section>
           <section><h2>How do we use fetch in React?</h2></section>
           <section>
             <p>Does this work?</p>
-            <pre><code class="hljs jsx" data-trim data-line-numbers="|2,5">
+            <pre><code class="hljs jsx" data-trim data-line-numbers="|2,5"><script type="text/template">
                function MyComponent() {
                  const response = await fetch('/user');
                  if (!response.ok) throw new Error('Could not fetch data!');   
 
                  const user = await response.json();   
                  
-                 return &lt;p&gt;{user.name}&lt;/p&gt;;
+                 return <p>{user.name}</p>;
                }        
-            </code></pre>
+              </script></code></pre>
             <p class="fragment">
               <span class="warn">Does not work!</span> &ndash; The render
               function is not async.
@@ -109,7 +117,7 @@
           </section>
           <section>
             <p>Well, how about this?</p>
-            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12">
+            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
                function MyComponent() {
                  let user;
 
@@ -121,20 +129,19 @@
                    });
                  });   
                  
-                 return &lt;p&gt;{user?.name}&lt;/p&gt;;
-               }</code></pre>
+                 return <p>{user?.name}</p>;
+               }</script></code></pre>
             <p class="fragment">
               <span class="warn">Does not work!</span> &ndash; When the promise
               resolves, the render function already ran.
             </p>
           </section>
           <section>
-            <p>
-              Fetching data asynchronously requires state management &rarr;
-              <span class="warn">useState</span>
-            </p>
-
-            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12">
+              <p>Fetching data asynchronously requires state management.</p>
+              <p><span class="warn">&rarr;useState</span></p>
+          </section>
+          <section>
+            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
               function MyComponent() {
                 const [user, setUser] = useState();
 
@@ -146,73 +153,73 @@
                   });
                 });   
                 
-                return &lt;p&gt;{user?.name}&lt;/p&gt;;
-              }</code></pre>
-
+                return <p>{user?.name}</p>;
+              }</script></code></pre>
               <p class="fragment">
-                <span class="warn">Works &ndash; but still bad!</span> &ndash; Side effects should not be executed in the render function.
+                <span class="warn">Bad!</span> &ndash; This produces an infinte loop.
               </p>
           </section>
           <section>
-            <p>Why we should <em>not</em> run side effects in the render function</p>
+            <h3>Why we should <em>not</em> run side effects in the render function</h3>
             <ul>
               <li class="fragment">We don't want the side effect to execute with every render.</li>
               <li class="fragment">The render function might be executed anytime &ndash; we don't control it.</li>
               <li class="fragment">In the render function we just want to render and not spend computing on other tasks.</li>
             </ul>
           </section>
-          <section>
-            <p>The <span class="warn">useEffect</span> hook</p>
-            <pre>
-              <code class="hljs jsx" data-trim data-noescape>
+          <section data-auto-animate>
+            <h3>The <span class="warn">useEffect</span> Hook</h3>
+            <pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="1,5-9"><script type="text/template">
                  import { useEffect } from "react";
 
-                 &hellip;
+                 function MyComponent() {
 
                    useEffect(() => {
 
                      // Run side effect
 
                    }, [dependency1, dependency2]);
-              </code>
-          </pre>
+
+                   // …
+                 }
+                  </script></code></pre>
           </section>
           <section data-auto-animate>
-            <p data-id="code"><pre><code class="hljs jsx" data-trim data-noescape data-line-numbers="|5">
+            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="|5"><script type="text/template">
               
                    useEffect(() => {
 
                      // Run side effect
 
                    }, [dependency1, dependency2]);
-              </code></pre></p>
+                  </script></code></pre></p>
               <p>The effect is executed initially and whenever a dependency changes.</p>
           </section>
           <section data-auto-animate>
-            <p data-id="code"><pre><code class="hljs jsx" data-trim data-noescape data-line-numbers="5">
+            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="5"><script type="text/template">
               
                    useEffect(() => {
 
                      // Run side effect
 
                    }, []);
-              </code></pre></p>
-              <p>When passing an empty array, the effect is executed only on first render.</p>
+                  </script></code></pre></p>
+              <p>When passing an empty array, the effect is executed only initially (on first render).</p>
           </section>
           <section data-auto-animate>
-            <p data-id="code"><pre><code class="hljs jsx" data-trim data-noescape data-line-numbers="5">
+            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="5"><script type="text/template">
               
                    useEffect(() => {
 
                      // Run side effect
 
                    });
-              </code></pre></p>
+                  </script></code></pre></p>
               <p>If no depencencies are passed, the effect is executed with every render.</p>
           </section>
           <section>
             <p>Let's call this API correctly!</p>
-            <p><pre><code class="hljs jsx" data-trim data-line-numbers="|4-12|12|">
+            <p><pre><code class="hljs jsx" data-trim data-line-numbers="|4-12|12|"><script type="text/template">
               function MyComponent() {
                 const [user, setUser] = useState();
 
@@ -224,11 +231,11 @@
                       setUser(u);
                     });
                   }); 
-                }, []);
+                }, [setUser]);
                 
-                return &lt;p&gt;{user?.name}&lt;/p&gt;;
+                return <p>{user?.name}</p>;
               }
-              </code></pre></p>
+            </script></code></pre></p>
 
               <p class="fragment"><em>Wait&hellip;</em> but what about <span class="warn">async-await?</span></p>
           </section>

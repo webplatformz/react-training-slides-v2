@@ -38,7 +38,7 @@
             <h2>How to handle component-level state</h2>
           </section>
           <section>
-            <p><span class="warn">useState</span> hook</p>
+            <h3>The <span class="warn">useState</span> Hook</h3>
             <pre>
                 <code class="hljs jsx" data-trim data-line-numbers="1,5"><script type="text/template">
 import { useState } from "react";
@@ -53,8 +53,7 @@ function MyComponent() {
             </pre>
           </section>
           <section>
-            <pre>
-                <code class="hljs jsx" data-trim><script type="text/template">
+            <pre><code class="hljs jsx" data-trim data-line-numbers="1|3-4|6-7|"><script type="text/template">
     const [age, setAge] = useState();
 
     // The variable contains the current state value
@@ -62,8 +61,7 @@ function MyComponent() {
      
     // The set* function updates the state
     setAge(19);
-  </script></code>
-            </pre>
+  </script></code></pre>
           </section>
           <section>
             <pre>
@@ -91,14 +89,13 @@ function MyComponent() {
         </section>
         <section>
           <section><h2>How to handle input</h2></section>
-          <section>
+          <section data-auto-animate>
             <p>
               The <span class="warn">onChange</span> prop is a function which is
               called when the input is changed.
             </p>
 
-            <pre>
-            <code class="hljs jsx" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="|3-7"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -106,12 +103,10 @@ function MyComponent() {
       // Do something
 
     }} />
-  </script></code>
-        </pre>
+  </script></code></pre>
           </section>
-          <section>
-            <pre>
-            <code class="hljs jsx" data-trim><script type="text/template">
+          <section data-auto-animate>
+            <pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="3-7"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -119,8 +114,7 @@ function MyComponent() {
       console.log(event.target.value);
       
     }} />
-  </script></code>
-        </pre>
+  </script></code></pre>
 
             <p>
               Use <span class="warn">event.target.value</span> to access the
