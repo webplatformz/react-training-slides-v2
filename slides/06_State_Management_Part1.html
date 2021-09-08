@@ -73,6 +73,7 @@ function MyComponent() {
                   const [favoriteMeal, setFavoriteMeal] = useState();
                 </script></code>
             </pre>
+            <p>TODO show typing</p>
             <p>
               The array destructuring makes it easy to use multiple states in a
               component.
@@ -139,7 +140,7 @@ function MyComponent() {
 import { useState } from "react";
 
 function Profile() {
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState("");
 
   return (<>
     <label htmlFor="username">Username</label>
