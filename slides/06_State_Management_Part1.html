@@ -73,7 +73,6 @@ function MyComponent() {
                   const [favoriteMeal, setFavoriteMeal] = useState();
                 </script></code>
             </pre>
-            <p>TODO show typing</p>
             <p>
               The array destructuring makes it easy to use multiple states in a
               component.
@@ -205,8 +204,33 @@ function MyComponent() {
           </section>
         </section>
         <section>
-          <h2>Synthetic Events</h2>
-          TODO
+          <section>
+            <h2>SyntheticEvent</h2>
+          </section>
+          <section>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="3"><script type="text/template">
+  <input
+    type="text"
+    onChange={(event) => { // often just called 'e'
+    
+      console.log(event.target.value);
+      
+    }} />
+  </script></code></pre>
+            <p>Event handlers like <span class="code">onChange</span> receive an instance of <span class="code">SyntheticEvent</span>.</p>
+
+            <p class="fragment">This is a <span class="warn">wrapper for the native events</span>, ensuring a consistent API and functionality across browsers.</p>
+          </section>
+          <section>
+            <h3>SyntheticEvent API</h3>
+
+            <ul>
+              <li><span class="code">e.target.value</span></li>
+              <li><span class="code">e.preventDefault()</span></li>
+              <li>API for specific event type (e.g. <span class="code">e.keyCode</span>)</li>
+              <li>&hellip;</li>
+            </ul>
+          </section>
         </section>
         <section>
           <h2>Recap</h2>
@@ -220,7 +244,7 @@ function MyComponent() {
             </li>
             <li>How to handle input</li>
             <li>What Hooks are and how to use them</li>
-            <li>What Synthetic Events are</li>
+            <li>That events are wrapped by <span class="code">SyntheticEvent</span></li>
           </ul>
         </section>
         <section class="deck-slide">
