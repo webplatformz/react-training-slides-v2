@@ -27,7 +27,568 @@
             08 Routing
           </h1>
         </section>
-        
+        <section>
+          <section>
+            <p>So far our Pokedex app only has a single page.</p>
+          </section>
+          <section data-auto-animate>
+            <p>Let's make this more interesting&hellip;</p>
+            <div class="fragment column-container">
+              <div class="column">
+                <img src="../img/routing_home.png" />
+              </div>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <p>Let's make this more interesting&hellip;</p>
+            <div class="column-container">
+              <div class="column">
+                <img src="../img/routing_detail.png" />
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Routing</h3>
+            <p class="fragment">
+              We want to define distinct pages within our application.
+            </p>
+
+            <p class="fragment">
+              The current page at a given time is defined by the URL of the
+              browser tab.
+            </p>
+
+            <p class="fragment">
+              The URL can contain parameters which are used by a page to show
+              specific data.
+            </p>
+          </section>
+          <section>
+            <p>React does <em>not</em> provide routing.</p>
+
+            <div class="fragment">
+              <p>
+                The most popular routing library in the React ecosystem is
+                <span class="warn">React Router.</span>
+              </p>
+
+              <p>
+                <a href="https://reactrouter.com">https://reactrouter.com</a>
+              </p>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Basic Routing with React Router</h2>
+          </section>
+          <section>
+            <h3>Install the Package</h3>
+        <p><pre data-id="code"><code class="hljs zsh" data-trim><script type="text/template">
+          npm install react-router-dom
+        </script></code></pre></p>
+          </section>
+          <section data-auto-animate>
+            <h3>How to Define Routes</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+              function App() {
+                return (
+                  // Let's route!
+                );
+              }
+            </script></code></pre></p>
+          </section>
+          <section data-auto-animate>
+            <h3>How to Define Routes</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-8"><script type="text/template">
+              import { BrowserRouter as Router }
+                from "react-router-dom";
+
+              function App() {
+                return (
+                  <Router>
+
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+            <p>The <span class="code">BrowserRouter</span> provides the access to the routing functionality.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>How to Define Routes</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
+              import { BrowserRouter as Router, Switch }
+                from "react-router-dom";
+
+              function App() {
+                return (
+                  <Router>
+                    <Switch>
+
+                    </Switch>
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+
+            <p>A <span class="code">Switch</span> component renders the first route which matches the browser's URL (exclusively).</p>
+          </section>
+          <section data-auto-animate>
+            <h3>How to Define Routes</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-12"><script type="text/template">
+              import { BrowserRouter as Router, Switch, Route }
+                from "react-router-dom";
+
+              function App() {
+                return (
+                  <Router>
+                    <Switch>
+                      <Route path="/page1">
+
+                      </Route>
+                    </Switch>
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+
+            <p>Here we define a route with the path <span class="code">/page1</span>.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>How to Define Routes</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,10|9-11"><script type="text/template">
+              import { BrowserRouter as Router, Switch, Route }
+                from "react-router-dom";
+              import Page1 from "./Page1.tsx";
+
+              function App() {
+                return (
+                  <Router>
+                    <Switch>
+                      <Route path="/page1">
+                        <Page1 />
+                      </Route>
+                    </Switch>
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+
+            <p>The page to be renderered for this route is simply defined as child of <span class="code">Route</span>.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>How to Define Routes</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4,13-15|"><script type="text/template">
+              import { BrowserRouter as Router, Switch, Route }
+                from "react-router-dom";
+              import Page1 from "./Page1.tsx";
+              import Page2 from "./Page2.tsx";
+
+              function App() {
+                return (
+                  <Router>
+                    <Switch>
+                      <Route path="/page1">
+                        <Page1 />
+                      </Route>
+                      <Route path="/page2">
+                        <Page2 />
+                      </Route>
+                    </Switch>
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+          </section>
+          <section>
+            <p><span class="code">Page1.tsx</span></p>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+              export default function Page1() {
+                return <p>This is page 1.</p>;
+              }
+            </script></code></pre></p>
+
+            <p>The "page" is just a normal React component.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>Routes with Parameters</h3>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="6-8|6"><script type="text/template">
+              function App() {
+                return (
+                  <Router>
+                    <Switch>
+                      // …
+                      <Route path="/cars/:carId">
+                        <CarDetail />
+                      </Route>
+                    </Switch>
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+
+            <p>This route has a parameter <span class="code">carId</span>.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>Routes with Parameters</h3>
+
+            <p><span class="code">CarDetail.tsx</span></p>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
+              import { useParams } from "react-router-dom";
+
+              export default function CarDetail() {
+                const { carId } = useParams();
+                return <p>This is the car with the ID {carId}.</p>;
+              }
+            </script></code></pre></p>
+
+            <p class="fragment">The <span class="code">useParams</span> Hook returns the parameters of the current route as an object.</p>
+          </section>
+          <section>
+            <h3>Route Redirection</h3>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="1,10"><script type="text/template">
+              import { Route, Redirect } from "react-router-dom";
+
+              function App() {
+                return (
+                  <Router>
+                    <Switch>
+                      <Route path="/page1">
+                        <Page1 />
+                      </Route>
+                      <Redirect from="/" to="page1" />
+                    </Switch>
+                  </Router>
+                );
+              }
+            </script></code></pre></p>
+
+            <p>With the <span class="code">Redirect</span> component, a route can be redirected to another route.</p>
+          </section>
+          <section>
+            <h3>How to Link to a Route</h3>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="1,6-7|"><script type="text/template">
+              import { Link } from "react-router-dom";
+
+              function NavBar() {
+                return (
+                  <p>
+                    <Link to="/page1">Page 1</Link>
+                    | <Link to="/page2">Page 2</Link>
+                  </p>
+                );
+              }
+            </script></code></pre></p>
+          </section>
+          <section>
+            <h3>Cheat Sheet</h3>
+
+            <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
+            <p><span class="code">&lt;Switch /&gt;</span></p>
+            <p><span class="code">&lt;Route path="/cars/:carId"&gt;&lt;CarDetail /&gt;&lt;/Router&gt;</span></p>
+            <p><span class="code">&lt;Redirect from="/" to="/cars" /&gt;</span></p>
+            <p><span class="code">&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span></p>
+          </section>
+        </section>
+        <section>
+          <section>
+          <h2>Exercise</h2>
+            <ol>
+              <li>
+                Implement a detail view to show the detail data of a specific pokemon.
+
+                <p><span class="code">GET https://pokeapi.co/api/v2/pokemon/<em>name</em></span></p>
+              </li>
+              <li>Split the app up into two navigatale pages:
+                <ul>
+                  <li>The <em>Home</em> page shows the list of pokemon.</li>
+                  <li>When clicking on a pokemon in the list, the pokemon detail page is shown.</li>
+                </ul>
+              </li>
+            </ol>
+          </section>
+          <section>
+            <div class="column-container">
+              <div class="column-2">
+                <img src="../img/routing_home.png" />
+              </div>
+              <div class="column-2">
+                <img src="../img/routing_detail.png" />
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Stretch Goal</h3>
+            <p>Think about what to do with the username input and display functionality.</p>
+
+            <p>Can we have the input on a <em>Profile</em> page but show the name on all pages?</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Solution</h2>
+
+            <p><span class="code">App.tsx</span></p>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|8,9|10|"><script type="text/template">
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import List from "./pages/list/List";
+import Detail from "./pages/detail/Detail";
+
+export default function App() {
+  return (<Router>
+    <Switch>
+      <Route path="/pokemon"><List /></Route>
+      <Route path="/pokemon/:pokemonName"><Detail /></Route>
+      <Redirect from="/" to="/pokemon" />
+    </Switch>
+  </Router>);
+}
+
+            </script></code></pre></p>
+          </section>
+          <section>
+
+            <p><span class="code">PokeListEntry.tsx</span></p>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|7|"><script type="text/template">
+import { Link } from "react-router-dom";
+
+interface PokeListEntryProps { name: string; }
+
+function PokeListEntry({ name }: PokeListEntryProps) {
+  return (<div className="uppercase">
+    <Link to={`/pokemon/${name}`}>{name}</Link>
+  </div>);
+}
+
+export default PokeListEntry;
+            </script></code></pre></p>
+          </section>
+          <section>
+
+            <p><span class="code">Detail.tsx</span></p>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
+import { useParams } from "react-router-dom";
+import usePokeDetail from "../../service/poke/usePokeDetail";
+
+interface Params { pokemonName: string; }
+
+export default function Detail() {
+  const { pokemonName } = useParams<Params>();
+  const pokemon = usePokeDetail(pokemonName);
+  if (!pokemon) return null;
+  return (<>
+    <h1>{pokemon.name}</h1>
+    <dl>
+      <dt>hp</dt>
+      <dd>{pokemon.hp}</dd>
+      <dt>attack</dt>
+      <dd>{pokemon.attack}</dd>
+      // …
+    </dl>
+  </>);
+}           
+            </script></code></pre></p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>More about React Router</h2>
+          </section>
+          <section>
+            <h3>NavLink</h3>
+
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="4-6"><script type="text/template">
+function MyComponent() {
+  return (<>
+    // …
+    <NavLink to="/faq" activeClassName="selected">
+      FAQs
+    </NavLink>
+  </>);
+}
+            </script></code></pre></p>
+            
+            <p>A <span class="code">NavLink</span> is marked with the specified CSS class/style when its route is active.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>Route Matching</h3>
+
+            <p>Current URL: <span class="code">/pokemon/pikachu</span></p>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4-9"><script type="text/template">
+function MyComponent() {
+  return (<>
+    // …
+    <Route path="/pokemon/:pokemonName">
+      <Detail />
+    </Route>
+    <Route path="/pokemon">
+      <List />
+    </Route>
+  </>);
+}
+            </script></code></pre></p>
+
+            <p class="fragment">By default routes can also match <em>partly</em>.<br>
+              <span class="warn">&rarr; Both routes are active!</span></p>
+          </section>
+          <section data-auto-animate>
+            <h3>Route Matching</h3>
+
+            <p>Current URL: <span class="code">/pokemon/pikachu</span></p>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="7"><script type="text/template">
+function MyComponent() {
+  return (<>
+    // …
+    <Route path="/pokemon/:pokemonName">
+      <Detail />
+    </Route>
+    <Route exact path="/pokemon">
+      <List />
+    </Route>
+  </>);
+}
+            </script></code></pre></p>
+
+            <p>With the <span class="code">exact</span> attribute partly matches do not activate the route.</p>
+          </section>
+          <section data-auto-animate>
+            <h3>Route Matching</h3>
+
+            <p>Current URL: <span class="code">/pokemon/pikachu</span></p>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4,11|5,8|4-11"><script type="text/template">
+function MyComponent() {
+  return (<>
+    // …
+    <Switch>
+      <Route path="/pokemon/:pokemonName">
+        <Detail />
+      </Route>
+      <Route path="/pokemon">
+        <List />
+      </Route>
+    </Switch>
+  </>);
+}
+            </script></code></pre></p>
+
+            <p><span class="warn">Alternative:</span> wrap the routes in a <span class="code">Switch</span>.
+            <br>Only the first matching route is activated.</p>
+          </section>
+          <section>
+            <h3>Nested Routes</h3>
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4-18|8,17,10-15"><script type="text/template">
+function MyComponent() {
+  return (<>
+    // …
+    <Switch>
+      <Route path="/boats">
+        // …
+      </Route>
+      <Route path="/cars">
+        <Switch>
+          <Route path="/cars">
+            <CarList />
+          </Route>
+          <Route path="/cars/:carId">
+            <CarDetail />
+          </Route>
+        </Switch>
+      </Route>
+    </Switch>
+  </>);
+}
+            </script></code></pre></p>
+            <p></p>
+          </section>
+          <section>
+            <h3>useLocation</h3>
+
+            <p>Current URL: <span class="code">/cars?filter=Tesla</span></p>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
+function MyComponent() {
+  const { pathname, search } = useLocation();
+
+  console.log(`Pathname: ${pathname}`);
+  // Pathname: /cars
+
+  console.log(`Query string: ${search}`);
+  // Query string: ?filter=Tesla
+  
+  // …
+}
+            </script></code></pre></p>
+
+            <p>Returns the <span class="warn">location</span> object representing the current URL.</p>
+          </section>
+          <section>
+            <h3>useHistory</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
+function MyComponent() {
+  const history = useHistory();
+
+  return <button onClick={() => {
+
+    // Do something
+
+    history.push('/home');
+  }}>
+    Do something and then go to Home
+  </button>
+}
+            </script></code></pre></p>
+
+            <p>Provides access to the <span class="warn">history</span> object which can be used to navigate programmatically.</p>
+          </section>
+          <section>
+            <h3>MemoryRouter</h3>
+
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+function MyComponent() {
+  return <MemoryRouter
+    initialEntries={["/one", "/two", "/three"]}
+    initialIndex={1}
+  >
+    // …
+  </MemoryRouter>;
+}
+            </script></code></pre></p>
+
+            <p>Use instead of <span class="code">BrowserRouter</span> for tests.</p>
+          </section>
+        </section>
+        <section>
+          <h2>Recap</h2>
+          <p>We learned&hellip;</p>
+          <ul>
+            <li>How to define routes</li>
+            <li>How to define routes with parameters</li>
+            <li>How to redirect routes</li>
+            <li>How to link to a route</li>
+            <li>Further useful React Router features</li>
+          </ul>
+        </section>
+        <section class="deck-slide">
+          <h1>Questions?</h1>
+        </section>
       </div>
     </div>
 

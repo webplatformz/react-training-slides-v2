@@ -100,7 +100,7 @@
           <section><h2>How do we use fetch in React?</h2></section>
           <section>
             <p>Does this work?</p>
-            <pre><code class="hljs jsx" data-trim data-line-numbers="|2,5"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|2,5"><script type="text/template">
                function MyComponent() {
                  const response = await fetch('/user');
                  if (!response.ok) throw new Error('Could not fetch data!');   
@@ -117,7 +117,7 @@
           </section>
           <section>
             <p>Well, how about this?</p>
-            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
                function MyComponent() {
                  let user;
 
@@ -141,7 +141,7 @@
               <p><span class="warn">&rarr;useState</span></p>
           </section>
           <section>
-            <pre><code class="hljs jsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
               function MyComponent() {
                 const [user, setUser] = useState();
 
@@ -169,7 +169,7 @@
           </section>
           <section data-auto-animate>
             <h3>The <span class="warn">useEffect</span> Hook</h3>
-            <pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="1,5-9"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,5-9"><script type="text/template">
                  import { useEffect } from "react";
 
                  function MyComponent() {
@@ -185,7 +185,7 @@
                   </script></code></pre>
           </section>
           <section data-auto-animate>
-            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="|5"><script type="text/template">
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|5"><script type="text/template">
               
                    useEffect(() => {
 
@@ -196,7 +196,7 @@
               <p>The effect is executed initially and whenever a dependency changes.</p>
           </section>
           <section data-auto-animate>
-            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="5"><script type="text/template">
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="5"><script type="text/template">
               
                    useEffect(() => {
 
@@ -207,7 +207,7 @@
               <p>When passing an empty array, the effect is executed only initially (on first render).</p>
           </section>
           <section data-auto-animate>
-            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="5"><script type="text/template">
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="5"><script type="text/template">
               
                    useEffect(() => {
 
@@ -219,7 +219,7 @@
           </section>
           <section data-auto-animate>
             <p>Let's call this API correctly!</p>
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="|4-12|12|"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="|4-12|12|"><script type="text/template">
               function MyComponent() {
                 const [user, setUser] = useState();
 
@@ -242,7 +242,7 @@
           <section data-auto-animate>
             <p>What about <span class="warn">async-await?</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="|3,6"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="|3,6"><script type="text/template">
                 useEffect(() => {
 
                   fetch('/user').then(response => {
@@ -259,7 +259,7 @@
           <section data-auto-animate>
             <p>What about <span class="warn">async-await?</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="3,6"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="3,6"><script type="text/template">
                 useEffect(() => {
 
                   const response = await fetch('/user');
@@ -274,7 +274,7 @@
           <section data-auto-animate>
             <p>What about <span class="warn">async-await?</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="1"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
                 useEffect(() => {
 
                   const response = await fetch('/user');
@@ -291,7 +291,7 @@
           <section data-auto-animate>
             <p>What about <span class="warn">async-await?</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="1"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
                 useEffect(async () => {
 
                   const response = await fetch('/user');
@@ -308,7 +308,7 @@
           <section data-auto-animate>
             <p>What about <span class="warn">async-await?</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="1,3,9|"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="1,3,9|"><script type="text/template">
                 useEffect(() => {
 
                   (async function() {
@@ -339,7 +339,7 @@
 
           <p><span class="code">List.tsx</span></p>
 
-          <p><pre><code class="hljs jsx" data-trim data-line-numbers="|2-9"><script type="text/template">
+          <p><pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
             function List() {
               const [pokemons, setPokemons] = useState(null);
               useEffect(() => {
@@ -367,7 +367,7 @@
 
             <p><span class="code">MyComponent.tsx</span></p>
 
-            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="|4-14|3,16-17"><script type="text/template">
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|4-14|3,16-17"><script type="text/template">
               import { useState, useEffect } from "react";
 
               export default function MyComponent() {
@@ -392,7 +392,7 @@
 
             <p>&rarr; <span class="code">useUser.ts</span></p>
 
-            <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="3,16-17|"><script type="text/template">
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,16-17|"><script type="text/template">
               import { useState, useEffect } from "react";
 
               export default function useUser() {
@@ -417,7 +417,7 @@
 
             <p data-id="2"><span class="code">MyComponent.tsx</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="|1,4-14"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="|1,4-14"><script type="text/template">
               import { useState, useEffect } from "react";
 
               export default function MyComponent() {
@@ -442,7 +442,7 @@
 
             <p data-id="2"><span class="code">MyComponent.tsx</span></p>
 
-            <p><pre data-id="code2"><code class="hljs jsx" data-trim data-line-numbers="1,4|"><script type="text/template">
+            <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="1,4|"><script type="text/template">
               import useUser from "./useUser.ts";
 
               export default function MyComponent() {
@@ -470,7 +470,7 @@
         <section>
           <p><span class="code">usePokeList.ts</span></p>
           
-          <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="3,12-15"><script type="text/template">
+          <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,12-15"><script type="text/template">
 import { useEffect, useState } from "react";
 
 function usePokeList() {
@@ -492,7 +492,7 @@ export default usePokeList;
 
   <p><span class="code">List.tsx</span></p>
           
-  <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="3,6"><script type="text/template">
+  <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,6"><script type="text/template">
     import DefaultLayout from "../../components/default-layout/DefaultLayout";
     import PokeListEntry from "../../components/poke-list-entry/PokeListEntry";
     import usePokeList from "../../service/poke/usePokeList";
@@ -531,7 +531,7 @@ export default usePokeList;
       </section>
       <section data-auto-animate>
 
-        <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers=""><script type="text/template">
+        <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
         useEffect(() => {
 
           // Do something which requires a cleanup
@@ -544,7 +544,7 @@ export default usePokeList;
       </section>
       <section data-auto-animate>
 
-        <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="6-8|"><script type="text/template">
+        <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="6-8|"><script type="text/template">
         useEffect(() => {
 
           // Do something which requires a cleanup
@@ -560,7 +560,7 @@ export default usePokeList;
         <section>
           <section data-auto-animate>
           <h2>Exercise</h2>
-          <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="6-7|8"><script type="text/template">
+          <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="6-7|8"><script type="text/template">
 function usePokeList() {
   const [pokemons, setPokemons] = useState(null);
 
@@ -581,7 +581,7 @@ function usePokeList() {
 
         <section data-auto-animate>
           <h2>Exercise</h2>
-          <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="8"><script type="text/template">
+          <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="8"><script type="text/template">
 function usePokeList() {
   const [pokemons, setPokemons] = useState(null);
 
@@ -622,7 +622,7 @@ function usePokeList() {
           <h2>Solution</h2>
           <p><span class="code">usePokeList.ts</span></p>
           
-          <p><pre data-id="code"><code class="hljs jsx" data-trim data-line-numbers="5,10,12|"><script type="text/template">
+          <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="5,10,12|"><script type="text/template">
 function usePokeList() {
   const [pokemons, setPokemons] = useState(null);
 
@@ -640,6 +640,14 @@ function usePokeList() {
   return pokemons;
 }
 </script></code></pre></p>
+</section>
+<section>
+  <h2>Alternatives to plain Fetch</h2>
+
+  <ul>
+    <li>Axios</li>
+    <li>TODO</li>
+  </ul>
 </section>
 <section>
   <h2>Recap</h2>
