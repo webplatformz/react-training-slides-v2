@@ -42,8 +42,26 @@
             </section>
             <section>
                 <h2>Exercise</h2>
-                <p>TODO</p>
+                <ul>
+                    <li class="fragment">Setup a new React project with create-react-app</li>
+                    <li class="fragment">Render a pokémon name like Bulbasaur in the <span class="code">App.tsx</span></li>
+                </ul>
             </section>
+            <section>
+                <h2>Solution</h2>
+                <span class="code">App.tsx</span>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        export default function App() {
+                            return (
+                                &lt;div>Bulbasaur&lt;/div&gt;
+                            );
+                        }
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
             <section>
                 <h3>Apply / Use component in a consumer</h3>
                 <p>Multiline JSX should always be wrapped in braces. Single line doesn't.</p>
@@ -63,7 +81,98 @@
             </section>
             <section>
                 <h2>Exercise</h2>
-                <p>TODO</p>
+                <ul>
+                    <li class="fragment">Create a separate component to show some pokémon name</li>
+                    <li class="fragment">Consume this component in the <span class="code">App.tsx</span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Solution</h2>
+                <span class="code">PokeListEntry.tsx</span>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        function PokeListEntry() {
+                            return (
+                                &lt;div>Bulbasaur&lt;/div&gt;
+                            );
+                        }
+
+                        export default PokeListEntry;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Solution continued</h3>
+                <span class="code">App.tsx</span>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        import PokeListEntry from "./poke-list-entry/PokeListEntry.tsx"
+
+                        export default function App() {
+                            return (
+                                &lt;PokeListEntry /&gt;
+                            );
+                        }
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Props</h2>
+                <p>Similar to Angular, we can pass props from a consumer into any child component</p>
+                <p class="fragment">A property can be a primitive, an object or a function</p>
+                <p class="fragment">Properties can be required, optional or even nullable</p>
+                <p class="fragment">Use primitives or objects to pass data into the child component</p>
+                <p class="fragment">Use function to listen on events emitted by the child component</p>
+            </section>
+            <section>
+                <h3>Define Props on a component</h3>
+                <p>You <b>may</b> set a default value for optional props</p>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        type Props = {
+                            name: string; // required prop
+                            age?: string; // optional prop
+                            wearsGlasses: boolean | null; // required but nullable prop
+                            wearsHat?: boolean | null; // optional and nullable prop
+                        };
+
+                        function SomeComponent({
+                            name, age = '-',
+                            wearsGlasses, wearsHat = true
+                        }: Props) {
+                            return &lt;div&gt;&hellip;&lt;/div&gt;;
+                        }
+
+                        export default SomeComponent;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Exercise</h2>
+                <ul>
+                    <li>Create Props for your PokeListEntry component expecting an optional name</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Solution</h2>
+                <span class="code">PokeListEntry.tsx</span>
+                <pre>
+                    <code class="hljs jsx" data-trim data-noescape>
+                        type Props = {
+                            name?: string;
+                        };
+
+                        function PokeListEntry({ name = 'Bulbasaur' }: Props) {
+                            return (
+                                &lt;div>{name}&lt;/div&gt;
+                            );
+                        }
+
+                        export default PokeListEntry;
+                    </code>
+                </pre>
             </section>
         </section>
         <section>
@@ -160,7 +269,42 @@
             </section>
             <section>
                 <h2>Exercise</h2>
-                <p>TODO</p>
+                <ul>
+                    <li>Test your PokeListEntry component with React Testing Library</li>
+                    <li>Stretch Goal: <a href="https://jestjs.io/docs/api#testeachtablename-fn-timeout" target="_blank">Parameterize your test with React Testing Library using</a> <span class="code">it.each(table)(name, fn, timeout)</span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Solution</h2>
+                <span class="code">PokeListEntry.test.tsx</span>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                      it('should render Bulbasaur if no name is passed', () => {
+                        const name = 'Bulbasaur';
+                        const { getByText } = render(&lt;PokeListEntry /&gt;);
+                        expect(getByText(name)).toBeInTheDocument();
+                      });
+
+                      it('should render the passed pokémon name', () => {
+                        const name = 'Pickachu';
+                        const { getByText } = render(&lt;PokeListEntry name={name} /&gt;);
+                        expect(getByText(name)).toBeInTheDocument();
+                      });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Solution continued</h3>
+                <span class="code">PokeListEntry.test.tsx</span>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                      it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
+                        ('should render the passed pokémon name', (name) => {
+                        const { getByText } = render(&lt;PokeListEntry name={name} /&gt;);
+                        expect(getByText(name)).toBeInTheDocument();
+                      });
+                    </code>
+                </pre>
             </section>
         </section>
         <section>
@@ -179,37 +323,36 @@
             </section>
         </section>
         <section>
-            <h2>List</h2>
-            <p>To render a list, we apply the <span class="code">map</span> function on a list to produce HTML-Elements
-            </p>
-            <p>Each list item shall have a unique <span class="code">key</span></p>
-            <pre>
-                <code class="hljs javascript" data-trim data-noescape>
-                    function List() {
-                        const items = ['Apple', 'Orange', 'Mango'];
-                        return (
-                            &lt;ul&gt;
-                                {items.map(item => &lt;li key={item}&gt;{item}&lt;/li&gt;)}
-                            &lt;/ul&gt;
-                        )
-                    }
+            <section>
+                <h2>List</h2>
+                <p>To render a list, we apply the <span class="code">map</span> function on a list to produce HTML-Elements
+                </p>
+                <p>Each list item shall have a unique <span class="code">key</span></p>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        function List() {
+                            const items = ['Apple', 'Orange', 'Mango'];
+                            return (
+                                &lt;ul&gt;
+                                    {items.map(item => &lt;li key={item}&gt;{item}&lt;/li&gt;)}
+                                &lt;/ul&gt;
+                            )
+                        }
 
-                    export default List;
-                </code>
-            </pre>
-        </section>
-        <section>
-            <h2>Exercise</h2>
-            <ol>
-                <li>Create a (hard-coded) <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of
-                    Pokémon</a></li>
-                <li>The representation of the list item shall be rendered in a different dumb component than the list
-                    itself
-                </li>
-                <li>Stretch-Goal: Test your components with React-Testing-Library</li>
-            </ol>
-        </section>
-        <section>
+                        export default List;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Exercise</h2>
+                <ul>
+                    <li>Create a (hard-coded) <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of
+                        Pokémon</a></li>
+                    <li class="fragment">Render all Pokémon names in a list</li>
+                    <li class="fragment">Make the name in <span class="code">PokeListEntry.tsx</span> required</li>
+                    <li class="fragment">Write tests</li>
+                </ul>
+            </section>
             <section>
                 <h2>Solution</h2>
                 <pre>
@@ -235,6 +378,7 @@
                 </pre>
             </section>
             <section>
+                <h3>Solution continued</h3>
                 <pre>
                     <code class="hljs javascript" data-trim data-noescape>
                         type Props = {
