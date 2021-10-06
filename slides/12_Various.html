@@ -117,9 +117,36 @@
             </section>
             <section>
                 <h2>Redux / Zustand (flux-based)</h2>
+                <img src="../img/flux-simple.png" />
             </section>
             <section>
                 <h2>Recoil / Jotai (atom-based)</h2>
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const textState = atom({
+                      key: 'textState',
+                      default: '',
+                    });
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const [text, setText] = useRecoilState(textState);
+                </script></code></pre></p>
+            </section>
+            <section>
+                <h2>valtio (proxy-based)</h2>
+            </script></code></pre></p>
+            <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                const state = proxy({ count: 0, text: 'hello' })
+            </script></code></pre></p>
+            <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                const snap = useSnapshot(state)
+                return (
+                  <div>
+                    {snap.count}
+                    <button onClick={() => ++state.count}>+1</button>
+                  </div>
+                )
+            </script></code></pre></p>
             </section>
         </section>
         <section>
