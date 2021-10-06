@@ -138,6 +138,10 @@
           </section>
         </section>
         <section>
+          <h1>Additional styling options</h1>
+          <p>Some nice to know approaches for styling</p>
+        </section>
+        <section>
           <section>
             <h1>Tailwind CSS</h1>
             <p>Utility-first CSS framework</p>
@@ -160,6 +164,38 @@
             <p><img src="../img/tailwindcss_website.png"></p>
 
             <p><a href="https://tailwind.css">tailwindcss.com</a></p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>CSS in JS</h1>
+            <p>Extending CSS with JS features</p>
+          </section>
+          <section>
+            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+              const Button = styled.a`
+                display: inline-block;
+                border-radius: 3px;
+                padding: 0.5rem 0;
+                color: white;
+                border: 2px solid white;
+
+                ${props => props.primary && css`
+                  background: white;
+                  color: black;
+                `}
+              `;
+            </script></code></pre></p>
+            <p>No worries, this approach is not about inline styles.</p>
+          </section>
+          <section>
+            <p>There are different CSS in JS approaches, e.g.:</p>
+            <ul>
+              <li>styled-components</li>
+              <li>Emotion</li>
+              <li>JSS</li>
+              <li>Stitches</li>
+            </ul>
           </section>
         </section>
         <section class="deck-slide">
