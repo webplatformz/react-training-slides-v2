@@ -111,6 +111,52 @@
                 <p>Use virtualization as a "last resort", usually there are other places which are easier to fix.</p>
             </section>
         </section>
+        <section>
+            <section>
+                <h2>State Management</h2>
+            </section>
+            <section>
+                <h2>Redux / Zustand (flux-based)</h2>
+            </section>
+            <section>
+                <h2>Recoil / Jotai (atom-based)</h2>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Data Management</h2>
+            </section>
+            <section>
+                <h2>Requirements</h2>
+                <ul>
+                    <li>Handle repetitive data loading states (pending, success, error)</li>
+                    <li>Cache response</li>
+                    <li>Invalidate response</li>
+                    <li>Handle mutations</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Libraries</h2>
+                <ul>
+                    <li>SWR</li>
+                    <li>react-query</li>
+                </ul>
+            </section>
+            <section>
+            </script></code></pre></p>
+            <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                import useSWR from 'swr'
+
+                const fetcher = (...args) => fetch(...args).then(res => res.json())
+                
+                const { data, error } = useSWR('/api/user', fetcher)
+
+                if (error) return <div>failed to load</div>
+                if (!data) return <div>loading...</div>
+                return <div>hello {data.name}!</div>
+            </script></code></pre></p>
+            </section>
+        </section>
     </div>
 </div>
 
