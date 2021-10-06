@@ -326,13 +326,37 @@
           </section>
         </section>
         <section>
-          <h2>Exercise</h2>
+          <section>
+            <h2>Exercise</h2>
 
-          <p><img src="../img/data_fetching_goal.png" /></p>
-          <ul>
-            <li>Retrieve the data for the pokemon list from the PokeAPI.</li>
-            <li>API call: <span class="code">GET https://pokeapi.co/api/v2/pokemon?limit=50</li>
-          </ul>
+            <p><img src="../img/data_fetching_goal.png" /></p>
+            <ul>
+              <li>Retrieve the data for the pokemon list from the <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">PokeAPI</a>.</li>
+              <li>API call: <span class="code">GET https://pokeapi.co/api/v2/pokemon?limit=50</li>
+            </ul>
+          </section>
+          <section>
+            <h2>List API</h2>
+            <a href="https://pokeapi.co/api/v2/pokemon?limit=5" target="_blank" rel="noopener noreferrer">
+                https://pokeapi.co/api/v2/pokemon?limit=5
+            </a>
+            <pre>
+                <code class="hljs json" data-trim data-noescape>
+                    {
+                        "count": 1118,
+                        "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
+                        "previous": null,
+                        "results": [
+                            {
+                                "name": "bulbasaur",
+                                "url": "https://pokeapi.co/api/v2/pokemon/1/"
+                            },
+                            ...
+                        ]
+                    }
+                </code>
+            </pre>
+          </section>
         </section>
         <section>
           <h2>Solution</h2>
