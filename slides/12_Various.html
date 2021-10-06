@@ -35,6 +35,64 @@
                 be applied.</p>
             <p>Rules can be overridden in the <span class="code">rules</span> field value.</p>
         </section>
+        <section>
+            <section>
+                <h2>Refs</h2>
+                <p>Or: How to break out of virtual dom</p>
+            </section>
+            <section>
+                <p>Refs permit to obtain a reference to a real dom element</p>
+            </section>
+            <section>
+                <h2>Focus</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    import { useRef, useEffect } from "react";
+      
+                    export default function MyComponent() {
+                      const inputRef = useRef(null);
+                      useEffect(() => {
+                        inputRef.current.focus();
+                      }, []);
+      
+                      return (
+                        <input ref={inputRef} />
+                      );
+                    }
+                  
+                </script></code></pre></p>
+                <p>Automatically set focus on page load</p>
+                <div class="fragment tip">
+                  There are alternatives such as using autofocus on the input field.
+                </div>
+            </section>
+            <section>
+                <h2>How to forward ref?</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    function CustomInput({ ref }) {
+                      return <input ref={ref} />;
+                    }
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    <CustomInput ref={ref} />
+                </script></code></pre></p>
+                <p class="fragment">
+                  <span class="warn">Does not work!</span> &ndash; ref is a special prop (the other one is key)
+                </p>
+            </section>
+            <section>
+                <h2>forwardRef!</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const CustomInput = forwardRef((props, ref) => {
+                      return <input ref={ref} />;
+                    });
+                      
+                    CustomInput.displayName = "CustomInput";
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    <CustomInput ref={ref} />
+                </script></code></pre></p>
+            </section>
+        </section>
     </div>
 </div>
 
