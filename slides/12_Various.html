@@ -121,7 +121,6 @@
             </section>
             <section>
                 <h2>Recoil / Jotai (atom-based)</h2>
-                </script></code></pre></p>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     const textState = atom({
                       key: 'textState',
@@ -134,19 +133,18 @@
             </section>
             <section>
                 <h2>valtio (proxy-based)</h2>
-            </script></code></pre></p>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                const state = proxy({ count: 0, text: 'hello' })
-            </script></code></pre></p>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                const snap = useSnapshot(state)
-                return (
-                  <div>
-                    {snap.count}
-                    <button onClick={() => ++state.count}>+1</button>
-                  </div>
-                )
-            </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const state = proxy({ count: 0, text: 'hello' })
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const snap = useSnapshot(state)
+                    return (
+                      <div>
+                        {snap.count}
+                        <button onClick={() => ++state.count}>+1</button>
+                      </div>
+                    )
+                </script></code></pre></p>
             </section>
         </section>
         <section>
@@ -170,18 +168,127 @@
                 </ul>
             </section>
             <section>
-            </script></code></pre></p>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                import useSWR from 'swr'
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    import useSWR from 'swr'
 
-                const fetcher = (...args) => fetch(...args).then(res => res.json())
-                
-                const { data, error } = useSWR('/api/user', fetcher)
+                    const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-                if (error) return <div>failed to load</div>
-                if (!data) return <div>loading...</div>
-                return <div>hello {data.name}!</div>
-            </script></code></pre></p>
+                    const { data, error } = useSWR('/api/user', fetcher)
+
+                    if (error) return <div>failed to load</div>
+                    if (!data) return <div>loading...</div>
+                    return <div>hello {data.name}!</div>
+                </script></code></pre></p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Class Components</h2>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                class HelloWorld extends React.Component {
+                    render() {
+                        return (
+                            <div>Hello World</div>
+                        );
+                    }
+                }
+                </script></code></pre></p>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                class HelloWorld extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = {date: new Date()};
+                    }
+
+                    componentDidMount() {
+                        this.timerID = setInterval(
+                            () => this.setState({ date: new Date() }),
+                            1000
+                        );
+                    }
+
+                    componentWillUnmount() {
+                        clearInterval(this.timerID);
+                    }
+
+                    render() {
+                        return (
+                            <>
+                                <h1>Hello World, it is:</h1>
+                                <h2>{this.state.date.toLocaleTimeString()}</h2>
+                            </>
+                        );
+                    }
+                }
+                </script></code></pre></p>
+            </section>
+            <section>
+                <h3>Class components</h3>
+                <ul>
+                    <li>are another way to write a component</li>
+                    <li>must implement a render-method</li>
+                    <li>can be enriched with lifecycle methods</li>
+                    <li>May not contain React hooks</li>
+                    <li>Are rarely used since the existence of functional components</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>i18n / Internationalization</h2>
+            </section>
+            <section>
+                <h3>Libraries</h3>
+                <ul>
+                    <li>
+                        <a href="https://formatjs.io/" target="_blank" rel="noopener noreferrer">FormatJS (aka React-Intl)</a>
+                    </li>
+                    <li>
+                        <a href="https://react.i18next.com/" target="_blank" rel="noopener noreferrer">react-i18next</a>
+                    </li>
+                    <li>...</li>
+                </ul>
+            </section>
+            <section>
+                <h2>FormatJS (aka React-Intl)</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                ReactDOM.render(
+                    <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
+                        <App />
+                    </IntlProvider>,
+                    document.getElementById('container')
+                )
+                </script></code></pre></p>
+            </section>
+            <section>
+                <h2>FormatJS (aka React-Intl)</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const { formatMessage } = useIntl();
+                    &hellip;
+                    return (
+                        <h1>{formatMessage({ id: 'myOptionalPersonallyDefinedKey', description: 'title' })}</h1>
+                        <h2><FormattedMessage
+                                id="myOptionalPersonallyDefinedKey"
+                                defaultMessage="Today is {ts, date, ::yyyyMMdd}"
+                                values={{ts: Date.now()}}
+                        /></h2>
+                    );
+                </script></code></pre></p>
+            </section>
+            <section>
+                <h2>FormatJS (aka React-Intl) - Support</h2>
+                <ul>
+                    <li>Singular, plural, zero, one, many translation forms</li>
+                    <li>Number / date formatting</li>
+                    <li>Hard-coded Keys as well as autogenerated ones</li>
+                    <li>Pre-compilation for run-time performance</li>
+                    <li>Built in as well as custom formatters for different translation tools</li>
+                    <li>Stores keys and translated terms in JSON-Files</li>
+                </ul>
             </section>
         </section>
     </div>
