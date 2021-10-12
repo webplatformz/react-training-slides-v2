@@ -35,6 +35,7 @@
         <section>
             <h2>Content 2/2</h2>
             <ul>
+                <li>Code-Splitting</li>
                 <li>Further React Hooks</li>
                 <li>Next.JS</li>
                 <li>Refs</li>
@@ -253,6 +254,26 @@
             <section>
                 <h2>Advice</h2>
                 <p>Use virtualization as a "last resort", usually there are other places which are easier to fix.</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Code-Splitting</h2>
+                <p>React Lazy / Suspense</p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    import React, { Suspense } from 'react';
+
+                    const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+                    function MyComponent() {
+                        return (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <OtherComponent />
+                            </Suspense>
+                        );
+                    }
+
+                </script></code></pre></p>
             </section>
         </section>
         <section>
