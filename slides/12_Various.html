@@ -136,41 +136,38 @@
             <section>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                 class HelloWorld extends React.Component {
-                render() {
-                return (
-                <div>Hello World</div>
-                );
-                }
+                  render() {
+                    return (
+                      <div>Hello World</div>
+                    );
+                  }
                 }
                 </script></code></pre></p>
             </section>
             <section>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                 class HelloWorld extends React.Component {
-                constructor(props) {
-                super(props);
-                this.state = {date: new Date()};
-                }
-
-                componentDidMount() {
-                this.timerID = setInterval(
-                () => this.setState({ date: new Date() }),
-                1000
-                );
-                }
-
-                componentWillUnmount() {
-                clearInterval(this.timerID);
-                }
-
-                render() {
-                return (
-                <>
-                <h1>Hello World, it is:</h1>
-                <h2>{this.state.date.toLocaleTimeString()}</h2>
-                </>
-                );
-                }
+                  constructor(props) {
+                    super(props);
+                    this.state = {date: new Date()};
+                  }
+                  componentDidMount() {
+                    this.timerID = setInterval(
+                      () => this.setState({ date: new Date() }),
+                      1000
+                    );
+                  }
+                  componentWillUnmount() {
+                    clearInterval(this.timerID);
+                  }
+                  render() {
+                    return (
+                      <>
+                        <h1>Hello World, it is:</h1>
+                        <h2>{this.state.date.toLocaleTimeString()}</h2>
+                      </>
+                    );
+                  }
                 }
                 </script></code></pre></p>
             </section>
@@ -205,10 +202,10 @@
                 <h2>FormatJS (aka React-Intl)</h2>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                 ReactDOM.render(
-                <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
-                        <App />
-                    </IntlProvider>,
-                document.getElementById('container')
+                  <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
+                    <App />
+                  </IntlProvider>,
+                  document.getElementById('container')
                 )
                 </script></code></pre></p>
             </section>
@@ -218,12 +215,12 @@
                     const { formatMessage } = useIntl();
                     &hellip;
                     return (
-                    <h1>{formatMessage({ id: 'myOptionalPersonallyDefinedKey', description: 'title' })}</h1>
-                    <h2><FormattedMessage
-                            id="myOptionalPersonallyDefinedKey"
-                            defaultMessage="Today is {ts, date, ::yyyyMMdd}"
-                            values={{ts: Date.now()}}
-                    /></h2>
+                      <h1>{formatMessage({ id: 'myOptionalPersonallyDefinedKey', description: 'title' })}</h1>
+                      <h2><FormattedMessage
+                                id="myOptionalPersonallyDefinedKey"
+                                defaultMessage="Today is {ts, date, ::yyyyMMdd}"
+                                values={{ts: Date.now()}}
+                      /></h2>
                     );
                 </script></code></pre></p>
             </section>
@@ -267,10 +264,10 @@
                     const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
                     function MyComponent() {
-                        return (
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <OtherComponent />
-                            </Suspense>
+                      return (
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <OtherComponent />
+                        </Suspense>
                         );
                     }
 
@@ -313,14 +310,14 @@
                     import { useRef, useEffect } from "react";
 
                     export default function MyComponent() {
-                    const inputRef = useRef(null);
-                    useEffect(() => {
-                    inputRef.current.focus();
-                    }, []);
+                      const inputRef = useRef(null);
+                      useEffect(() => {
+                        inputRef.current.focus();
+                      }, []);
 
-                    return (
-                    <input ref={inputRef} />
-                    );
+                      return (
+                        <input ref={inputRef} />
+                      );
                     }
 
                 </script></code></pre></p>
@@ -333,7 +330,7 @@
                 <h2>How to forward ref?</h2>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     function CustomInput({ ref }) {
-                    return <input ref={ref} />;
+                      return <input ref={ref} />;
                     }
                 </script></code></pre></p>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
@@ -347,7 +344,7 @@
                 <h2>forwardRef!</h2>
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     const CustomInput = forwardRef((props, ref) => {
-                    return <input ref={ref} />;
+                      return <input ref={ref} />;
                     });
 
                     CustomInput.displayName = "CustomInput";
