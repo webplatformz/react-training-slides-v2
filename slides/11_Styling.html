@@ -147,6 +147,46 @@
         </section>
 
         <section>
+          <section>
+            <h1>
+              classnames
+            </h1>
+            <p>A helper package for common className requirements</p>
+          </section>
+          <section>
+            <h2>
+              Apply multiple classNames
+            </h2>
+            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+              <div className={styles.root + " " + styles.primary} />
+            </script></code></pre></p>
+            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+              <div className={classnames(styles.root, styles.primary)} />
+            </script></code></pre></p>
+          </section>
+          <section>
+            <h2>
+              Apply conditional className
+            </h2>
+            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+              <div className={props.primary ? styles.primary : ""} />
+            </script></code></pre></p>
+            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+              <div className={classnames(
+                  {[styles.primary]: props.primary}
+                )}
+              />
+            </script></code></pre></p>
+          </section>
+          <section>
+            <h2>
+              More info about classnames:
+            </h2>
+            <p><a href="https://github.com/JedWatson/classnames" target="_blank" rel="noopener noreferrer">classnames</a></p>
+          </section>
+        </section>
+
+        <section>
           <h1>Additional styling options</h1>
           <p>Some nice to know approaches for styling</p>
         </section>
