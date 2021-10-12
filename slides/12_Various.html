@@ -30,17 +30,18 @@
                 <li>Class Components</li>
                 <li>i18n / Internationalization</li>
                 <li>Virtualization</li>
+                <li>Code-Splitting</li>
             </ul>
         </section>
         <section>
             <h2>Content 2/2</h2>
             <ul>
-                <li>Code-Splitting</li>
                 <li>Further React Hooks</li>
                 <li>Next.JS</li>
                 <li>Refs</li>
                 <li>browserslist</li>
                 <li>ESLint configuration</li>
+                <li>Error Boundaries</li>
             </ul>
         </section>
         <section>
@@ -369,6 +370,55 @@
             <p>If multiple configurations or plugins specify contradicting values for the same rule, the latter will
                 be applied.</p>
             <p>Rules can be overridden in the <span class="code">rules</span> field value.</p>
+        </section>
+        <section>
+            <section>
+            <h2>Error Boundaries</h2>
+        </section>
+        <section>
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,7-11,14-17"><script type="text/template">
+                class ErrorBoundary extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    this.state = { hasError: false };
+                  }
+                    
+                  static getDerivedStateFromError(error) {
+                    // Update state so the next render will show
+                    // the fallback UI.
+                    return { hasError: true };
+                  }
+                
+                  render() {
+                    if (this.state.hasError) {
+                       // You can render any custom fallback UI
+                      return <h1>Something went wrong.</h1>;
+                    }
+                    
+                    return this.props.children; 
+                  }
+                }
+  </script></code></pre></p>
+</section>
+<section>
+    <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,6-10"><script type="text/template">
+        class ErrorBoundary extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+            
+          componentDidCatch(error, errorInfo) {
+            // You can also log the error to
+            // an error reporting service
+            logErrorToMyService(error, errorInfo);
+          }
+
+          render() {
+            return this.props.children; 
+          }
+        }
+</script></code></pre></p>
+</section>
         </section>
     </div>
 </div>
