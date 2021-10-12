@@ -24,17 +24,15 @@
         <section>
             <h2>Setup</h2>
             <ul>
-                <li>Create-React-App</li>
+                <li>Create React App</li>
                 <li>JSX</li>
                 <li>JavaScript or TypeScript</li>
                 <li>NPM scripts</li>
-                <li>ESLint & Prettier</li>
-                <li>React Dev Tools</li>
             </ul>
         </section>
         <section>
             <section>
-                <h2>Create-React-App</h2>
+                <h2>Create React App</h2>
                 <pre>
                     <code class="hljs javascript" data-trim data-noescape>
                         $ npx create-react-app your-app-name
@@ -56,7 +54,7 @@
                 <h2>JSX</h2>
                 <pre class="fragment">
                     <code class="hljs javascript" data-trim data-noescape>
-                        const header = &lt;h1&gt;Hello World&lt;/h1&gt;
+                        const header = &lt;h1&gt;Hello World&lt;/h1&gt;;
                     </code>
                 </pre>
                 <pre>
@@ -71,16 +69,16 @@
             </section>
             <section>
                 <h2>JSX</h2>
-                <p>You can use any JS expression within curly braces</p>
+                <p>You can use any JS expression within curly braces.</p>
                 <pre>
                     <code class="hljs javascript" data-trim data-noescape>
                         const name = 'John Wayne';
 
-                        const header = &lt;h1&gt;Hello, {name}&lt;/h1&gt;
+                        const header = &lt;h1&gt;Hello, {name}&lt;/h1&gt;;
 
-                        const math = &lt;p&gt;2 + 2 equals {2 + 2}&lt;/p&gt;
+                        const math = &lt;p&gt;2 + 2 equals {2 + 2}&lt;/p&gt;;
 
-                        const formatted = &lt;h1&gt;Hello, {formatName(name)}&lt;/h1&gt;
+                        const formatted = &lt;h1&gt;Hello, {formatName(name)}&lt;/h1&gt;;
                     </code>
                 </pre>
                 <div class="fragment tip">JSX is basically JS + HTML</div>
@@ -92,9 +90,9 @@
                     <code class="hljs javascript" data-trim data-noescape>
                         function getGreeting(user) {
                             if (user) {
-                                return &lt;h1&gt;Hello, {formatName(name)}&lt;/h1&gt;
+                                return &lt;h1&gt;Hello, {formatName(name)}&lt;/h1&gt;;
                             }
-                            return &lt;h1&gt;Hello, stranger&lt;/h1&gt;
+                            return &lt;h1&gt;Hello, stranger&lt;/h1&gt;;
                         }
                     </code>
                 </pre>
@@ -128,7 +126,7 @@
             <section>
                 <h2>TypeScript</h2>
                 <p>We will be using TypeScript because we highly recommend using it in enterprise projects.</p>
-                <p>With Create-React-App Typescript is supported out of the box:</p>
+                <p>With Create React App Typescript is supported out of the box:</p>
                 <pre>
                     <code class="hljs javascript" data-trim data-noescape>
                         --template typescript
@@ -140,7 +138,7 @@
             <section>
                 <h2>NPM scripts</h2>
                 <p><span class="code">npm start</span></p>
-                <p>Starts the app with a live reload server. The build will fail if you have typescript errors.</p>
+                <p>Starts the app with a live reload server. The build will fail if you have TypeScript errors.</p>
             </section>
             <section>
                 <p><span class="code">npm run build</span></p>
@@ -154,11 +152,11 @@
             </section>
             <section>
                 <p><span class="code">npm run eject</span></p>
-                <p>You may have noticed that there is no webpack config visible. This is hidden from you when using Create-React-App <span class="warn">(convention over configuration)</span>.</p>
+                <p>You may have noticed that there is no webpack config visible. This is hidden from you when using Create React App <span class="warn">(convention over configuration)</span>.</p>
                 <p>In most cases, this will be fine. If you need to make custom changes to the config, you can <span
                         class="warn">eject</span>.</p>
-                <p>This cannot be undone and you lose Create-React-App support.</p>
-                <div class="fragment tip">We recommend starting & staying with Create-React-App until there is absolutely no way
+                <p>This cannot be undone and you loose Create React App support.</p>
+                <div class="fragment tip">We recommend starting &amp; staying with Create React App until there is absolutely no way
                     around ejecting.
                 </div>
             </section>
