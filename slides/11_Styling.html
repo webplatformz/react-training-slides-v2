@@ -69,40 +69,6 @@
         <section>
           <section>
             <h1>
-              CSS Modules
-            </h1>
-            <p>Locally scoped CSS</p>
-          </section>
-          <section>
-            <pre>
-              <code class="hljs css" data-trim data-noescape>
-                .root { color: red; }
-              </code>
-            </pre>
-            <p>to</p>
-            <pre>
-              <code class="hljs css" data-trim data-noescape>
-                .root-h2l5l { color: red; }
-              </code>
-            </pre>
-          </section>
-          <section>
-            <pre>
-              <code class="hljs javascript" data-trim data-noescape>
-                import styles from './Component.module.scss';
-              </code>
-            </pre>
-            <pre>
-              <code class="hljs html" data-trim data-noescape>
-                &lt;div className={styles.root} /&gt;
-              </code>
-            </pre>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h1>
               SASS / SCSS
             </h1>
             <p>CSS preprocessor</p>
@@ -136,7 +102,50 @@
               </code>
             </pre>
           </section>
+          <section>
+            <h2>Setup in CRA</h2>
+            <pre>
+              <code class="hljs shell" data-trim data-noescape>
+                $ npm install node-sass --save
+              </code>
+            </pre>
+          </section>
         </section>
+
+        <section>
+          <section>
+            <h1>
+              CSS Modules
+            </h1>
+            <p>Locally scoped CSS</p>
+          </section>
+          <section>
+            <pre>
+              <code class="hljs css" data-trim data-noescape>
+                .root { color: red; }
+              </code>
+            </pre>
+            <p>to</p>
+            <pre>
+              <code class="hljs css" data-trim data-noescape>
+                .root-h2l5l { color: red; }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <pre>
+              <code class="hljs javascript" data-trim data-noescape>
+                import styles from './Component.module.scss';
+              </code>
+            </pre>
+            <pre>
+              <code class="hljs html" data-trim data-noescape>
+                &lt;div className={styles.root} /&gt;
+              </code>
+            </pre>
+          </section>
+        </section>
+
         <section>
           <h1>Additional styling options</h1>
           <p>Some nice to know approaches for styling</p>
