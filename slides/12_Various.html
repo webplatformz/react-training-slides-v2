@@ -30,17 +30,18 @@
                 <li>i18n / Internationalization</li>
                 <li>Virtualization</li>
                 <li>Code-Splitting</li>
+                <li>Further React Hooks</li>
             </ul>
         </section>
         <section>
             <h2>Content 2/2</h2>
             <ul>
-                <li>Further React Hooks</li>
                 <li>Next.JS</li>
                 <li>Refs</li>
                 <li>browserslist</li>
                 <li>ESLint configuration</li>
                 <li>Error Boundaries</li>
+                <li>Mock Service Worker (MSW)</li>
             </ul>
         </section>
         <section>
@@ -388,6 +389,95 @@
         }
 </script></code></pre></p>
 </section>
+        </section>
+        <section>
+            <section>
+                <h2>Mock Service Worker (MSW)</h2>
+            </section>
+
+            <section>
+                <p><em>It is the closest thing to a mocking server without having to create one.</em><br>
+                    <small>&mdash; <a href="https://mswjs.io/docs/">Mock Service Worker Docs</a></small></p>
+            </section>
+
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    npm install msw --save-dev
+                </script></code></pre></p>
+            </section>
+
+            <section>
+                <h3>How it works in the browser</h3>
+            <p><img src="../img/mock_service_worker.jpeg" /></p>
+
+            <p><small>Source: <a href="https://mswjs.io/docs/">https://mswjs.io/docs/</a></small></p>
+            </section>
+
+            <section>
+                <h3>How it works in Node</h3>
+
+                <p>The <em>node-request-interceptor</em> library is used to intercept HTTP requests.</p>
+            </section>
+            
+            <section>
+                <h3>Advantages over conventional mocking approaches</h3>
+                <ul>
+                    <li>No wrapper in the application code necessary &ndash; it can call the native fetch</li>
+                    <li>The mock is completely seamless &ndash; the application behaves the same with and without mocks</li>
+                </ul>
+            </section>
+
+            <section>
+
+                <p><span class="code">src/mocks/server.ts</span></p>
+    <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+import { setupServer } from 'msw/node'
+import { handlers } from './handlers'
+
+// This configures a request mocking server
+// with the given request handlers.
+export const server = setupServer(...handlers);
+    </script></code></pre></p>
+            </section>
+
+            <section>
+
+                <p><span class="code">src/setupTests.ts</span></p>
+    <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+import { server } from "./mocks/server.js";
+
+// Establish API mocking before all tests.
+beforeAll(() => server.listen());
+
+// Reset any request handlers that we may add during
+// the tests, so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Clean up after the tests are finished.
+afterAll(() => server.close());
+    </script></code></pre></p>
+            </section>
+
+            <section>
+
+                <p><span class="code">src/handlers.ts</span></p>
+    <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+
+const handlers = [
+  rest.get(
+      "/api/v2/pokemon?limit=50",
+      (_, res, ctx) => res(ctx.json({
+        results: [
+          { name: "Pikachu", url: "…" },
+          …
+        ]
+      }))
+  )
+];
+
+export default handlers;
+    </script></code></pre></p>
+            </section>
         </section>
     </div>
 </div>
