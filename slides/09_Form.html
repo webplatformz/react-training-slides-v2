@@ -39,53 +39,54 @@
           </section>
           <section>
             <h2>input / textarea</h2>
-            <pre>
-              <code class="hljs html" data-trim data-noescape>
-                &lt;input
-                    value={value}
-                    onChange={e => { setValue(e.target.value) }}
-                /&gt
-              </code>
-            </pre>
+            <p><pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
+                const [value, setValue] = useState();
+                …
+                <input
+                  value={value}
+                  onChange={e => { setValue(e.target.value) }}
+                />
+            </script></code></pre></p>
           </section>
           <section>
             <h2>select</h2>
-            <pre>
-              <code class="hljs html" data-trim data-noescape>
-                &lt;select
+            <p><pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
+                const [option, setOption] = useState();
+                …
+                <select
                   value={value}
                   onChange={e => { setValue(e.target.value) }}
-                &gt;
-                  &lt;option value="grapefruit"&gt;Grapefruit&lt;/option&gt;
-                  &lt;option value="lime"&gt;Lime&lt;/option&gt;
-                &lt;/select&gt;
-              </code>
-            </pre>
+                >
+                  <option value="grapefruit">Grapefruit</option>
+                  <option value="lime">Lime</option>
+                </select>
+            </script></code></pre></p>
           </section>
           <section>
             <h2>checkbox</h2>
-            <pre>
-              <code class="hljs html" data-trim data-noescape>
-                &lt;input
+            <p><pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
+                const [checked, setChecked] = useState();
+                …
+                <input
                   type="checkbox"
                   checked={checked}
-                  onChange={(e) => { setChecked(e.target.checked) }} /&gt;
-              </code>
-            </pre>
+                  onChange={(e) => { setChecked(e.target.checked) }}
+                />
+            </script></code></pre></p>
           </section>
           <section>
             <h2>radio</h2>
-            <pre>
-              <code class="hljs html" data-trim data-noescape>
-                &lt;input
+            <p><pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
+                const [option, setOption] = useState();
+                …
+                <input
                   type="radio"
                   name="preference"
                   value="tomato"
                   checked={option === "tomato"}
                   onChange={(e) => { setOption(e.target.value) }}
-                /&gt;
-              </code>
-            </pre>
+                />
+            </script></code></pre></p>
           </section>
         </section>
 
@@ -95,27 +96,54 @@
           </section>
           <section>
             <h2>Controlled</h2>
-            <p>Update state with each change event</p>
-            <pre>
-                <code class="hljs html" data-trim data-noescape>
-                    &lt;input
-                      value={value}
-                      onChange={e => { setValue(e.target.value) }}
-                    /&gt
-                </code>
-            </pre>
+            <ul>
+              <li>Form Data is handled by a React component</li>
+              <li>Updates state with each change event causing re-renders
+                <ul>
+                  <li>Can occur on a keystroke</li>
+                  <li>When selecting an option form a Dropdown</li>
+                  <li>…</li>
+                </ul>
+              </li>
+            </ul>
           </section>
 
           <section>
             <h2>Uncontrolled</h2>
-            <p>Read values only on blur / submit to prevent needless re-renders.</p>
-            <pre>
-                <code class="hljs html" data-trim data-noescape>
-                    &lt;input
-                      defaultValue={value}
-                    /&gt
-                </code>
-            </pre>
+            <ul>
+              <li>Form Data is handled by the DOM itself</li>
+              <li>Read values only on blur / submit to prevent needless re-renders</li>
+              <li>Sometimes controlled fields are unavoidable
+                <ul>
+                  <li>React-Select</li>
+                  <li>Material-UI</li>
+                  <li>…</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <p><pre data-id="code"><code class="hljs javascript" data-trim><script type="text/template">
+                import {FormEventHandler, useRef} from 'react';
+
+                export default function RegistrationForm() {
+                  const inputEl = useRef<HTMLInputElement | null>(null);
+
+                  const handleSubmit: FormEventHandler<HTMLFormElement> =
+                    (event) => {
+                      console.log(inputEl.current?.value);
+                      event.preventDefault();
+                  };
+
+                  return (
+                      <form onSubmit={handleSubmit}>
+                          <label htmlFor="name">Name</label>
+                          <input id="name" type="text" ref={inputEl} />
+                          <input type="submit" value="Submit" />
+                      </form>
+                  );
+                }
+            </script></code></pre></p>
             <div class="fragment tip">
               To leverage uncontrolled form fields, using a library is advised
             </div>
@@ -140,16 +168,22 @@
                   handleSubmit,
                 } = useForm();
                 const onSubmit = data => { console.log(data); };
+                const onError = error => { console.log(error); };
               </code>
             </pre>
             <pre>
               <code class="hljs html" data-trim data-noescape>
-                &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
-                  &lt;input defaultValue="test" {...register("example")} /&gt;
+                &lt;form onSubmit={handleSubmit(onSubmit, onError)}&gt;
+                  &lt;input defaultValue="test"
+                    {...register("example", {/*validations*/})}
+                  /&gt;
                   &lt;input type="submit" /&gt;
                 &lt;/form&gt;
               </code>
             </pre>
+            <div class="fragment tip">
+              React Hook Form is enabling you to easily set and update form state as well as execute validation with adequate error-handling.
+            </div>
           </section>
         </section>
         <section class="deck-slide">
