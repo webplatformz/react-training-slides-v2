@@ -227,7 +227,7 @@
                     <Switch>
                       // …
                       <Route path="/cars/:carId">
-                        <CarDetail />
+                        <CarDetailPage />
                       </Route>
                     </Switch>
                   </Router>
@@ -240,12 +240,12 @@
           <section data-auto-animate>
             <h3>Routes with Parameters</h3>
 
-            <p><span class="code">CarDetail.tsx</span></p>
+            <p><span class="code">CarDetailPage.tsx</span></p>
 
             <p><pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
               import { useParams } from "react-router-dom";
 
-              export default function CarDetail() {
+              export default function CarDetailPage() {
                 const { carId } = useParams();
                 return <p>This is the car with the ID {carId}.</p>;
               }
@@ -266,7 +266,7 @@
                       <Route path="/page1">
                         <Page1 />
                       </Route>
-                      <Redirect from="/" to="page1" />
+                      <Redirect from="/" to="/page1" />
                     </Switch>
                   </Router>
                 );
@@ -296,7 +296,7 @@
 
             <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
             <p><span class="code">&lt;Switch /&gt;</span></p>
-            <p><span class="code">&lt;Route path="/cars/:carId"&gt;&lt;CarDetail /&gt;&lt;/Router&gt;</span></p>
+            <p><span class="code">&lt;Route path="/cars/:carId"&gt;&lt;CarDetailPage /&gt;&lt;/Router&gt;</span></p>
             <p><span class="code">&lt;Redirect from="/" to="/cars" /&gt;</span></p>
             <p><span class="code">&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span></p>
           </section>
@@ -362,13 +362,13 @@
             <p><pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|8,9|10|"><script type="text/template">
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import List from "./pages/list/List";
-import Detail from "./pages/detail/Detail";
+import DetailPage from "./pages/detail/DetailPage";
 
 export default function App() {
   return (<Router>
     <Switch>
       <Route path="/pokemon"><List /></Route>
-      <Route path="/pokemon/:pokemonName"><Detail /></Route>
+      <Route path="/pokemon/:pokemonName"><DetailPage /></Route>
       <Redirect from="/" to="/pokemon" />
     </Switch>
   </Router>);
@@ -396,7 +396,7 @@ export default PokeListEntry;
           </section>
           <section>
 
-            <p><span class="code">Detail.tsx</span></p>
+            <p><span class="code">DetailPage.tsx</span></p>
 
             <p><pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
 import { useParams } from "react-router-dom";
@@ -404,7 +404,7 @@ import usePokeDetail from "../../service/poke/usePokeDetail";
 
 interface Params { pokemonName: string; }
 
-export default function Detail() {
+export default function DetailPage() {
   const { pokemonName } = useParams<Params>();
   const pokemon = usePokeDetail(pokemonName);
   if (!pokemon) return null;
@@ -452,10 +452,10 @@ function MyComponent() {
   return (<>
     // …
     <Route path="/pokemon/:pokemonName">
-      <Detail />
+      <DetailPage />
     </Route>
     <Route path="/pokemon">
-      <List />
+      <ListPage />
     </Route>
   </>);
 }
@@ -474,10 +474,10 @@ function MyComponent() {
   return (<>
     // …
     <Route path="/pokemon/:pokemonName">
-      <Detail />
+      <DetailPage />
     </Route>
     <Route exact path="/pokemon">
-      <List />
+      <ListPage />
     </Route>
   </>);
 }
@@ -496,10 +496,10 @@ function MyComponent() {
     // …
     <Switch>
       <Route path="/pokemon/:pokemonName">
-        <Detail />
+        <DetailPage />
       </Route>
       <Route path="/pokemon">
-        <List />
+        <ListPage />
       </Route>
     </Switch>
   </>);
@@ -522,10 +522,10 @@ function MyComponent() {
       <Route path="/cars">
         <Switch>
           <Route path="/cars">
-            <CarList />
+            <CarListPage />
           </Route>
           <Route path="/cars/:carId">
-            <CarDetail />
+            <CarDetailPage />
           </Route>
         </Switch>
       </Route>
