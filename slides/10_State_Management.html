@@ -23,40 +23,28 @@
         </section>
         <section>
             <section>
-                <h2>Similarities to Flux & Redux</h2>
-                <p>React provides a few hooks with which you can achieve state management without having to use Flux or Redux.</p>
-                <p>They all work very similar, consisting of</p>
-                <ul>
-                    <li>State / Store --> <span class="warn">useState</span> / <span class="warn">useContext</span> hooks</li>
-                    <li>Actions --> plain javascript object</li>
-                    <li>Reducer(s) --> <span class="warn">useReducer</span> hook</li>
-                </ul>
+                <h1>React Context</h1>
+                <p>How to handle application wide state</p>
             </section>
             <section>
-                <h3>Cycle</h3>
-                <ol>
-                    <li>Creating an action</li>
-                    <li>Dispatch the action</li>
-                    <li>Reducer(s) will process the action and create a new state based on the previous state and the action itself</li>
-                    <li>New state is reflected to consumers who read it through selectors like <span class="warn">useContext</span> hook</li>
-                    <li>Consumer rerenders and may trigger further hooks like <span class="warn">useEffect</span> if their dependencies got updated</li>
-                </ol>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>How to handle application wide state?</h2>
+                <h2>Motivation</h2>
+                <p>Prevent Prop Drilling</p>
             </section>
             <section>
-                <h3>Applying contexts</h3>
-                <p>Any JavaScript object can be the value of a context.</p>
-                <ul>
-                    <li>Theme</li>
-                    <li>A JSON object</li>
-                    <li>An object having fields being functions</li>
-                    <li>&hellip;</li>
-                </ul>
+                <pre><code class="hljs tsx" data-trim data-line-numbers="1|3|5|7"><script type="text/template">
+                    const [username] = useState("Joe");
+
+                    <PageComponent username={username} />
+
+                    <SectionComponent username={username} />
+
+                    <SomeOtherComponent username={username} />
+                </script></code></pre>
+                <div class="fragment tip">
+                    React Context API
+                </div>
             </section>
+
             <section>
                 <h3><span class="warn">useContext</span> hook</h3>
                 <p class="fragment">Must be created through <span class="code">React.createContext(&hellip;)</span></p>
@@ -70,7 +58,19 @@
                 </pre>
                 <p class="fragment">Can be consumed within any descendant component through <span class="code">useContext(YourContext)</span></p>
             </section>
+
+            <section>
+                <h3>Applying contexts</h3>
+                <p>Any JavaScript object can be the value of a context.</p>
+                <ul>
+                    <li>Theme</li>
+                    <li>A JSON object</li>
+                    <li>An object having fields being functions</li>
+                    <li>&hellip;</li>
+                </ul>
+            </section>
         </section>
+        
         <section>
             <h2>Exercise</h2>
             <ul>
@@ -150,6 +150,29 @@
                         }
                     </code>
                 </pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Similarities to Flux & Redux</h2>
+                <p>React provides a few hooks with which you can achieve state management without having to use Flux or Redux.</p>
+                <p>They all work very similar, consisting of</p>
+                <ul>
+                    <li>State / Store --> <span class="warn">useState</span> / <span class="warn">useContext</span> hooks</li>
+                    <li>Actions --> plain javascript object</li>
+                    <li>Reducer(s) --> <span class="warn">useReducer</span> hook</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Cycle</h3>
+                <ol>
+                    <li>Creating an action</li>
+                    <li>Dispatch the action</li>
+                    <li>Reducer(s) will process the action and create a new state based on the previous state and the action itself</li>
+                    <li>New state is reflected to consumers who read it through selectors like <span class="warn">useContext</span> hook</li>
+                    <li>Consumer rerenders and may trigger further hooks like <span class="warn">useEffect</span> if their dependencies got updated</li>
+                </ol>
             </section>
         </section>
         <section>
