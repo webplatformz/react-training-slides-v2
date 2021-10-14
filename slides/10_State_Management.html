@@ -228,26 +228,6 @@
                 </ul>
             </section>
             <section>
-                <h2><a href="https://recoiljs.org/" target="_blank"
-                    rel="noopener noreferrer">
-                    Recoil
-                 </a> / <a href="https://github.com/pmndrs/jotai" target="_blank"
-                    rel="noopener noreferrer">
-                    Jotai
-                 </a> (atom-based)</h2>
-                <p>Primary focus on <span class="warn">state</span> and <span class="warn">selectors</span></p>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    const textState = atom({
-                      key: 'textState',
-                      default: '',
-                    });
-                </script></code></pre></p>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    const [text, setText] = useRecoilState(textState);
-                </script></code></pre></p>
-                <div class="fragment tip">As of 2021 recoil is still experimental</div>
-            </section>
-            <section>
                 <h2><a href="https://github.com/pmndrs/valtio" target="_blank"
                     rel="noopener noreferrer">
                     Valtio
@@ -270,9 +250,38 @@
                 </script></code></pre></p>
             </section>
             <section>
+                <h2><a href="https://recoiljs.org/" target="_blank"
+                    rel="noopener noreferrer">
+                    Recoil
+                 </a> / <a href="https://github.com/pmndrs/jotai" target="_blank"
+                    rel="noopener noreferrer">
+                    Jotai
+                 </a> (atom-based)</h2>
+                <p>Primary focus on <span class="warn">state</span> and <span class="warn">selectors</span></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const textState = atom({
+                      key: 'textState',
+                      default: '',
+                    });
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const [text, setText] = useRecoilState(textState);
+                </script></code></pre></p>
+                <div class="fragment tip">As of 2021 recoil is still experimental</div>
+            </section>
+            <section>
                 <h2>Rule of Thumb</h2>
                 <p>Prefer simple solutions for state management</p>
             </section>
+        </section>
+        <section>
+            <h2>Recap</h2>
+            <p>We learned&hellip;</p>
+            <ul>
+                <li>Context API</li>
+                <li>useReducer</li>
+                <li>External state management solutions</li>
+            </ul>
         </section>
         <section class="deck-slide">
             <h1>Questions?</h1>
