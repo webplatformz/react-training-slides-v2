@@ -250,6 +250,22 @@
                 </script></code></pre></p>
             </section>
             <section>
+                <h2>Proxy</h2>
+                <p><pre data-id="code"><code class="hljs js" data-trim data-line-numbers="|1,2,6,7|3|4,5|9|11|"><script type="text/template">
+                    const observer = {
+                      set: function(obj, prop, value) {
+                        console.log(obj, prop, value)
+                        obj[prop] = value;
+                        return true;
+                      }
+                    };
+                    
+                    const pokemon = new Proxy({}, observer);
+                    
+                    pokemon.name = 'bulbasaur'; // will call the setter
+                </script></code></pre></p>
+            </section>
+            <section>
                 <h2><a href="https://recoiljs.org/" target="_blank"
                     rel="noopener noreferrer">
                     Recoil
