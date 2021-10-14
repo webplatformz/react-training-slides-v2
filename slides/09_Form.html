@@ -54,8 +54,8 @@
                 const [option, setOption] = useState();
                 …
                 <select
-                  value={value}
-                  onChange={e => { setValue(e.target.value) }}
+                  value={option}
+                  onChange={e => { setOption(e.target.value) }}
                 >
                   <option value="grapefruit">Grapefruit</option>
                   <option value="lime">Lime</option>
