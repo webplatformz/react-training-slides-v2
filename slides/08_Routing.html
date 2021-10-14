@@ -367,8 +367,8 @@ import DetailPage from "./pages/detail/DetailPage";
 export default function App() {
   return (<Router>
     <Switch>
-      <Route path="/pokemon"><List /></Route>
       <Route path="/pokemon/:pokemonName"><DetailPage /></Route>
+      <Route path="/pokemon"><List /></Route>
       <Redirect from="/" to="/pokemon" />
     </Switch>
   </Router>);
