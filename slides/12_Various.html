@@ -25,7 +25,6 @@
             <h2>Content 1/2</h2>
             <ul>
                 <li>Virtual DOM</li>
-                <li>Data Management</li>
                 <li>Class Components</li>
                 <li>i18n / Internationalization</li>
                 <li>Virtualization</li>
@@ -57,40 +56,6 @@
                 <p class="fragment">Virtual DOM is a representation of the actual DOM</p>
                 <p class="fragment">Its purpose is to identify which parts of the real DOM need to be changed upon changes, by comparing the new virtual DOM result against the previous one.</p>
                 <p class="fragment">The delta then gets applied on the real DOM.<br/>E.g. only one element gets updated within a long list instead of the whole list.</p>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Data Management</h2>
-            </section>
-            <section>
-                <h2>Requirements</h2>
-                <ul>
-                    <li>Handle repetitive data loading states (pending, success, error)</li>
-                    <li>Cache response</li>
-                    <li>Invalidate response</li>
-                    <li>Handle mutations</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Libraries</h2>
-                <ul>
-                    <li>SWR</li>
-                    <li>react-query</li>
-                </ul>
-            </section>
-            <section>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    import useSWR from 'swr'
-
-                    const fetcher = (...args) => fetch(...args).then(res => res.json())
-
-                    const { data, error } = useSWR('/api/user', fetcher)
-
-                    if (error) return <div>failed to load</div>
-                    if (!data) return <div>loading...</div>
-                    return <div>hello {data.name}!</div>
-                </script></code></pre></p>
             </section>
         </section>
         <section>
