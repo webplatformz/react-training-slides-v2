@@ -337,6 +337,15 @@
             <h2>Error Boundaries</h2>
         </section>
         <section>
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+                function MyComponent() {
+                  return <ErrorBoundary>
+                    <MyWidget />
+                  </ErrorBoundary>;
+                }
+        </script></code></pre></p>
+        </section>
+        <section>
             <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,7-11,14-17"><script type="text/template">
                 class ErrorBoundary extends React.Component {
                   constructor(props) {
@@ -377,15 +386,6 @@
           render() {
             return this.props.children; 
           }
-        }
-</script></code></pre></p>
-</section>
-<section>
-    <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-        function MyComponent() {
-          return <ErrorBoundary>
-            <MyWidget />
-          </ErrorBoundary>;
         }
 </script></code></pre></p>
 </section>
