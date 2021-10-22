@@ -45,7 +45,7 @@ import { useState } from "react";
 
 function MyComponent() {
 
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
 
   // …
 }
@@ -53,8 +53,9 @@ function MyComponent() {
             </pre>
           </section>
           <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1|3-4|6-7|"><script type="text/template">
-    const [name, setName] = useState();
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-2|4-5|7-8|"><script type="text/template">
+    // define a name state with the initial value of ""
+    const [name, setName] = useState("");
 
     // The variable contains the current state value
     <p>Name: {name}</p>
@@ -66,25 +67,17 @@ function MyComponent() {
           <section>
             <pre>
                 <code class="hljs tsx" data-trim><script type="text/template">
-                  const [name, setName] = useState();
+                  const [name, setName] = useState("");
                   
-                  const [age, setAge] = useState();
+                  const [age, setAge] = useState(0);
                   
-                  const [favoriteMeal, setFavoriteMeal] = useState();
+                  const [meal, setMeal] = useState<undefined | Meal>();
                 </script></code>
             </pre>
             <p>
               The array destructuring makes it easy to use multiple states in a
               component.
             </p>
-          </section>
-          <section>
-            <pre>
-                <code class="hljs tsx" data-trim><script type="text/template">
-    const [color, setColor] = useState("blue");
-  </script></code>
-            </pre>
-            <p>Default value can be passed into <em>useState</em></p>
           </section>
         </section>
         <section>
