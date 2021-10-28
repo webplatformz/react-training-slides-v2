@@ -247,8 +247,12 @@
               import { useParams } from "react-router-dom";
 
               export default function CarDetailPage() {
-                const { carId } = useParams();
+                const { carId } = useParams<Params>();
                 return <p>This is the car with the ID {carId}.</p>;
+              }
+
+              interface Params {
+                carId: string;
               }
             </script></code></pre></p>
 

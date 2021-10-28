@@ -326,6 +326,25 @@
           </section>
         </section>
         <section>
+          <h3>Some words about types</h3>
+
+          <p><pre data-id="code2"><code class="hljs tsx" data-trim data-line-numbers="1,5,9-11"><script type="text/template">
+              const [user, setUser] = useState<User>();
+
+              // …
+
+              const result = await response.json() as User;
+
+              // …
+
+              interface User {
+                // …
+              }
+          </script></code></pre></p>
+
+          <p>Since we are using TypeScript, we should always work with defined types&mdash;avoid <span class="code">any</span>!</p>
+        </section>
+        <section>
           <section>
             <h2>Exercise</h2>
 
@@ -365,12 +384,12 @@
 
           <p><pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
             function List() {
-              const [pokemons, setPokemons] = useState(null);
+              const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
               useEffect(() => {
                 (async () => {
                   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-                  const pokemons = await response.json();
-                  setPokemons(pokemons.results);
+                  const result = await response.json() as PokemonResultDto;
+                  setPokemons(result.results);
                 })();
               }, []);
 
@@ -395,15 +414,15 @@
               import { useState, useEffect } from "react";
 
               export default function MyComponent() {
-                const [user, setUser] = useState();
+                const [user, setUser] = useState<User>();
 
                 useEffect(() => {
                   (async function() {
                     const response = await fetch('/user');
                     if (!response.ok) throw new Error('Could not fetch data!');
 
-                    const user = await response.json();
-                    setUser(user);
+                    const result = await response.json() as User;
+                    setUser(result);
                   })();
                 }, []);
 
@@ -420,15 +439,15 @@
               import { useState, useEffect } from "react";
 
               export default function useUser() {
-                const [user, setUser] = useState();
+                const [user, setUser] = useState<User>();
 
                 useEffect(() => {
                   (async function() {
                     const response = await fetch('/user');
                     if (!response.ok) throw new Error('Could not fetch data!');
 
-                    const user = await response.json();
-                    setUser(user);
+                    const result = await response.json() as User;
+                    setUser(result);
                   })();
                 }, []);
 
@@ -445,15 +464,15 @@
               import { useState, useEffect } from "react";
 
               export default function MyComponent() {
-                const [user, setUser] = useState();
+                const [user, setUser] = useState<User>();
 
                 useEffect(() => {
                   (async function() {
                     const response = await fetch('/user');
                     if (!response.ok) throw new Error('Could not fetch data!');
 
-                    const user = await response.json();
-                    setUser(user);
+                    const result = await response.json() as User;
+                    setUser(result);
                   })();
                 }, []);
 
@@ -486,6 +505,10 @@
           <div class="column-container">
             <div class="column"><img src="../img/construction_work_refactor.jpg" /></div>
           </div>
+          
+          <aside class="notes">
+            Do NOT go into breakout session now, this exercise can be done together with the next one in one breakout session.
+          </aside>
         </section>
         <section>
           <section>
@@ -498,12 +521,12 @@
 import { useEffect, useState } from "react";
 
 function usePokeList() {
-  const [pokemons, setPokemons] = useState(null);
+  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
   useEffect(() => {
     (async () => {
       const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const pokemons = await res.json();
-      setPokemons(pokemons.results);
+      const result = await res.json() as PokemonResultDto;
+      setPokemons(result.results);
     })();
   }, []);
   return pokemons;
@@ -586,13 +609,13 @@ export default usePokeList;
           <h2>Exercise</h2>
           <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="6-7|8"><script type="text/template">
 function usePokeList() {
-  const [pokemons, setPokemons] = useState(null);
+  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
 
   useEffect(() => {
     (async () => {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const pokemons = await response.json();
-      setPokemons(pokemons.results);
+      const result = await response.json() as PokemonResultDto;
+      setPokemons(result.results);
     })();
   }, []);
 
@@ -607,13 +630,13 @@ function usePokeList() {
           <h2>Exercise</h2>
           <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="8"><script type="text/template">
 function usePokeList() {
-  const [pokemons, setPokemons] = useState(null);
+  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
 
   useEffect(() => {
     (async () => {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const pokemons = await response.json();
-      setPokemons(pokemons.results);
+      const result = await response.json() as PokemonResultDto;
+      setPokemons(result.results);
     })();
   }, []);
 
@@ -648,15 +671,15 @@ function usePokeList() {
           
           <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="5,10,12|"><script type="text/template">
 function usePokeList() {
-  const [pokemons, setPokemons] = useState(null);
+  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const pokemons = await response.json();
+      const result = await response.json() as PokemonResultDto;
 
-      if (!cancelled) setPokemons(pokemons.results);
+      if (!cancelled) setPokemons(result.results);
     })();
     return () => { cancelled = true; };
   }, []);
