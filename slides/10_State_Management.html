@@ -52,10 +52,12 @@
                 <p class="fragment">The parameter is the default value of the context</span></p>
                 <p class="fragment">Provide context in an ancestor component using <span class="code"></span></p>
                 <pre class="fragment">
-                    <code class="hljs html" data-trim data-noescape>
-                        &lt;YourContext.Provider value={&hellip;}&gt;
-                            &hellip; &lt;!-- child components --&gt;
-                        &lt;YourContext.Provider&gt;
+                    <code class="hljs html" data-trim>
+                        <script type="text/template">
+                        <YourContext.Provider value={…}>
+                            … <!-- child components -->
+                        <YourContext.Provider>
+                        </script>
                     </code>
                 </pre>
                 <p class="fragment">Consume within any descendant component using <span class="code">const value = useContext(YourContext)</span></p>

@@ -172,13 +172,15 @@
               </code>
             </pre>
             <pre>
-              <code class="hljs html" data-trim data-noescape>
-                &lt;form onSubmit={handleSubmit(onSubmit, onError)}&gt;
-                  &lt;input defaultValue="test"
+              <code class="hljs html" data-trim>
+                <script type="text/template">
+                <form onSubmit={handleSubmit(onSubmit, onError)}>
+                  <input defaultValue="test"
                     {...register("example", {/*validations*/})}
-                  /&gt;
-                  &lt;input type="submit" /&gt;
-                &lt;/form&gt;
+                  />
+                  <input type="submit" />
+                </form>
+                </script>
               </code>
             </pre>
             <div class="fragment tip">

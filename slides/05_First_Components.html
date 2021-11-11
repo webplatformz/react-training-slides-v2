@@ -27,16 +27,18 @@
                 <p>A dumb component having hard-coded state</p>
                 <span class="code">Greeting.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         const NAME = 'World';
 
                         function Greeting() {
                             return (
-                                &lt;div&gt;Hello {NAME}&lt;/div&gt;
+                                <div>Hello {NAME}</div>
                             );
                         }
 
                         export default Greeting;
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -51,12 +53,14 @@
                 <h2>Solution</h2>
                 <span class="code">App.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         export default function App() {
                             return (
-                                &lt;div>Bulbasaur&lt;/div&gt;
+                                <div>Bulbasaur</div>
                             );
                         }
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -70,13 +74,15 @@
                 <h2>Solution</h2>
                 <span class="code">App.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         export default function App() {
                             const name = 'Bulbasaur';
                             return (
-                                &lt;div>Hello {name}&lt;/div&gt;
+                                <div>Hello {name}</div>
                             );
                         }
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -87,14 +93,16 @@
                 <p>Multiline JSX should always be wrapped in braces. Single line doesn't.</p>
                 <span class="code">App.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
                         import 'Greeting' from './greeting';
 
                         function App() {
-                            return &lt;Greeting/&gt;;
+                            return <Greeting/>;
                         }
 
                         export default App;
+                        </script>
                     </code>
                 </pre>
                 <div class="fragment tip">Don't build monoliths. Split your components!</div>
@@ -110,14 +118,16 @@
                 <h2>Solution</h2>
                 <span class="code">PokeListEntry.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         function PokeListEntry() {
                             return (
-                                &lt;div>Bulbasaur&lt;/div&gt;
+                                <div>Bulbasaur</div>
                             );
                         }
 
                         export default PokeListEntry;
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -125,14 +135,16 @@
                 <h3>Solution continued</h3>
                 <span class="code">App.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         import PokeListEntry from "./poke-list-entry/PokeListEntry.tsx"
 
                         export default function App() {
                             return (
-                                &lt;PokeListEntry /&gt;
+                                <PokeListEntry />
                             );
                         }
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -150,7 +162,8 @@
                 <h3>Define Props on a component</h3>
                 <p>You <b>may</b> set a default value for optional props</p>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         type Props = {
                             name: string; // required prop
                             age?: string; // optional prop
@@ -162,10 +175,11 @@
                             name, age = '-',
                             wearsGlasses, wearsHat = true
                         }: Props) {
-                            return &lt;div&gt;&hellip;&lt;/div&gt;;
+                            return <div>…</div>;
                         }
 
                         export default SomeComponent;
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -179,18 +193,20 @@
                 <h2>Solution</h2>
                 <span class="code">PokeListEntry.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         type Props = {
                             name?: string;
                         };
 
                         function PokeListEntry({ name = 'Bulbasaur' }: Props) {
                             return (
-                                &lt;div>{name}&lt;/div&gt;
+                                <div>{name}</div>
                             );
                         }
 
                         export default PokeListEntry;
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -200,8 +216,10 @@
                 <h2>Testing / React-Testing-Library</h2>
                 <p>Our components can be tested using the React Testing Library</p>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
                         $ npm install --save-dev @testing-library/react
+                        </script>
                     </code>
                 </pre>
                 <div class="fragment tip">Testing-Library is already installed with CRA</div>
@@ -210,16 +228,18 @@
                 <h2>Testing our dumb component</h2>
                 <span class="code">Greeting.test.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
                         import { render } from '@testing-library/react';
                         import Greeting from './Greeting';
 
                         describe('Greeting', () => {
                           it('should render "Hello World"', () => {
-                            const { getByText } = render(&lt;Greeting/&gt;);
+                            const { getByText } = render(<Greeting/>);
                             expect(getByText('Hello World')).toBeInTheDocument();
                           });
                         });
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -232,13 +252,15 @@
                 <h3>Add new test case</h3>
                 <span class="code">Greeting.test.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                      <script type="text/template">
                       it('should render correct name', () => {
                         const { getByText } = render(
-                            &lt;Greeting name="React Master" /&gt;
+                            <Greeting name="React Master" />
                         );
                         expect(getByText("Hello React Master")).toBeInTheDocument();
                       });
+                      </script>
                     </code>
                 </pre>
             </section>
@@ -246,16 +268,18 @@
                 <h3>Implement / Make the test green</h3>
                 <span class="code">Greeting.tsx</span>
                 <pre>
-                    <code class="hljs jsx" data-trim data-noescape>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
                         type Props = {
                             name?: string;
                         };
 
                         function Greeting({name = 'World'}: Props) {
-                            return &lt;div&gt;Hello {name}&lt;/div&gt;;
+                            return <div>Hello {name}</div>;
                         }
 
                         export default Greeting;
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -263,12 +287,14 @@
                 <h3>Refactor</h3>
                 <p>Refactor your code such that it is extensible and easy to understand</p>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
-                      it('should render correct name', () => {
-                        const name = 'React Master';
-                        const { getByText } = render(&lt;Greeting name={name} /&gt;);
-                        expect(getByText(`Hello ${name}`)).toBeInTheDocument();
-                      });
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
+                        it('should render correct name', () => {
+                          const name = 'React Master';
+                          const { getByText } = render(<Greeting name={name} />);
+                          expect(getByText(`Hello ${name}`)).toBeInTheDocument();
+                        });
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -299,18 +325,20 @@
                 <h2>Solution</h2>
                 <span class="code">PokeListEntry.test.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
-                      it('should render Bulbasaur if no name is passed', () => {
-                        const name = 'Bulbasaur';
-                        const { getByText } = render(&lt;PokeListEntry /&gt;);
-                        expect(getByText(name)).toBeInTheDocument();
-                      });
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
+                        it('should render Bulbasaur if no name is passed', () => {
+                            const name = 'Bulbasaur';
+                            const { getByText } = render(<PokeListEntry />);
+                            expect(getByText(name)).toBeInTheDocument();
+                        });
 
-                      it('should render the passed pokémon name', () => {
-                        const name = 'Pickachu';
-                        const { getByText } = render(&lt;PokeListEntry name={name} /&gt;);
-                        expect(getByText(name)).toBeInTheDocument();
-                      });
+                        it('should render the passed pokémon name', () => {
+                            const name = 'Pickachu';
+                            const { getByText } = render(<PokeListEntry name={name} />);
+                            expect(getByText(name)).toBeInTheDocument();
+                        });
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -318,12 +346,14 @@
                 <h3>Solution continued</h3>
                 <span class="code">PokeListEntry.test.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
-                      it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
-                        ('should render the passed pokémon name', (name) => {
-                        const { getByText } = render(&lt;PokeListEntry name={name} /&gt;);
-                        expect(getByText(name)).toBeInTheDocument();
-                      });
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
+                        it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
+                          ('should render the passed pokémon name', (name) => {
+                          const { getByText } = render(<PokeListEntry name={name} />);
+                          expect(getByText(name)).toBeInTheDocument();
+                        });
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -336,17 +366,19 @@
                 </p>
                 <p>Each list item shall have a unique <span class="code">key</span></p>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
                         function List() {
                             const items = ['Apple', 'Orange', 'Mango'];
                             return (
-                                &lt;ul&gt;
-                                    {items.map(item => &lt;li key={item}&gt;{item}&lt;/li&gt;)}
-                                &lt;/ul&gt;
+                                <ul>
+                                    {items.map(item => <li key={item}>{item}</li>)}
+                                </ul>
                             )
                         }
 
                         export default List;
+                        </script>
                     </code>
                 </pre>
             </section>
@@ -363,44 +395,48 @@
             <section>
                 <h2>Solution</h2>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
                         import PokeListEntry from "../../components/poke-list-entry/PokeListEntry";
 
                         function PokeList() {
                           const pokemons = [&hellip;];
                           return (
-                            &lt;&gt;
+                            <>
                               {pokemons.map((pokemon) => (
-                                &lt;PokeListEntry
+                                <PokeListEntry
                                     key={pokemon.name}
                                     name={pokemon.name}
-                                /&gt;
+                                />
                               ))}
-                            &lt;/&gt;
+                            </>
                           );
                         }
 
                         export default PokeList;
+                        </script>
                     </code>
                 </pre>
             </section>
             <section>
                 <h3>Solution continued</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
                         type Props = {
                           name: string;
                         };
 
                         function PokeListEntry({ name }: Props) {
                           return (
-                            &lt;div&gt;
+                            <div>
                               {name}
-                            &lt;/div&gt;
+                            </div>
                           );
                         }
 
                         export default PokeListEntry;
+                        </script>
                     </code>
                 </pre>
             </section>
