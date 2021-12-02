@@ -121,37 +121,35 @@
             <h3>How to Define Routes</h3>
 
             <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
-              import { BrowserRouter as Router, Switch }
+              import { BrowserRouter as Router, Routes }
                 from "react-router-dom";
 
               function App() {
                 return (
                   <Router>
-                    <Switch>
+                    <Routes>
 
-                    </Switch>
+                    </Routes>
                   </Router>
                 );
               }
             </script></code></pre></p>
 
-            <p>A <span class="code">Switch</span> component renders the first route which matches the browser's URL (exclusively).</p>
+            <p>A <span class="code">Routes</span> component renders the most specific matching route (exclusively).</p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-12"><script type="text/template">
-              import { BrowserRouter as Router, Switch, Route }
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
+              import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
 
               function App() {
                 return (
                   <Router>
-                    <Switch>
-                      <Route path="/page1">
-
-                      </Route>
-                    </Switch>
+                    <Routes>
+                      <Route path="/page1" />
+                    </Routes>
                   </Router>
                 );
               }
@@ -162,31 +160,29 @@
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,10|9-11"><script type="text/template">
-              import { BrowserRouter as Router, Switch, Route }
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,10|9"><script type="text/template">
+              import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
               import Page1 from "./Page1.tsx";
 
               function App() {
                 return (
                   <Router>
-                    <Switch>
-                      <Route path="/page1">
-                        <Page1 />
-                      </Route>
-                    </Switch>
+                    <Routes>
+                      <Route path="/page1" element={<Page1 />} />
+                    </Routes>
                   </Router>
                 );
               }
             </script></code></pre></p>
 
-            <p>The page to be renderered for this route is simply defined as child of <span class="code">Route</span>.</p>
+            <p>The page to be renderered for this route is simply defined as <span class="code">element</span> of <span class="code">Route</span>.</p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4,13-15|"><script type="text/template">
-              import { BrowserRouter as Router, Switch, Route }
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="11"><script type="text/template">
+              import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
               import Page1 from "./Page1.tsx";
               import Page2 from "./Page2.tsx";
@@ -194,14 +190,10 @@
               function App() {
                 return (
                   <Router>
-                    <Switch>
-                      <Route path="/page1">
-                        <Page1 />
-                      </Route>
-                      <Route path="/page2">
-                        <Page2 />
-                      </Route>
-                    </Switch>
+                    <Routes>
+                      <Route path="/page1" element={<Page1 />} />
+                      <Route path="/page2" element={<Page2 />} />
+                    </Routes>
                   </Router>
                 );
               }
@@ -221,16 +213,17 @@
           <section data-auto-animate>
             <h3>Routes with Parameters</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="6-8|6"><script type="text/template">
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="7|"><script type="text/template">
               function App() {
                 return (
                   <Router>
-                    <Switch>
+                    <Routes>
                       // …
-                      <Route path="/cars/:carId">
-                        <CarDetailPage />
-                      </Route>
-                    </Switch>
+                      <Route
+                        path="/cars/:carId"
+                        element={<CarDetailPage />}
+                      />
+                    </Routes>
                   </Router>
                 );
               }
@@ -261,24 +254,25 @@
           <section>
             <h3>Route Redirection</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="1,10"><script type="text/template">
-              import { Route, Redirect } from "react-router-dom";
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="1,8-11"><script type="text/template">
+              import { Route, Navigate } from "react-router-dom";
 
               function App() {
                 return (
                   <Router>
-                    <Switch>
-                      <Route path="/page1">
-                        <Page1 />
-                      </Route>
-                      <Redirect from="/" to="/page1" />
-                    </Switch>
+                    <Routes>
+                      <Route path="/page1" element={<Page1 />} />
+                      <Route
+                        path="/"
+                        element={<Navigate to="/page1" />}
+                      />
+                    </Routes>
                   </Router>
                 );
               }
             </script></code></pre></p>
 
-            <p>With the <span class="code">Redirect</span> component, a route can be redirected to another route.</p>
+            <p>With the <span class="code">Navigate</span> component, a route can be redirected to another route.</p>
           </section>
           <section>
             <h3>How to Link to a Route</h3>
@@ -300,9 +294,9 @@
             <h3>Cheat Sheet</h3>
 
             <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
-            <p><span class="code">&lt;Switch /&gt;</span></p>
-            <p><span class="code">&lt;Route path="/cars/:carId"&gt;&lt;CarDetailPage /&gt;&lt;/Router&gt;</span></p>
-            <p><span class="code">&lt;Redirect from="/" to="/cars" /&gt;</span></p>
+            <p><span class="code">&lt;Routes /&gt;</span></p>
+            <p><span class="code">&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;} /&gt;</span></p>
+            <p><span class="code">&lt;Navigate to="/cars" /&gt;</span></p>
             <p><span class="code">&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span></p>
           </section>
         </section>
@@ -365,17 +359,17 @@
             <p><span class="code">App.tsx</span></p>
 
             <p><pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|8,9|10|"><script type="text/template">
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import List from "./pages/list/List";
 import DetailPage from "./pages/detail/DetailPage";
 
 export default function App() {
   return (<Router>
-    <Switch>
+    <Routes>
       <Route path="/pokemon/:pokemonName"><DetailPage /></Route>
       <Route path="/pokemon"><List /></Route>
-      <Redirect from="/" to="/pokemon" />
-    </Switch>
+      <Route path="/" element={<Navigate to="/pokemon" />} />
+    </Routes>
   </Router>);
 }
 
@@ -472,94 +466,21 @@ function MyComponent() {
             
             <p>A <span class="code">NavLink</span> is marked with the specified CSS class/style when its route is active.</p>
           </section>
-          <section data-auto-animate>
-            <h3>Route Matching</h3>
-
-            <p>Current URL: <span class="code">/pokemon/pikachu</span></p>
-
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4-9"><script type="text/template">
-function MyComponent() {
-  return (<>
-    // …
-    <Route path="/pokemon/:pokemonName">
-      <DetailPage />
-    </Route>
-    <Route path="/pokemon">
-      <ListPage />
-    </Route>
-  </>);
-}
-            </script></code></pre></p>
-
-            <p class="fragment">By default routes can also match <em>partly</em>.<br>
-              <span class="warn">&rarr; Both routes are active!</span></p>
-          </section>
-          <section data-auto-animate>
-            <h3>Route Matching</h3>
-
-            <p>Current URL: <span class="code">/pokemon/pikachu</span></p>
-
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="7"><script type="text/template">
-function MyComponent() {
-  return (<>
-    // …
-    <Route path="/pokemon/:pokemonName">
-      <DetailPage />
-    </Route>
-    <Route exact path="/pokemon">
-      <ListPage />
-    </Route>
-  </>);
-}
-            </script></code></pre></p>
-
-            <p>With the <span class="code">exact</span> attribute partly matches do not activate the route.</p>
-          </section>
-          <section data-auto-animate>
-            <h3>Route Matching</h3>
-
-            <p>Current URL: <span class="code">/pokemon/pikachu</span></p>
-
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4,11|5,8|4-11"><script type="text/template">
-function MyComponent() {
-  return (<>
-    // …
-    <Switch>
-      <Route path="/pokemon/:pokemonName">
-        <DetailPage />
-      </Route>
-      <Route path="/pokemon">
-        <ListPage />
-      </Route>
-    </Switch>
-  </>);
-}
-            </script></code></pre></p>
-
-            <p><span class="warn">Alternative:</span> wrap the routes in a <span class="code">Switch</span>.
-            <br>Only the first matching route is activated.</p>
-          </section>
           <section>
             <h3>Nested Routes</h3>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4-18|8,17,10-15"><script type="text/template">
+            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="6-11"><script type="text/template">
 function MyComponent() {
   return (<>
     // …
-    <Switch>
-      <Route path="/boats">
-        // …
-      </Route>
+    <Routes>
+      <Route path="/boats" element={<BoatPage />} />
       <Route path="/cars">
-        <Switch>
-          <Route path="/cars">
-            <CarListPage />
-          </Route>
-          <Route path="/cars/:carId">
-            <CarDetailPage />
-          </Route>
-        </Switch>
+        <Route path=""
+               element={<CarListPage />} />
+        <Route path=":carId"
+               element={<CarDetailPage />} />
       </Route>
-    </Switch>
+    </Routes>
   </>);
 }
             </script></code></pre></p>
