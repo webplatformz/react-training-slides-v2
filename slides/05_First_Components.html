@@ -43,21 +43,24 @@
                 </pre>
             </section>
             <section>
-                <h2>Exercise</h2>
-                <ul>
-                    <li class="fragment">Setup a new React project with <span class="code">create-react-app</span></li>
-                    <li class="fragment">Render a pokémon name like Bulbasaur in the <span class="code">App.tsx</span></li>
-                </ul>
-            </section>
-            <section>
-                <h2>Solution</h2>
-                <span class="code">App.tsx</span>
+                <h3>Single-line VS multi-line JSX</h3>
+                <p>Multi-line JSX should always be wrapped in braces. Single-line doesn't.</p>
                 <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        export default function App() {
+                        function MyComponent() {
+                            return <div>Single-line without enclosing ()</div>;
+                        }
+                        </script>
+                    </code>
+
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
+                        function MyComponent() {
                             return (
-                                <div>Bulbasaur</div>
+                                <div>
+                                    <div>Multi-line enclosed with ()</div>
+                                </div>
                             );
                         }
                         </script>
@@ -65,43 +68,19 @@
                 </pre>
             </section>
             <section>
-                <h2>Exercise</h2>
-                <p>
-                    Extract pokémon name into a variable.
-                </p>
-            </section>
-            <section>
-                <h2>Solution</h2>
-                <span class="code">App.tsx</span>
-                <pre>
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
-                        export default function App() {
-                            const name = 'Bulbasaur';
-                            return (
-                                <div>Hello {name}</div>
-                            );
-                        }
-                        </script>
-                    </code>
-                </pre>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h3>Apply / Use component in a consumer</h3>
-                <p>Multiline JSX should always be wrapped in braces. Single line doesn't.</p>
-                <span class="code">App.tsx</span>
+                <h3>Component Splitting</h3>
+                <p>Importing another component</p>
+                <span class="code">WelcomePage.tsx</span>
                 <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         import 'Greeting' from './greeting';
 
-                        function App() {
+                        function WelcomePage() {
                             return <Greeting/>;
                         }
 
-                        export default App;
+                        export default WelcomePage;
                         </script>
                     </code>
                 </pre>
@@ -110,7 +89,8 @@
             <section>
                 <h2>Exercise</h2>
                 <ul>
-                    <li class="fragment">Create a separate component to show some pokémon name</li>
+                    <li class="fragment">Setup a new React project with <span class="code">create-react-app</span></li>
+                    <li class="fragment">Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant</li>
                     <li class="fragment">Consume this component in the <span class="code">App.tsx</span></li>
                 </ul>
             </section>
@@ -120,9 +100,11 @@
                 <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
+                        const NAME = 'World';
+
                         function PokeListEntry() {
                             return (
-                                <div>Bulbasaur</div>
+                                <div>{NAME}</div>
                             );
                         }
 
@@ -162,7 +144,7 @@
                 <h3>Define Props on a component</h3>
                 <p>You <b>may</b> set a default value for optional props</p>
                 <pre>
-                    <code class="hljs jsx" data-trim>
+                    <code class="hljs jsx" data-trim data-line-numbers="1-6|2|3|4|5|9|8-10|1,2,6,9,11|8-12">
                         <script type="text/template">
                         type Props = {
                             name: string; // required prop
@@ -171,11 +153,10 @@
                             wearsHat?: boolean | null; // optional and nullable prop
                         };
 
-                        function SomeComponent({
-                            name, age = '-',
-                            wearsGlasses, wearsHat = true
-                        }: Props) {
-                            return <div>…</div>;
+                        function SomeComponent(
+                            props: Props
+                        ) {
+                            return <div>{props.name}…</div>;
                         }
 
                         export default SomeComponent;
@@ -184,9 +165,35 @@
                 </pre>
             </section>
             <section>
+                <h3>With object destruction</h3>
+                <pre>
+                    <code class="hljs jsx" data-trim data-line-numbers="8-13|2,4,5,9,11,12|3,10|14|8-15">
+                        <script type="text/template">
+                        type Props = {
+                            name: string;
+                            age?: string;
+                            wearsGlasses: boolean | null;
+                            wearsHat?: boolean | null;
+                        };
+
+                        function SomeComponent({
+                            name,
+                            age = '-',
+                            wearsGlasses,
+                            wearsHat
+                        }: Props) {
+                            return <div>{name}…</div>;
+                        }
+                        </script>
+                    </code>
+                </pre>
+            </section>
+            <section>
                 <h2>Exercise</h2>
                 <ul>
                     <li>Create Props for your PokeListEntry component expecting an optional name</li>
+                    <li>Set a default name if property is not passed by consumer</li>
+                    <li>Use object destruction</li>
                 </ul>
             </section>
             <section>
