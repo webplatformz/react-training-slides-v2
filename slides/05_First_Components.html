@@ -46,21 +46,17 @@
                 <h3>Single-line VS multi-line JSX</h3>
                 <p>Multi-line JSX should always be wrapped in braces. Single-line doesn't.</p>
                 <pre>
-                    <code class="hljs jsx" data-trim>
+                    <code class="hljs jsx" data-trim data-line-numbers="2,6,10|1-11">
                         <script type="text/template">
                         function MyComponent() {
                             return <div>Single-line without enclosing ()</div>;
                         }
-                        </script>
-                    </code>
 
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
                         function MyComponent() {
                             return (
-                                <div>
+                                <>
                                     <div>Multi-line enclosed with ()</div>
-                                </div>
+                                </>
                             );
                         }
                         </script>
@@ -72,7 +68,7 @@
                 <p>Importing another component</p>
                 <span class="code">WelcomePage.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs javascript" data-trim data-line-numbers="1,4|1-7">
                         <script type="text/template">
                         import 'Greeting' from './greeting';
 
@@ -235,7 +231,7 @@
                 <h2>Testing our dumb component</h2>
                 <span class="code">Greeting.test.tsx</span>
                 <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs javascript" data-trim data-line-numbers="4,5,8,9|1,6|6,7|1-9">
                         <script type="text/template">
                         import { render } from '@testing-library/react';
                         import Greeting from './Greeting';
@@ -373,13 +369,15 @@
                 </p>
                 <p>Each list item shall have a unique <span class="code">key</span></p>
                 <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs javascript" data-trim data-line-numbers="6|1-12">
                         <script type="text/template">
                         function List() {
                             const items = ['Apple', 'Orange', 'Mango'];
                             return (
                                 <ul>
-                                    {items.map(item => <li key={item}>{item}</li>)}
+                                    { items.map(
+                                        item => <li key={item}>{item}</li>
+                                    )}
                                 </ul>
                             )
                         }
