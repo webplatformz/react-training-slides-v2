@@ -25,11 +25,11 @@
             <h2>Content 1/2</h2>
             <ul>
                 <li>Virtual DOM</li>
-                <li>Class Components</li>
                 <li>i18n / Internationalization</li>
                 <li>Virtualization</li>
                 <li>Code-Splitting</li>
                 <li>Further React Hooks</li>
+                <li>Mock Service Worker (MSW)</li>
             </ul>
         </section>
         <section>
@@ -39,8 +39,8 @@
                 <li>Refs</li>
                 <li>browserslist</li>
                 <li>ESLint configuration</li>
+                <li>Class Components</li>
                 <li>Error Boundaries</li>
-                <li>Mock Service Worker (MSW)</li>
             </ul>
         </section>
         <section>
@@ -56,59 +56,6 @@
                 <p class="fragment">Virtual DOM is a representation of the actual DOM</p>
                 <p class="fragment">Its purpose is to identify which parts of the real DOM need to be changed upon changes, by comparing the new virtual DOM result against the previous one.</p>
                 <p class="fragment">The delta then gets applied on the real DOM.<br/>E.g. only one element gets updated within a long list instead of the whole list.</p>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Class Components</h2>
-            </section>
-            <section>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                class HelloWorld extends React.Component {
-                  render() {
-                    return (
-                      <div>Hello World</div>
-                    );
-                  }
-                }
-                </script></code></pre></p>
-            </section>
-            <section>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                class HelloWorld extends React.Component {
-                  constructor(props) {
-                    super(props);
-                    this.state = {date: new Date()};
-                  }
-                  componentDidMount() {
-                    this.timerID = setInterval(
-                      () => this.setState({ date: new Date() }),
-                      1000
-                    );
-                  }
-                  componentWillUnmount() {
-                    clearInterval(this.timerID);
-                  }
-                  render() {
-                    return (
-                      <>
-                        <h1>Hello World, it is:</h1>
-                        <h2>{this.state.date.toLocaleTimeString()}</h2>
-                      </>
-                    );
-                  }
-                }
-                </script></code></pre></p>
-            </section>
-            <section>
-                <h3>Class components</h3>
-                <ul>
-                    <li>are another way to write a component</li>
-                    <li>must implement a render-method</li>
-                    <li>can be enriched with lifecycle methods</li>
-                    <li>May not contain React hooks</li>
-                    <li>Are rarely used since the existence of functional components</li>
-                </ul>
             </section>
         </section>
         <section>
@@ -214,149 +161,6 @@
         </section>
         <section>
             <section>
-                <h2>Next.JS</h2>
-            </section>
-            <section>
-                <h3>The Framework for React</h3>
-                <ul>
-                    <li>Server Side Rendering</li>
-                    <li>Search Engine Optimization</li>
-                    <li>Code Splitting</li>
-                </ul>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Refs</h2>
-                <p>Or: How to break out of virtual dom</p>
-            </section>
-            <section>
-                <p>Refs permit to obtain a reference to a real dom element</p>
-            </section>
-            <section>
-                <h2>Focus</h2>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    import { useRef, useEffect } from "react";
-
-                    export default function MyComponent() {
-                      const inputRef = useRef(null);
-                      useEffect(() => {
-                        inputRef.current.focus();
-                      }, []);
-
-                      return (
-                        <input ref={inputRef} />
-                      );
-                    }
-
-                </script></code></pre></p>
-                <p>Automatically set focus on page load</p>
-                <div class="fragment tip">
-                    There are alternatives such as using autofocus on the input field.
-                </div>
-            </section>
-            <section>
-                <h2>How to forward ref?</h2>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    function CustomInput({ ref }) {
-                      return <input ref={ref} />;
-                    }
-                </script></code></pre></p>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    <CustomInput ref={ref} />
-                </script></code></pre></p>
-                <p class="fragment">
-                    <span class="warn">Does not work!</span> &ndash; ref is a special prop (the other one is key)
-                </p>
-            </section>
-            <section>
-                <h2>forwardRef!</h2>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    const CustomInput = forwardRef((props, ref) => {
-                      return <input ref={ref} />;
-                    });
-
-                    CustomInput.displayName = "CustomInput";
-                </script></code></pre></p>
-                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
-                    <CustomInput ref={ref} />
-                </script></code></pre></p>
-            </section>
-        </section>
-        <section>
-            <h2>browserslist</h2>
-            <p>The browserslist configuration controls the outputted JavaScript so that the emitted code will be
-                compatible with the browsers specified.</p>
-            <p>Polyfills still need to be added manually!</p>
-        </section>
-        <section>
-            <h2>ESLint configuration</h2>
-            <p>Multiple configurations and plugins can be configured in the <span class="code">extends</span> field
-                value.</p>
-            <p>If multiple configurations or plugins specify contradicting values for the same rule, the latter will
-                be applied.</p>
-            <p>Rules can be overridden in the <span class="code">rules</span> field value.</p>
-        </section>
-        <section>
-            <section>
-            <h2>Error Boundaries</h2>
-        </section>
-        <section>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-                function MyComponent() {
-                  return <ErrorBoundary>
-                    <MyWidget />
-                  </ErrorBoundary>;
-                }
-        </script></code></pre></p>
-        </section>
-        <section>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,7-11,14-17"><script type="text/template">
-                class ErrorBoundary extends React.Component {
-                  constructor(props) {
-                    super(props);
-                    this.state = { hasError: false };
-                  }
-                    
-                  static getDerivedStateFromError(error) {
-                    // Update state so the next render will show
-                    // the fallback UI.
-                    return { hasError: true };
-                  }
-                
-                  render() {
-                    if (this.state.hasError) {
-                       // You can render any custom fallback UI
-                      return <h1>Something went wrong.</h1>;
-                    }
-                    
-                    return this.props.children; 
-                  }
-                }
-  </script></code></pre></p>
-</section>
-<section>
-    <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,6-10"><script type="text/template">
-        class ErrorBoundary extends React.Component {
-          constructor(props) {
-            super(props);
-          }
-            
-          componentDidCatch(error, errorInfo) {
-            // You can also log the error to
-            // an error reporting service
-            logErrorToMyService(error, errorInfo);
-          }
-
-          render() {
-            return this.props.children; 
-          }
-        }
-</script></code></pre></p>
-</section>
-        </section>
-        <section>
-            <section>
                 <h2>Mock Service Worker (MSW)</h2>
             </section>
 
@@ -442,6 +246,202 @@ const handlers = [
 
 export default handlers;
     </script></code></pre></p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Next.JS</h2>
+            </section>
+            <section>
+                <h3>The Framework for React</h3>
+                <ul>
+                    <li>Server Side Rendering</li>
+                    <li>Search Engine Optimization</li>
+                    <li>Code Splitting</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Refs</h2>
+                <p>Or: How to break out of virtual dom</p>
+            </section>
+            <section>
+                <p>Refs permit to obtain a reference to a real dom element</p>
+            </section>
+            <section>
+                <h2>Focus</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    import { useRef, useEffect } from "react";
+
+                    export default function MyComponent() {
+                      const inputRef = useRef(null);
+                      useEffect(() => {
+                        inputRef.current.focus();
+                      }, []);
+
+                      return (
+                        <input ref={inputRef} />
+                      );
+                    }
+
+                </script></code></pre></p>
+                <p>Automatically set focus on page load</p>
+                <div class="fragment tip">
+                    There are alternatives such as using autofocus on the input field.
+                </div>
+            </section>
+            <section>
+                <h2>How to forward ref?</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    function CustomInput({ ref }) {
+                      return <input ref={ref} />;
+                    }
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    <CustomInput ref={ref} />
+                </script></code></pre></p>
+                <p class="fragment">
+                    <span class="warn">Does not work!</span> &ndash; ref is a special prop (the other one is key)
+                </p>
+            </section>
+            <section>
+                <h2>forwardRef!</h2>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    const CustomInput = forwardRef((props, ref) => {
+                      return <input ref={ref} />;
+                    });
+
+                    CustomInput.displayName = "CustomInput";
+                </script></code></pre></p>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                    <CustomInput ref={ref} />
+                </script></code></pre></p>
+            </section>
+        </section>
+        <section>
+            <h2>browserslist</h2>
+            <p>The browserslist configuration controls the outputted JavaScript so that the emitted code will be
+                compatible with the browsers specified.</p>
+            <p>Polyfills still need to be added manually!</p>
+        </section>
+        <section>
+            <h2>ESLint configuration</h2>
+            <p>Multiple configurations and plugins can be configured in the <span class="code">extends</span> field
+                value.</p>
+            <p>If multiple configurations or plugins specify contradicting values for the same rule, the latter will
+                be applied.</p>
+            <p>Rules can be overridden in the <span class="code">rules</span> field value.</p>
+        </section>
+        <section>
+            <section>
+                <h2>Class Components</h2>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                class HelloWorld extends React.Component {
+                  render() {
+                    return (
+                      <div>Hello World</div>
+                    );
+                  }
+                }
+                </script></code></pre></p>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+                class HelloWorld extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    this.state = {date: new Date()};
+                  }
+                  componentDidMount() {
+                    this.timerID = setInterval(
+                      () => this.setState({ date: new Date() }),
+                      1000
+                    );
+                  }
+                  componentWillUnmount() {
+                    clearInterval(this.timerID);
+                  }
+                  render() {
+                    return (
+                      <>
+                        <h1>Hello World, it is:</h1>
+                        <h2>{this.state.date.toLocaleTimeString()}</h2>
+                      </>
+                    );
+                  }
+                }
+                </script></code></pre></p>
+            </section>
+            <section>
+                <h3>Class components</h3>
+                <ul>
+                    <li>are another way to write a component</li>
+                    <li>must implement a render-method</li>
+                    <li>can be enriched with lifecycle methods</li>
+                    <li>May not contain React hooks</li>
+                    <li>Are rarely used since the existence of functional components</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+            <h2>Error Boundaries</h2>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+                    function MyComponent() {
+                    return <ErrorBoundary>
+                        <MyWidget />
+                    </ErrorBoundary>;
+                    }
+            </script></code></pre></p>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,7-11,14-17"><script type="text/template">
+                    class ErrorBoundary extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = { hasError: false };
+                    }
+                        
+                    static getDerivedStateFromError(error) {
+                        // Update state so the next render will show
+                        // the fallback UI.
+                        return { hasError: true };
+                    }
+                    
+                    render() {
+                        if (this.state.hasError) {
+                        // You can render any custom fallback UI
+                        return <h1>Something went wrong.</h1>;
+                        }
+                        
+                        return this.props.children; 
+                    }
+                    }
+            </script></code></pre></p>
+            </section>
+            <section>
+                <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,6-10"><script type="text/template">
+                    class ErrorBoundary extends React.Component {
+                    constructor(props) {
+                        super(props);
+                    }
+                        
+                    componentDidCatch(error, errorInfo) {
+                        // You can also log the error to
+                        // an error reporting service
+                        logErrorToMyService(error, errorInfo);
+                    }
+
+                    render() {
+                        return this.props.children; 
+                    }
+                    }
+            </script></code></pre></p>
             </section>
         </section>
     </div>
