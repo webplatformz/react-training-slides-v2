@@ -50,6 +50,37 @@
               </code>
             </pre>
           </section>
+          <section data-auto-animate>
+            <h2>CSS Custom Properties</h2>
+            <p>How can this scenario benefit from custom properties?</p>
+            <pre data-id="code">
+              <code class="hljs css" data-trim data-noescape>
+                .button {
+                  transition: opacity .1s ease-in-out, color .3s ease-in;
+                }
+
+                .button:hover {
+                  transition: opacity .2s ease-in-out, color .3s ease-in;
+                }
+              </code>
+            </pre>
+          </section>
+          <section data-auto-animate>
+            <h2>CSS Custom Properties</h2>
+            <p>How can this scenario benefit from custom properties?</p>
+            <pre data-id="code">
+              <code class="hljs css" data-trim data-noescape>
+                .button {
+                  --opacity-fade-duration: .1s;
+                  transition: opacity var(--opacity-fade-duration) ease-in-out, color .3s ease-in;
+                }
+
+                .button:hover {
+                  --opacity-fade-duration: .2s;
+                }
+              </code>
+            </pre>
+          </section>
           <section>
             <h2>CSS Grid</h2>
             <p>No need for flexbox grid</p>
@@ -63,6 +94,54 @@
             <div class="fragment tip">
               CSS flexbox layout is still a good option, just not for everything.
             </div>
+          </section>
+          <section>
+            <h2>CSS Grid</h2>
+            <img src="../img/simple-page-layout-screenshot.jpg" />
+          </section>
+          <section>
+            <h2>CSS Grid</h2>
+            <p>No need for flexbox grid</p>
+            <pre>
+              <code class="hljs css" data-trim data-noescape>
+                .root {
+                  display: grid;
+                  grid-template-columns: 1fr 3fr;
+                }
+                
+                .header, .footer {
+                  grid-column: 1 / -1;
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>
+              <a href="https://cssgridgarden.com/" target="_blank" rel="noopener noreferrer">
+                CSS Grid Garden Tutorial
+              </a>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>CSS Setup</h1>
+            <p>why is there a margin on my page?</p>
+          </section>
+          <section>
+            <h2>User-Agent Style</h2>
+            <p>Every browser must include a <em>User-Agent stylesheet</em> as well as comply with the <em>specification</em></p>
+            <ul>
+              <li>margin around body</li>
+              <li>margin around heading elements (e.g. h1)</li>
+              <li>img as inline element</li>
+            </ul>
+          </section>
+          <section>
+            <h2>CSS Reset</h2>
+            <p>One possible solution: <a href="https://piccalil.li/blog/a-modern-css-reset/">A modern CSS Reset</a></p>
+            <p>Simple stylesheet which resets margins, box-sizing and other "sane defaults"</p>
           </section>
         </section>
 
@@ -118,6 +197,27 @@
               CSS Modules
             </h1>
             <p>Locally scoped CSS</p>
+          </section>
+          <section>
+            <h2>
+              Class conflict
+            </h2>
+            <p><span class="code">Component1.scss</span></p>
+            <pre>
+              <code class="hljs scss" data-trim data-noescape>
+                .root {
+                  color: red;
+                }
+              </code>
+            </pre>
+            <p><span class="code">Component2.scss</span></p>
+            <pre>
+              <code class="hljs scss" data-trim data-noescape>
+                .root {
+                  color: green;
+                }
+              </code>
+            </pre>
           </section>
           <section>
             <pre>
