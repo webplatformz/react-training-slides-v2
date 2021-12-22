@@ -179,13 +179,16 @@
                 <p><pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     import useSWR from 'swr'
 
-                    const fetcher = (...args) => fetch(...args).then(res => res.json())
+                    const fetcher = (input: RequestInfo, init: RequestInit) =>
+                      fetch(input, init).then((res) => res.json());
 
-                    const { data, error } = useSWR('/api/user', fetcher)
+                    function MyComponent() {
+                      const { data, error } = useSWR('/api/user', fetcher)
 
-                    if (error) return <div>failed to load</div>
-                    if (!data) return <div>loading...</div>
-                    return <div>hello {data.name}!</div>
+                      if (error) return <div>failed to load</div>
+                      if (!data) return <div>loading...</div>
+                      return <div>hello {data.name}!</div>
+                    }
                 </script></code></pre></p>
             </section>
             <section>
