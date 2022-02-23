@@ -38,6 +38,7 @@
                 <li>Next.JS</li>
                 <li>Refs</li>
                 <li>browserslist</li>
+                <li>Prettier</li>
                 <li>ESLint configuration</li>
                 <li>Class Components</li>
                 <li>Error Boundaries</li>
@@ -330,6 +331,64 @@ export default handlers;
             <p>The browserslist configuration controls the outputted JavaScript so that the emitted code will be
                 compatible with the browsers specified.</p>
             <p>Polyfills still need to be added manually!</p>
+        </section>
+        <section>
+            <h2>Tools</h2>
+            <ul>
+                <li>Prettier</li>
+                <li>ESLint</li>
+                <li>React Developer Tools</li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Prettier</h2>
+                <p>Your code is always consistent, as is the code from the rest of your team. No more bikeshedding!</p>
+                <p>
+                    <a href="https://prettier.io/playground/" target="_blank" rel="noopener noreferrer">
+                        See it in action
+                    </a>
+                </p>
+            </section>
+            <section>
+                <p>Let's install it either locally <span class="code">npm i -D prettier</span> or run it with <span
+                        class="code">npx prettier</span>.</p>
+                <p>Add the plugin for your IDE
+                    <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank"
+                       rel="noopener noreferrer">VS Code</a>,
+                    <a href="https://plugins.jetbrains.com/plugin/10456-prettier" target="_blank"
+                       rel="noopener noreferrer">JetBrains</a>, etc.
+                </p>
+            </section>
+            <section>
+                <p>Prettier is heavily opinionated. Luckily there are a lot of
+                    <a href="https://prettier.io/docs/en/options.html" target="_blank" rel="noopener noreferrer">
+                        options
+                    </a>
+                    to customize it to your liking.</p>
+                <p>Add a <span class="code">.prettierrc.js</span> file to your project:</p>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        module.exports = {
+                            endOfLine: 'lf',
+                            singleQuote: true,
+                            trailingComma: 'all',
+                            quoteProps: 'consistent',
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <p>Add an npm script to the <span class="code">package.json</span>:</p>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        "scripts": {
+                            "pretty": "prettier --write \"src/**/*.{js,json,
+                                yml,yaml,css,scss,ts,tsx,md}\"",
+                        },
+                    </code>
+                </pre>
+            </section>
         </section>
         <section>
             <h2>ESLint configuration</h2>
