@@ -117,6 +117,57 @@
                 <p><em>and many more&hellip;</em></p>
             </section>
         </section>
+        <section>
+            <section>
+                <h2>Recap of JavaScript features which are frequently used in React</h2>
+            </section>
+            <section>
+                <h2>Destructuring Assignment</h2>
+                <pre><code class="hljs js" data-trim><script type="text/template">
+                    const joe = { name: 'Joe', age: 20, home: 'Schlieren', size: 170 }
+                </script></code></pre>
+                <pre><code class="hljs js" data-trim><script type="text/template">
+                    console.log(joe.name, joe.age)
+                </script></code></pre>
+                <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
+                    const { name, age } = joe
+                    console.log(name, age)
+                </script></code></pre>
+            </section>
+            <section>
+                <p>Using destructuring in functions</p>
+                <pre><code class="hljs js" data-trim><script type="text/template">
+                    function person({ name, age }) {
+                        
+                    }
+                    person(joe)
+                </script></code></pre>
+                <div class="fragment">
+                    <p>Using destructuring in functions with TypeScript</p>
+                    <pre><code class="hljs js" data-trim><script type="text/template">
+                        function person({ name, age }: Person) {
+                            
+                        }
+                        person(joe)
+                    </script></code></pre>
+                </div>
+            </section>
+            <section>
+                <h2>Spread Syntax</h2>
+                <pre><code class="hljs js" data-trim><script type="text/template">
+                    const joe = { name: 'Joe', age: 20, home: 'Schlieren', size: 170 }
+                </script></code></pre>
+                <pre><code class="hljs js" data-trim><script type="text/template">
+                    const { name, ...rest } = joe
+                    // name = 'Joe'
+                    // rest = { age: 20, home: 'Schlieren', size: 170 }
+                </script></code></pre>
+                <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
+                    const jack = { name: 'Jack', ...rest }
+                    // jack = { name: 'Jack', age: 20, home: 'Schlieren', size: 170 }
+                </script></code></pre>
+            </section>
+        </section>
         <section class="deck-slide">
             <h1>Questions?</h1>
         </section>
