@@ -274,21 +274,17 @@
             <h2>Testing our dumb component</h2>
             <span class="code">Greeting.test.tsx</span>
             <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs javascript" data-trim data-line-numbers="4,5,8,9|1,6|6,7|1-9">
-                        <script type="text/template">
-                        import { render } from '@testing-library/react';
-                        import Greeting from './Greeting';
+            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,6|6,8|"><script type="text/template">
+import { render, screen } from '@testing-library/react';
+import Greeting from './Greeting';
 
-                        describe('Greeting', () => {
-                            it('should render "Hello World"', () => {
-                            const { getByText } = render(<Greeting/>);
-                            expect(getByText('Hello World')).toBeInTheDocument();
-                            });
-                        });
-                        </script>
-                    </code>
-                </pre>
+describe('Greeting', () => {
+    it('should render "Hello World"', () => {
+        render(<Greeting/>);
+
+        expect(screen.getByText('Hello World')).toBeInTheDocument();
+    });
+});</script></code></pre>
           </section>
           <section>
             <h2>TDD - Test Driven Development</h2>
@@ -306,10 +302,12 @@
                     <code class="hljs javascript" data-trim>
                       <script type="text/template">
                       it('should render correct name', () => {
-                        const { getByText } = render(
+                        render(
                             <Greeting name="React Master" />
                         );
-                        expect(getByText("Hello React Master")).toBeInTheDocument();
+
+                        expect(screen.getByText("Hello React Master"))
+                          .toBeInTheDocument();
                       });
                       </script>
                     </code>
@@ -347,8 +345,11 @@
                         <script type="text/template">
                         it('should render correct name', () => {
                           const name = 'React Master';
-                          const { getByText } = render(<Greeting name={name} />);
-                          expect(getByText(`Hello ${name}`)).toBeInTheDocument();
+
+                          render(<Greeting name={name} />);
+
+                          expect(screen.getByText(`Hello ${name}`))
+                            .toBeInTheDocument();
                         });
                         </script>
                     </code>
@@ -406,14 +407,14 @@
                         <script type="text/template">
                         it('should render Bulbasaur if no name is passed', () => {
                             const name = 'Bulbasaur';
-                            const { getByText } = render(<PokeListEntry />);
-                            expect(getByText(name)).toBeInTheDocument();
+                            render(<PokeListEntry />);
+                            expect(screen.getByText(name)).toBeInTheDocument();
                         });
 
                         it('should render the passed pokémon name', () => {
                             const name = 'Pickachu';
-                            const { getByText } = render(<PokeListEntry name={name} />);
-                            expect(getByText(name)).toBeInTheDocument();
+                            render(<PokeListEntry name={name} />);
+                            expect(screen.getByText(name)).toBeInTheDocument();
                         });
                         </script>
                     </code>
@@ -428,8 +429,8 @@
                         <script type="text/template">
                         it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
                           ('should render the passed pokémon name', (name) => {
-                          const { getByText } = render(<PokeListEntry name={name} />);
-                          expect(getByText(name)).toBeInTheDocument();
+                          render(<PokeListEntry name={name} />);
+                          expect(screen.getByText(name)).toBeInTheDocument();
                         });
                         </script>
                     </code>
