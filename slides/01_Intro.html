@@ -1,193 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>01 Intro | Essential React</title>
 
-    <link rel="icon" href="../img/zuehlke_logo.jpg">
-    <link rel="stylesheet" href="../dist/reset.css">
-    <link rel="stylesheet" href="../dist/reveal.css">
-    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+    <link rel="icon" href="../img/zuehlke_logo.jpg" />
+    <link rel="stylesheet" href="../dist/reset.css" />
+    <link rel="stylesheet" href="../dist/reveal.css" />
+    <link rel="stylesheet" href="../css/theme/zuehlke.css" />
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
-</head>
-<body>
-<div class="reveal">
-    <div class="slides">
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
         <section class="deck-slide">
-            <h1>Essential React <br/>
-                01 Intro</h1>
+          <h1>
+            Essential React <br />
+            01 Intro
+          </h1>
         </section>
         <section>
-            <h2>About us</h2>
-            <div class="column-container">
-                <div class="column-3">
-                    <img src="../img/male.jpeg" class="portrait">
-                    <h3 class="margin-top">Martin Leimer</h3>
-                </div>
-                <div class="column-3">
-                    <img src="../img/femo.jpeg" class="portrait">
-                    <h3 class="margin-top">Felix Mokross</h3>
-                </div>
-                <div class="column-3">
-                    <img src="../img/stus.jpeg" class="portrait">
-                    <h3 class="margin-top">Simon Stucki</h3>
-                </div>
+          <h2>About us</h2>
+          <div class="column-container">
+            <div class="column-3">
+              <img src="../img/moec.jpeg" class="portrait" />
+              <h3 class="margin-top">Moritz Eck</h3>
             </div>
-            <p>Web developers working for Zühlke since 16 combined years 😉</p>
+            <div class="column-3">
+              <img src="../img/femo.jpeg" class="portrait" />
+              <h3 class="margin-top">Felix Mokross</h3>
+            </div>
+            <div class="column-3">
+              <img src="../img/stus.jpeg" class="portrait" />
+              <h3 class="margin-top">Simon Stucki</h3>
+            </div>
+          </div>
+          <p>Web developers working for Zühlke since 11 combined years 😉</p>
         </section>
         <section>
-            <h2>Schedule</h2>
+          <h2>Schedule</h2>
+          <ul>
+            <li>09:00 Start</li>
+            <li>10:30 - 10:45 Coffee break</li>
+            <li>12:30 - 13:30 Lunch break</li>
+            <li>15:00 - 15:15 Coffee break</li>
+            <li>17:00 End</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>Course structure</h2>
             <ul>
-                <li>09:00 Start</li>
-                <li>10:30 - 10:45 Coffee break</li>
-                <li>12:30 - 13:30 Lunch break</li>
-                <li>15:00 - 15:15 Coffee break</li>
-                <li>17:00 End</li>
+              <li>Theoretical input</li>
+              <li>Building an app</li>
+              <li>Questions any time</li>
             </ul>
+            <p>made with <a href="https://revealjs.com/#/">reveal.js</a></p>
+          </section>
+          <section>
+            <p>Follow the presentation here</p>
+            <p>
+              <a
+                href="https://webplatformz.github.io/react-training-slides-v2/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://webplatformz.github.io/react-training-slides-v2/
+              </a>
+            </p>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>Course structure</h2>
-                <ul>
-                    <li>Theoretical input</li>
-                    <li>Building an app</li>
-                    <li>Questions any time</li>
-                </ul>
-                <p>made with <a href="https://revealjs.com/#/">reveal.js</a></p>
-            </section>
-            <section>
-                <p>Follow the presentation here</p>
-                <p>
-                    <a href="https://webplatformz.github.io/react-training-slides-v2/" target="_blank"
-                       rel="noopener noreferrer">
-                        https://webplatformz.github.io/react-training-slides-v2/
-                    </a>
-                </p>
-            </section>
+          <section>
+            <h2>About React</h2>
+          </section>
+          <section>
+            <p>
+              React is a <span class="warn">library</span>, not a framework.
+            </p>
+            <p>
+              It handles <span class="warn">rendering</span> and
+              <span class="warn">state</span>, but leaves other things like data
+              fetching and routing up to you.
+            </p>
+            <p>
+              Fortunately, thanks to the huge community, there are always
+              <span class="warn">many options</span> to choose from.
+            </p>
+          </section>
+          <section>
+            <h3>History of React</h3>
+            <ul>
+              <li>Created in 2011 at Facebook</li>
+              <li>Made open source in 2013</li>
+              <li>React Hooks introduced in 2019</li>
+              <li>Current version is React 17</li>
+            </ul>
+          </section>
+          <section>
+            <img src="../img/react/popularity-comparison.png" />
+          </section>
+          <section>
+            <img src="../img/react/react-stats.png" />
+          </section>
         </section>
         <section>
-            <section>
-                <h2>About React</h2>
-            </section>
-            <section>
-                <p>React is a <span class="warn">library</span>, not a framework.</p>
-                <p>It handles <span class="warn">rendering</span> and <span class="warn">state</span>, but leaves
-                    other things like data fetching and routing up to you.
-                </p>
-                <p>Fortunately, thanks to the huge community, there are always <span class="warn">many options</span> to choose from.</p>
-            </section>
-            <section>
-                <h3>History of React</h3>
-                <ul>
-                    <li>Created in 2011 at Facebook</li>
-                    <li>Made open source in 2013</li>
-                    <li>React Hooks introduced in 2019</li>
-                    <li>Current version is React 17</li>
-                </ul>
-            </section>
-            <section>
-                <img src="../img/react/popularity-comparison.png"/>
-            </section>
-            <section>
-                <img src="../img/react/react-stats.png"/>
-            </section>
+          <section data-auto-animate>
+            <h2>Who uses React?</h2>
+          </section>
+          <section data-auto-animate>
+            <h2>Who uses React?</h2>
+            <p><img src="../img/showcases_netflix.png" /></p>
+          </section>
+          <section data-auto-animate>
+            <h2>Who uses React?</h2>
+            <p><img src="../img/showcases_airbnb.png" /></p>
+          </section>
+          <section data-auto-animate>
+            <h2>Who uses React?</h2>
+            <p><img src="../img/showcases_dropbox.png" /></p>
+          </section>
+          <section data-auto-animate>
+            <h2>Who uses React?</h2>
+            <p><em>and many more&hellip;</em></p>
+          </section>
         </section>
         <section>
-            <section data-auto-animate>
-                <h2>Who uses React?</h2>
-            </section>
-            <section data-auto-animate>
-                <h2>Who uses React?</h2>
-                <p><img src="../img/showcases_netflix.png"></p>
-            </section>
-            <section data-auto-animate>
-                <h2>Who uses React?</h2>
-                <p><img src="../img/showcases_airbnb.png"></p>
-            </section>
-            <section data-auto-animate>
-                <h2>Who uses React?</h2>
-                <p><img src="../img/showcases_dropbox.png"></p>
-            </section>
-            <section data-auto-animate>
-                <h2>Who uses React?</h2>
-                <p><em>and many more&hellip;</em></p>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Recap of JavaScript features which are frequently used in React</h2>
-            </section>
-            <section>
-                <h2>Destructuring Assignment</h2>
-                <pre><code class="hljs js" data-trim><script type="text/template">
+          <section>
+            <h2>
+              Recap of JavaScript features which are frequently used in React
+            </h2>
+          </section>
+          <section>
+            <h2>Destructuring Assignment</h2>
+            <pre><code class="hljs js" data-trim><script type="text/template">
                     const joe = { name: 'Joe', age: 20, home: 'Schlieren', size: 170 }
                 </script></code></pre>
-                <pre><code class="hljs js" data-trim><script type="text/template">
+            <pre><code class="hljs js" data-trim><script type="text/template">
                     console.log(joe.name, joe.age)
                 </script></code></pre>
-                <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
+            <!-- prettier-ignore -->
+            <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
                     const { name, age } = joe
                     console.log(name, age)
                 </script></code></pre>
-            </section>
-            <section>
-                <p>Using destructuring in functions</p>
-                <pre><code class="hljs js" data-trim><script type="text/template">
+          </section>
+          <section>
+            <p>Using destructuring in functions</p>
+            <pre><code class="hljs js" data-trim><script type="text/template">
                     function person({ name, age }) {
                         
                     }
                     person(joe)
                 </script></code></pre>
-                <div class="fragment">
-                    <p>Using destructuring in functions with TypeScript</p>
-                    <pre><code class="hljs js" data-trim><script type="text/template">
+            <div class="fragment">
+              <p>Using destructuring in functions with TypeScript</p>
+              <pre><code class="hljs js" data-trim><script type="text/template">
                         function person({ name, age }: Person) {
                             
                         }
                         person(joe)
                     </script></code></pre>
-                </div>
-            </section>
-            <section>
-                <h2>Spread Syntax</h2>
-                <pre><code class="hljs js" data-trim><script type="text/template">
+            </div>
+          </section>
+          <section>
+            <h2>Spread Syntax</h2>
+            <pre><code class="hljs js" data-trim><script type="text/template">
                     const joe = { name: 'Joe', age: 20, home: 'Schlieren', size: 170 }
                 </script></code></pre>
-                <pre><code class="hljs js" data-trim><script type="text/template">
+            <pre><code class="hljs js" data-trim><script type="text/template">
                     const { name, ...rest } = joe
                     // name = 'Joe'
                     // rest = { age: 20, home: 'Schlieren', size: 170 }
                 </script></code></pre>
-                <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
+            <!-- prettier-ignore -->
+            <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
                     const jack = { name: 'Jack', ...rest }
                     // jack = { name: 'Jack', age: 20, home: 'Schlieren', size: 170 }
                 </script></code></pre>
-            </section>
+          </section>
         </section>
         <section class="deck-slide">
-            <h1>Questions?</h1>
+          <h1>Questions?</h1>
         </section>
+      </div>
     </div>
-</div>
 
-<script src="../dist/reveal.js"></script>
-<script src="../plugin/notes/notes.js"></script>
-<script src="../plugin/markdown/markdown.js"></script>
-<script src="../plugin/highlight/highlight.js"></script>
-<script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
-    Reveal.initialize({
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-    });
-</script>
-</body>
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
