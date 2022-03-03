@@ -1,32 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>05 First Component | Essential React</title>
 
-    <link rel="icon" href="../img/zuehlke_logo.jpg">
-    <link rel="stylesheet" href="../dist/reset.css">
-    <link rel="stylesheet" href="../dist/reveal.css">
-    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+    <link rel="icon" href="../img/zuehlke_logo.jpg" />
+    <link rel="stylesheet" href="../dist/reset.css" />
+    <link rel="stylesheet" href="../dist/reveal.css" />
+    <link rel="stylesheet" href="../css/theme/zuehlke.css" />
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
-</head>
-<body>
-<div class="reveal">
-    <div class="slides">
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
         <section class="deck-slide">
-            <h1>Essential React <br/>
-                05 First Component</h1>
+          <h1>
+            Essential React <br />
+            05 First Component
+          </h1>
         </section>
         <section>
-            <section>
-                <h2>Simple React Component</h2>
-                <p>A dumb component having hard-coded state</p>
-                <span class="code">Greeting.tsx</span>
-                <pre>
+          <section>
+            <h2>Simple React Component</h2>
+            <p>A dumb component having hard-coded state</p>
+            <span class="code">Greeting.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
                         const NAME = 'World';
@@ -41,11 +47,15 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Single-line VS multi-line JSX</h3>
-                <p>Multi-line JSX should always be wrapped in braces. Single-line doesn't.</p>
-                <pre>
+          </section>
+          <section>
+            <h3>Single-line VS multi-line JSX</h3>
+            <p>
+              Multi-line JSX should always be wrapped in braces. Single-line
+              doesn't.
+            </p>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim data-line-numbers="2,6,10|1-11">
                         <script type="text/template">
                         function MyComponent() {
@@ -62,12 +72,13 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Component Splitting</h3>
-                <p>Importing another component</p>
-                <span class="code">WelcomePage.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h3>Component Splitting</h3>
+            <p>Importing another component</p>
+            <span class="code">WelcomePage.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim data-line-numbers="1,4|1-7">
                         <script type="text/template">
                         import Greeting from './greeting';
@@ -80,20 +91,31 @@
                         </script>
                     </code>
                 </pre>
-                <div class="fragment tip">Don't build monoliths. Split your components!</div>
-            </section>
-            <section>
-                <h2>Exercise</h2>
-                <ul>
-                    <li class="fragment">Setup a new React project with <span class="code">create-react-app</span></li>
-                    <li class="fragment">Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant</li>
-                    <li class="fragment">Consume this component in the <span class="code">App.tsx</span></li>
-                </ul>
-            </section>
-            <section>
-                <h2>Solution</h2>
-                <span class="code">PokeListEntry.tsx</span>
-                <pre>
+            <div class="fragment tip">
+              Don't build monoliths. Split your components!
+            </div>
+          </section>
+          <section>
+            <h2>Exercise</h2>
+            <ul>
+              <li class="fragment">
+                Setup a new React project with
+                <span class="code">create-react-app</span>
+              </li>
+              <li class="fragment">
+                Create a PokeListEntry component to show a pokémon name like
+                'Bulbasaur' kept in a constant
+              </li>
+              <li class="fragment">
+                Consume this component in the <span class="code">App.tsx</span>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Solution</h2>
+            <span class="code">PokeListEntry.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
                         const NAME = 'World';
@@ -108,11 +130,12 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Solution continued</h3>
-                <span class="code">App.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h3>Solution continued</h3>
+            <span class="code">App.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
                         import PokeListEntry from "./poke-list-entry/PokeListEntry.tsx"
@@ -125,21 +148,33 @@
                         </script>
                     </code>
                 </pre>
-            </section>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>Props</h2>
-                <p>Similar to Angular, we can pass props from a consumer into any child component</p>
-                <p class="fragment">A property can be a primitive, an object or a function</p>
-                <p class="fragment">Properties can be required, optional or even nullable</p>
-                <p class="fragment">Use primitives or objects to pass data into the child component</p>
-                <p class="fragment">Use function to listen on events emitted by the child component</p>
-            </section>
-            <section>
-                <h3>Define Props on a component</h3>
-                <p>You <b>may</b> set a default value for optional props</p>
-                <pre>
+          <section>
+            <h2>Props</h2>
+            <p>
+              Similar to Angular, we can pass props from a consumer into any
+              child component
+            </p>
+            <p class="fragment">
+              A property can be a primitive, an object or a function
+            </p>
+            <p class="fragment">
+              Properties can be required, optional or even nullable
+            </p>
+            <p class="fragment">
+              Use primitives or objects to pass data into the child component
+            </p>
+            <p class="fragment">
+              Use function to listen on events emitted by the child component
+            </p>
+          </section>
+          <section>
+            <h3>Define Props on a component</h3>
+            <p>You <b>may</b> set a default value for optional props</p>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim data-line-numbers="1-6|2|3|4|5|9|8-10|1,2,6,9,11|8-12">
                         <script type="text/template">
                         type Props = {
@@ -159,10 +194,11 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>With object destruction</h3>
-                <pre>
+          </section>
+          <section>
+            <h3>With object destruction</h3>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim data-line-numbers="8-13|2,4,5,9,11,12|3,10|14|8-15">
                         <script type="text/template">
                         type Props = {
@@ -183,19 +219,23 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h2>Exercise</h2>
-                <ul>
-                    <li>Create Props for your PokeListEntry component expecting an optional name</li>
-                    <li>Set a default name if property is not passed by consumer</li>
-                    <li>Use object destruction</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Solution</h2>
-                <span class="code">PokeListEntry.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h2>Exercise</h2>
+            <ul>
+              <li>
+                Create Props for your PokeListEntry component expecting an
+                optional name
+              </li>
+              <li>Set a default name if property is not passed by consumer</li>
+              <li>Use object destruction</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Solution</h2>
+            <span class="code">PokeListEntry.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
                         type Props = {
@@ -212,49 +252,57 @@
                         </script>
                     </code>
                 </pre>
-            </section>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>Testing / React-Testing-Library</h2>
-                <p>Our components can be tested using the React Testing Library</p>
-                <pre>
+          <section>
+            <h2>Testing / React-Testing-Library</h2>
+            <p>Our components can be tested using the React Testing Library</p>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         $ npm install --save-dev @testing-library/react
                         </script>
                     </code>
                 </pre>
-                <div class="fragment tip">Testing-Library is already installed with CRA</div>
-            </section>
-            <section>
-                <h2>Testing our dumb component</h2>
-                <span class="code">Greeting.test.tsx</span>
-                <pre>
+            <div class="fragment tip">
+              Testing-Library is already installed with CRA
+            </div>
+          </section>
+          <section>
+            <h2>Testing our dumb component</h2>
+            <span class="code">Greeting.test.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim data-line-numbers="4,5,8,9|1,6|6,7|1-9">
                         <script type="text/template">
                         import { render } from '@testing-library/react';
                         import Greeting from './Greeting';
 
                         describe('Greeting', () => {
-                          it('should render "Hello World"', () => {
+                            it('should render "Hello World"', () => {
                             const { getByText } = render(<Greeting/>);
                             expect(getByText('Hello World')).toBeInTheDocument();
-                          });
+                            });
                         });
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h2>TDD - Test Driven Development</h2>
-                <p>It is a good practice to conduct TDD wherever possible</p>
-                <p>Let us amend the component such that we can set the name through an input property</p>
-            </section>
-            <section>
-                <h3>Add new test case</h3>
-                <span class="code">Greeting.test.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h2>TDD - Test Driven Development</h2>
+            <p>It is a good practice to conduct TDD wherever possible</p>
+            <p>
+              Let us amend the component such that we can set the name through
+              an input property
+            </p>
+          </section>
+          <section>
+            <h3>Add new test case</h3>
+            <span class="code">Greeting.test.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                       <script type="text/template">
                       it('should render correct name', () => {
@@ -266,11 +314,12 @@
                       </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Implement / Make the test green</h3>
-                <span class="code">Greeting.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h3>Implement / Make the test green</h3>
+            <span class="code">Greeting.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
                         type Props = {
@@ -285,11 +334,15 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Refactor</h3>
-                <p>Refactor your code such that it is extensible and easy to understand</p>
-                <pre>
+          </section>
+          <section>
+            <h3>Refactor</h3>
+            <p>
+              Refactor your code such that it is extensible and easy to
+              understand
+            </p>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         it('should render correct name', () => {
@@ -300,34 +353,55 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h2>Cheat Sheet</h2>
-                <ul>
-                    <li><span class="code">getBy*</span> - verify that an element/node is present at this very moment.
-                        Throws an error if element/node is not found.
-                    </li>
-                    <li><span class="code">queryBy*</span> - similar to <span class="code">getBy*</span>, but will not
-                        throw an error if the element/node is absent.
-                    </li>
-                    <li><span class="code">findBy*</span> - verify that an element will be present, e.g. upon completion
-                        of an asynchronous API-Call
-                    </li>
-                </ul>
-                <p><a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries
-                    here</a></p>
-            </section>
-            <section>
-                <h2>Exercise</h2>
-                <ul>
-                    <li>Test your PokeListEntry component with React Testing Library</li>
-                    <li>Stretch Goal: <a href="https://jestjs.io/docs/api#testeachtablename-fn-timeout" target="_blank">Parameterize your test with React Testing Library using</a> <span class="code">it.each(table)(name, fn, timeout)</span></li>
-                </ul>
-            </section>
-            <section>
-                <h2>Solution</h2>
-                <span class="code">PokeListEntry.test.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h2>Cheat Sheet</h2>
+            <ul>
+              <li>
+                <span class="code">getBy*</span> - verify that an element/node
+                is present at this very moment. Throws an error if element/node
+                is not found.
+              </li>
+              <li>
+                <span class="code">queryBy*</span> - similar to
+                <span class="code">getBy*</span>, but will not throw an error if
+                the element/node is absent.
+              </li>
+              <li>
+                <span class="code">findBy*</span> - verify that an element will
+                be present, e.g. upon completion of an asynchronous API-Call
+              </li>
+            </ul>
+            <p>
+              <a
+                target="_blank"
+                href="https://testing-library.com/docs/queries/about/"
+                >Find more about queries here</a
+              >
+            </p>
+          </section>
+          <section>
+            <h2>Exercise</h2>
+            <ul>
+              <li>
+                Test your PokeListEntry component with React Testing Library
+              </li>
+              <li>
+                Stretch Goal:
+                <a
+                  href="https://jestjs.io/docs/api#testeachtablename-fn-timeout"
+                  target="_blank"
+                  >Parameterize your test with React Testing Library using</a
+                >
+                <span class="code">it.each(table)(name, fn, timeout)</span>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Solution</h2>
+            <span class="code">PokeListEntry.test.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         it('should render Bulbasaur if no name is passed', () => {
@@ -344,11 +418,12 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Solution continued</h3>
-                <span class="code">PokeListEntry.test.tsx</span>
-                <pre>
+          </section>
+          <section>
+            <h3>Solution continued</h3>
+            <span class="code">PokeListEntry.test.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
@@ -359,16 +434,22 @@
                         </script>
                     </code>
                 </pre>
-            </section>
+          </section>
         </section>
 
         <section>
-            <section>
-                <h2>List</h2>
-                <p>To render a list, we apply the <span class="code">map</span> function on a list to produce HTML-Elements
-                </p>
-                <p>Each list item shall have a unique <span class="code">key</span></p>
-                <pre>
+          <section>
+            <h2>List</h2>
+            <p>
+              To render a list, we apply the
+              <span class="code">map</span> function on a list to produce
+              HTML-Elements
+            </p>
+            <p>
+              Each list item shall have a unique <span class="code">key</span>
+            </p>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim data-line-numbers="6|1-12">
                         <script type="text/template">
                         function List() {
@@ -386,20 +467,30 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h2>Exercise</h2>
-                <ul>
-                    <li>Create a (hard-coded) <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of
-                        Pokémon</a></li>
-                    <li class="fragment">Render all Pokémon names in a list</li>
-                    <li class="fragment">Make the name in <span class="code">PokeListEntry.tsx</span> required</li>
-                    <li class="fragment">Write tests</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Solution</h2>
-                <pre>
+          </section>
+          <section>
+            <h2>Exercise</h2>
+            <ul>
+              <li>
+                Create a (hard-coded)
+                <a
+                  target="_blank"
+                  href="https://pokeapi.co/api/v2/pokemon?limit=50"
+                  >list of Pokémon</a
+                >
+              </li>
+              <li class="fragment">Render all Pokémon names in a list</li>
+              <li class="fragment">
+                Make the name in
+                <span class="code">PokeListEntry.tsx</span> required
+              </li>
+              <li class="fragment">Write tests</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Solution</h2>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         import PokeListEntry from "../../components/poke-list-entry/PokeListEntry";
@@ -422,10 +513,11 @@
                         </script>
                     </code>
                 </pre>
-            </section>
-            <section>
-                <h3>Solution continued</h3>
-                <pre>
+          </section>
+          <section>
+            <h3>Solution continued</h3>
+            <!-- prettier-ignore -->
+            <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         type Props = {
@@ -444,25 +536,25 @@
                         </script>
                     </code>
                 </pre>
-            </section>
+          </section>
         </section>
+      </div>
     </div>
-</div>
 
-<script src="../dist/reveal.js"></script>
-<script src="../plugin/notes/notes.js"></script>
-<script src="../plugin/markdown/markdown.js"></script>
-<script src="../plugin/highlight/highlight.js"></script>
-<script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
-    Reveal.initialize({
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
-    });
-</script>
-</body>
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
