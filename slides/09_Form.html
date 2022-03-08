@@ -98,11 +98,11 @@
             <h2>Controlled</h2>
             <ul>
               <li>Form Data is handled by a React component</li>
-              <li>Updates state with each change event causing re-renders
+              <li>Change Event -> State Update -> Re-Render</li>
+              <li>For example,
                 <ul>
-                  <li>Can occur on a keystroke</li>
-                  <li>When selecting an option form a Dropdown</li>
-                  <li>…</li>
+                  <li>on a keystroke</li>
+                  <li>when selecting an option form a Dropdown</li>
                 </ul>
               </li>
             </ul>
@@ -111,42 +111,48 @@
           <section>
             <h2>Uncontrolled</h2>
             <ul>
-              <li>Form Data is handled by the DOM itself</li>
-              <li>Read values only on blur / submit to prevent needless re-renders</li>
-              <li>Sometimes controlled fields are unavoidable
+              <li>Form Data is handled by the DOM</li>
+              <li>State is updated only onBlur/onSubmit -> prevents needless re-renders</li>
+              <li>But, sometimes controlled fields are unavoidable
                 <ul>
                   <li>React-Select</li>
                   <li>Material-UI</li>
-                  <li>…</li>
                 </ul>
               </li>
             </ul>
           </section>
           <section>
             <p><pre data-id="code"><code class="hljs javascript" data-trim><script type="text/template">
-                import {FormEventHandler, useRef} from 'react';
+              import { FormEvent, useRef } from 'react';
 
-                export default function RegistrationForm() {
-                  const inputEl = useRef<HTMLInputElement | null>(null);
-
-                  const handleSubmit: FormEventHandler<HTMLFormElement> =
-                    (event) => {
-                      console.log(inputEl.current?.value);
-                      event.preventDefault();
-                  };
-
-                  return (
-                      <form onSubmit={handleSubmit}>
-                          <label htmlFor="name">Name</label>
-                          <input id="name" type="text" ref={inputEl} />
-                          <input type="submit" value="Submit" />
-                      </form>
-                  );
-                }
+              export default function RegistrationForm() {
+                const inputEl = useRef<HTMLInputElement | null>(null);
+              
+                const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+                  console.log(inputEl.current?.value);
+                  event.preventDefault();
+                };
+              
+                return (
+                  <form onSubmit={handleSubmit}>
+                    <label htmlFor="name">Name</label>
+                    <input id="name" type="text" ref={inputEl} />
+                    <input type="submit" value="Submit" />
+                  </form>
+                );
+              }
             </script></code></pre></p>
             <div class="fragment tip">
               To leverage uncontrolled form fields, using a library is advised
             </div>
+          </section>
+          <section>
+            <h2>Demo</h2>
+            <a href="https://w5uwm.csb.app/controlled-form-demo" target="_blank">Controlled Form</a>
+            <br/>
+            vs.
+            <br />
+            <a href="https://w5uwm.csb.app/uncontrolled-form-demo" target="_blank">Uncontrolled Form</a>
           </section>
         </section>
 
@@ -155,8 +161,8 @@
             <h2>Form Libraries</h2>
             <p>Form handling can be quite repetitive, the usage of a helper library should therefore be considered.</p>
             <ul>
-              <li>React Hook Form</li>
-              <li>Formik</li>
+              <li>React Hook Form (Uncontrolled)</li>
+              <li>Formik (Controlled)</li>
             </ul>
           </section>
           <section>
@@ -188,12 +194,72 @@
             </div>
           </section>
         </section>
+        <section>
+          <h2>Exercise</h2>
+          <ol>
+            <li>Create a form using react-hook-form<br /><span class="code">npm i react-hook-form</span></li>
+            <li>Allow the user to enter their name & e-mail address</li>
+            <li>Validate the inputs and display an error if necessary</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Solution (Name Input)</h2>
+          <pre>
+            <code class="hljs tsx" data-trim data-line-numbers="|1,4-5|11|10,12">
+              <script type="text/template">
+                type FormValues = { name: string; email: string; };
+
+                export default function Form() {
+                  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+                  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+                
+                  return (
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <input type="text" placeholder="Dr. React" 
+                             className={errors?.name?.type ? styles.inputError : ''}
+                             {...register('name', { required: true, maxLength: 25 })} />
+                      {errors?.name?.type && <span className={styles.errorMessage}>{errors.name.message}</span>}
+                      <input type="submit" value="save" />
+                    </form>
+                  );
+                }
+              </script>
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2>Solution (E-Mail Input)</h2>
+          <pre>
+            <code class="hljs tsx" data-trim data-line-numbers="|9-12">
+              <script type="text/template">
+                export default function Form() {
+                  /* ... (see previous slide) */
+                  return (
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      /* ... (see previous slide) */
+                      <input
+                        type="text" placeholder="react@zuhlke.com"
+                        className={errors?.email?.type ? styles.inputError : ''}
+                        {...register('email', { 
+                          required: true, 
+                          pattern: /^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i 
+                        })}
+                      />
+                      {errors?.email?.type && <span className={styles.errorMessage}>{errors.email.message}</span>}
+                      <input type="submit" value="save" />
+                    </form>
+                  );
+                }
+              </script>
+            </code>
+          </pre>
+        </section>
         <section class="deck-slide">
-          <h1>Questions?</h1>
+          <h2>Questions?</h2>
         </section>
       </div>
     </div>
-
+    
     <script src="../dist/reveal.js"></script>
     <script src="../plugin/notes/notes.js"></script>
     <script src="../plugin/markdown/markdown.js"></script>
