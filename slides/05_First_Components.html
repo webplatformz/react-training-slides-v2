@@ -94,7 +94,7 @@
               <li class="fragment">
                 Setup a new React project with
                 <br />
-                <span class="code">npx create-react-app "name"</span>
+                <span class="code">npx create-react-app "name" --template typescript</span>
               </li>
               <li class="fragment">
                 Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant
@@ -257,16 +257,17 @@
             <span class="code">Greeting.test.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,6|6,8|"><script type="text/template">
-import { render, screen } from '@testing-library/react';
-import Greeting from './Greeting';
+              import { render, screen } from '@testing-library/react';
+              import Greeting from './Greeting';
 
-describe('Greeting', () => {
-    it('should render "Hello World"', () => {
-        render(<Greeting/>);
+              describe('Greeting', () => {
+                  it('should render "Hello World"', () => {
+                      render(<Greeting/>);
 
-        expect(screen.getByText('Hello World')).toBeInTheDocument();
-    });
-});</script></code></pre>
+                      expect(screen.getByText('Hello World')).toBeInTheDocument();
+                  });
+              });
+            </script></code></pre>
           </section>
           <section>
             <h2>TDD - Test Driven Development</h2>
@@ -281,12 +282,9 @@ describe('Greeting', () => {
                     <code class="hljs javascript" data-trim>
                       <script type="text/template">
                       it('should render correct name', () => {
-                        render(
-                            <Greeting name="React Master" />
-                        );
+                        render(<Greeting name="React Master" />);
 
-                        expect(screen.getByText("Hello React Master"))
-                          .toBeInTheDocument();
+                        expect(screen.getByText("Hello React Master")).toBeInTheDocument();
                       });
                       </script>
                     </code>
@@ -296,40 +294,31 @@ describe('Greeting', () => {
             <h3>Implement / Make the test green</h3>
             <span class="code">Greeting.tsx</span>
             <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
-                        type Props = {
-                            name?: string;
-                        };
+            <pre><code class="hljs jsx" data-trim><script type="text/template">
+              type Props = {
+                  name?: string;
+              };
 
-                        function Greeting({name = 'World'}: Props) {
-                            return <div>Hello {name}</div>;
-                        }
+              function Greeting({name = 'World'}: Props) {
+                  return <div>Hello {name}</div>;
+              }
 
-                        export default Greeting;
-                        </script>
-                    </code>
-                </pre>
+              export default Greeting;
+            </script></code></pre>
           </section>
           <section>
             <h3>Refactor</h3>
             <p>Refactor your code such that it is extensible and easy to understand</p>
             <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                        <script type="text/template">
-                        it('should render correct name', () => {
-                          const name = 'React Master';
+            <pre><code class="hljs javascript" data-trim><script type="text/template">
+              it('should render correct name', () => {
+                const name = 'React Master';
 
-                          render(<Greeting name={name} />);
+                render(<Greeting name={name} />);
 
-                          expect(screen.getByText(`Hello ${name}`))
-                            .toBeInTheDocument();
-                        });
-                        </script>
-                    </code>
-                </pre>
+                expect(screen.getByText(`Hello ${name}`)).toBeInTheDocument();
+              });
+            </script></code></pre>
           </section>
           <section>
             <h2>Cheat Sheet</h2>
