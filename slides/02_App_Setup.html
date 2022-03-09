@@ -98,17 +98,17 @@
                     </code>
                 </pre>
                 <pre>
-                    <code class="hljs html" data-trim>
+                    <code class="hljs html" data-trim><script type="text/template">
                         <div className="header">
                             {getGreeting(user)}
                         </div>
-                    </code>
+                    </script></code>
                 </pre>
             </section>
             <section>
                 <h2>JSX</h2>
-                <p>JSX uses <span class="code">camelCase</span> for DOM element properties, e.g. <span class="code">class</span>
-                    becomes <span class="code">className</span></p>
+                <p>JSX uses <span class="code">camelCase</span> for most DOM element properties, e.g. <span class="code">stroke-width</span>
+                    becomes <span class="code">strokeWidth</span></p>
                 <pre>
                     <code class="hljs html" data-trim>
                         <script type="text/template">
@@ -125,6 +125,7 @@
                         </script>
                     </code>
                 </pre>
+                <div class="fragment tip">React warns about potentially wrong attribute names.</div>
             </section>
         </section>
         <section>
