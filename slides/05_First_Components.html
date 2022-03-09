@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>05 First Component | Essential React</title>
 
@@ -22,7 +19,8 @@
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             05 First Component
           </h1>
         </section>
@@ -50,10 +48,7 @@
           </section>
           <section>
             <h3>Single-line VS multi-line JSX</h3>
-            <p>
-              Multi-line JSX should always be wrapped in braces. Single-line
-              doesn't.
-            </p>
+            <p>Multi-line JSX should always be wrapped in braces. Single-line doesn't.</p>
             <!-- prettier-ignore -->
             <pre>
                     <code class="hljs jsx" data-trim data-line-numbers="2,6,10|1-11">
@@ -91,24 +86,22 @@
                         </script>
                     </code>
                 </pre>
-            <div class="fragment tip">
-              Don't build monoliths. Split your components!
-            </div>
+            <div class="fragment tip">Don't build monoliths. Split your components!</div>
           </section>
           <section>
             <h2>Exercise</h2>
             <ul>
               <li class="fragment">
                 Setup a new React project with
-                <br/>
+                <br />
                 <span class="code">npx create-react-app "name"</span>
               </li>
               <li class="fragment">
-                Create a PokeListEntry component to show a pokémon name like
-                'Bulbasaur' kept in a constant
+                Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant
               </li>
               <li class="fragment">
-                Consume this component in the <span class="code">App.tsx</span>
+                Consume this component in the
+                <span class="code">App.tsx</span>
               </li>
             </ul>
           </section>
@@ -154,26 +147,19 @@
         <section>
           <section>
             <h2>Props</h2>
-            <p>
-              Similar to Angular, we can pass props from a consumer into any
-              child component
-            </p>
-            <p class="fragment">
-              A property can be a primitive, an object or a function
-            </p>
-            <p class="fragment">
-              Properties can be required, optional or even nullable
-            </p>
-            <p class="fragment">
-              Use primitives or objects to pass data into the child component
-            </p>
-            <p class="fragment">
-              Use function to listen on events emitted by the child component
-            </p>
+            <p>Similar to Angular, we can pass props from a consumer into any child component</p>
+            <p class="fragment">A property can be a primitive, an object or a function</p>
+            <p class="fragment">Properties can be required, optional or even nullable</p>
+            <p class="fragment">Use primitives or objects to pass data into the child component</p>
+            <p class="fragment">Use function to listen on events emitted by the child component</p>
           </section>
           <section>
             <h3>Define Props on a component</h3>
-            <p>You <b>may</b> set a default value for optional props</p>
+            <p>
+              You
+              <b>may</b>
+              set a default value for optional props
+            </p>
             <!-- prettier-ignore -->
             <pre>
                     <code class="hljs jsx" data-trim data-line-numbers="1-6|2|3|4|5|9|8-10|1,2,6,9,11|8-12">
@@ -224,10 +210,7 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>
-                Create Props for your PokeListEntry component expecting an
-                optional name
-              </li>
+              <li>Create Props for your PokeListEntry component expecting an optional name</li>
               <li>Set a default name if property is not passed by consumer</li>
               <li>Use object destruction</li>
             </ul>
@@ -267,9 +250,7 @@
                         </script>
                     </code>
                 </pre>
-            <div class="fragment tip">
-              Testing-Library is already installed with CRA
-            </div>
+            <div class="fragment tip">Testing-Library is already installed with CRA</div>
           </section>
           <section>
             <h2>Testing our dumb component</h2>
@@ -290,10 +271,7 @@ describe('Greeting', () => {
           <section>
             <h2>TDD - Test Driven Development</h2>
             <p>It is a good practice to conduct TDD wherever possible</p>
-            <p>
-              Let us amend the component such that we can set the name through
-              an input property
-            </p>
+            <p>Let us amend the component such that we can set the name through an input property</p>
           </section>
           <section>
             <h3>Add new test case</h3>
@@ -336,10 +314,7 @@ describe('Greeting', () => {
           </section>
           <section>
             <h3>Refactor</h3>
-            <p>
-              Refactor your code such that it is extensible and easy to
-              understand
-            </p>
+            <p>Refactor your code such that it is extensible and easy to understand</p>
             <!-- prettier-ignore -->
             <pre>
                     <code class="hljs javascript" data-trim>
@@ -360,41 +335,34 @@ describe('Greeting', () => {
             <h2>Cheat Sheet</h2>
             <ul>
               <li>
-                <span class="code">getBy*</span> - verify that an element/node
-                is present at this very moment. Throws an error if element/node
-                is not found.
+                <span class="code">getBy*</span>
+                - verify that an element/node is present at this very moment. Throws an error if element/node is not
+                found.
               </li>
               <li>
-                <span class="code">queryBy*</span> - similar to
-                <span class="code">getBy*</span>, but will not throw an error if
-                the element/node is absent.
+                <span class="code">queryBy*</span>
+                - similar to
+                <span class="code">getBy*</span>
+                , but will not throw an error if the element/node is absent.
               </li>
               <li>
-                <span class="code">findBy*</span> - verify that an element will
-                be present, e.g. upon completion of an asynchronous API-Call
+                <span class="code">findBy*</span>
+                - verify that an element will be present, e.g. upon completion of an asynchronous API-Call
               </li>
             </ul>
             <p>
-              <a
-                target="_blank"
-                href="https://testing-library.com/docs/queries/about/"
-                >Find more about queries here</a
-              >
+              <a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries here</a>
             </p>
           </section>
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>
-                Test your PokeListEntry component with React Testing Library
-              </li>
+              <li>Test your PokeListEntry component with React Testing Library</li>
               <li>
                 Stretch Goal:
-                <a
-                  href="https://jestjs.io/docs/api#testeachtablename-fn-timeout"
-                  target="_blank"
-                  >Parameterize your test with React Testing Library using</a
-                >
+                <a href="https://jestjs.io/docs/api#testeachtablename-fn-timeout" target="_blank">
+                  Parameterize your test with React Testing Library using
+                </a>
                 <span class="code">it.each(table)(name, fn, timeout)</span>
               </li>
             </ul>
@@ -444,11 +412,12 @@ describe('Greeting', () => {
             <h2>List</h2>
             <p>
               To render a list, we apply the
-              <span class="code">map</span> function on a list to produce
-              HTML-Elements
+              <span class="code">map</span>
+              function on a list to produce HTML-Elements
             </p>
             <p>
-              Each list item shall have a unique <span class="code">key</span>
+              Each list item shall have a unique
+              <span class="code">key</span>
             </p>
             <!-- prettier-ignore -->
             <pre>
@@ -475,16 +444,13 @@ describe('Greeting', () => {
             <ul>
               <li>
                 Create a (hard-coded)
-                <a
-                  target="_blank"
-                  href="https://pokeapi.co/api/v2/pokemon?limit=50"
-                  >list of Pokémon</a
-                >
+                <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of Pokémon</a>
               </li>
               <li class="fragment">Render all Pokémon names in a list</li>
               <li class="fragment">
                 Make the name in
-                <span class="code">PokeListEntry.tsx</span> required
+                <span class="code">PokeListEntry.tsx</span>
+                required
               </li>
               <li class="fragment">Write tests</li>
             </ul>
@@ -555,7 +521,7 @@ describe('Greeting', () => {
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
       });
     </script>
   </body>
