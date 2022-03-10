@@ -168,13 +168,14 @@
           <section>
             <h2>React Hook Form</h2>
             <pre>
-              <code class="hljs javascript" data-trim data-noescape>
-                const {
-                  register,
-                  handleSubmit,
-                } = useForm();
-                const onSubmit = data => { console.log(data); };
-                const onError = error => { console.log(error); };
+              <code class="hljs tsx" data-trim data-noescape>
+                <script type="text/template">
+                  type FormValues = { example: string; };
+                  
+                  const { register, handleSubmit, formState } = useForm<FormValues>();
+                  const onSubmit = data => { console.log(data); };
+                  const onError = error => { console.log(error); };
+                </script>
               </code>
             </pre>
             <pre>
