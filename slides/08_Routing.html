@@ -264,7 +264,7 @@
                       <Route path="/page1" element={<Page1 />} />
                       <Route
                         path="/"
-                        element={<Navigate to="/page1" />}
+                        element={<Navigate to="/page1" replace />}
                       />
                     </Routes>
                   </Router>
@@ -296,7 +296,7 @@
             <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
             <p><span class="code">&lt;Routes /&gt;</span></p>
             <p><span class="code">&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;} /&gt;</span></p>
-            <p><span class="code">&lt;Navigate to="/cars" /&gt;</span></p>
+            <p><span class="code">&lt;Navigate to="/cars" replace /&gt;</span></p>
             <p><span class="code">&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span></p>
           </section>
         </section>
@@ -368,7 +368,7 @@ export default function App() {
     <Routes>
       <Route path="/pokemon" element={<ListPage />} />
       <Route path="/pokemon/:pokemonName" element={<DetailPage />} />
-      <Route path="/" element={<Navigate to="/pokemon" />} />
+      <Route path="/" element={<Navigate to="/pokemon" replace />} />
     </Routes>
   </Router>);
 }
@@ -453,11 +453,15 @@ export interface PokeDetail { … }
           <section>
             <h3>NavLink</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="4-6"><script type="text/template">
+            <p><pre><code class="hljs tsx" data-trim data-line-numbers="4-10"><script type="text/template">
 function MyComponent() {
   return (<>
     // …
-    <NavLink to="/faq" activeClassName="selected">
+    <NavLink 
+      to="/faq"
+      className={({ isActive }) =>
+        isActive ? "activated" : ""}
+    >
       FAQs
     </NavLink>
   </>);
@@ -508,24 +512,24 @@ function MyComponent() {
             <p>Returns the <span class="warn">location</span> object representing the current URL.</p>
           </section>
           <section>
-            <h3>useHistory</h3>
+            <h3>useNavigate</h3>
 
             <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
 function MyComponent() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return <button onClick={() => {
 
     // Do something
 
-    history.push('/home');
+    navigate('/home');
   }}>
     Do something and then go to Home
   </button>
 }
             </script></code></pre></p>
 
-            <p>Provides access to the <span class="warn">history</span> object which can be used to navigate programmatically.</p>
+            <p>Navigate programmatically</p>
           </section>
           <section>
             <h3>MemoryRouter</h3>
