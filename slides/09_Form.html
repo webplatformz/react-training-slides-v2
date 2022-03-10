@@ -170,24 +170,23 @@
             <pre>
               <code class="hljs tsx" data-trim data-noescape>
                 <script type="text/template">
-                  type FormValues = { example: string; };
+                  type FormValues = { name: string; };
                   
                   const { register, handleSubmit, formState } = useForm<FormValues>();
                   const onSubmit = data => { console.log(data); };
                   const onError = error => { console.log(error); };
-                </script>
-              </code>
-            </pre>
-            <pre>
-              <code class="hljs html" data-trim>
-                <script type="text/template">
-                <form onSubmit={handleSubmit(onSubmit, onError)}>
-                  <input defaultValue="test"
-                    {...register("example", {/*validations*/})}
-                  />
-                  <input type="submit" />
-                </form>
-                </script>
+
+                  return (
+                    <form onSubmit={handleSubmit(onSubmit, onError)}>
+                      <input defaultValue="Dr. React" {...register("name", 
+                        { required: { 
+                          value: true, 
+                          message: "The field 'name' is required!" }
+                        })}/>
+                      <input type="submit" />
+                    </form>
+                    )
+                  </script>
               </code>
             </pre>
             <div class="fragment tip">
