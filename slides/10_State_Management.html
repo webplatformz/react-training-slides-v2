@@ -274,14 +274,14 @@
                 </ol>
                 <pre>
                     <code class="hljs javascript" data-trim data-noescape>
-                        function reducer(state, action) {
+                        function reducer(state: State, action: Action) {
                           switch (action.type) {
                             case 'increment':
                               return {count: state.count + 1};
                             case 'decrement':
                               return {count: state.count - 1};
                             default:
-                              throw new Error();
+                              throw new Error("unknown action type");
                           }
                         }
                     </code>
@@ -289,12 +289,92 @@
                 <div class="fragment tip">Never manipulate the existing state reference. Always return a new state object!</div>
             </section>
             <section>
+                <h3>Type Example</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim data-noescape>
+                        type State = {
+                            count: number;
+                        }
+                        type Action = { type: 'increment' | 'decrement' }
+                    </code>
+                </pre>
+            </section>
+            <section>
                 <h3>Applying reducers</h3>
                 <ul>
                     <li>Can be standalone within a single component</li>
                     <li>Can be used together with useContext</li>
-                    <li>&hellip;</li>
                 </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2><span class="code">useReducer</span> Exercise</h2>
+                <ul>
+                    <li>Add a pokemon visit counter to your application</li>
+                    <li>Count how many pokemon the user has seen</li>
+                    <li>Display the count somewhere in your app</li>
+                    <li>Add a reset button to reset the counter</li>
+                </ul>
+                <img src="../img/use-reducer-exercise.PNG" />
+            </section>
+            <section>
+                <h3>Stretch Goal</h3>
+                <p>Don't count multiple visits to the same pokemon.</p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Solution</h2>
+                <p> <span class="code">usePokeVisit.ts</span> types</p>
+                <pre>
+                    <code class="hljs tsx" data-trim><script type="text/template">
+                        export type AddPokeVisitAction = {
+                          type: "add";
+                          value: string;
+                        };
+                        
+                        export type ResetPokeVisitAction = {
+                          type: "reset";
+                        };
+                        
+                        type PokeVisitAction = AddPokeVisitAction | ResetPokeVisitAction;
+                    </script></code>
+                </pre>
+            </section>
+
+            <section>
+                <p><span class="code">usePokeVisit.ts</span> reducer</p>
+                <pre>
+                    <code class="hljs tsx" data-trim><script type="text/template">
+                        const usePokeVisit = () => {
+                          return useReducer((state: Set<string>, action: PokeVisitAction) => {
+                            switch (action.type) {
+                              case "add":
+                                return new Set([...state, action.value]);
+                              case "reset":
+                                return new Set();
+                              default:
+                                throw new Error("unknown action type");
+                            }
+                          }, new Set());
+                        };        
+                    </script></code>
+                </pre>
+            </section>
+            <section>
+                <p>dispatching visits</p>
+                <pre>
+                    <code class="hljs ts" data-trim><script type="text/template">
+                        useEffect(() => {
+                          dispatch({
+                            type: "add",
+                            value: pokemonName
+                          });
+                        }, [dispatch, pokemonName]);      
+                    </script></code>
+                </pre>
             </section>
         </section>
         <section>
