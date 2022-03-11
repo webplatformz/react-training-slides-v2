@@ -112,13 +112,30 @@
         </section>
         
         <section>
-            <h2>Exercise</h2>
-            <ul>
-                <li>Enhance the profile component by replacing the useState with useContext</li>
-                <li>Display the username globally (e.g. in the header)</li>
-                <li>Hint 1: Provide the context in the <span class="code">App.tsx</span></li>
-                <li>Hint 2: The value of the context can rely on values of other hooks</li>
-            </ul>
+            <section>
+                <h2>Exercise</h2>
+                <ul>
+                    <li>Enhance the profile component by prefilling the default form values</li>
+                    <li>Display the username globally (e.g. in the header)</li>
+                    <li>Hint 1: Provide the context in the <span class="code">App.tsx</span></li>
+                    <li>Hint 2: The value of the context can rely on values of other hooks</li>
+                </ul>
+            </section>
+            <section>
+                <pre>
+                    <code class="hljs tsx" data-trim><script type="text/template">
+                    const {
+                      register,
+                      handleSubmit,
+                      formState: { errors }
+                    } = useForm<FormValues>({
+                      defaultValues: {
+                        username: 'joe'
+                      }
+                    });
+                    </script></code>
+                </pre>
+            </section>
         </section>
         <section>
             <section>
