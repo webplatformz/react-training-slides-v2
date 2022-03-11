@@ -201,6 +201,7 @@
               <li>Create a form using react-hook-form<br /><span class="code">npm i react-hook-form</span></li>
               <li>Allow the user to enter their name & e-mail address</li>
               <li>Validate the inputs and display an error if necessary</li>
+              <li>Log the result of the form submisson to the console</li>
             </ol>
           </section>
           <section>
@@ -224,7 +225,7 @@
                       <form onSubmit={handleSubmit(onSubmit)}>
                         <input type="text" placeholder="Dr. React" 
                               className={errors?.name?.type ? styles.inputError : ''}
-                              {...register('name', { required: true, maxLength: 25 })} />
+                              {...register('name', { required: { value: true, message: "Name is required!" }, maxLength: { value: 25, message: "The name should be shorter than 25 characters!" } })} />
                         {errors?.name?.type && <span className={styles.errorMessage}>{errors.name.message}</span>}
                         <input type="submit" value="save" />
                       </form>
@@ -248,8 +249,8 @@
                           type="text" placeholder="react@zuhlke.com"
                           className={errors?.email?.type ? styles.inputError : ''}
                           {...register('email', { 
-                            required: true, 
-                            pattern: /^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i 
+                            required: { value: true, message: "The 'email' field is required!" }, 
+                            pattern: { value: /^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Invalid email!" } 
                           })}
                         />
                         {errors?.email?.type && <span className={styles.errorMessage}>{errors.email.message}</span>}
