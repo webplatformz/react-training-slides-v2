@@ -64,6 +64,33 @@
             </section>
 
             <section>
+                <pre>
+                    <code class="hljs tsx" data-trim>
+                        <script type="text/template">
+            import { createContext, useContext } from "react";
+
+            type YourContextValue = {
+              user: string;
+            };
+            
+            const UserContext = createContext<YourContextValue | null>(null);
+            
+            function Parent() {
+              return (<UserContext.Provider value={{ user: "joe" }}>
+                <Child />
+              </UserContext.Provider>)
+            }
+
+            function Child() {
+              const context = useContext(UserContext);
+              return <p>{context?.user}</p>; // joe
+            }
+                        </script>
+                    </code>
+                </pre>
+            </section>
+
+            <section>
                 <h3>What to put in contexts?</h3>
                 <p><span class="warn">Any JavaScript object</span> can be the value of a context.</p>
                 <ul>
