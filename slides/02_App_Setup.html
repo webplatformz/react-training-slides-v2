@@ -1,77 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>02 App Setup | Essential React</title>
 
-    <link rel="icon" href="../img/zuehlke_logo.jpg">
-    <link rel="stylesheet" href="../dist/reset.css">
-    <link rel="stylesheet" href="../dist/reveal.css">
-    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+    <link rel="icon" href="../img/zuehlke_logo.jpg" />
+    <link rel="stylesheet" href="../dist/reset.css" />
+    <link rel="stylesheet" href="../dist/reveal.css" />
+    <link rel="stylesheet" href="../css/theme/zuehlke.css" />
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
-</head>
-<body>
-<div class="reveal">
-    <div class="slides">
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
         <section class="deck-slide">
-            <h1>Essential React <br/>
-                02 App Setup</h1>
+          <h1>
+            Essential React <br />
+            02 App Setup
+          </h1>
         </section>
         <section>
-            <h2>Setup</h2>
-            <ul>
-                <li>Create React App</li>
-                <li>JSX</li>
-                <li>JavaScript or TypeScript</li>
-                <li>NPM scripts</li>
-            </ul>
+          <h2>Setup</h2>
+          <ul>
+            <li>Create React App</li>
+            <li>JSX</li>
+            <li>JavaScript or TypeScript</li>
+            <li>NPM scripts</li>
+          </ul>
         </section>
         <section>
-            <section>
-                <h2>Create React App</h2>
-                <pre>
+          <section>
+            <h2>Create React App</h2>
+            <pre>
                     <code class="hljs javascript" data-trim>
                         $ npx create-react-app your-app-name
                           --template typescript
-                          --use-npm
                     </code>
                 </pre>
-          
-                <aside class="notes">
-                  We use NPM as it is more widely known. However, yarn is the default with CRA. Feel free to use it if you are more comfortable with it.
-                </aside>
-            </section>
-            <section>
-                <h2>What is all this stuff?</h2>
-                <p><img src="../img/create_react_app_initial_files.png" width="300" /></p>
-            </section>
+
+            <aside class="notes">
+              We use NPM as it is more widely known. However, yarn is the
+              default with CRA. Feel free to use it if you are more comfortable
+              with it.
+            </aside>
+          </section>
+          <section>
+            <h2>What is all this stuff?</h2>
+            <p>
+              <img
+                src="../img/create_react_app_initial_files.png"
+                width="300"
+              />
+            </p>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>JSX</h2>
-                <pre>
+          <section>
+            <h2>JSX</h2>
+            <pre>
                     <code class="hljs javascript" data-trim>
                         const header = <h1>Hello World</h1>;
                     </code>
                 </pre>
-                <pre class="fragment">
+            <pre class="fragment">
                     <code class="hljs javascript" data-trim>
                         const header = React.createElement(
                             'h1', {}, 'Hello World'
                         );
                     </code>
                 </pre>
-                <p class="fragment"><a target="_blank" href="https://babeljs.io/repl">Babel</a> transpiles exactly like
-                    this.</p>
-            </section>
-            <section>
-                <h2>JSX</h2>
-                <p>You can use any JS expression within curly braces.</p>
-                <pre>
+            <p class="fragment">
+              <a target="_blank" href="https://babeljs.io/repl">Babel</a>
+              transpiles exactly like this.
+            </p>
+          </section>
+          <section>
+            <h2>JSX</h2>
+            <p>You can use any JS expression within curly braces.</p>
+            <pre>
                     <code class="hljs javascript" data-trim>
                         const name = 'John Wayne';
 
@@ -82,12 +95,12 @@
                         const formatted = <h1>Hello, {formatName(name)}</h1>;
                     </code>
                 </pre>
-                <div class="fragment tip">JSX is basically JS + HTML</div>
-            </section>
-            <section>
-                <h2>JSX</h2>
-                <p>JSX is an expression too.</p>
-                <pre>
+            <div class="fragment tip">JSX is basically JS + HTML</div>
+          </section>
+          <section>
+            <h2>JSX</h2>
+            <p>JSX is an expression too.</p>
+            <pre>
                     <code class="hljs javascript" data-trim>
                         function getGreeting(user) {
                             if (user) {
@@ -97,19 +110,22 @@
                         }
                     </code>
                 </pre>
-                <pre>
+            <pre>
                     <code class="hljs html" data-trim><script type="text/template">
                         <div className="header">
                             {getGreeting(user)}
                         </div>
                     </script></code>
                 </pre>
-            </section>
-            <section>
-                <h2>JSX</h2>
-                <p>JSX uses <span class="code">camelCase</span> for most DOM element properties, e.g. <span class="code">stroke-width</span>
-                    becomes <span class="code">strokeWidth</span></p>
-                <pre>
+          </section>
+          <section>
+            <h2>JSX</h2>
+            <p>
+              JSX uses <span class="code">camelCase</span> for most DOM element
+              properties, e.g. <span class="code">stroke-width</span> becomes
+              <span class="code">strokeWidth</span>
+            </p>
+            <pre>
                     <code class="hljs html" data-trim>
                         <script type="text/template">
                             regular HTML
@@ -117,7 +133,7 @@
                         </script>
                     </code>
                 </pre>
-                <pre>
+            <pre>
                     <code class="hljs html" data-trim>
                         <script type="text/template">
                             JSX
@@ -125,98 +141,131 @@
                         </script>
                     </code>
                 </pre>
-                <div class="fragment tip">React warns about wrong property names.</div>
-            </section>
+            <div class="fragment tip">
+              React warns about wrong property names.
+            </div>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>TypeScript</h2>
-                <p>We will be using TypeScript because we highly recommend using it in enterprise projects.</p>
-                <p>With Create React App Typescript is supported out of the box:</p>
-                <pre>
+          <section>
+            <h2>TypeScript</h2>
+            <p>
+              We will be using TypeScript because we highly recommend using it
+              in enterprise projects.
+            </p>
+            <p>With Create React App Typescript is supported out of the box:</p>
+            <pre>
                     <code class="hljs javascript" data-trim>
                         --template typescript
                     </code>
                 </pre>
-                <div class="fragment tip">JSX + TypeScript = TSX</div>
-            </section>
+            <div class="fragment tip">JSX + TypeScript = TSX</div>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>NPM scripts</h2>
-                <p><span class="code">npm start</span></p>
-                <p>Starts the app with a live reload server. The build will fail if you have TypeScript errors.</p>
-            </section>
-            <section>
-                <p><span class="code">npm run build</span></p>
-                <p>Creates a production ready build of your app and puts it in the <span class="code">build</span>
-                    folder.</p>
-            </section>
-            <section>
-                <p><span class="code">npm test</span></p>
-                <p>Runs your tests using <span class="warn">jest</span> and <span
-                        class="warn">react-testing-library</span></p>
-            </section>
-            <section>
-                <p><span class="code">npm run eject</span></p>
-                <p>You may have noticed that there is no webpack config visible. This is hidden from you when using Create React App <span class="warn">(convention over configuration)</span>.</p>
-                <p>In most cases, this will be fine. If you need to make custom changes to the config, you can <span
-                        class="warn">eject</span>.</p>
-                <p>This cannot be undone and you lose Create React App support.</p>
-                <div class="fragment tip">We recommend starting &amp; staying with Create React App until there is absolutely no way
-                    around ejecting.
-                </div>
-            </section>
+          <section>
+            <h2>NPM scripts</h2>
+            <p><span class="code">npm start</span></p>
+            <p>
+              Starts the app with a live reload server. The build will fail if
+              you have TypeScript errors.
+            </p>
+          </section>
+          <section>
+            <p><span class="code">npm run build</span></p>
+            <p>
+              Creates a production ready build of your app and puts it in the
+              <span class="code">build</span> folder.
+            </p>
+          </section>
+          <section>
+            <p><span class="code">npm test</span></p>
+            <p>
+              Runs your tests using <span class="warn">jest</span> and
+              <span class="warn">react-testing-library</span>
+            </p>
+          </section>
+          <section>
+            <p><span class="code">npm run eject</span></p>
+            <p>
+              You may have noticed that there is no webpack config visible. This
+              is hidden from you when using Create React App
+              <span class="warn">(convention over configuration)</span>.
+            </p>
+            <p>
+              In most cases, this will be fine. If you need to make custom
+              changes to the config, you can <span class="warn">eject</span>.
+            </p>
+            <p>This cannot be undone and you lose Create React App support.</p>
+            <div class="fragment tip">
+              We recommend starting &amp; staying with Create React App until
+              there is absolutely no way around ejecting.
+            </div>
+          </section>
         </section>
         <section>
-            <section>
-                <h2>ESLint</h2>
-                <p>Enforce some code styles which pertain more to usage.</p>
-                <p>Create React App comes with some predefined rules.</p>
-                <p>ESLint has a ton of (predefined) rules, ranging from very loose to super strict
-                    (<a href="https://www.npmjs.com/package/eslint-config-airbnb" target="_blank"
-                        rel="noopener noreferrer">airbnb</a>).
-                </p>
-            </section>
-            <section>
-                <p>Run <span class="code">npm i -D eslint</span> to install it.</p>
-                <p>Run <span class="code">npx eslint --init</span> to setup a configuration file:</p>
-                <pre>
+          <section>
+            <h2>ESLint</h2>
+            <p>Enforce some code styles which pertain more to usage.</p>
+            <p>Create React App comes with some predefined rules.</p>
+            <p>
+              ESLint has a ton of (predefined) rules, ranging from very loose to
+              super strict (<a
+                href="https://www.npmjs.com/package/eslint-config-airbnb"
+                target="_blank"
+                rel="noopener noreferrer"
+                >airbnb</a
+              >).
+            </p>
+          </section>
+          <section>
+            <p>Run <span class="code">npm i -D eslint</span> to install it.</p>
+            <p>
+              Run <span class="code">npx eslint --init</span> to setup a
+              configuration file:
+            </p>
+            <pre>
                     <code class="hljs javascript" data-trim data-noescape>
                         "scripts": {
                             "lint": "eslint \"src/**/*.{js,ts,tsx}\" &#45;&#45;quiet",
                         },
                     </code>
                 </pre>
-                <p>And again add the plugin for your IDE:
-                    <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint" target="_blank"
-                       rel="noopener noreferrer">
-                        VS Code
-                    </a>
-                </p>
-                <div class="fragment tip">ESLint is already installed through react-scripts with CRA</div>
-            </section>
+            <p>
+              And again add the plugin for your IDE:
+              <a
+                href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VS Code
+              </a>
+            </p>
+            <div class="fragment tip">
+              ESLint is already installed through react-scripts with CRA
+            </div>
+          </section>
         </section>
         <section class="deck-slide">
-            <h1>Questions?</h1>
+          <h1>Questions?</h1>
         </section>
+      </div>
     </div>
-</div>
 
-<script src="../dist/reveal.js"></script>
-<script src="../plugin/notes/notes.js"></script>
-<script src="../plugin/markdown/markdown.js"></script>
-<script src="../plugin/highlight/highlight.js"></script>
-<script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
-    Reveal.initialize({
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
-    });
-</script>
-</body>
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
