@@ -2,7 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>05 First Component | Essential React</title>
 
@@ -48,11 +51,12 @@
           </section>
           <section>
             <h3>Single-line VS multi-line JSX</h3>
-            <p>Multi-line JSX should always be wrapped in braces. Single-line doesn't.</p>
+            <p>
+              Multi-line JSX should always be wrapped in braces. Single-line
+              doesn't.
+            </p>
             <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim data-line-numbers="2,6,10|1-11">
-                        <script type="text/template">
+            <pre><code class="hljs jsx" data-trim data-line-numbers="2,6,10|1-11"><script type="text/template">
                         function MyComponent() {
                             return <div>Single-line without enclosing ()</div>;
                         }
@@ -64,18 +68,14 @@
                                 </>
                             );
                         }
-                        </script>
-                    </code>
-                </pre>
+                        </script></code></pre>
           </section>
           <section>
             <h3>Component Splitting</h3>
             <p>Importing another component</p>
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs javascript" data-trim data-line-numbers="1,4|1-7">
-                        <script type="text/template">
+            <pre><code class="hljs javascript" data-trim data-line-numbers="1,4|1-7"><script type="text/template">
                         import Greeting from './greeting';
 
                         function WelcomePage() {
@@ -83,10 +83,10 @@
                         }
 
                         export default WelcomePage;
-                        </script>
-                    </code>
-                </pre>
-            <div class="fragment tip">Don't build monoliths. Split your components!</div>
+                        </script></code></pre>
+            <div class="fragment tip">
+              Don't build monoliths. Split your components!
+            </div>
           </section>
           <section>
             <h2>Exercise</h2>
@@ -94,10 +94,13 @@
               <li class="fragment">
                 Setup a new React project with
                 <br />
-                <span class="code">npx create-react-app "name" --template typescript</span>
+                <span class="code"
+                  >npx create-react-app "name" --template typescript</span
+                >
               </li>
               <li class="fragment">
-                Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant
+                Create a PokeListEntry component to show a pokémon name like
+                'Bulbasaur' kept in a constant
               </li>
               <li class="fragment">
                 Consume this component in the
@@ -147,11 +150,22 @@
         <section>
           <section>
             <h2>Props</h2>
-            <p>Similar to Angular, we can pass props from a consumer into any child component</p>
-            <p class="fragment">A property can be a primitive, an object or a function</p>
-            <p class="fragment">Properties can be required, optional or even nullable</p>
-            <p class="fragment">Use primitives or objects to pass data into the child component</p>
-            <p class="fragment">Use function to listen on events emitted by the child component</p>
+            <p>
+              Similar to Angular, we can pass props from a consumer into any
+              child component
+            </p>
+            <p class="fragment">
+              A property can be a primitive, an object or a function
+            </p>
+            <p class="fragment">
+              Properties can be required, optional or even nullable
+            </p>
+            <p class="fragment">
+              Use primitives or objects to pass data into the child component
+            </p>
+            <p class="fragment">
+              Use function to listen on events emitted by the child component
+            </p>
           </section>
           <section>
             <h3>Define Props on a component</h3>
@@ -210,7 +224,10 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>Create Props for your PokeListEntry component expecting an optional name</li>
+              <li>
+                Create Props for your PokeListEntry component expecting an
+                optional name
+              </li>
               <li>Set a default name if property is not passed by consumer</li>
               <li>Use object destruction</li>
             </ul>
@@ -250,7 +267,9 @@
                         </script>
                     </code>
                 </pre>
-            <div class="fragment tip">Testing-Library is already installed with CRA</div>
+            <div class="fragment tip">
+              Testing-Library is already installed with CRA
+            </div>
           </section>
           <section>
             <h2>Testing our dumb component</h2>
@@ -272,7 +291,10 @@
           <section>
             <h2>TDD - Test Driven Development</h2>
             <p>It is a good practice to conduct TDD wherever possible</p>
-            <p>Let us amend the component such that we can set the name through an input property</p>
+            <p>
+              Let us amend the component such that we can set the name through
+              an input property
+            </p>
           </section>
           <section>
             <h3>Add new test case</h3>
@@ -308,7 +330,10 @@
           </section>
           <section>
             <h3>Refactor</h3>
-            <p>Refactor your code such that it is extensible and easy to understand</p>
+            <p>
+              Refactor your code such that it is extensible and easy to
+              understand
+            </p>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim><script type="text/template">
               it('should render correct name', () => {
@@ -325,8 +350,8 @@
             <ul>
               <li>
                 <span class="code">getBy*</span>
-                - verify that an element/node is present at this very moment. Throws an error if element/node is not
-                found.
+                - verify that an element/node is present at this very moment.
+                Throws an error if element/node is not found.
               </li>
               <li>
                 <span class="code">queryBy*</span>
@@ -336,20 +361,30 @@
               </li>
               <li>
                 <span class="code">findBy*</span>
-                - verify that an element will be present, e.g. upon completion of an asynchronous API-Call
+                - verify that an element will be present, e.g. upon completion
+                of an asynchronous API-Call
               </li>
             </ul>
             <p>
-              <a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries here</a>
+              <a
+                target="_blank"
+                href="https://testing-library.com/docs/queries/about/"
+                >Find more about queries here</a
+              >
             </p>
           </section>
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>Test your PokeListEntry component with React Testing Library</li>
+              <li>
+                Test your PokeListEntry component with React Testing Library
+              </li>
               <li>
                 Stretch Goal:
-                <a href="https://jestjs.io/docs/api#testeachtablename-fn-timeout" target="_blank">
+                <a
+                  href="https://jestjs.io/docs/api#testeachtablename-fn-timeout"
+                  target="_blank"
+                >
                   Parameterize your test with React Testing Library using
                 </a>
                 <span class="code">it.each(table)(name, fn, timeout)</span>
@@ -433,7 +468,11 @@
             <ul>
               <li>
                 Create a (hard-coded)
-                <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">list of Pokémon</a>
+                <a
+                  target="_blank"
+                  href="https://pokeapi.co/api/v2/pokemon?limit=50"
+                  >list of Pokémon</a
+                >
               </li>
               <li class="fragment">Render all Pokémon names in a list</li>
               <li class="fragment">
@@ -510,7 +549,7 @@
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
     </script>
   </body>
