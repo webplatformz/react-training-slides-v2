@@ -706,81 +706,81 @@ export default usePokeList;
         <section>
           <section data-auto-animate>
             <h2>Exercise</h2>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="6-7|8"><script type="text/template">
-function usePokeList() {
-  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const result = await response.json() as PokemonResultDto;
-      setPokemons(result.results);
-    })();
-  }, []);
-
-  return pokemons;
-}
-</script></code></pre>
-
             <p>
-              What happens if the component is unmounted while the request or
-              deserialization is still running?
+              Abort the request to the pokemon list when the component is
+              unmounted.
             </p>
           </section>
-
           <section data-auto-animate>
-            <h2>Exercise</h2>
+            <p>
+              Abort the request to the pokemon list when the component is
+              unmounted.
+            </p>
+
+            <p>
+              Requests can be aborted using
+              <span class="warn">AbortController</span> (<a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController"
+                >MDN</a
+              >):
+            </p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="8"><script type="text/template">
-function usePokeList() {
-  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
+            ><code class="hljs tsx" data-trim data-line-numbers><script type="text/template">
+      // create controller
+      const controller = new AbortController();
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const result = await response.json() as PokemonResultDto;
-      setPokemons(result.results);
-    })();
-  }, []);
+      // pass signal to request
+      const response = await fetch("https://…", {
+        signal: controller.signal
+      });
 
-  return pokemons;
-}
+      // abort request:
+      controller.abort();
 </script></code></pre>
-
-            <p><img src="../img/state_update_on_unmounted_warning.png" /></p>
-          </section>
-          <section data-automate>
-            <p><img src="../img/state_update_on_unmounted_warning.png" /></p>
-            <p>
-              &rarr; State updates on unmounted components will result in this
-              warning.
-            </p>
           </section>
           <section>
-            <ul>
-              <li>
-                Prevent the state update if the component was unmounted during
-                the asynchronous operation.
-              </li>
-              <li class="fragment">
-                Stretch goal: Make it possile to test this manually.
-                <ul>
-                  <li class="fragment">
-                    Hint: Add/remove the List component to/from the DOM upon a
-                    button click.
-                  </li>
-                  <li class="fragment">
-                    Hint: Use a delay to make it easier to test.
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <span class="code fragment">
-              await new Promise((resolve) => setTimeout(resolve, 3000));
-            </span>
+            <p>How can we check if it works?</p>
+          </section>
+          <section>
+            <img
+              src="../img/poke-list-duplicate-request.png"
+              alt="Duplicate request"
+            />
+
+            <p>What's going on here?</p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">index.tsx</span></p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
+              const root = ReactDOM.createRoot(
+                document.getElementById("root") as HTMLElement
+              );
+              root.render(
+                <React.StrictMode>
+                  <App />
+                </React.StrictMode>
+              );
+</script></code></pre>
+            <p>
+              In development, when using <em>Strict Mode</em>, components are
+              re-mounted: mount, unmount, mount
+            </p>
+            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
+          </section>
+          <section data-auto-animate>
+            <p>
+              In development, when using <em>Strict Mode</em>, components are
+              re-mounted: mount, unmount, mount
+            </p>
+            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
+            <p>
+              &rarr; Effects are executed at least twice in development<br /><small
+                >(not in prod)</small
+              >
+            </p>
           </section>
         </section>
         <section>
