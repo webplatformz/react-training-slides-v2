@@ -10,7 +10,8 @@
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
-    "build": "gulp build"
+    "build": "gulp build",
+    "format": "npx prettier --write ."
   },
   "author": {
     "name": "Hakim El Hattab",

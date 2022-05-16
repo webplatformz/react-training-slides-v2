@@ -29,9 +29,7 @@
 
         <section>
           <section>
-            <h1>
-              Modern CSS
-            </h1>
+            <h1>Modern CSS</h1>
             <p>IE11 is ☠</p>
             <p>New CSS features are supported in all evergreen browsers</p>
           </section>
@@ -92,7 +90,8 @@
               </code>
             </pre>
             <div class="fragment tip">
-              CSS flexbox layout is still a good option, just not for everything.
+              CSS flexbox layout is still a good option, just not for
+              everything.
             </div>
           </section>
           <section>
@@ -117,7 +116,11 @@
           </section>
           <section>
             <p>
-              <a href="https://cssgridgarden.com/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://cssgridgarden.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 CSS Grid Garden Tutorial
               </a>
             </p>
@@ -131,7 +134,10 @@
           </section>
           <section>
             <h2>User-Agent Style</h2>
-            <p>Every browser must include a <em>User-Agent stylesheet</em> as well as comply with the <em>specification</em></p>
+            <p>
+              Every browser must include a <em>User-Agent stylesheet</em> as
+              well as comply with the <em>specification</em>
+            </p>
             <ul>
               <li>margin around body</li>
               <li>margin around heading elements (e.g. h1)</li>
@@ -140,16 +146,22 @@
           </section>
           <section>
             <h2>CSS Reset</h2>
-            <p>One possible solution: <a href="https://piccalil.li/blog/a-modern-css-reset/">A modern CSS Reset</a></p>
-            <p>Simple stylesheet which resets margins, box-sizing and other "sane defaults"</p>
+            <p>
+              One possible solution:
+              <a href="https://piccalil.li/blog/a-modern-css-reset/"
+                >A modern CSS Reset</a
+              >
+            </p>
+            <p>
+              Simple stylesheet which resets margins, box-sizing and other "sane
+              defaults"
+            </p>
           </section>
         </section>
 
         <section>
           <section>
-            <h1>
-              SASS / SCSS
-            </h1>
+            <h1>SASS / SCSS</h1>
             <p>CSS preprocessor</p>
           </section>
           <section>
@@ -193,15 +205,11 @@
 
         <section>
           <section>
-            <h1>
-              CSS Modules
-            </h1>
+            <h1>CSS Modules</h1>
             <p>Locally scoped CSS</p>
           </section>
           <section>
-            <h2>
-              Class conflict
-            </h2>
+            <h2>Class conflict</h2>
             <p><span class="code">Component1.scss</span></p>
             <pre>
               <code class="hljs scss" data-trim data-noescape>
@@ -250,41 +258,40 @@
 
         <section>
           <section>
-            <h1>
-              classnames
-            </h1>
+            <h1>classnames</h1>
             <p>A helper package for common className requirements</p>
           </section>
           <section>
-            <h2>
-              Apply multiple classNames
-            </h2>
-            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+            <h2>Apply multiple classNames</h2>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
               <div className={styles.root + " " + styles.primary} />
-            </script></code></pre></p>
-            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+            </script></code></pre>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
               <div className={classnames(styles.root, styles.primary)} />
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
-            <h2>
-              Apply conditional className
-            </h2>
-            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+            <h2>Apply conditional className</h2>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
               <div className={props.primary ? styles.primary : ""} />
-            </script></code></pre></p>
-            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+            </script></code></pre>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
               <div className={classnames(
                   {[styles.primary]: props.primary}
                 )}
               />
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
-            <h2>
-              More info about classnames:
-            </h2>
-            <p><a href="https://github.com/JedWatson/classnames" target="_blank" rel="noopener noreferrer">classnames</a></p>
+            <h2>More info about classnames:</h2>
+            <p>
+              <a
+                href="https://github.com/JedWatson/classnames"
+                target="_blank"
+                rel="noopener noreferrer"
+                >classnames</a
+              >
+            </p>
           </section>
         </section>
 
@@ -302,7 +309,9 @@
             <h3>Stretch Goal</h3>
             <ol>
               <li>Make detail view fade in</li>
-              <li>Make pokemon image fade in after it's loaded (check demo app)</li>
+              <li>
+                Make pokemon image fade in after it's loaded (check demo app)
+              </li>
             </ol>
           </section>
         </section>
@@ -317,7 +326,7 @@
             <p>Utility-first CSS framework</p>
           </section>
           <section>
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="3,5"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="3,5"><script type="text/template">
               export default function Example() {
                 return (
                   <div className="px-5 pt-4 flex items-center justify-between">
@@ -327,13 +336,23 @@
                   </div>
                 );
               }
-            </script></code></pre></p>
-            <p>Elements are styled using <span class="warn">utility CSS classes.</span></p>
+            </script></code></pre>
+            <p>
+              Elements are styled using
+              <span class="warn">utility CSS classes.</span>
+            </p>
           </section>
           <section>
-            <p><img src="../img/tailwindcss_website.png"></p>
+            <p><img src="../img/tailwindcss_website.png" /></p>
 
-            <p><a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">tailwindcss.com</a></p>
+            <p>
+              <a
+                href="https://tailwindcss.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                >tailwindcss.com</a
+              >
+            </p>
           </section>
         </section>
         <section>
@@ -342,7 +361,7 @@
             <p>Extending CSS with JS features</p>
           </section>
           <section>
-            <p><pre><code class="hljs tsx" data-trim><script type="text/template">
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
               const Button = styled.a`
                 display: inline-block;
                 border-radius: 3px;
@@ -355,15 +374,44 @@
                   color: black;
                 `}
               `;
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
             <p>There are different CSS in JS approaches, e.g.:</p>
             <ul>
-              <li><a href="https://styled-components.com/" target="_blank" rel="noopener noreferrer">styled-components</a> ⭐️</li>
-              <li><a href="https://emotion.sh/" target="_blank" rel="noopener noreferrer">Emotion</a></li>
-              <li><a href="https://cssinjs.org/" target="_blank" rel="noopener noreferrer">JSS</a></li>
-              <li><a href="https://stitches.dev/" target="_blank" rel="noopener noreferrer">Stitches</a></li>
+              <li>
+                <a
+                  href="https://styled-components.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >styled-components</a
+                >
+                ⭐️
+              </li>
+              <li>
+                <a
+                  href="https://emotion.sh/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Emotion</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://cssinjs.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >JSS</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://stitches.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Stitches</a
+                >
+              </li>
             </ul>
           </section>
         </section>

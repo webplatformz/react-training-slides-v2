@@ -88,7 +88,9 @@ function MyComponent() {
               called when the input is changed.
             </p>
 
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -98,7 +100,9 @@ function MyComponent() {
   </script></code></pre>
           </section>
           <section data-auto-animate>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -120,10 +124,12 @@ function MyComponent() {
           <ol>
             <li>Allow the user to enter their name</li>
             <li>
-              The entered name is displayed as a greeting next to the input field
+              The entered name is displayed as a greeting next to the input
+              field
             </li>
             <li>
-              Display the input field on top of the list - routing will come later
+              Display the input field on top of the list - routing will come
+              later
             </li>
           </ol>
         </section>
@@ -151,7 +157,10 @@ function Profile() {
         <section>
           <section>
             <h3>What are Hooks?</h3>
-            <p>Hooks are functions that let you "hook into" React state and lifecycle features.</p>
+            <p>
+              Hooks are functions that let you "hook into" React state and
+              lifecycle features.
+            </p>
           </section>
           <section>
             <h3>Built-in Hooks</h3>
@@ -176,15 +185,28 @@ function MyComponent() {
 }
 </script></code></pre>
             <p>The Hook function is called in the render function.</p>
-            <p>Depending on the Hook, it may have parameters and may provide a return value to access the provided functionality.</p>
+            <p>
+              Depending on the Hook, it may have parameters and may provide a
+              return value to access the provided functionality.
+            </p>
           </section>
           <section>
             <h3>Rules of Hooks</h3>
             <ul>
-              <li>Only call Hooks at the <span class="warn">top level</span> (not inside loops, conditions, or nested functions)</li>
-              <li>Only call Hooks from <span class="warn">React function components</span> or <span class="warn">custom Hooks</span></li>
+              <li>
+                Only call Hooks at the <span class="warn">top level</span> (not
+                inside loops, conditions, or nested functions)
+              </li>
+              <li>
+                Only call Hooks from
+                <span class="warn">React function components</span> or
+                <span class="warn">custom Hooks</span>
+              </li>
             </ul>
-            <p>The <span class="code">eslint-plugin-react-hooks</span> enforces these rules.</p>
+            <p>
+              The <span class="code">eslint-plugin-react-hooks</span> enforces
+              these rules.
+            </p>
           </section>
           <section>
             <h2>History of Hooks</h2>
@@ -195,8 +217,8 @@ function MyComponent() {
             </p>
 
             <p>
-              With Hooks these features can be used in function components and thereby
-              makes the code <span class="warn">simpler</span> and
+              With Hooks these features can be used in function components and
+              thereby makes the code <span class="warn">simpler</span> and
               <span class="warn">better reusable</span>.
             </p>
           </section>
@@ -214,9 +236,15 @@ function MyComponent() {
     }}
   />
   </script></code></pre>
-            <p>Event handlers like <span class="code">onChange</span> receive an instance of <span class="code">SyntheticEvent</span>.</p>
+            <p>
+              Event handlers like <span class="code">onChange</span> receive an
+              instance of <span class="code">SyntheticEvent</span>.
+            </p>
 
-            <p class="fragment">This is a <span class="warn">wrapper for the native events</span>, ensuring a consistent API and functionality across browsers.</p>
+            <p class="fragment">
+              This is a <span class="warn">wrapper for the native events</span>,
+              ensuring a consistent API and functionality across browsers.
+            </p>
           </section>
           <section>
             <h3>SyntheticEvent API</h3>
@@ -225,12 +253,19 @@ function MyComponent() {
               <li><span class="code">e.target.value</span></li>
               <li><span class="code">e.preventDefault()</span></li>
               <li><span class="code">e.nativeEvent</span></li>
-              <li>API for specific event type (e.g. <span class="code">e.keyCode</span>)</li>
+              <li>
+                API for specific event type (e.g.
+                <span class="code">e.keyCode</span>)
+              </li>
             </ul>
           </section>
           <section>
             <p>
-              <a href="https://reactjs.org/docs/events.html" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://reactjs.org/docs/events.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 SyntheticEvent API
               </a>
             </p>
@@ -248,7 +283,10 @@ function MyComponent() {
             </li>
             <li>How to handle input</li>
             <li>What Hooks are and how to use them</li>
-            <li>That events are wrapped by <span class="code">SyntheticEvent</span></li>
+            <li>
+              That events are wrapped by
+              <span class="code">SyntheticEvent</span>
+            </li>
           </ul>
         </section>
         <section class="deck-slide">

@@ -84,26 +84,32 @@
           </section>
           <section>
             <h3>Install the Package</h3>
-        <p><pre data-id="code"><code class="hljs zsh" data-trim><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs zsh" data-trim><script type="text/template">
           npm install react-router-dom
           npm install --save-dev @types/react-router-dom
-        </script></code></pre></p>
+        </script></code></pre>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
               function App() {
                 return (
                   // Let's route!
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-8"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="1-2,6-8"><script type="text/template">
               import { BrowserRouter as Router }
                 from "react-router-dom";
 
@@ -114,13 +120,18 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
-            <p>The <span class="code">BrowserRouter</span> provides the access to the routing functionality.</p>
+            </script></code></pre>
+            <p>
+              The <span class="code">BrowserRouter</span> provides the access to
+              the routing functionality.
+            </p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
               import { BrowserRouter as Router, Routes }
                 from "react-router-dom";
 
@@ -133,14 +144,19 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p>A <span class="code">Routes</span> component renders the most specific matching route (exclusively).</p>
+            <p>
+              A <span class="code">Routes</span> component renders the most
+              specific matching route (exclusively).
+            </p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
               import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
 
@@ -153,14 +169,19 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p>Here we define a route with the path <span class="code">/page1</span>.</p>
+            <p>
+              Here we define a route with the path
+              <span class="code">/page1</span>.
+            </p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,9"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="3,9"><script type="text/template">
               import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
               import Page1 from "./Page1.tsx";
@@ -174,14 +195,20 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p>The page to be renderered for this route is simply defined as <span class="code">element</span> of <span class="code">Route</span>.</p>
+            <p>
+              The page to be renderered for this route is simply defined as
+              <span class="code">element</span> of
+              <span class="code">Route</span>.
+            </p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4,11"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="4,11"><script type="text/template">
               import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
               import Page1 from "./Page1.tsx";
@@ -197,23 +224,23 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
             <p><span class="code">Page1.tsx</span></p>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
               export default function Page1() {
                 return <p>This is page 1.</p>;
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
             <p>The "page" is just a normal React component.</p>
           </section>
           <section data-auto-animate>
             <h3>Routes with Parameters</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="7|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="7|"><script type="text/template">
               function App() {
                 return (
                   <Router>
@@ -227,7 +254,7 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
             <p>This route has a parameter <span class="code">carId</span>.</p>
           </section>
@@ -236,7 +263,7 @@
 
             <p><span class="code">CarDetailPage.tsx</span></p>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
               import { useParams } from "react-router-dom";
 
               export default function CarDetailPage() {
@@ -247,14 +274,17 @@
               interface Params {
                 carId: string;
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p class="fragment">The <span class="code">useParams</span> Hook returns the parameters of the current route as an object.</p>
+            <p class="fragment">
+              The <span class="code">useParams</span> Hook returns the
+              parameters of the current route as an object.
+            </p>
           </section>
           <section>
             <h3>Route Redirection</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="1,8-11"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,8-11"><script type="text/template">
               import { Route, Navigate } from "react-router-dom";
 
               function App() {
@@ -270,14 +300,17 @@
                   </Router>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p>With the <span class="code">Navigate</span> component, a route can be redirected to another route.</p>
+            <p>
+              With the <span class="code">Navigate</span> component, a route can
+              be redirected to another route.
+            </p>
           </section>
           <section>
             <h3>How to Link to a Route</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="1,6-7|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,6-7|"><script type="text/template">
               import { Link } from "react-router-dom";
 
               function NavBar() {
@@ -288,31 +321,51 @@
                   </p>
                 );
               }
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
             <h3>Cheat Sheet</h3>
 
             <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
             <p><span class="code">&lt;Routes /&gt;</span></p>
-            <p><span class="code">&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;} /&gt;</span></p>
-            <p><span class="code">&lt;Navigate to="/cars" replace /&gt;</span></p>
-            <p><span class="code">&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span></p>
+            <p>
+              <span class="code"
+                >&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;}
+                /&gt;</span
+              >
+            </p>
+            <p>
+              <span class="code">&lt;Navigate to="/cars" replace /&gt;</span>
+            </p>
+            <p>
+              <span class="code"
+                >&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span
+              >
+            </p>
           </section>
         </section>
         <section>
           <section>
-          <h2>Exercise</h2>
+            <h2>Exercise</h2>
             <ol>
               <li>
-                Implement a detail view to show the detail data of a specific pokemon.
+                Implement a detail view to show the detail data of a specific
+                pokemon.
 
-                <p><span class="code">GET https://pokeapi.co/api/v2/pokemon/<em>name</em></span></p>
+                <p>
+                  <span class="code"
+                    >GET https://pokeapi.co/api/v2/pokemon/<em>name</em></span
+                  >
+                </p>
               </li>
-              <li>Split the app up into two navigatale pages:
+              <li>
+                Split the app up into two navigatale pages:
                 <ul>
                   <li>The <em>Home</em> page shows the list of pokemon.</li>
-                  <li>When clicking on a pokemon in the list, the pokemon detail page is shown.</li>
+                  <li>
+                    When clicking on a pokemon in the list, the pokemon detail
+                    page is shown.
+                  </li>
                 </ul>
               </li>
             </ol>
@@ -329,8 +382,12 @@
           </section>
           <section>
             <h2>Detail API</h2>
-            <a href="https://pokeapi.co/api/v2/pokemon/bulbasaur" target="_blank" rel="noopener noreferrer">
-                https://pokeapi.co/api/v2/pokemon/bulbasaur
+            <a
+              href="https://pokeapi.co/api/v2/pokemon/bulbasaur"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://pokeapi.co/api/v2/pokemon/bulbasaur
             </a>
             <pre>
                 <code class="hljs json" data-trim data-noescape>
@@ -344,12 +401,18 @@
                     }
                 </code>
             </pre>
-        </section>
+          </section>
           <section>
             <h3>Stretch Goal</h3>
-            <p>Think about what to do with the username input and display functionality.</p>
+            <p>
+              Think about what to do with the username input and display
+              functionality.
+            </p>
 
-            <p>Can we have the input on a <em>Profile</em> page but show the name on all pages?</p>
+            <p>
+              Can we have the input on a <em>Profile</em> page but show the name
+              on all pages?
+            </p>
           </section>
         </section>
         <section>
@@ -358,7 +421,7 @@
 
             <p><span class="code">App.tsx</span></p>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|8,9|10|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|8,9|10|"><script type="text/template">
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import List from "./pages/list/List";
 import DetailPage from "./pages/detail/DetailPage";
@@ -373,13 +436,12 @@ export default function App() {
   </Router>);
 }
 
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
-
             <p><span class="code">PokeListEntry.tsx</span></p>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|7|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|7|"><script type="text/template">
 import { Link } from "react-router-dom";
 
 interface PokeListEntryProps { name: string; }
@@ -391,13 +453,12 @@ function PokeListEntry({ name }: PokeListEntryProps) {
 }
 
 export default PokeListEntry;
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
-
             <p><span class="code">DetailPage.tsx</span></p>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
 import { useParams } from "react-router-dom";
 import usePokeDetail from "../../service/poke/usePokeDetail";
 
@@ -418,13 +479,12 @@ export default function DetailPage() {
     </dl>
   </>);
 }           
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
           <section>
-
             <p><span class="code">usePokeDetail.ts</span></p>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="|1,7,13|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,7,13|"><script type="text/template">
 export default function usePokeDetail(name: string) {
   const [detail, setDetail] = useState<PokeDetail>();
   useEffect(() => {
@@ -443,7 +503,7 @@ export default function usePokeDetail(name: string) {
 }
 
 export interface PokeDetail { … }
-            </script></code></pre></p>
+            </script></code></pre>
           </section>
         </section>
         <section>
@@ -453,7 +513,7 @@ export interface PokeDetail { … }
           <section>
             <h3>NavLink</h3>
 
-            <p><pre><code class="hljs tsx" data-trim data-line-numbers="4-10"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="4-10"><script type="text/template">
 function MyComponent() {
   return (<>
     // …
@@ -466,13 +526,18 @@ function MyComponent() {
     </NavLink>
   </>);
 }
-            </script></code></pre></p>
-            
-            <p>A <span class="code">NavLink</span> is marked with the specified CSS class/style when its route is active.</p>
+            </script></code></pre>
+
+            <p>
+              A <span class="code">NavLink</span> is marked with the specified
+              CSS class/style when its route is active.
+            </p>
           </section>
           <section>
             <h3>Nested Routes</h3>
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="6-11"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="6-11"><script type="text/template">
 function MyComponent() {
   return (<>
     // …
@@ -487,7 +552,7 @@ function MyComponent() {
     </Routes>
   </>);
 }
-            </script></code></pre></p>
+            </script></code></pre>
             <p></p>
           </section>
           <section>
@@ -495,7 +560,9 @@ function MyComponent() {
 
             <p>Current URL: <span class="code">/cars?filter=Tesla</span></p>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
 function MyComponent() {
   const { pathname, search } = useLocation();
 
@@ -507,14 +574,19 @@ function MyComponent() {
   
   // …
 }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p>Returns the <span class="warn">location</span> object representing the current URL.</p>
+            <p>
+              Returns the <span class="warn">location</span> object representing
+              the current URL.
+            </p>
           </section>
           <section>
             <h3>useNavigate</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
 function MyComponent() {
   const navigate = useNavigate();
 
@@ -527,14 +599,16 @@ function MyComponent() {
     Do something and then go to Home
   </button>
 }
-            </script></code></pre></p>
+            </script></code></pre>
 
             <p>Navigate programmatically</p>
           </section>
           <section>
             <h3>MemoryRouter</h3>
 
-            <p><pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
 function MyComponent() {
   return <MemoryRouter
     initialEntries={["/one", "/two", "/three"]}
@@ -543,9 +617,11 @@ function MyComponent() {
     // …
   </MemoryRouter>;
 }
-            </script></code></pre></p>
+            </script></code></pre>
 
-            <p>Use instead of <span class="code">BrowserRouter</span> for tests.</p>
+            <p>
+              Use instead of <span class="code">BrowserRouter</span> for tests.
+            </p>
           </section>
         </section>
         <section>
