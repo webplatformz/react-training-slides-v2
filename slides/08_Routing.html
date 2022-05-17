@@ -284,18 +284,18 @@
           <section>
             <h3>Route Redirection</h3>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,8-11"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,7-10"><script type="text/template">
               import { Route, Navigate } from "react-router-dom";
 
               function App() {
                 return (
                   <Router>
                     <Routes>
-                      <Route path="/page1" element={<Page1 />} />
                       <Route
                         path="/"
                         element={<Navigate to="/page1" replace />}
                       />
+                      <Route path="/page1" element={<Page1 />} />
                     </Routes>
                   </Router>
                 );
@@ -421,7 +421,7 @@
 
             <p><span class="code">App.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|8,9|10|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|9,10|8|"><script type="text/template">
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import List from "./pages/list/List";
 import DetailPage from "./pages/detail/DetailPage";
@@ -429,9 +429,9 @@ import DetailPage from "./pages/detail/DetailPage";
 export default function App() {
   return (<Router>
     <Routes>
+      <Route path="/" element={<Navigate to="/pokemon" replace />} />
       <Route path="/pokemon" element={<ListPage />} />
       <Route path="/pokemon/:pokemonName" element={<DetailPage />} />
-      <Route path="/" element={<Navigate to="/pokemon" replace />} />
     </Routes>
   </Router>);
 }
@@ -484,11 +484,10 @@ export default function DetailPage() {
           <section>
             <p><span class="code">usePokeDetail.ts</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,7,13|"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,6,12|"><script type="text/template">
 export default function usePokeDetail(name: string) {
   const [detail, setDetail] = useState<PokeDetail>();
   useEffect(() => {
-      let canceled = false;
       (async function() {
           const response = await fetch(
             `https://pokeapi.co/api/v2/pokemon/${name}`
@@ -533,24 +532,43 @@ function MyComponent() {
               CSS class/style when its route is active.
             </p>
           </section>
-          <section>
+          <section data-auto-animate>
             <h3>Nested Routes</h3>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="6-11"><script type="text/template">
+            ><code class="hljs tsx" data-trim data-line-numbers="5,13|6,7|7,12|8,10"><script type="text/template">
 function MyComponent() {
   return (<>
     // …
     <Routes>
-      <Route path="/boats" element={<BoatPage />} />
-      <Route path="/cars">
-        <Route path=""
-               element={<CarListPage />} />
-        <Route path=":carId"
-               element={<CarDetailPage />} />
+      <Route path="/" element={<Layout />} />
+        <Route path="boats" element={<BoatPage />} />
+        <Route path="cars" element={<CarLayout />}>
+          <Route index
+                 element={<CarListPage />} />
+          <Route path=":carId"
+                 element={<CarDetailPage />} />
+        </Route>
       </Route>
     </Routes>
   </>);
+}
+            </script></code></pre>
+            <p></p>
+          </section>
+          <section data-auto-animate>
+            <h3>Nested Routes</h3>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="1,6"><script type="text/template">
+function Layout() {
+  return (<div>
+
+    {/* Navbar… */}
+
+    <Outlet />
+
+  </div>);
 }
             </script></code></pre>
             <p></p>
