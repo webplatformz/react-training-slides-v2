@@ -40,7 +40,7 @@
         <section>
           <h2>Content 2/3</h2>
           <ul>
-            <li>Next.JS</li>
+            <li>Next.js</li>
             <li>Refs</li>
             <li>browserslist</li>
             <li>Prettier</li>
@@ -53,6 +53,8 @@
           <h2>Content 3/3</h2>
           <ul>
             <li>Advanced Animation</li>
+            <li>Concurrent Features</li>
+            <li>React Server Components</li>
           </ul>
         </section>
         <section>
@@ -207,6 +209,9 @@
             <ul>
               <li>useMemo</li>
               <li>useCallback</li>
+              <li>useLayoutEffect</li>
+              <li>useDeferredValue</li>
+              <li>useTransition</li>
             </ul>
           </section>
         </section>
@@ -337,12 +342,12 @@ export default handlers;
                 href="https://nextjs.org/docs"
                 target="_blank"
                 rel="noopener noreferrer"
-                >Next.JS</a
+                >Next.js</a
               >
             </h2>
           </section>
           <section>
-            <h3>Rendering Techniques</h3>
+            <h3>Rendering Techniques supported by Next.js</h3>
             <ul>
               <li>Client Side Rendering (CSR)</li>
               <li>Static Site Generation (SSG)</li>
@@ -685,6 +690,47 @@ export default handlers;
               >framer-motion Demo</a
             >
           </p>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>Concurrent Features</h2>
+          </section>
+          <section data-auto-animate>
+            <h2>Concurrent Features</h2>
+            <ul>
+              <li>New with React 18</li>
+              <li>
+                Allows React to prepare a part of the UI in the background
+              </li>
+              <li>Will mostly be used via libraries (in development)</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li data-id="suspense">
+                <a
+                  href="https://17.reactjs.org/docs/concurrent-mode-suspense.html#approach-3-render-as-you-fetch-using-suspense"
+                  >Suspense for data fetching</a
+                >
+              </li>
+              <li>startTransition/useTransition</li>
+              <li>useDeferredValue</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>React Server Components (RSC)</h2>
+          </section>
+          <section data-auto-animate>
+            <h2>React Server Components (RSC)</h2>
+            <ul>
+              <li>Still in development</li>
+              <li>Different from server-side-rendering</li>
+              <li>Server components are never rendered on the client</li>
+            </ul>
+            <p>&rarr;Eliminates roundtrips, reduces bundle size</p>
+          </section>
         </section>
       </div>
     </div>
