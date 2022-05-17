@@ -81,6 +81,23 @@
               <li><span class="warn">Fetch:</span> standard browser API</li>
               <li>&hellip; or any data fetching library</li>
             </ul>
+
+            <div class="fragment tip">
+              Data fetching support becomes more sophistaced with React
+              18&mdash;use a library!
+            </div>
+            <aside class="notes">
+              <p>
+                We will demonstrate here a very basic way to perform data
+                fetching. It works and might be fine for very small
+                applications.
+              </p>
+
+              <p>
+                With React 18: Suspense for data fetching. Should be used with a
+                library.
+              </p>
+            </aside>
           </section>
           <section>
             <h3>Fetch</h3>
@@ -101,7 +118,9 @@
           </section>
         </section>
         <section>
-          <section><h2>How do we use fetch in React?</h2></section>
+          <section>
+            <h2>How <em>can</em> we use fetch in React?</h2>
+          </section>
           <section>
             <p>Does this work?</p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="|2,5"><script type="text/template">
@@ -456,11 +475,12 @@
           </section>
         </section>
         <section>
-          <h2>Solution</h2>
+          <section>
+            <h2>Solution</h2>
 
-          <p><span class="code">List.tsx</span></p>
+            <p><span class="code">List.tsx</span></p>
 
-          <pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
             function List() {
               const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
               useEffect(() => {
@@ -478,6 +498,47 @@
               </>);
             }
         </script></code></pre>
+          </section>
+          <section>
+            <img
+              src="../img/poke-list-duplicate-request.png"
+              alt="Duplicate request"
+            />
+
+            <p>What's going on here?</p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">index.tsx</span></p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
+            const root = ReactDOM.createRoot(
+              document.getElementById("root") as HTMLElement
+            );
+            root.render(
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            );
+</script></code></pre>
+            <p>
+              In development, when using <em>Strict Mode</em>, components are
+              re-mounted: mount, unmount, mount
+            </p>
+            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
+          </section>
+          <section data-auto-animate>
+            <p>
+              In development, when using <em>Strict Mode</em>, components are
+              re-mounted: mount, unmount, mount
+            </p>
+            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
+            <p>
+              &rarr; Effects are executed at least twice in development<br /><small
+                >(not in prod)</small
+              >
+            </p>
+          </section>
         </section>
         <section>
           <section><h2>Custom Hooks</h2></section>
@@ -706,6 +767,21 @@ export default usePokeList;
         <section>
           <section data-auto-animate>
             <h2>Exercise</h2>
+          </section>
+          <section data-auto-animate>
+            <h2>Exercise</h2>
+            <p>
+              Let's imagine the request or the processing of the response are
+              <span class="warn">costly</span>.
+            </p>
+
+            <aside class="notes">
+              Not the case in this demo app. Just to demonstrate how to use
+              useEffect cleanup.
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <h2>Exercise</h2>
             <p>
               Abort the request to the pokemon list when the component is
               unmounted.
@@ -740,47 +816,12 @@ export default usePokeList;
 </script></code></pre>
           </section>
           <section>
-            <p>How can we check if it works?</p>
-          </section>
-          <section>
+            Check if it is working in the Network tab:
+
             <img
               src="../img/poke-list-duplicate-request.png"
               alt="Duplicate request"
             />
-
-            <p>What's going on here?</p>
-          </section>
-          <section data-auto-animate>
-            <p><span class="code">index.tsx</span></p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
-              const root = ReactDOM.createRoot(
-                document.getElementById("root") as HTMLElement
-              );
-              root.render(
-                <React.StrictMode>
-                  <App />
-                </React.StrictMode>
-              );
-</script></code></pre>
-            <p>
-              In development, when using <em>Strict Mode</em>, components are
-              re-mounted: mount, unmount, mount
-            </p>
-            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
-          </section>
-          <section data-auto-animate>
-            <p>
-              In development, when using <em>Strict Mode</em>, components are
-              re-mounted: mount, unmount, mount
-            </p>
-            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
-            <p>
-              &rarr; Effects are executed at least twice in development<br /><small
-                >(not in prod)</small
-              >
-            </p>
           </section>
         </section>
         <section>
@@ -789,23 +830,23 @@ export default usePokeList;
 
           <pre
             data-id="code"
-          ><code class="hljs tsx" data-trim data-line-numbers="5,10,12|"><script type="text/template">
-function usePokeList() {
-  const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
-
+          ><code class="hljs tsx" data-trim data-line-numbers="4,9,15"><script type="text/template">
+  // …
+  
   useEffect(() => {
-    let cancelled = false;
+    const controller = new AbortController();
+
     (async () => {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-      const result = await response.json() as PokemonResultDto;
-
-      if (!cancelled) setPokemons(result.results);
+      const response = await fetch(
+        "https://pokeapi.co/api/v2/pokemon?limit=50",
+        { signal: controller.signal }
+      );
+      
+      // …
     })();
-    return () => { cancelled = true; };
-  }, []);
 
-  return pokemons;
-}
+    return () => controller.abort();
+  }, []);
 </script></code></pre>
         </section>
         <section>
