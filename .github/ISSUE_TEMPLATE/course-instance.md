@@ -22,6 +22,10 @@ assignees: ""
 - [ ] Miro board has been prepared
 - [ ] Chapter assignments are clear
 
+### Day before course
+
+- [ ] Teams meeting has been checked against Moodle participant list (in case of late changes)
+
 ### Around course date
 
 - [ ] Next course instance has been promoted
