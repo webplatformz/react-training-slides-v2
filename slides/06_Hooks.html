@@ -37,30 +37,27 @@
           </section>
           <section>
             <h3>The <span class="warn">useState</span> Hook</h3>
-            <pre>
-                <code class="hljs tsx" data-trim data-line-numbers="1,5"><script type="text/template">
-import { useState } from "react";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
+                import { useState } from "react";
 
-function MyComponent() {
-
-  const [name, setName] = useState("");
-
-  // …
-}
-</script></code>
-            </pre>
+                function MyComponent() {
+                  const [name, setName] = useState("");
+                }
+            </script></code></pre>
           </section>
           <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-2|4-5|7-8|"><script type="text/template">
-    // define a name state with the initial value of ""
-    const [name, setName] = useState("");
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              function MyComponent() {
+                // Define a name state with the initial value of ""
+                const [name, setName] = useState("");
+            
+                // The setName function updates the state
+                setName("Joe");
 
-    // The variable contains the current state value
-    <p>Name: {name}</p>
-     
-    // The set* function updates the state
-    setName("Joe");
-  </script></code></pre>
+                // The variable 'name' contains the current state value
+                return <p>Name: {name}</p>
+              }
+            </script></code></pre>
           </section>
           <section>
             <pre>
