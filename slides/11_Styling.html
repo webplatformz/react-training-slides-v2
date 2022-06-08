@@ -272,16 +272,15 @@
             <h2>Apply conditional className</h2>
             <pre><code class="hljs" data-trim>
               <script type="text/template">
-                <div className={ 
-                  props.primary ? styles.primary : "" 
-                }/>
+                <div className={isPrimary ? styles.primary : ""} />
               </script>
             </code></pre>
             <pre><code class="hljs" data-trim>
               <script type="text/template">
-                <div className={
-                  classnames({ [styles.primary] : props.primary })
-                }/>
+              <div className={classnames({
+                  [styles.primary]: isPrimary
+                })}
+              />
               </script>
             </code></pre>
           </section>
@@ -372,7 +371,7 @@
                 color: white;
                 border: 2px solid white;
 
-                ${props => props.primary && css`
+                ${props => isPrimary && css`
                   background: white;
                   color: black;
                 `}
