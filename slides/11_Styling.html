@@ -270,15 +270,20 @@
           </section>
           <section>
             <h2>Apply conditional className</h2>
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-              <div className={props.primary ? styles.primary : ""} />
-            </script></code></pre>
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-              <div className={classnames(
-                  {[styles.primary]: props.primary}
-                )}
-              />
-            </script></code></pre>
+            <pre><code class="hljs" data-trim>
+              <script type="text/template">
+                <div className={ 
+                  props.primary ? styles.primary : "" 
+                }/>
+              </script>
+            </code></pre>
+            <pre><code class="hljs" data-trim>
+              <script type="text/template">
+                <div className={
+                  classnames({ [styles.primary] : props.primary })
+                }/>
+              </script>
+            </code></pre>
           </section>
           <section>
             <h2>More info about classnames:</h2>
