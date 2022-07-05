@@ -10,12 +10,10 @@
     <title>06 Hooks | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
-    <link rel="stylesheet" href="../dist/reset.css" />
-    <link rel="stylesheet" href="../dist/reveal.css" />
-    <link rel="stylesheet" href="../css/theme/zuehlke.css" />
-
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+    />
   </head>
 
   <body>
@@ -39,30 +37,27 @@
           </section>
           <section>
             <h3>The <span class="warn">useState</span> Hook</h3>
-            <pre>
-                <code class="hljs tsx" data-trim data-line-numbers="1,5"><script type="text/template">
-import { useState } from "react";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
+                import { useState } from "react";
 
-function MyComponent() {
-
-  const [name, setName] = useState("");
-
-  // …
-}
-</script></code>
-            </pre>
+                function MyComponent() {
+                  const [name, setName] = useState("");
+                }
+            </script></code></pre>
           </section>
           <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-2|4-5|7-8|"><script type="text/template">
-    // define a name state with the initial value of ""
-    const [name, setName] = useState("");
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              function MyComponent() {
+                // Define a name state with the initial value of ""
+                const [name, setName] = useState("");
+            
+                // The setName function updates the state
+                setName("Joe");
 
-    // The variable contains the current state value
-    <p>Name: {name}</p>
-     
-    // The set* function updates the state
-    setName("Joe");
-  </script></code></pre>
+                // The variable 'name' contains the current state value
+                return <p>Name: {name}</p>
+              }
+            </script></code></pre>
           </section>
           <section>
             <pre>
@@ -295,20 +290,9 @@ function MyComponent() {
       </div>
     </div>
 
-    <script src="../dist/reveal.js"></script>
-    <script src="../plugin/notes/notes.js"></script>
-    <script src="../plugin/markdown/markdown.js"></script>
-    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
     <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-      });
+      setupZuehlkeRevealPresentation();
     </script>
   </body>
 </html>

@@ -10,12 +10,10 @@
     <title>12 Various | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
-    <link rel="stylesheet" href="../dist/reset.css" />
-    <link rel="stylesheet" href="../dist/reveal.css" />
-    <link rel="stylesheet" href="../css/theme/zuehlke.css" />
-
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="../plugin/highlight/monokai.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+    />
   </head>
   <body>
     <div class="reveal">
@@ -735,20 +733,9 @@ export default handlers;
       </div>
     </div>
 
-    <script src="../dist/reveal.js"></script>
-    <script src="../plugin/notes/notes.js"></script>
-    <script src="../plugin/markdown/markdown.js"></script>
-    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
     <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        hash: true,
-
-        // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-      });
+      setupZuehlkeRevealPresentation();
     </script>
   </body>
 </html>

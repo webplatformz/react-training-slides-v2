@@ -1,0 +1,115 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700,600);
+
+@font-face {
+    font-family: "Zuehlke";
+    src: url("../font/zuehlke-webfont.eot") format("eot"),
+        url("../font/zuehlke-webfont.woff2") format("woff2"),
+        url("../font/zuehlke-webfont.woff") format("woff"),
+        url("../font/zuehlke-webfont.ttf") format("truetype"),
+        url("../font/zuehlke-webfont.svg") format("svg");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --zuehlke-orange: #ff9900;
+    --tileBackground: rgba(50, 50, 50, .8);
+    --mainMargin: 15px;
+    --logoSize: 8vw;
+    --minLogoSize: 100px;
+    --maxLogoSize: 200px;
+}
+
+body {
+    font-family: 'Open Sans', 'sans-serif';
+    display: flex;
+    background-size: cover;
+    background: url("../../img/bg.jpg") center, center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: calc(var(--minLogoSize) + var(--mainMargin)) var(--mainMargin) 0;
+}
+
+body::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: var(--logoSize);
+    width: var(--logoSize);
+    height: var(--logoSize);
+    min-width: var(--minLogoSize);
+    min-height: var(--minLogoSize);
+    max-width: var(--maxLogoSize);
+    max-height: var(--maxLogoSize);
+    background: url("../../img/zuehlke_logo.jpg");
+    background-size: contain;
+}
+
+body h1 {
+    font-size: 50px;
+}
+
+body h1,
+body h2,
+body h3 {
+    font-family: 'Zuehlke', 'sans-serif';
+    color: var(--zuehlke-orange);
+}
+
+body .nowrap {
+    white-space: nowrap;
+}
+
+body header {
+    flex-basis: 100%;
+    margin: var(--mainMargin);
+    background-color: var(--tileBackground);
+    border-radius: 5px;
+    text-align: center;
+}
+
+body section {
+    flex-basis: calc(25% - 2 * var(--mainMargin));
+    min-width: 200px;
+    color: white;
+    margin: var(--mainMargin);
+    border-radius: 5px;
+    background: var(--tileBackground);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+body section:hover {
+    transform: scale(1.05);
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.4);
+}
+
+body section a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    text-decoration: none;
+    color: inherit;
+    padding: var(--mainMargin);
+}
+
+body section a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+body section h2 {
+    margin: 0 0 10px;
+}
+
+body section ul {
+    padding-left: 20px;
+    margin: 0;
+}
