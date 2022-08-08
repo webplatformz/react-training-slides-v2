@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Zuehlke: Essential React Course",
   "scripts": {
+    "start": "hrs .",
     "format": "npx prettier --write ."
   },
   "devDependencies": {
-    "prettier": "2.6.2"
+    "prettier": "2.6.2",
+    "simple-hot-reload-server": "^1.2.0"
   }
 }
