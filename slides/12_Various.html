@@ -421,7 +421,7 @@ export default handlers;
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim><script type="text/template">
-                    const CustomInput = forwardRef((props, ref) => {
+                    const CustomInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
                       return <input ref={ref} />;
                     });
 
