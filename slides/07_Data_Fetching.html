@@ -199,188 +199,17 @@
               </li>
             </ul>
           </section>
-          <section data-auto-animate>
-            <h3>The <span class="warn">useEffect</span> Hook</h3>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1,5-9"><script type="text/template">
-                 import { useEffect } from "react";
 
-                 function MyComponent() {
-
-                   useEffect(() => {
-
-                     // Run side effect
-
-                   }, [dependency1, dependency2]);
-
-                   // …
-                 }
-                  </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="|5"><script type="text/template">
-              
-                   useEffect(() => {
-
-                     // Run side effect
-
-                   }, [dependency1, dependency2]);
-                  </script></code></pre>
-            <p>
-              The effect is executed initially and whenever a dependency
-              changes.
-            </p>
-          </section>
-          <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5"><script type="text/template">
-              
-                   useEffect(() => {
-
-                     // Run side effect
-
-                   }, []);
-                  </script></code></pre>
-            <p>
-              When passing an empty array, the effect is executed only initially
-              (on first render).
-            </p>
-          </section>
-          <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5"><script type="text/template">
-              
-                   useEffect(() => {
-
-                     // Run side effect
-
-                   });
-                  </script></code></pre>
-            <p>
-              If no depencencies are passed, the effect is executed with every
-              render.
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>Let's call this API correctly!</p>
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="|4-12|12|"><script type="text/template">
-              function MyComponent() {
-                const [user, setUser] = useState();
-
-                useEffect(() => {
-                  fetch('/user').then(response => {
-                    if (!response.ok) throw new Error('Could not fetch data!');
-  
-                    response.json().then(u => {
-                      setUser(u);
-                    });
-                  }); 
-                }, []);
-                
-                return <p>{user?.name}</p>;
-              }
-            </script></code></pre>
-
-            <p class="fragment">
-              <em>Wait&hellip;</em> but what about
-              <span class="warn">async-await?</span>
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>What about <span class="warn">async-await?</span></p>
-
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="|3,6"><script type="text/template">
-                useEffect(() => {
-
-                  fetch('/user').then(response => {
-                    if (!response.ok) throw new Error('Could not fetch data!');
-  
-                    response.json().then(u => {
-                      setUser(u);
-                    });
-                  }); 
-
-                }, []);
-            </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <p>What about <span class="warn">async-await?</span></p>
-
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="3,6"><script type="text/template">
-                useEffect(() => {
-
-                  const response = await fetch('/user');
-                  if (!response.ok) throw new Error('Could not fetch data!');
-
-                  const user = await response.json();
-                  setUser(user);
-
-                }, []);
-            </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <p>What about <span class="warn">async-await?</span></p>
-
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
-                useEffect(() => {
-
-                  const response = await fetch('/user');
-                  if (!response.ok) throw new Error('Could not fetch data!');
-
-                  const user = await response.json();
-                  setUser(user);
-
-                }, []);
-            </script></code></pre>
-
-            <p>
-              <span class="warn">Does not work!</span> &ndash; The effect
-              function is not async.
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>What about <span class="warn">async-await?</span></p>
-
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
-                useEffect(async () => {
-
-                  const response = await fetch('/user');
-                  if (!response.ok) throw new Error('Could not fetch data!');
-
-                  const user = await response.json();
-                  setUser(user);
-
-                }, []);
-            </script></code></pre>
-
-            <p>
-              <span class="warn">Does not work!</span> &ndash; The effect
-              function is not async.
-            </p>
-          </section>
           <section data-auto-animate>
             <p>What about <span class="warn">async-await?</span></p>
 
             <pre
               data-id="code2"
             ><code class="hljs tsx" data-trim data-line-numbers="1,3,9|"><script type="text/template">
-                useEffect(() => {
+              function MyComponent() {
+                const [user, setUser] = useState();
 
+                useEffect(() => {
                   (async function() {
                     const response = await fetch('/user');
                     if (!response.ok) throw new Error('Could not fetch data!');
@@ -388,13 +217,59 @@
                     const user = await response.json();
                     setUser(user);
                   })();
-
                 }, []);
+                
+                return <p>{user?.name}</p>;
+              }
             </script></code></pre>
 
             <p>
-              <span class="warn">This works!</span> &ndash; We call our async
-              logic without waiting for its top-level promise to resolve.
+              <span class="warn">This works!</span> &ndash; but implementing
+              this yourself is discouraged due to to
+              <a
+                href="https://reactjs.org/blog/2022/03/29/react-v18.html#new-strict-mode-behaviors"
+                >strict mode and future-proofing</a
+              >. Use a library for dataFetching!
+            </p>
+          </section>
+
+          <section data-auto-animate>
+            <p>Configure TanStack Query</p>
+            <p>
+              <span class="code">npm i @tanstack/react-query</span>
+            </p>
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="1|6-8"><script type="text/template">
+              const queryClient = new QueryClient()
+
+              function App() {
+                return (
+                  // Provide the client to your App
+                  <QueryClientProvider client={queryClient}>
+                    <MyComponent />
+                  </QueryClientProvider>
+                )
+              }
+            </script></code></pre>
+          </section>
+
+          <section data-auto-animate>
+            <p>Using <span class="warn">SWR</span> for data fetching</p>
+
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
+              function MyComponent() {
+                const { data: user } = useQuery(['user'], '/user')
+                
+                return <p>{user?.name}</p>;
+              }
+            </script></code></pre>
+
+            <p>
+              <span class="warn">Short & clean!</span> &ndash; also comes with
+              with retry&cache functionality
             </p>
           </section>
         </section>
@@ -403,17 +278,12 @@
 
           <pre
             data-id="code2"
-          ><code class="hljs tsx" data-trim data-line-numbers="1,5,9-11"><script type="text/template">
-              const [user, setUser] = useState<User>();
-
-              // …
-
-              const result = await response.json() as User;
-
-              // …
+          ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
+              const { data: user } = useQuery<User>(['user'], '/user')
 
               interface User {
-                // …
+                firstName: string,
+                // ...
               }
           </script></code></pre>
 
@@ -438,7 +308,16 @@
                 >.
               </li>
               <li>
-                API call:
+                Install
+                <a
+                  href="https://tanstack.com/query"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >TanStack Query</a
+                >: <span class="code">npm i @tanstack/react-query</span>
+              </li>
+              <li>
+                API call with SWR:
                 <span class="code"
                   >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
                 >
@@ -474,7 +353,7 @@
         </section>
         <section>
           <section>
-            <h2>Solution</h2>
+            <h2>TODO: UPDATE SOLUTION TanStackSolution</h2>
 
             <p><span class="code">List.tsx</span></p>
 
@@ -852,7 +731,7 @@ export default usePokeList;
 
           <ul>
             <li>Axios</li>
-            <li>React Query</li>
+            <li>TanStack Query</li>
             <li>SWR</li>
           </ul>
           <p>Will be part of Chapter 9&hellip;</p>
