@@ -267,8 +267,8 @@
               >
             </p>
             <p>
-              Therefore it is recommanded to not fetch data with
-              useEffect but rely on a library, so lets do it!
+              Therefore it is recommanded to not fetch data with useEffect but
+              rely on a library, so lets do it!
             </p>
           </section>
           <section data-auto-animate>
@@ -416,6 +416,65 @@
             }
         </script></code></pre>
           </section>
+        </section>
+        <section>
+          <section>
+            <h2>useEffect</h2>
+            <p>What is it good for?</p>
+          </section>
+          <section>
+            <h3>Valid useCases</h3>
+            <ul>
+              <li>Subscribing to Events (window, ...)</li>
+              <li>Releasing resources to prevent a memory leak</li>
+              <li>Cancelling a network request/asynchronous operation</li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
+              function getWindowDimensions() {
+                const { innerWidth: width, innerHeight: height } = window;
+                return { width, height};
+              }
+              export default function MyComponent() {
+                const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+              
+                const handleResize = useCallback(() => {
+                  setWindowDimensions(getWindowDimensions());
+                }, []);
+              
+                useEffect(() => {
+                  handleResize();
+                  window.addEventListener('resize', handleResize);
+                  return () => window.removeEventListener('resize', handleResize);
+                }, [handleResize]);
+              // ...
+              
+          </script></code></pre>
+          </section>
+
+          <section>
+            <h3>Cleanup is necessary for...</h3>
+            <ul>
+              <li>Unsubscribing from a pub-sub interface</li>
+              <li>Releasing resources to prevent a memory leak</li>
+              <li>Cancelling a network request/asynchronous operation</li>
+            </ul>
+          </section>
+          <section>
+            <h3>useEffect is a code-smell</h3>
+            <ul>
+              <li>Don't use useEffect to update state on props or state</li>
+              <li>Don't notify parents on state change</li>
+              <li>
+                Do alculate all dependent states on the fly - if necessary, use
+                <span class="warn">useMemo</span>
+              </li>
+              <li>Do invoke callbacks as part of event handling logic</li>
+            </ul>
+          </section>
+
+       
         </section>
         <section>
           <section><h2>Custom Hooks</h2></section>
@@ -592,55 +651,7 @@ export default usePokeList;
 </script></code></pre>
           </section>
         </section>
-        <section>
-          <section>
-            <h2>useEffect Cleanup</h2>
-          </section>
-          <section>
-            <p>
-              Some side effects may require a
-              <span class="warn">cleanup</span> logic to be executed when the
-              component is unmounted.
-            </p>
-          </section>
-          <section>
-            <h3>Examples</h3>
-            <ul>
-              <li>Cancelling a network request/asynchronous operation</li>
-              <li>Unsubscribing from a pub-sub interface</li>
-              <li>Releasing resources to prevent a memory leak</li>
-            </ul>
-          </section>
-          <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-        useEffect(() => {
 
-          // Do something which requires a cleanup
-          // when the component is unmounted
-
-        }, []);
-      </script></code></pre>
-
-            <p>How do we perform the cleanup?</p>
-          </section>
-          <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="6-8|"><script type="text/template">
-        useEffect(() => {
-
-          // Do something which requires a cleanup
-          // when the component is unmounted
-
-          return () => {
-            // Perform the cleanup
-          };
-        }, []);
-      </script></code></pre>
-          </section>
-        </section>
         <section>
           <section data-auto-animate>
             <h2>Exercise</h2>
