@@ -26,190 +26,188 @@
           </h1>
         </section>
         <section>
-          <section>
-            <p><img src="../img/data_fetching_goal.png" /></p>
-            <p class="fragment">Where do we get this data from?</p>
-          </section>
-          <section>
-            <h2>PokeAPI</h2>
-            <a
-              href="https://pokeapi.co/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Documentation
-            </a>
-          </section>
-          <section>
-            <h3>List of Pokemon</h3>
-            <pre><code class="hljs json" data-trim data-line-numbers="|5-13"><script type="text/template">
-                {
-                  "count": 1118,
-                  "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
-                  "previous": null,
-                  "results": [
-                    {
-                      "name": "bulbasaur",
-                      "url": "https://pokeapi.co/api/v2/pokemon/1/"
-                    },
-                    {
-                      "name": "ivysaur",
-                      "url":"https://pokeapi.co/api/v2/pokemon/2/"
-                    },
-                    …
-                  ]
-                }
-              </script></code></pre>
-            <p>
-              <a
-                href="https://pokeapi.co/api/v2/pokemon?limit=5"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GET https://pokeapi.co/api/v2/pokemon?limit=5
-              </a>
-            </p>
-          </section>
-        </section>
-        <section>
-          <section><h2>What to use for data fetching?</h2></section>
-          <section>
-            <ul>
-              <li>React does <em>not</em> provide data fetching</li>
-              <li><span class="warn">Fetch:</span> standard browser API</li>
-              <li>&hellip; or any data fetching library</li>
-            </ul>
-
-            <div class="fragment tip">
-              Data fetching support becomes more sophistaced with React
-              18&mdash;use a library!
-            </div>
-            <aside class="notes">
-              <p>
-                We will demonstrate here a very basic way to perform data
-                fetching. It works and might be fine for very small
-                applications.
-              </p>
-
-              <p>
-                With React 18: Suspense for data fetching. Should be used with a
-                library.
-              </p>
-            </aside>
-          </section>
-          <section>
-            <h3>Fetch</h3>
-            <pre><code class="hljs typescript" data-trim data-line-numbers="1-4|6-9|11-12|"><script type="text/template">
-                // Send the request and wait for the response
-                const response = await fetch(
-                  'https://example.com/data'
-                );
-
-                // Did we get a response status code other than 2XX?
-                if (!response.ok) {
-                  throw new Error("Could not fetch data!");
-                }
-
-                // Deserialize the JSON response body
-                const data = await response.json();
-              </script></code></pre>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h2>How <em>can</em> we use fetch in React?</h2>
-          </section>
-          <section>
-            <p>Does this work?</p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|2,5"><script type="text/template">
-               function MyComponent() {
-                 const response = await fetch('/user');
-                 if (!response.ok) throw new Error('Could not fetch data!');   
-
-                 const user = await response.json();   
-                 
-                 return <p>{user.name}</p>;
-               }        
-              </script></code></pre>
-            <p class="fragment">
-              <span class="warn">Does not work!</span> &ndash; The render
-              function is not async.
-            </p>
-          </section>
-          <section>
-            <p>Well, how about this?</p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
-               function MyComponent() {
-                 let user;
-
-                 fetch('/user').then(response => {
-                   if (!response.ok) throw new Error('Could not fetch data!');
-
-                   response.json().then(u => {
-                     user = u;
-                   });
-                 });   
-                 
-                 return <p>{user?.name}</p>;
-               }</script></code></pre>
-            <p class="fragment">
-              <span class="warn">Does not work!</span> &ndash; When the promise
-              resolves, the render function already ran.
-            </p>
-          </section>
-          <section>
-            <p>Fetching data asynchronously requires state management.</p>
-            <p><span class="warn">&rarr;useState</span></p>
-          </section>
-          <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|4,7|2,8,12"><script type="text/template">
-              function MyComponent() {
-                const [user, setUser] = useState();
-
-                fetch('/user').then(response => {
-                  if (!response.ok) throw new Error('Could not fetch data!');
-
-                  response.json().then(u => {
-                    setUser(u);
-                  });
-                });   
-                
-                return <p>{user?.name}</p>;
-              }</script></code></pre>
-            <p class="fragment">
-              <span class="warn">Bad!</span> &ndash; This produces an infinte
-              loop.
-            </p>
-          </section>
-          <section>
-            <h3>
-              Why we should <em>not</em> run side effects in the render function
-            </h3>
-            <ul>
-              <li class="fragment">
-                We don't want the side effect to execute with every render.
-              </li>
-              <li class="fragment">
-                The render function might be executed anytime &ndash; we don't
-                control it.
-              </li>
-              <li class="fragment">
-                In the render function we just want to render and not spend
-                computing on other tasks.
-              </li>
-            </ul>
-          </section>
-
           <section data-auto-animate>
-            <p>Handle sideEffects with <span class="warn">useEffect</span></p>
+            <h3>The <span class="warn">useEffect</span> Hook</h3>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="1,5-9"><script type="text/template">
+                 import { useEffect } from "react";
 
+                 function MyComponent() {
+
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   }, [dependency1, dependency2]);
+
+                   // …
+                 }
+                  </script></code></pre>
+          </section>
+          <section data-auto-animate>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="|5"><script type="text/template">
+              
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   }, [dependency1, dependency2]);
+                  </script></code></pre>
+            <p>
+              The effect is executed initially and whenever a dependency
+              changes.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5"><script type="text/template">
+              
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   }, []);
+                  </script></code></pre>
+            <p>
+              When passing an empty array, the effect is executed only initially
+              (on first render).
+            </p>
+          </section>
+          <section data-auto-animate>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5"><script type="text/template">
+              
+                   useEffect(() => {
+
+                     // Run side effect
+
+                   });
+                  </script></code></pre>
+            <p>
+              If no depencencies are passed, the effect is executed with every
+              render.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>Let's call this API correctly!</p>
             <pre
               data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="1,3,9|"><script type="text/template">
+            ><code class="hljs tsx" data-trim data-line-numbers="|4-12|12|"><script type="text/template">
               function MyComponent() {
                 const [user, setUser] = useState();
 
                 useEffect(() => {
+                  fetch('/user').then(response => {
+                    if (!response.ok) throw new Error('Could not fetch data!');
+  
+                    response.json().then(u => {
+                      setUser(u);
+                    });
+                  }); 
+                }, []);
+                
+                return <p>{user?.name}</p>;
+              }
+            </script></code></pre>
+
+            <p class="fragment">
+              <em>Wait&hellip;</em> but what about
+              <span class="warn">async-await?</span>
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>What about <span class="warn">async-await?</span></p>
+
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="|3,6"><script type="text/template">
+                useEffect(() => {
+
+                  fetch('/user').then(response => {
+                    if (!response.ok) throw new Error('Could not fetch data!');
+  
+                    response.json().then(u => {
+                      setUser(u);
+                    });
+                  }); 
+
+                }, []);
+            </script></code></pre>
+          </section>
+          <section data-auto-animate>
+            <p>What about <span class="warn">async-await?</span></p>
+
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="3,6"><script type="text/template">
+                useEffect(() => {
+
+                  const response = await fetch('/user');
+                  if (!response.ok) throw new Error('Could not fetch data!');
+
+                  const user = await response.json();
+                  setUser(user);
+
+                }, []);
+            </script></code></pre>
+          </section>
+          <section data-auto-animate>
+            <p>What about <span class="warn">async-await?</span></p>
+
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
+                useEffect(() => {
+
+                  const response = await fetch('/user');
+                  if (!response.ok) throw new Error('Could not fetch data!');
+
+                  const user = await response.json();
+                  setUser(user);
+
+                }, []);
+            </script></code></pre>
+
+            <p>
+              <span class="warn">Does not work!</span> &ndash; The effect
+              function is not async.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>What about <span class="warn">async-await?</span></p>
+
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
+                useEffect(async () => {
+
+                  const response = await fetch('/user');
+                  if (!response.ok) throw new Error('Could not fetch data!');
+
+                  const user = await response.json();
+                  setUser(user);
+
+                }, []);
+            </script></code></pre>
+
+            <p>
+              <span class="warn">Does not work!</span> &ndash; The effect
+              function is not async.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>What about <span class="warn">async-await?</span></p>
+
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="1,3,9|"><script type="text/template">
+                useEffect(() => {
+
                   (async function() {
                     const response = await fetch('/user');
                     if (!response.ok) throw new Error('Could not fetch data!');
@@ -217,19 +215,95 @@
                     const user = await response.json();
                     setUser(user);
                   })();
+
                 }, []);
-                
-                return <p>{user?.name}</p>;
-              }
             </script></code></pre>
 
-            <p><span class="warn">This works!</span>, but ...</p>
+            <p>
+              <span class="warn">This works!</span> &ndash; We call our async
+              logic without waiting for its top-level promise to resolve.
+            </p>
+          </section>
+        </section>
+  
+        <section>
+          <section>
+            <h2>Exercise</h2>
+
+            <p><img src="../img/data_fetching_goal.png" /></p>
+            <ul>
+              <li>
+                Retrieve the data for the pokemon list from the
+                <a
+                  href="https://pokeapi.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >PokeAPI</a
+                >.
+              </li>
+              <li>
+                API call:
+                <span class="code"
+                  >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
+                >
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>List API</h2>
+            <a
+              href="https://pokeapi.co/api/v2/pokemon?limit=5"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://pokeapi.co/api/v2/pokemon?limit=5
+            </a>
+            <pre>
+                <code class="hljs json" data-trim data-noescape>
+                    {
+                        "count": 1118,
+                        "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
+                        "previous": null,
+                        "results": [
+                            {
+                                "name": "bulbasaur",
+                                "url": "https://pokeapi.co/api/v2/pokemon/1/"
+                            },
+                            ...
+                        ]
+                    }
+                </code>
+            </pre>
           </section>
         </section>
         <section>
           <section>
+            <h2>Solution</h2>
+
+            <p><span class="code">List.tsx</span></p>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
+            function List() {
+              const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
+              useEffect(() => {
+                (async () => {
+                  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
+                  const result = await response.json() as PokemonResultDto;
+                  setPokemons(result.results);
+                })();
+              }, []);
+
+              return (<>
+                {pokemons?.map((pokemon) => (
+                  <PokeListEntry key={pokemon.name} name={pokemon.name} />
+                ))}
+              </>);
+            }
+        </script></code></pre>
+          </section>
+          <section>
             <img
-              src="../img/user-duplicate-request.png"
+              src="../img/poke-list-duplicate-request.png"
               alt="Duplicate request"
             />
 
@@ -266,155 +340,6 @@
                 >(not in prod)</small
               >
             </p>
-            <p>
-              Therefore it is recommanded to not fetch data with
-              useEffect but rely on a library, so lets do it!
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>Configure TanStack Query</p>
-            <p>
-              <span class="code">npm i @tanstack/react-query</span>
-            </p>
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="1|6-8"><script type="text/template">
-              const queryClient = new QueryClient()
-
-              function App() {
-                return (
-                  // Provide the client to your App
-                  <QueryClientProvider client={queryClient}>
-                    <MyComponent />
-                  </QueryClientProvider>
-                )
-              }
-            </script></code></pre>
-          </section>
-
-          <section data-auto-animate>
-            <p>
-              Using <span class="warn">Tanstack Query</span> for data fetching
-            </p>
-
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
-              function MyComponent() {
-                const { data: user } = useQuery(['user'], '/user')
-                
-                return <p>{user?.name}</p>;
-              }
-            </script></code></pre>
-
-            <p>
-              <span class="warn">Short & clean!</span> &ndash; also comes with
-              with retry&cache functionality
-            </p>
-          </section>
-        </section>
-        <section>
-          <h3>Some words about types</h3>
-
-          <pre
-            data-id="code2"
-          ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
-              const { data: user } = useQuery<User>(['user'], '/user')
-
-              interface User {
-                firstName: string,
-                // ...
-              }
-          </script></code></pre>
-
-          <p>
-            Since we are using TypeScript, we should always work with defined
-            types&mdash;avoid <span class="code">any</span>!
-          </p>
-        </section>
-        <section>
-          <section>
-            <h2>Exercise</h2>
-
-            <p><img src="../img/data_fetching_goal.png" /></p>
-            <ul>
-              <li>
-                Retrieve the data for the pokemon list from the
-                <a
-                  href="https://pokeapi.co/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >PokeAPI</a
-                >.
-              </li>
-              <li>
-                Install
-                <a
-                  href="https://tanstack.com/query"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >TanStack Query</a
-                >: <span class="code">npm i @tanstack/react-query</span>
-              </li>
-              <li>
-                API call with SWR:
-                <span class="code"
-                  >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
-                >
-              </li>
-            </ul>
-          </section>
-          <section>
-            <h2>List API</h2>
-            <a
-              href="https://pokeapi.co/api/v2/pokemon?limit=5"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://pokeapi.co/api/v2/pokemon?limit=5
-            </a>
-            <pre>
-                <code class="hljs json" data-trim data-noescape>
-                    {
-                        "count": 1118,
-                        "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
-                        "previous": null,
-                        "results": [
-                            {
-                                "name": "bulbasaur",
-                                "url": "https://pokeapi.co/api/v2/pokemon/1/"
-                            },
-                            ...
-                        ]
-                    }
-                </code>
-            </pre>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h2>TODO: UPDATE SOLUTION TanStackSolution</h2>
-
-            <p><span class="code">List.tsx</span></p>
-
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
-            function List() {
-              const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
-              useEffect(() => {
-                (async () => {
-                  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-                  const result = await response.json() as PokemonResultDto;
-                  setPokemons(result.results);
-                })();
-              }, []);
-
-              return (<>
-                {pokemons?.map((pokemon) => (
-                  <PokeListEntry key={pokemon.name} name={pokemon.name} />
-                ))}
-              </>);
-            }
-        </script></code></pre>
           </section>
         </section>
         <section>
@@ -731,7 +656,7 @@ export default usePokeList;
 
           <ul>
             <li>Axios</li>
-            <li>TanStack Query</li>
+            <li>React Query</li>
             <li>SWR</li>
           </ul>
           <p>Will be part of Chapter 9&hellip;</p>
