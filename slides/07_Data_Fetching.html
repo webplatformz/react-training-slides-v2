@@ -428,8 +428,15 @@
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
+              
+              export const fetcher = async <T>(uri: string): Promise<T> => {
+                const response = await fetch(uri);
+
+                return response.json();
+              };
+
               function MyComponent() {
-                const { data: user } = useQuery(['user'], '/user')
+                const { data: user } = useQuery(['user'], () => fetcher('/user'))
                 
                 return <p>{user?.name}</p>;
               }
