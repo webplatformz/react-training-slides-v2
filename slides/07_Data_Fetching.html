@@ -278,8 +278,8 @@
               const queryClient = new QueryClient()
 
               function App() {
+                /* Provide the client to your App */
                 return (
-                  // Provide the client to your App
                   <QueryClientProvider client={queryClient}>
                     <MyComponent />
                   </QueryClientProvider>
@@ -295,9 +295,17 @@
 
             <pre
               data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
+            ><code class="hljs tsx" data-trim data-line-numbers="8-9|1-5"><script type="text/template">
+              
+              const fetcher = async (uri: string): Promise => {
+                const response = await fetch(uri);
+
+                return response.json();
+              };
+
               function MyComponent() {
-                const { data: user } = useQuery(['user'], '/user')
+                const { data: user, isLoading, error } = useQuery(['user'], 
+                                        () => fetcher('/user'))
                 
                 return <p>{user?.name}</p>;
               }
@@ -305,7 +313,7 @@
 
             <p>
               <span class="warn">Clean & simple </span> &ndash; also comes with
-              with retry&cache functionality
+              with retry, cache &amp; more functionality
             </p>
           </section>
         </section>
@@ -314,8 +322,15 @@
 
           <pre
             data-id="code2"
-          ><code class="hljs tsx" data-trim data-line-numbers="1"><script type="text/template">
-              const { data: user } = useQuery<User>(['user'], '/user')
+          ><code class="hljs tsx" data-trim data-line-numbers="8,1,10-13"><script type="text/template">
+            const fetcher = async <T>(uri: string): Promise<T> => {
+              const response = await fetch(uri);
+
+              return response.json();
+            };
+
+            const { data: user } = useQuery(['user'], 
+                () => fetcher<User>('/user'))
 
               interface User {
                 firstName: string,
@@ -329,7 +344,7 @@
           </p>
         </section>
         <section>
-          <section>
+          <section data-auto-animate>
             <h2>Exercise</h2>
 
             <p><img src="../img/data_fetching_goal.png" /></p>
@@ -358,10 +373,26 @@
                   >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
                 >
               </li>
+              <li>Stretch goal: Display loading & error messages
+              </li>
             </ul>
           </section>
-          <section>
-            <h2>List API</h2>
+          <section data-auto-animate>
+              <a
+                href="https://tanstack.com/query"
+                target="_blank"
+                rel="noopener noreferrer"
+                >TanStack Query</a
+              >: <span class="code">npm i @tanstack/react-query</span></span
+            >
+            <pre>
+              <code class="hljs json" data-trim data-noescape>
+                export const fetcher = async <T>(uri: string): Promise<T> => {
+                  const response = await fetch(uri);
+                  return response.json();
+                };
+              </code>
+          </pre>
             <a
               href="https://pokeapi.co/api/v2/pokemon?limit=5"
               target="_blank"
@@ -372,9 +403,7 @@
             <pre>
                 <code class="hljs json" data-trim data-noescape>
                     {
-                        "count": 1118,
-                        "next": "https://pokeapi.co/api/v2/pokemon?offset=5&limit=5",
-                        "previous": null,
+                        ...
                         "results": [
                             {
                                 "name": "bulbasaur",
@@ -389,25 +418,23 @@
         </section>
         <section>
           <section>
-            <h2>TODO: UPDATE SOLUTION TanStackSolution</h2>
+            <h2>Solution</h2>
 
             <p><span class="code">List.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|2-9"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|8-10|11|12"><script type="text/template">
             function List() {
-              const [pokemons, setPokemons] = useState<readonly Pokemon[]>();
-              useEffect(() => {
-                (async () => {
-                  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50");
-                  const result = await response.json() as PokemonResultDto;
-                  setPokemons(result.results);
-                })();
-              }, []);
+              const {data: pokemons, isLoading, error} = 
+                useQuery(["pokemon_list"], () =>
+                fetcher<PokemonResultDto>("https://pokeapi.co/api/v2/pokemon?limit=1000")
+              );
 
               return (<>
-                {pokemons?.map((pokemon) => (
+              {!isLoading && !error && pokemons?.map((pokemon) => (
                   <PokeListEntry key={pokemon.name} name={pokemon.name} />
                 ))}
+              {isLoading && <div>LOADING</div>}
+              {error && <div>ERROR while loading data</div>}
               </>);
             }
         </script></code></pre>
