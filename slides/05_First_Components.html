@@ -28,17 +28,19 @@
         <section>
           <section>
             <h2>Simple React Component</h2>
-            <p>A dumb component having hard-coded state</p>
             <span class="code">Greeting.tsx</span>
             <!-- prettier-ignore -->
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        const NAME = 'World';
+                        const name = 'World';
 
                         function Greeting() {
                             return (
-                                <div>Hello {NAME}</div>
+                                <div>
+                                  <h1>Hello, {name}</h1>
+                                  <p>This is your first component!</p>
+                                </div>
                             );
                         }
 
@@ -48,43 +50,70 @@
                 </pre>
           </section>
           <section>
-            <h3>Single-line VS multi-line JSX</h3>
-            <p>
-              Multi-line JSX should always be wrapped in braces. Single-line
-              doesn't.
-            </p>
+            <h3>Single-line vs. multi-line JSX</h3>
+            <p>Multi-line JSX should always be wrapped in parentheses.</p>
             <!-- prettier-ignore -->
-            <pre><code class="hljs jsx" data-trim data-line-numbers="2,6,10|1-11"><script type="text/template">
-                        function MyComponent() {
-                            return <div>Single-line without enclosing ()</div>;
+            <pre><code class="hljs jsx" data-trim data-line-numbers="2,6,11|"><script type="text/template">
+                        function SingleLineComponent() {
+                            return <p>Single-line without enclosing ()</p>;
                         }
 
-                        function MyComponent() {
+                        function MultiLineComponent() {
                             return (
-                                <>
-                                    <div>Multi-line enclosed with ()</div>
-                                </>
+                                <div>
+                                    <h1>Heading</h1>
+                                    <p>This is a multi-line component enclosed by ().</p>
+                                </div>
                             );
                         }
                         </script></code></pre>
+            <div class="fragment tip">
+              <span
+                >Use a code formatter like
+                <a href="https://prettier.io/">Prettier</a></span
+              >
+            </div>
           </section>
           <section>
             <h3>Component Splitting</h3>
             <p>Importing another component</p>
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="1,4|1-7"><script type="text/template">
+            <pre><code class="hljs javascript" data-trim data-line-numbers="1,6|"><script type="text/template">
                         import Greeting from './greeting';
 
-                        function WelcomePage() {
-                            return <Greeting/>;
+                        export default function WelcomePage() {
+                            return (
+                              <div>
+                                <Greeting />
+                                <p>Other content</p>
+                              </div>
+                            );
                         }
-
-                        export default WelcomePage;
                         </script></code></pre>
             <div class="fragment tip">
               Don't build monoliths. Split your components!
             </div>
+          </section>
+          <section>
+            <h3>Fragments</h3>
+            <p>Components always return a <em>single node</em>.</p>
+            <p>
+              If you want to return multiple elements, wrap them in a
+              <span class="warn">Fragment</span> to avoid rendering an
+              unnecessary <span class="code">&lt;div&gt;</span>.
+            </p>
+            <!-- prettier-ignore -->
+            <pre><code class="hljs javascript" data-trim data-line-numbers="3,6|"><script type="text/template">
+                        function MyComponent() {
+                            return (
+                              <>
+                                <ChildComponent />
+                                <p>Other content</p>
+                              </>
+                            );
+                        }
+                        </script></code></pre>
           </section>
           <section>
             <h2>Exercise</h2>
@@ -113,15 +142,13 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        const NAME = 'World';
+                        const name = 'World';
 
-                        function PokeListEntry() {
+                        export default function PokeListEntry() {
                             return (
-                                <div>{NAME}</div>
+                                <div>{name}</div>
                             );
                         }
-
-                        export default PokeListEntry;
                         </script>
                     </code>
                 </pre>
@@ -133,7 +160,7 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        import PokeListEntry from "./poke-list-entry/PokeListEntry.tsx"
+                        import PokeListEntry from "./PokeListEntry.tsx"
 
                         export default function App() {
                             return (
@@ -149,75 +176,45 @@
           <section>
             <h2>Props</h2>
             <p>
-              Similar to Angular, we can pass props from a consumer into any
-              child component
+              We can pass data to child components by setting their
+              <span class="warn">props</span> (properties)
             </p>
             <p class="fragment">
-              A property can be a primitive, an object or a function
+              A prop can have any type, e.g. it can be a JavaScript primitive,
+              an object, or a function
             </p>
+            <p class="fragment">Props can be defined as required or optional</p>
             <p class="fragment">
-              Properties can be required, optional or even nullable
-            </p>
-            <p class="fragment">
-              Use primitives or objects to pass data into the child component
-            </p>
-            <p class="fragment">
-              Use function to listen on events emitted by the child component
+              Pass <span class="warn">functions as props</span> to listen to
+              <span class="warn">events</span> emitted by child components
             </p>
           </section>
           <section>
             <h3>Define Props on a component</h3>
-            <p>
-              You
-              <b>may</b>
-              set a default value for optional props
-            </p>
+
+            <p></p>
             <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim data-line-numbers="1-6|2|3|4|5|9|8-10|1,2,6,9,11|8-12">
-                        <script type="text/template">
-                        type Props = {
-                            name: string; // required prop
-                            age?: string; // optional prop
-                            wearsGlasses: boolean | null; // required but nullable prop
-                            wearsHat?: boolean | null; // optional and nullable prop
-                        };
-
-                        function SomeComponent(
-                            props: Props
-                        ) {
-                            return <div>{props.name}…</div>;
-                        }
-
-                        export default SomeComponent;
-                        </script>
-                    </code>
-                </pre>
-          </section>
-          <section>
-            <h3>With object destruction</h3>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim data-line-numbers="8-13|2,4,5,9,11,12|3,10|14|8-15">
-                        <script type="text/template">
-                        type Props = {
-                            name: string;
-                            age?: string;
-                            wearsGlasses: boolean | null;
-                            wearsHat?: boolean | null;
-                        };
-
-                        function SomeComponent({
+            <pre><code class="hljs jsx" data-trim><script type="text/template">
+                          type MyComponentProps = {
+                              name: string; // required prop
+                              age?: number; // optional prop
+                              wearsHat?: boolean; // optional prop with default value
+                          };
+  
+                          export default function MyComponent({
                             name,
-                            age = '-',
-                            wearsGlasses,
-                            wearsHat
-                        }: Props) {
-                            return <div>{name}…</div>;
-                        }
-                        </script>
-                    </code>
-                </pre>
+                            age,
+                            wearsHat = false,
+                          }: MyComponentProps) {
+                              return (
+                                <div>
+                                  <p>Name: {name}</p>
+                                  <p>Age: {age !== undefined ? age : "unknown"}</p>
+                                  <p>Wears hat: {wearsHat ? "yes" : "no"}</p>
+                                </div>
+                              );
+                          }
+                        </script></code></pre>
           </section>
           <section>
             <h2>Exercise</h2>
@@ -237,17 +234,17 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        type Props = {
+                        type PokeListEntryProps = {
                             name?: string;
                         };
 
-                        function PokeListEntry({ name = 'Bulbasaur' }: Props) {
+                        export default function PokeListEntry({
+                          name = 'Bulbasaur'
+                        }: PokeListEntryProps) {
                             return (
                                 <div>{name}</div>
                             );
                         }
-
-                        export default PokeListEntry;
                         </script>
                     </code>
                 </pre>
@@ -255,19 +252,18 @@
         </section>
         <section>
           <section>
-            <h2>Testing / React-Testing-Library</h2>
-            <p>Our components can be tested using the React Testing Library</p>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                        <script type="text/template">
-                        $ npm install --save-dev @testing-library/react
-                        </script>
-                    </code>
-                </pre>
-            <div class="fragment tip">
-              Testing-Library is already installed with CRA
-            </div>
+            <h2>Testing / React Testing Library</h2>
+            <p>
+              Our components can be tested using the
+              <a
+                href="https://testing-library.com/docs/react-testing-library/intro/"
+                >React Testing Library</a
+              >
+            </p>
+
+            <p class="fragment">
+              It is already pre-installed when using Create React App.
+            </p>
           </section>
           <section>
             <h2>Testing our dumb component</h2>
@@ -432,35 +428,137 @@
         <section>
           <section>
             <h2>List</h2>
+          </section>
+          <section data-auto-animate>
             <p>
-              To render a list, we apply the
+              To render a list of items, we call the
               <span class="code">map</span>
-              function on a list to produce HTML-Elements
+              function on an array.<br />In the callback we map the array item
+              to a JSX element.
             </p>
-            <p>
-              Each list item shall have a unique
-              <a
-                href="https://reactjs.org/docs/lists-and-keys.html#keys"
-                target="_blank"
-              >
-                key
-              </a>
-            </p>
+
+            <p>We can map to an HTML element or to a custom component.</p>
             <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="6|1-12"><script type="text/template">
-                        function List() {
+            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="5-7|"><script type="text/template">
+                        export default function List() {
                             const items = ['Apple', 'Orange', 'Mango'];
                             return (
                                 <ul>
-                                    { items.map(
+                                    {items.map(
                                         item => <li key={item}>{item}</li>
                                     )}
                                 </ul>
-                            )
-                        }
-
-                        export default List;</script></code></pre>
+                            );
+                        }</script></code></pre>
           </section>
+          <section data-auto-animate>
+            <!-- prettier-ignore -->
+            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
+                        export default function List() {
+                            const items = ['Apple', 'Orange', 'Mango'];
+                            return (
+                                <ul>
+                                    {items.map(
+                                        item => <li key={item}>{item}</li>
+                                    )}
+                                </ul>
+                            );
+                        }</script></code></pre>
+
+            <p>
+              The JSX element returned from <span class="code">map</span> must
+              have a <span class="warn">key</span> prop.
+            </p>
+
+            <p class="fragment">
+              This is a special prop used by React internally to distinguish the
+              elements. It must be
+              <span class="warn">unique within the list</span> (e.g. an entity
+              ID).
+            </p>
+          </section>
+        </section>
+        <section>
+          <section><h2>The children prop</h2></section>
+          <section>
+            <p>Like HTML elements, React components can be nested:</p>
+
+            <pre>
+            <code class="hljs jsx" data-trim>
+                <script type="text/template">
+                export default function App() {
+                  return (
+                    <ContentContainer title="Profile">
+                      <ProfilePicture />
+                      <Bio />
+                      <ScrollableSection>
+                        <ProjectList />
+                      </ScrollableSection>
+                    </ContentContainer>
+                  );
+                }
+                </script>
+            </code>
+        </pre>
+          </section>
+          <section data-auto-animate>
+            <p>
+              The parent component receives the child components through the
+              <span class="warn">children</span> prop.
+            </p>
+
+            <pre>
+            <code class="hljs jsx" data-trim data-line-numbers="1,5,14,16" data-id="code">
+                <script type="text/template">
+                import { PropsWithChildren } from "react"
+
+                function ContentContainer({
+                  title,
+                  children,
+                }: ContentContainerProps) {
+                  return (
+                    <div className="content-container">
+                      …
+                    </div>
+                  );
+                }
+
+                type ContentContainerProps = PropsWithChildren<{
+                  title: string
+                }>;
+                </script>
+            </code>
+        </pre>
+          </section>
+          <section data-auto-animate>
+            <pre>
+            <code class="hljs jsx" data-trim data-line-numbers="3,11" data-id="code">
+                <script type="text/template">
+                function ContentContainer({
+                  title,
+                  children,
+                }: ContentContainerProps) {
+                  return (
+                    <div className="content-container">
+                      <div className="heading">
+                        <h1>{title}</h1>
+                      </div>
+                      <div className="content">
+                        {children}
+                      </div>
+                    </div>
+                  );
+                }
+                </script>
+            </code>
+        </pre>
+
+            <p>
+              The children prop can be rendered in the parent component's JSX.
+            </p>
+          </section>
+        </section>
+        <section>
           <section>
             <h2>Exercise</h2>
             <ul>
@@ -469,7 +567,7 @@
                 <a
                   target="_blank"
                   href="https://pokeapi.co/api/v2/pokemon?limit=50"
-                  >list of Pokémon</a
+                  >array of Pokémon</a
                 >
               </li>
               <li class="fragment">Render all Pokémon names in a list</li>
@@ -478,32 +576,45 @@
                 <span class="code">PokeListEntry.tsx</span>
                 required
               </li>
-              <li class="fragment">Write tests</li>
+              <li class="fragment">Write tests for the list</li>
+              <li class="fragment">
+                Create a <span class="warn">Layout component</span> which wraps
+                the list with a page structure (containing a nav bar with dummy
+                links)
+              </li>
             </ul>
           </section>
           <section>
+            <img
+              src="../img/exercise-goal-list-and-layout.png"
+              alt="Exercise goal"
+            />
+          </section>
+        </section>
+        <section>
+          <section>
             <h2>Solution</h2>
+          </section>
+          <section>
             <!-- prettier-ignore -->
             <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
-                        import PokeListEntry from "../../components/poke-list-entry/PokeListEntry";
+                        import PokeListEntry from "./PokeListEntry";
 
-                        function PokeList() {
+                        export default function PokeList() {
                           const pokemons = […];
                           return (
-                            <>
+                            <ul>
                               {pokemons.map((pokemon) => (
                                 <PokeListEntry
                                     key={pokemon.name}
                                     name={pokemon.name}
                                 />
                               ))}
-                            </>
+                            </ul>
                           );
                         }
-
-                        export default PokeList;
                         </script>
                     </code>
                 </pre>
@@ -514,19 +625,61 @@
             <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
-                        type Props = {
+                        type PokeListEntryProps = {
                           name: string;
                         };
 
-                        function PokeListEntry({ name }: Props) {
+                        export default function PokeListEntry({
+                          name
+                        }: PokeListEntryProps) {
+                          return <li>{name}</li>;
+                        }
+                        </script>
+                    </code>
+                </pre>
+          </section>
+          <section>
+            <h3>Solution continued</h3>
+            <!-- prettier-ignore -->
+            <pre>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
+                        type LayoutProps = PropsWithChildren<{
+                          name: string;
+                        }>;
+
+                        export default function Layout({ children }: LayoutProps) {
                           return (
-                            <div>
-                              {name}
-                            </div>
+                            <>
+                              <header>
+                                <nav>
+                                  <a href="#">Home</a> | <a href="#">Profile</a>
+                                </nav>
+                              </header>
+                              <main>{children}</main>
+                            </>
                           );
                         }
-
-                        export default PokeListEntry;
+                        </script>
+                    </code>
+                </pre>
+          </section>
+          <section>
+            <h3>Solution continued</h3>
+            <!-- prettier-ignore -->
+            <pre>
+                    <code class="hljs javascript" data-trim>
+                        <script type="text/template">
+                        import Layout from "./Layout";
+                        import PokeList from "./PokeList";
+  
+                        export default function App() {
+                          return (
+                            <Layout>
+                              <PokeList />
+                            </Layout>
+                          );
+                        }
                         </script>
                     </code>
                 </pre>
