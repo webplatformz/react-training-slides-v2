@@ -22,6 +22,7 @@ assignees: ""
 - [ ] Teams call/invite with course participants has been sent out
   - incl. setup instructions/prerequesites
 - [ ] Miro board has been prepared
+  - [template](https://miro.com/app/dashboard/?tpTemplate=uXjVPb8UJMw%3D&isCustom=true&share_link_id=176973458557)
 - [ ] Chapter assignments are clear
 
 ### Day before course
