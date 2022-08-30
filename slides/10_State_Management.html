@@ -87,7 +87,7 @@
               user: string;
             };
             
-            const UserContext = createContext<YourContextValue | null>(null);
+            const UserContext = createContext<YourContextValue | undefined>(undefined);
             
             function Parent() {
               return (<UserContext.Provider value={{ user: "joe" }}>
@@ -148,8 +148,9 @@
             </ul>
           </section>
           <section>
+            <p>Default values can be provided to the form like this:</p>
             <pre>
-                    <code class="hljs tsx" data-trim><script type="text/template">
+                    <code class="hljs tsx" data-trim data-line-numbers="6-8"><script type="text/template">
                     const {
                       register,
                       handleSubmit,
@@ -174,13 +175,11 @@
                       setUsername: (username: string) => void;
                     };
                     
-                    const UserContext = createContext<UserContextValue | null>(null);
+                    const UserContext = createContext<UserContextValue | undefined>(undefined);
                     
                     export function useUserContext(): UserContextValue {
                       const context = useContext(UserContext);
-                      if (context === null) {
-                        throw new Error("…");
-                      }
+                      if (!context) throw new Error("…");
                       return context;
                     }
                     </script></code>
