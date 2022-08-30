@@ -234,44 +234,26 @@
         <section>
           <section>
             <h2>ESLint</h2>
-            <p>Enforce some code styles which pertain more to usage.</p>
-            <p>Create React App comes with some predefined rules.</p>
+
             <p>
-              ESLint has a ton of (predefined) rules, ranging from very loose to
-              super strict (<a
-                href="https://www.npmjs.com/package/eslint-config-airbnb"
-                target="_blank"
-                rel="noopener noreferrer"
-                >airbnb</a
-              >).
+              ESLint is a tool that statically analyzes your code to discover
+              potential problems (<span class="warn">linting</span>).
             </p>
-          </section>
-          <section>
-            <p>Run <span class="code">npm i -D eslint</span> to install it.</p>
-            <p>
-              Run <span class="code">npx eslint --init</span> to setup a
-              configuration file:
+            <p class="fragment">
+              Create React App comes with ESLint <em>built-in</em>. Problems are
+              shown in the terminal.
             </p>
-            <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
-                        "scripts": {
-                            "lint": "eslint \"src/**/*.{js,ts,tsx}\" &#45;&#45;quiet",
-                        },
-                    </code>
-                </pre>
-            <p>
-              And again add the plugin for your IDE:
+            <p class="fragment">
+              Recommendation: Install the
               <a
                 href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                VS Code
+                VS Code plugin for ESLint
               </a>
+              for highlighting and fix assistance in the editor.
             </p>
-            <div class="fragment tip">
-              ESLint is already installed through react-scripts with CRA
-            </div>
           </section>
         </section>
         <section class="deck-slide">
