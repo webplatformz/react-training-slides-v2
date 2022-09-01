@@ -210,14 +210,14 @@
             <h2>NPM scripts</h2>
             <p><span class="code">npm start</span></p>
             <p>
-              Starts the app with a live reload server. The build will fail if
-              you have TypeScript errors.
+              Starts the app in dev mode with a hot reload server. The build
+              will fail if you have TypeScript errors.
             </p>
           </section>
           <section>
             <p><span class="code">npm run build</span></p>
             <p>
-              Creates a production ready build of your app and puts it in the
+              Creates a production build of your app and puts it into in the
               <span class="code">build</span> folder.
             </p>
           </section>
@@ -244,6 +244,16 @@
               We recommend starting &amp; staying with Create React App until
               there is absolutely no way around ejecting.
             </div>
+          </section>
+          <section>
+            <h3>CI setup</h3>
+
+            <p>On the CI, you will typically run at least these scripts:</p>
+
+            <ul>
+              <li><span class="code">npm test</span></li>
+              <li><span class="code">npm run build</span></li>
+            </ul>
           </section>
         </section>
         <section>
