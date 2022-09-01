@@ -95,7 +95,7 @@
               Don't build monoliths. Split your components!
             </div>
           </section>
-          <section>
+          <section data-auto-animate>
             <h3>Fragments</h3>
             <p>Components always return a <em>single node</em>.</p>
             <p>
@@ -104,7 +104,7 @@
               unnecessary <span class="code">&lt;div&gt;</span>.
             </p>
             <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="3,6|"><script type="text/template">
+            <pre><code class="hljs javascript" data-trim data-line-numbers="3,6|" data-id="code"><script type="text/template">
                         function MyComponent() {
                             return (
                               <>
@@ -114,6 +114,33 @@
                             );
                         }
                         </script></code></pre>
+          </section>
+          <section data-auto-animate>
+            <h3>Fragments</h3>
+            <!-- prettier-ignore -->
+            <pre><code class="hljs javascript" data-trim data-line-numbers="1,5,8" data-id="code"><script type="text/template">
+                        import { Fragment } from "react";
+
+                        function MyComponent() {
+                            return (
+                              <Fragment>
+                                <ChildComponent />
+                                <p>Other content</p>
+                              </Fragment>
+                            );
+                        }
+                        </script></code></pre>
+            <p>
+              Using the long-form <span class="code">Fragment</span> is
+              equivalent to the shorter
+              <nobr><span class="code">&lt;&gt;…&lt;/&gt;</span></nobr> syntax.
+            </p>
+            <p class="fragment tip">
+              <span
+                >We will see in a bit in which situation the long-form
+                <span class="code">&lt;Fragment&gt;</span> is useful.</span
+              >
+            </p>
           </section>
           <section>
             <h2>Exercise</h2>
@@ -454,8 +481,8 @@
           <section data-auto-animate>
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
+                        const items = ["Apple", "Orange", "Mango"];
                         export default function List() {
-                            const items = ['Apple', 'Orange', 'Mango'];
                             return (
                                 <ul>
                                     {items.map(
@@ -475,6 +502,39 @@
               elements. It must be
               <span class="warn">unique within the list</span> (e.g. an entity
               ID).
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>
+              Use a <span class="warn">Fragment</span> to return multiple
+              elements from <span class="code">map</span>.
+            </p>
+            <!-- prettier-ignore -->
+            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,10,13"><script type="text/template">
+                        import { Fragment } from "react";
+
+                        const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
+                        export default function List() {
+                            return (
+                                <table>
+                                  <tbody>
+                                    {items.map(
+                                        item => (
+                                          <Fragment key={item.id}>
+                                            <tr>…</tr>
+                                            <tr>…</tr>
+                                          </Fragment>
+                                        )
+                                    )}
+                                  <tbody>
+                                </table>
+                            );
+                        }</script></code></pre>
+            <p class="fragment tip">
+              <span
+                >Here we can't use the shorter
+                <span class="code">&lt;&gt;…&lt;/&gt;</span> syntax. Only <span class="code">Fragment</span> can take the key prop.</span
+                ></p>
             </p>
           </section>
         </section>
