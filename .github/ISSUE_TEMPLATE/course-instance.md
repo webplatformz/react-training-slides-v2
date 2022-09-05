@@ -41,8 +41,7 @@ assignees: ""
 | Chapter          | Assigned to |
 | ---------------- | ----------- |
 | Intro            | Felix       |
-| App Setup        | Moritz      |
-| Demo App         | Moritz      |
+| Setup            | Moritz      |
 | First Components | Moritz      |
 | Hooks            | Felix       |
 | Data Fetching    | Felix       |
