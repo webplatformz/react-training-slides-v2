@@ -57,7 +57,7 @@
           <ul>
             <li>09:00 Start</li>
             <li>10:30 - 10:45 Coffee break</li>
-            <li>12:30 - 13:30 Lunch break</li>
+            <li>12:00 - 13:00 Lunch break</li>
             <li>15:00 - 15:15 Coffee break</li>
             <li>17:00 End</li>
           </ul>
@@ -122,16 +122,24 @@
           </section>
           <section>
             <p>
-              React is a <span class="warn">library</span>, not a framework.
+              React is a library for creating
+              <span class="warn">user interfaces</span>.
             </p>
-            <p>
-              It handles <span class="warn">rendering</span> and
-              <span class="warn">state</span>, but leaves other things like data
-              fetching and routing up to you.
+            <p class="fragment">
+              It is provides the
+              <span class="warn">rendering mechanism</span> and a
+              <span class="warn">basic state handling</span> (for
+              interactivity), but leaves other aspects to the developer.
             </p>
-            <p>
-              Fortunately, thanks to the huge community, there are always
-              <span class="warn">many options</span> to choose from.
+            <p class="fragment">
+              Thanks to the huge community, there are
+              <span class="warn">many complementing libraries</span>, e.g. for
+              routing and data fetching.
+            </p>
+            <p class="fragment">
+              There are also
+              <span class="warn">full-featured frameworks</span> based on React,
+              which target common use cases (e.g. Next.js, Remix).
             </p>
           </section>
           <section>
@@ -178,34 +186,49 @@
             <h3>frequently used in React</h3>
           </section>
           <section>
-            <h2>Destructuring Assignment</h2>
+            <h2>Object Destructuring</h2>
             <pre><code class="hljs js" data-trim><script type="text/template">
-                    const joe = { name: 'Joe', age: 20, home: 'Schlieren', size: 170 }
+                    const joe = { name: 'Joe', age: 20, home: 'Schlieren', size: 170 };
                 </script></code></pre>
             <pre><code class="hljs js" data-trim><script type="text/template">
-                    console.log(joe.name, joe.age)
+                    console.log(joe.name, joe.age);
                 </script></code></pre>
             <!-- prettier-ignore -->
             <pre class="fragment"><code class="hljs js" data-trim><script type="text/template">
-                    const { name, age } = joe
-                    console.log(name, age)
+                    const { name, age } = joe;
+                    console.log(name, age);
+                </script></code></pre>
+          </section>
+          <section>
+            <h2>Array Destructuring</h2>
+
+            <p>Similarly, arrays can be destructed:</p>
+            <pre><code class="hljs js" data-trim><script type="text/template">
+                    const fruits = ["banana", "apple", "orange"];
+                    
+                    const [firstFruit, secondFruit] = fruits;
+
+                    console.log(firstFruit); // "banana"
+                    console.log(secondFruit); // "apple"
                 </script></code></pre>
           </section>
           <section>
             <p>Using destructuring for function parameters:</p>
             <pre><code class="hljs js" data-trim><script type="text/template">
                     function person({ name, age }) {
-                        
+                        …
                     }
-                    person(joe)
+
+                    person(joe);
                 </script></code></pre>
             <div class="fragment">
               <p>with TypeScript:</p>
               <pre><code class="hljs js" data-trim><script type="text/template">
                         function person({ name, age }: Person) {
-                            
+                            …
                         }
-                        person(joe)
+
+                        person(joe);
                     </script></code></pre>
             </div>
           </section>

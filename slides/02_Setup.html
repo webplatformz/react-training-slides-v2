@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>02 App Setup | Essential React</title>
+    <title>02 Setup | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
     <link
@@ -21,17 +21,32 @@
         <section class="deck-slide">
           <h1>
             Essential React <br />
-            02 App Setup
+            02 Setup
           </h1>
         </section>
         <section>
-          <h2>Setup</h2>
-          <ul>
-            <li>Create React App</li>
-            <li>JSX</li>
-            <li>JavaScript or TypeScript</li>
-            <li>NPM scripts</li>
-          </ul>
+          <section>
+            <h2>How React can be used</h2>
+
+            <p>
+              <a href="https://create-react-app.dev">Create React App</a> (CRA)
+              is the most popular toolchain to build client-side rendered React
+              apps.
+            </p>
+            <p class="fragment">
+              In contrast,
+              <span class="warn">full-featured frameworks</span> (e.g. Next.js,
+              Remix) provide advanced rendering mechanisms like server-side
+              rendering (SSR) and static site generation (SSG).
+            </p>
+            <p class="fragment">
+              For our demo app, we will use Create React App.
+            </p>
+            <p class="fragment tip">
+              We will talk about full-featured frameworks and when to use them
+              later.
+            </p>
+          </section>
         </section>
         <section>
           <section>
@@ -195,14 +210,14 @@
             <h2>NPM scripts</h2>
             <p><span class="code">npm start</span></p>
             <p>
-              Starts the app with a live reload server. The build will fail if
-              you have TypeScript errors.
+              Starts the app in dev mode with a hot reload server. The build
+              will fail if you have TypeScript errors.
             </p>
           </section>
           <section>
             <p><span class="code">npm run build</span></p>
             <p>
-              Creates a production ready build of your app and puts it in the
+              Creates a production build of your app and puts it into in the
               <span class="code">build</span> folder.
             </p>
           </section>
@@ -230,49 +245,112 @@
               there is absolutely no way around ejecting.
             </div>
           </section>
+          <section>
+            <h3>CI setup</h3>
+
+            <p>On the CI, you will typically run at least these scripts:</p>
+
+            <ul>
+              <li><span class="code">npm test</span></li>
+              <li><span class="code">npm run build</span></li>
+            </ul>
+          </section>
         </section>
         <section>
           <section>
             <h2>ESLint</h2>
-            <p>Enforce some code styles which pertain more to usage.</p>
-            <p>Create React App comes with some predefined rules.</p>
+
             <p>
-              ESLint has a ton of (predefined) rules, ranging from very loose to
-              super strict (<a
-                href="https://www.npmjs.com/package/eslint-config-airbnb"
-                target="_blank"
-                rel="noopener noreferrer"
-                >airbnb</a
-              >).
+              ESLint is a tool that statically analyzes your code to discover
+              potential problems (<span class="warn">linting</span>).
             </p>
-          </section>
-          <section>
-            <p>Run <span class="code">npm i -D eslint</span> to install it.</p>
-            <p>
-              Run <span class="code">npx eslint --init</span> to setup a
-              configuration file:
+            <p class="fragment">
+              Create React App comes with ESLint <em>built-in</em>. Problems are
+              shown in the terminal.
             </p>
-            <pre>
-                    <code class="hljs javascript" data-trim data-noescape>
-                        "scripts": {
-                            "lint": "eslint \"src/**/*.{js,ts,tsx}\" &#45;&#45;quiet",
-                        },
-                    </code>
-                </pre>
-            <p>
-              And again add the plugin for your IDE:
+            <p class="fragment">
+              <em>Recommendation:</em> Install the
               <a
                 href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                VS Code
+                VS Code plugin for ESLint
               </a>
+              for highlighting and fix assistance in the editor.
             </p>
-            <div class="fragment tip">
-              ESLint is already installed through react-scripts with CRA
-            </div>
           </section>
+          <section>
+            <h3>Linting on CI</h3>
+
+            <p>
+              ESLint is also run as part of
+              <span class="code">npm run build</span>.
+            </p>
+            <p>In case of errors, the build fails.</p>
+            <p class="fragment">
+              On CI environments,
+              <span class="warn">warnings are treated like errors</span> to
+              ensure a clean production build.
+            </p>
+            <p class="fragment">
+              <small
+                >(Ensure that the environment variable
+                <span class="code">CI</span> is set to
+                <span class="code">true</span> for this to work.)</small
+              >
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>React Developer Tools</h2>
+            <p>React has wonderful dev tools which the core team maintains.</p>
+            <p>
+              They're available for both
+              <a
+                href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Chromium-based</a
+              >
+              browsers and
+              <a
+                href="https://addons.mozilla.org/en-US/firefox/addon/react-devtools/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Firefox</a
+              >.
+            </p>
+          </section>
+          <section>
+            <ul>
+              <li>Explore React app like a DOM tree</li>
+              <li>Modify state and props on the fly</li>
+              <li>Tease out performance problems</li>
+              <li>Programmatically manipulate components</li>
+            </ul>
+          </section>
+          <section>
+            <p><img src="../img/react_developer_tools.png" /></p>
+          </section>
+        </section>
+
+        <section>
+          <h2>Demo App</h2>
+          <p>This is the app we will build within this course.</p>
+          <p>
+            It is based on the open <a href="https://pokeapi.co">PokeAPI</a>.
+          </p>
+          <a
+            href="https://zb580z.csb.app/pokemon"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Codesandbox Demo</a
+          >
         </section>
         <section class="deck-slide">
           <h1>Questions?</h1>
