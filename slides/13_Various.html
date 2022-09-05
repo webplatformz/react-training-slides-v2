@@ -631,14 +631,14 @@ export default handlers;
                     }
                         
                     static getDerivedStateFromError(error) {
-                        // Update state so the next render will show
-                        // the fallback UI.
+                        /* Update state so the next render will show
+                           the fallback UI. */
                         return { hasError: true };
                     }
                     
                     render() {
                         if (this.state.hasError) {
-                        // You can render any custom fallback UI
+                        /* You can render any custom fallback UI */
                         return <h1>Something went wrong.</h1>;
                         }
                         
@@ -652,19 +652,19 @@ export default handlers;
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="1,6-10"><script type="text/template">
                     class ErrorBoundary extends React.Component {
-                    constructor(props) {
-                        super(props);
-                    }
-                        
-                    componentDidCatch(error, errorInfo) {
-                        // You can also log the error to
-                        // an error reporting service
-                        logErrorToMyService(error, errorInfo);
-                    }
+                      constructor(props) {
+                          super(props);
+                      }
+                          
+                      componentDidCatch(error, errorInfo) {
+                          /* You can also log the error to
+                            an error reporting service */
+                          logErrorToMyService(error, errorInfo);
+                      }
 
-                    render() {
-                        return this.props.children; 
-                    }
+                      render() {
+                          return this.props.children; 
+                      }
                     }
             </script></code></pre>
           </section>
