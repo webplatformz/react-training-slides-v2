@@ -96,17 +96,17 @@
           <section>
             <h3>Fetch</h3>
             <pre><code class="hljs typescript" data-trim data-line-numbers="1-4|6-9|11-12|"><script type="text/template">
-                // Send the request and wait for the response
+                /* Send the request and wait for the response */
                 const response = await fetch(
                   'https://example.com/data'
                 );
 
-                // Did we get a response status code other than 2XX?
+                /* Did we get a response status code other than 2XX? */
                 if (!response.ok) {
                   throw new Error("Could not fetch data!");
                 }
 
-                // Deserialize the JSON response body
+                /* Deserialize the JSON response body */
                 const data = await response.json();
               </script></code></pre>
           </section>
@@ -337,7 +337,7 @@
 
               interface User {
                 firstName: string,
-                // ...
+                /* ... */
               }
           </script></code></pre>
 

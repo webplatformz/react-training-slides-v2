@@ -286,8 +286,8 @@
 import { setupServer } from 'msw/node'
 import { handlers } from './handlers'
 
-// This configures a request mocking server
-// with the given request handlers.
+/* This configures a request mocking server
+   with the given request handlers. */
 export const server = setupServer(...handlers);
     </script></code></pre>
           </section>
@@ -299,14 +299,14 @@ export const server = setupServer(...handlers);
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
 import { server } from "./mocks/server.js";
 
-// Establish API mocking before all tests.
+/* Establish API mocking before all tests. */
 beforeAll(() => server.listen());
 
-// Reset any request handlers that we may add during
-// the tests, so they don't affect other tests.
+/* Reset any request handlers that we may add during
+   the tests, so they don't affect other tests. */
 afterEach(() => server.resetHandlers());
 
-// Clean up after the tests are finished.
+/* Clean up after the tests are finished. */
 afterAll(() => server.close());
     </script></code></pre>
           </section>
