@@ -197,7 +197,7 @@
           </section>
 
           <section data-auto-animate>
-            <p>Handle sideEffects with <span class="warn">useEffect</span></p>
+            <p>Handle side effects with <span class="warn">useEffect</span></p>
 
             <pre
               data-id="code2"
@@ -264,7 +264,7 @@
             </p>
             <p>
               Therefore it is recommanded to not fetch data with useEffect but
-              rely on a library, so lets do it!
+              rely on a library, so let's do it!
             </p>
           </section>
           <section data-auto-animate>
@@ -275,7 +275,7 @@
             <pre
               data-id="code2"
             ><code class="hljs tsx" data-trim data-line-numbers="1|6-8"><script type="text/template">
-              const queryClient = new QueryClient()
+              const queryClient = new QueryClient();
 
               function App() {
                 /* Provide the client to your App */
@@ -283,7 +283,7 @@
                   <QueryClientProvider client={queryClient}>
                     <MyComponent />
                   </QueryClientProvider>
-                )
+                );
               }
             </script></code></pre>
           </section>
@@ -305,8 +305,8 @@
               };
 
               function MyComponent() {
-                const { data: user, isLoading, error } = useQuery(['user'], 
-                                        () => fetcher('/user'))
+                const { data: user, isLoading, error } = useQuery(
+                  ['user'],() => fetcher('/user'))
                 
                 return <p>{user?.name}</p>;
               }
@@ -316,7 +316,7 @@
               <span class="warn">Clean & simple </span> &ndash; also comes with
               with retry, cache &amp; more functionality
             </p>
-            <div class="fragment tip">In a future release, load handling can be done with suspense</div>
+            <div class="fragment tip">In a future release, the loading state can be handled with Suspense</div>
           </section>
         </section>
         <section>
@@ -460,7 +460,7 @@
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
-            <li>Why fetching data is tricky with react render mechanism</li>
+            <li>Why fetching data is tricky with React render mechanism</li>
             <li>How to fetch data in React with a library</li>
             <li>Display details relating to loading & errors</li>
           </ul>

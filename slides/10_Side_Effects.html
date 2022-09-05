@@ -22,7 +22,7 @@
         <section class="deck-slide">
           <h1>
             Essential React <br />
-            10 SideEffects
+            10 Side Effects
           </h1>
         </section>
         <section>
@@ -33,7 +33,7 @@
           <section>
             <h3>Valid useCases</h3>
             <ul>
-              <li>Subscribing to Events (window, ...)</li>
+              <li>Subscribing to events (window, ...)</li>
               <li>Releasing resources to prevent a memory leak</li>
               <li>Cancelling a network request/asynchronous operation</li>
             </ul>
@@ -75,7 +75,7 @@
               <li>Don't use useEffect to update state on props or state</li>
               <li>Don't notify parents on state change</li>
               <li>
-                Do alculate all dependent states on the fly - if necessary, use
+                Do calculate all dependent states on the fly - if necessary, use
                 <span class="warn">useMemo</span>
               </li>
               <li>Do invoke callbacks as part of event handling logic</li>
@@ -88,7 +88,7 @@
             <img src="../img/search.png" />
             <p>
               Add a search input and use <span class="warn">useEffect</span> to
-              implement a debounce on the pokemonlist as a filter.
+              implement a debounce on the pokemon list as a filter.
             </p>
            
           </script></code></pre>
@@ -96,7 +96,7 @@
           <section data-auto-animate>
             <p>
               Add a search input and use <span class="warn">useEffect</span> to
-              implement a debounce on the pokemonlist as a filter.
+              implement a debounce on the pokemon list as a filter.
             </p>
             <p>Use setTimeout & clearTimeout to build a delay</p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
@@ -190,7 +190,7 @@
           <ul>
             <li>How to use <span class="warn">useEffect</span></li>
             <li>
-              When to use <span class="warn">useEffect</span> and when to rely 
+              When to use <span class="warn">useEffect</span> and when to use a different approach to reach your goal 
             </li>
             <li>How to cleanup side effects in useEffect</li>
           </ul>
