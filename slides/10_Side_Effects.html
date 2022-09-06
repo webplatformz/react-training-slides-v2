@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>10 Side Effects | Essential React</title>
+    <title>Side Effects | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
     <link
@@ -22,7 +22,7 @@
         <section class="deck-slide">
           <h1>
             Essential React <br />
-            10 Side Effects
+            Side Effects
           </h1>
         </section>
         <section>
@@ -42,7 +42,7 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
               function getWindowDimensions() {
                 const { innerWidth: width, innerHeight: height } = window;
-                return { width, height};
+                return { width, height };
               }
               export default function MyComponent() {
                 const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
@@ -72,15 +72,22 @@
           <section>
             <h3>useEffect as last-resort</h3>
             <ul>
-              <li>Don't use useEffect to update state based on props or state, 
-                whenever possible calculate all dependent states on the fly. <br/>If necessary, use
+              <li>
+                Don't use useEffect to update state based on props or state,
+                whenever possible calculate all dependent states on the fly.
+                <br />If necessary, use
                 <span class="warn">useMemo</span>
               </li>
-              <li>Don't notify parents on state change, whenever possible 
-                invoke callbacks as part of event handling logic.</li>
+              <li>
+                Don't notify parents on state change, whenever possible invoke
+                callbacks as part of event handling logic.
+              </li>
             </ul>
-            <aside class="notes">Treat useEffect as a code smell - if you have to use it,
-               challenge yourself if there is not a better way to solve the underlying issue</aside>
+            <aside class="notes">
+              Treat useEffect as a code smell - if you have to use it, challenge
+              yourself if there is not a better way to solve the underlying
+              issue
+            </aside>
           </section>
         </section>
         <section>
@@ -91,8 +98,6 @@
               Add a search input and use <span class="warn">useEffect</span> to
               implement a debounce on the pokemon list as a filter.
             </p>
-           
-          </script></code></pre>
           </section>
           <section data-auto-animate>
             <p>
@@ -152,8 +157,8 @@
                 const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
               
                 useEffect(() => {
-                  var timoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
-                  return () => clearTimeout(timoutId);
+                  const timeoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
+                  return () => clearTimeout(timeoutId);
                 }, [searchTerm]);
                 /* ... */
               }
@@ -184,16 +189,128 @@
             </script></code></pre>
           </section>
         </section>
-           <section>
-            <section>
+        <section>
+          <section><h2>Custom Hooks</h2></section>
+          <section>
+            <p>
+              We can reuse a concrete Hook logic by extracting it into a
+              <span class="warn">custom Hook</span>.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
+              function MyComponent() {
+                const result = /* logic that uses Hooks */
+                
+                return <p>{result}</p>;
+              }
+          </script></code></pre>
+            <p>The logic to be extracted can use a single or multiple Hooks.</p>
+          </section>
+          <section data-auto-animate>
+            <p>We simply move the logic into its own function.</p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="1,4|2-3|7"><script type="text/template">
+              function useMyCustomHook() {
+                /* logic that uses Hooks */
+                return result;
+              }
+
+              function MyComponent() {
+                const result = useMyCustomHook();
+
+                return <p>{result}</p>;
+              }
+          </script></code></pre>
+            <p class="fragment">In the component we just call this function.</p>
+            <p class="fragment tip">
+              <span>
+                Stick to the Hooks naming convention:
+                <span class="code">use*</span></span
+              >
+            </p>
+          </section>
+        </section>
+        <section>
+          <h2>Exercise</h2>
+
+          <p>Extract the debounce logic for the search into a custom Hook.</p>
+
+          <div class="column-container">
+            <div class="column">
+              <img src="../img/construction_work_refactor.jpg" />
+            </div>
+          </div>
+        </section>
+        <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section>
+            <p><span class="code">usePokeList.ts</span></p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="3|12-16"><script type="text/template">
+              import { useEffect, useState } from "react";
+
+              function useDebouncedSearch(initialSearchTerm: string) {
+                const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+                const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+              
+                useEffect(() => {
+                  const timoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
+                  return () => clearTimeout(timoutId);
+                }, [searchTerm]);
+              
+                return {
+                  searchTerm,
+                  setSearchTerm,
+                  debouncedSearchTerm
+                };
+              }
+              
+              export default useDebouncedSearch;
+              
+</script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">List.tsx</span></p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2-6"><script type="text/template">
+              function ListPage() {
+                const {
+                  searchTerm,
+                  setSearchTerm,
+                  debouncedSearchTerm
+                } = useDebouncedSearch("");
+              
+                const pokemons = usePokeList();
+                /* … */
+              }
+              
+              export default ListPage;
+              
+    
+</script></code></pre>
+          </section>
+        </section>
+        <section>
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
             <li>How to use <span class="warn">useEffect</span></li>
             <li>
-              When to use <span class="warn">useEffect</span> and when to use a different approach to reach your goal 
+              When to use <span class="warn">useEffect</span> and when to use a
+              different approach to reach your goal
             </li>
             <li>How to cleanup side effects in useEffect</li>
+            <li>How to extract Hook logic from components into Custom Hooks</li>
           </ul>
         </section>
         <section class="deck-slide">

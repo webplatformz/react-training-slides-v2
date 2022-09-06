@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>06 Hooks | Essential React</title>
+    <title>Hooks | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
     <link
@@ -22,7 +22,7 @@
         <section class="deck-slide">
           <h1>
             Essential React <br />
-            06 Hooks
+            Hooks
           </h1>
         </section>
         <section>
@@ -264,134 +264,6 @@ function MyComponent() {
                 SyntheticEvent API
               </a>
             </p>
-          </section>
-        </section>
-
-        <section>
-          <section><h2>Custom Hooks</h2></section>
-          <section>
-            <p>
-              We can reuse a concrete Hook logic by extracting it into a
-              <span class="warn">custom Hook</span>.
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p><span class="code">MyComponent.tsx</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
-              
-              export const fetcher = async <T>(uri: string): Promise<T> => {
-                const response = await fetch(uri);
-
-                return response.json();
-              };
-
-              function MyComponent() {
-                const { data: user } = useQuery(['user'], () => fetcher('/user'))
-                
-                return <p>{user?.name}</p>;
-              }
-          </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <p>&rarr; <span class="code">useUser.ts</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3-8"><script type="text/template">
-              import { useQuery } from 'react-query';
-
-              export default function useUser() {
-                const { data: user, isLoading } = useQuery(['user'], '/user')
-                const fullName = `${user?.firstName} ${user?lastName}`
-
-                return {user, isLoading, fullName};
-              }
-          </script></code></pre>
-          </section>
-
-          <section data-auto-animate>
-            <p data-id="2"><span class="code">MyComponent.tsx</span></p>
-
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="4"><script type="text/template">
-              import useUser from "./useUser.ts";
-
-              export default function MyComponent() {
-                const {user, isLoading} = useUser();
-
-                /* … */
-              }
-            
-          </script></code></pre>
-          </section>
-        </section>
-        <section>
-          <h2>Exercise</h2>
-
-          <p>Extract the debounce logic for the search into a custom Hook.</p>
-
-          <div class="column-container">
-            <div class="column">
-              <img src="../img/construction_work_refactor.jpg" />
-            </div>
-          </div>
-        </section>
-        <section>
-          <section>
-            <h2>Solution</h2>
-          </section>
-          <section>
-            <p><span class="code">usePokeList.ts</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3|12"><script type="text/template">
-              import { useEffect, useState } from "react";
-
-              function useDebouncedSearch(initialSearchTerm: string) {
-                const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-                const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-              
-                useEffect(() => {
-                  var timoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
-                  return () => clearTimeout(timoutId);
-                }, [searchTerm]);
-              
-                return { searchTerm, setSearchTerm, debouncedSearchTerm };
-              }
-              
-              export default useDebouncedSearch;
-              
-</script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">List.tsx</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="7,8"><script type="text/template">
-              import usePokeList from "../../service/poke/usePokeList";
-              import PokeListEntry from "./poke-list-entry/PokeListEntry";
-              import SearchPanel from "./search-panel/SearchPanel";
-              import useDebouncedSearch from "./useDebouncedSearch";
-              
-              function ListPage() {
-                const { searchTerm, setSearchTerm, debouncedSearchTerm } =
-                  useDebouncedSearch("");
-              
-                const pokemons = usePokeList();
-                /* ... */
-                );
-              }
-              
-              export default ListPage;
-              
-    
-</script></code></pre>
           </section>
         </section>
 
