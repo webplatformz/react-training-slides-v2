@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>10 State Management | Essential React</title>
+    <title>11 State Management | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
     <link
@@ -21,7 +21,7 @@
         <section class="deck-slide">
           <h1>
             Essential React <br />
-            10 State Management
+            11 State Management
           </h1>
         </section>
         <section>
@@ -226,99 +226,6 @@
                 </pre>
           </section>
         </section>
-
-        <section>
-          <section>
-            <h2>API Data Management</h2>
-            <p>How to make calling APIs less tedious</p>
-          </section>
-          <section>
-            <h2>Requirements</h2>
-            <ul>
-              <li>
-                Handle repetitive data loading states (pending, success, error)
-              </li>
-              <li>Cache response</li>
-              <li>Invalidate response</li>
-              <li>Handle mutations</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Libraries</h2>
-            <ul>
-              <li>
-                <a
-                  href="https://swr.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  SWR
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://react-query.tanstack.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  react-query
-                </a>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim><script type="text/template">
-                    import useSWR from 'swr'
-
-                    const fetcher = (input: RequestInfo, init: RequestInit) =>
-                      fetch(input, init).then((res) => res.json());
-
-                    function MyComponent() {
-                      const { data, error } = useSWR('/api/user', fetcher)
-
-                      if (error) return <div>failed to load</div>
-                      if (!data) return <div>loading...</div>
-                      return <div>hello {data.name}!</div>
-                    }
-                </script></code></pre>
-          </section>
-          <section>
-            <h3>Install the Package</h3>
-            <pre
-              data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">
-                npm install swr
-                </script></code></pre>
-          </section>
-        </section>
-
-        <section>
-          <h2>Exercise</h2>
-          <ul>
-            <li>Use SWR in your <span class="code">usePokeList</span> hook</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Solution</h2>
-          <p><span class="code">usePokeList.ts</span></p>
-          <pre>
-                <code class="hljs tsx" data-trim><script type="text/template">
-                    const fetcher = (input: RequestInfo, init: RequestInit) =>
-                      fetch(input, init).then((res) => res.json());
-                    function usePokeList() {
-                      const { data: pokemons } = useSWR(
-                        "https://pokeapi.co/api/v2/pokemon?limit=50",
-                        fetcher
-                      );
-                      return pokemons?.results;
-                    }
-                </script></code>
-            </pre>
-        </section>
-
         <section>
           <section>
             <h2>How to handle more complex states?</h2>

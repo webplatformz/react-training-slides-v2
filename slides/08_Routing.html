@@ -96,7 +96,7 @@
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
               function App() {
                 return (
-                  // Let's route!
+                  /* Let's route! */
                 );
               }
             </script></code></pre>
@@ -242,7 +242,7 @@
                 return (
                   <Router>
                     <Routes>
-                      // …
+                      /* … */
                       <Route
                         path="/cars/:carId"
                         element={<CarDetailPage />}
@@ -490,9 +490,9 @@ export default function usePokeDetail(name: string) {
             `https://pokeapi.co/api/v2/pokemon/${name}`
           );
           
-          // …
+          /* … */
       })();
-      // …
+      /* … */
   }, [name]);
 
   return detail;
@@ -582,12 +582,12 @@ function MyComponent() {
   const { pathname, search } = useLocation();
 
   console.log(`Pathname: ${pathname}`);
-  // Pathname: /cars
+  /* Pathname: /cars */
 
   console.log(`Query string: ${search}`);
-  // Query string: ?filter=Tesla
+  /* Query string: ?filter=Tesla */
   
-  // …
+  /* … */
 }
             </script></code></pre>
 

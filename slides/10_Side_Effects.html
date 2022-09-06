@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>10 Side Effects | Essential React</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+    />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="deck-slide">
+          <h1>
+            Essential React <br />
+            10 Side Effects
+          </h1>
+        </section>
+        <section>
+          <section>
+            <h2>useEffect</h2>
+            <p>What is it good for?</p>
+          </section>
+          <section>
+            <h3>Valid useCases</h3>
+            <ul>
+              <li>Subscribing to events (window, ...)</li>
+              <li>Releasing resources to prevent a memory leak</li>
+              <li>Cancelling a network request/asynchronous operation</li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
+              function getWindowDimensions() {
+                const { innerWidth: width, innerHeight: height } = window;
+                return { width, height};
+              }
+              export default function MyComponent() {
+                const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+              
+                const handleResize = useCallback(() => {
+                  setWindowDimensions(getWindowDimensions());
+                }, []);
+              
+                useEffect(() => {
+                  handleResize();
+                  window.addEventListener('resize', handleResize);
+                  return () => window.removeEventListener('resize', handleResize);
+                }, [handleResize]);
+              /* ... */
+              
+          </script></code></pre>
+          </section>
+
+          <section>
+            <h3>Cleanup is necessary for...</h3>
+            <ul>
+              <li>Unsubscribing from a pub-sub interface</li>
+              <li>Releasing resources to prevent a memory leak</li>
+              <li>Cancelling a network request/asynchronous operation</li>
+            </ul>
+          </section>
+          <section>
+            <h3>useEffect as last-resort</h3>
+            <ul>
+              <li>Don't use useEffect to update state based on props or state, 
+                whenever possible calculate all dependent states on the fly. <br/>If necessary, use
+                <span class="warn">useMemo</span>
+              </li>
+              <li>Don't notify parents on state change, whenever possible 
+                invoke callbacks as part of event handling logic.</li>
+            </ul>
+            <aside class="notes">Treat useEffect as a code smell - if you have to use it,
+               challenge yourself if there is not a better way to solve the underlying issue</aside>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>Exercise</h2>
+            <img src="../img/search.png" />
+            <p>
+              Add a search input and use <span class="warn">useEffect</span> to
+              implement a debounce on the pokemon list as a filter.
+            </p>
+           
+          </script></code></pre>
+          </section>
+          <section data-auto-animate>
+            <p>
+              Add a search input and use <span class="warn">useEffect</span> to
+              implement a debounce on the pokemon list as a filter.
+            </p>
+            <p>Use setTimeout & clearTimeout to build a delay</p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
+              const timeoutId = setTimeout(
+                () => console.log('execute with timeout'), 300);
+              clearTimeout(timeoutId); 
+          </script></code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section>
+            <p><span class="code">SearchPanel.tsx</span></p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+              type Props = {
+                searchTerm: string;
+                onSearchChanged: (searchTerm: string) => void;
+              };
+              
+              function SearchPanel({ searchTerm, onSearchChanged }: Props) {
+                return (
+                  <div >
+                    <label htmlFor="searchTerm">Search</label>
+                    <input
+                      type="text"
+                      id="searchTerm"
+                      value={searchTerm}
+                      placeholder="Pokemon name"
+                      onChange={(e) => {
+                        onSearchChanged(e.target.value);
+                      }}
+                    />
+                  </div>
+                );
+              }
+              
+              export default SearchPanel;
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">ListPage.tsx</span></p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2,3|5-8"><script type="text/template">
+
+              function ListPage() {
+                const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+                const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+              
+                useEffect(() => {
+                  var timoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
+                  return () => clearTimeout(timoutId);
+                }, [searchTerm]);
+                /* ... */
+              }
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">ListPage.tsx</span></p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5|8"><script type="text/template">
+
+              function ListPage() {
+                /* ... */
+                return (
+                  <>
+                    <SearchPanel searchTerm={searchTerm} onSearchChanged={setSearchTerm} />
+                    {pokemons ? (
+                      pokemons
+                        ?.filter((p) => p.name.includes(debouncedSearchTerm))
+                        .map((pokemon) => (
+                          <PokeListEntry key={pokemon.name} name={pokemon.name} />
+                        ))
+                    ) : (
+                      <div>LOADING</div>
+                    )}
+                  </>
+              }
+            </script></code></pre>
+          </section>
+        </section>
+           <section>
+            <section>
+          <h2>Recap</h2>
+          <p>We learned&hellip;</p>
+          <ul>
+            <li>How to use <span class="warn">useEffect</span></li>
+            <li>
+              When to use <span class="warn">useEffect</span> and when to use a different approach to reach your goal 
+            </li>
+            <li>How to cleanup side effects in useEffect</li>
+          </ul>
+        </section>
+        <section class="deck-slide">
+          <h1>Questions?</h1>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script>
+      setupZuehlkeRevealPresentation();
+    </script>
+  </body>
+</html>
