@@ -72,14 +72,15 @@
           <section>
             <h3>useEffect as last-resort</h3>
             <ul>
-              <li>Don't use useEffect to update state on props or state</li>
-              <li>Don't notify parents on state change</li>
-              <li>
-                Do calculate all dependent states on the fly - if necessary, use
+              <li>Don't use useEffect to update state based on props or state, 
+                whenever possible calculate all dependent states on the fly. <br/>If necessary, use
                 <span class="warn">useMemo</span>
               </li>
-              <li>Do invoke callbacks as part of event handling logic</li>
+              <li>Don't notify parents on state change, whenever possible 
+                invoke callbacks as part of event handling logic.</li>
             </ul>
+            <aside class="notes">Treat useEffect as a code smell - if you have to use it,
+               challenge yourself if there is not a better way to solve the underlying issue</aside>
           </section>
         </section>
         <section>
