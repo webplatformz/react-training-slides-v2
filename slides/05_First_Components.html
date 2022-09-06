@@ -78,7 +78,7 @@
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="1,6|"><script type="text/template">
-                        import Greeting from './greeting';
+                        import Greeting from './Greeting';
 
                         export default function WelcomePage() {
                             return (
@@ -97,12 +97,12 @@
             <h3>Fragments</h3>
             <p>Components always return a <em>single node</em>.</p>
             <p>
-              If you want to return multiple elements, wrap them in a
+              If you want to return multiple nodes, wrap them in a
               <span class="warn">Fragment</span> to avoid rendering an
               unnecessary <span class="code">&lt;div&gt;</span>.
             </p>
             <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="3,6|" data-id="code"><script type="text/template">
+            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5|3,6|" data-id="code"><script type="text/template">
                         function MyComponent() {
                             return (
                               <>
@@ -185,7 +185,7 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        import PokeListEntry from "./PokeListEntry.tsx"
+                        import PokeListEntry from "./PokeListEntry"
 
                         export default function App() {
                             return (
@@ -294,13 +294,13 @@
             <h2>Testing our dumb component</h2>
             <span class="code">Greeting.test.tsx</span>
             <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,6|6,8|"><script type="text/template">
+            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8|"><script type="text/template">
               import { render, screen } from '@testing-library/react';
               import Greeting from './Greeting';
 
               describe('Greeting', () => {
                   it('should render "Hello World"', () => {
-                      render(<Greeting/>);
+                      render(<Greeting />);
 
                       expect(screen.getByText('Hello World')).toBeInTheDocument();
                   });
@@ -325,7 +325,8 @@
                       it('should render correct name', () => {
                         render(<Greeting name="React Master" />);
 
-                        expect(screen.getByText("Hello React Master")).toBeInTheDocument();
+                        expect(screen.getByText("Hello React Master"))
+                          .toBeInTheDocument();
                       });
                       </script>
                     </code>
@@ -340,7 +341,7 @@
                   name?: string;
               };
 
-              function Greeting({name = 'World'}: Props) {
+              function Greeting({ name = 'World' }: Props) {
                   return <div>Hello {name}</div>;
               }
 
@@ -360,7 +361,8 @@
 
                 render(<Greeting name={name} />);
 
-                expect(screen.getByText(`Hello ${name}`)).toBeInTheDocument();
+                expect(screen.getByText(`Hello ${name}`))
+                  .toBeInTheDocument();
               });
             </script></code></pre>
           </section>
@@ -508,7 +510,7 @@
               elements from <span class="code">map</span>.
             </p>
             <!-- prettier-ignore -->
-            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,10,13"><script type="text/template">
+            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6-9,11-12,14-17|1,10,13"><script type="text/template">
                         import { Fragment } from "react";
 
                         const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
@@ -531,8 +533,9 @@
             <p class="fragment tip">
               <span
                 >Here we can't use the shorter
-                <span class="code">&lt;&gt;…&lt;/&gt;</span> syntax. Only <span class="code">Fragment</span> can take the key prop.</span
-                ></p>
+                <span class="code">&lt;&gt;…&lt;/&gt;</span> syntax. Only
+                <span class="code">Fragment</span> can take the key prop.</span
+              >
             </p>
           </section>
         </section>
@@ -703,9 +706,7 @@
             <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
-                        type LayoutProps = PropsWithChildren<{
-                          name: string;
-                        }>;
+                        type LayoutProps = PropsWithChildren<{}>;
 
                         export default function Layout({ children }: LayoutProps) {
                           return (
@@ -754,7 +755,10 @@
             <li>Use props to pass data into a component</li>
             <li>Write tests to verify the components behaviour</li>
             <li>Render a list of components</li>
-            <li>Create wrapper components using the <span class="warn">children</span> prop</li>
+            <li>
+              Create wrapper components using the
+              <span class="warn">children</span> prop
+            </li>
           </ul>
         </section>
         <section class="deck-slide">
