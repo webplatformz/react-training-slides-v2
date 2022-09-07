@@ -251,7 +251,10 @@
             <p>On the CI, you will typically run at least these scripts:</p>
 
             <ul>
-              <li><span class="code">npm test</span></li>
+              <li><span class="code">npm test:ci</span>
+                <br/>
+                (similar to <span class="code">npm test</span> but configured in package.json with the flag <span class="warn">--watchAll=false</span>)
+              </li>
               <li><span class="code">npm run build</span></li>
             </ul>
           </section>
