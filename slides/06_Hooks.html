@@ -50,12 +50,17 @@
               function MyComponent() {
                 // Define a name state with the initial value of ""
                 const [name, setName] = useState("");
-            
-                // The setName function updates the state
-                setName("Joe");
-
+              
+                // setName updates the state
+                const updateName = (e) => setName(e.target.value);
+              
                 // The variable 'name' contains the current state value
-                return <p>Name: {name}</p>
+                return (
+                  <div>
+                    <p>Name: {name}</p>
+                    <input type="text" onChange={updateName} />
+                  </div>
+                );
               }
             </script></code></pre>
           </section>
