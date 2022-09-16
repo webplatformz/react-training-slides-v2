@@ -195,8 +195,8 @@
                   type FormValues = { name: string; };
                   
                   const { register, handleSubmit, formState } = useForm<FormValues>();
-                  const onSubmit = data => { console.log(data); };
-                  const onError = error => { console.log(error); };
+                  const onSubmit: SubmitHandler<FormValues> = (data) => { console.log(data); };
+                  const onError: SubmitErrorHandler<FormValues> = (error) => { console.log(error); };
 
                   return (
                     <form onSubmit={handleSubmit(onSubmit, onError)}>
