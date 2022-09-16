@@ -425,21 +425,22 @@
 
             <p><span class="code">List.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|9-11|12|13"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|6-7|9-15"><script type="text/template">
             function List() {
-              const {data: pokemons, isLoading, error} = 
-                useQuery(['pokemon_list'], () =>
+              const { data, isLoading, isError } = useQuery(['pokemon', 'list'], () =>
                 fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
               );
 
+              if (isLoading) return <div>LOADING</div>;
+              if (isError) return <div>ERROR while loading data</div>;
+            
               return (
                 <>
-                  {!isLoading && !error && pokemons?.map((pokemon) => (
-                    <PokeListEntry key={pokemon.name} name={pokemon.name} />
-                  ))}
-                  {isLoading && <div>LOADING</div>}
-                  {error && <div>ERROR while loading data</div>}
-                </>);
+                  {data.results.map((pokemon) => (
+                      <PokeListEntry key={pokemon.name} name={pokemon.name} />
+                    ))}
+                </>
+              );
             }
         </script></code></pre>
           </section>
