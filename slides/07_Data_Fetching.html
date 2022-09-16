@@ -428,8 +428,8 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|9-11|12|13"><script type="text/template">
             function List() {
               const {data: pokemons, isLoading, error} = 
-                useQuery(["pokemon_list"], () =>
-                fetcher<PokemonResultDto>("https://pokeapi.co/api/v2/pokemon?limit=1000")
+                useQuery(['pokemon_list'], () =>
+                fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
               );
 
               return (
