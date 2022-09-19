@@ -428,7 +428,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/pokemon" replace />} />
       <Route path="/pokemon" element={<ListPage />} />
-      <Route path="/pokemon/:pokemonName" element={<DetailPage />} />
+      <Route path="/pokemon/:name" element={<DetailPage />} />
     </Routes>
   </Router>);
 }
@@ -457,48 +457,24 @@ export default PokeListEntry;
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
 import { useParams } from "react-router-dom";
-import usePokeDetail from "../../service/poke/usePokeDetail";
 
-interface Params { pokemonName: string; }
+interface Params { name: string; }
 
 export default function DetailPage() {
-  const { pokemonName } = useParams<Params>();
-  const pokemon = usePokeDetail(pokemonName);
-  if (!pokemon) return null;
+  const { name } = useParams<Params>();
+  const { data, isLoading, isError } = useQuery(['pokemon', name], () =>
+    fetcher<PokemonDetailDto>(`https://pokeapi.co/api/v2/pokemon/${name}`)
+  );
+  if (!data) return null;
   return (<>
-    <h1>{pokemon.name}</h1>
+    <h1>{data.name}</h1>
     <dl>
       <dt>hp</dt>
-      <dd>{pokemon.hp}</dd>
-      <dt>attack</dt>
-      <dd>{pokemon.attack}</dd>
+      <dd>{data.hp}</dd>
       // …
     </dl>
   </>);
 }           
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">usePokeDetail.ts</span></p>
-
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,6,12|"><script type="text/template">
-export default function usePokeDetail(name: string) {
-  const [detail, setDetail] = useState<PokeDetail>();
-  useEffect(() => {
-      (async function() {
-          const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${name}`
-          );
-          
-          /* … */
-      })();
-      /* … */
-  }, [name]);
-
-  return detail;
-}
-
-export interface PokeDetail { … }
             </script></code></pre>
           </section>
         </section>
