@@ -359,34 +359,91 @@
           </section>
 
           <section>
-            <p><span class="code">usePokeVisit.ts</span> reducer</p>
+            <h3>
+              <span class="code">usePokeVisit.ts</span> reducer function &
+              initial state
+            </h3>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              export type PokeVisitState = string[];
+              export const initialState: PokeVisitState = [];
+
+              export function pokeVisitReducer(
+                state: PokeVisitState,
+                action: PokeVisitAction
+              ): PokeVisitState {
+                switch (action.type) {
+                  case "add":
+                    return [...state, action.value];
+                  case "reset":
+                    return initialState;
+                  default:
+                    throw new Error("unknown action type");
+                }
+              }      
+            </script></code></pre>
+          </section>
+
+          <section>
+            <h3><span class="code">usePokeVisit.ts</span> reducer hook</h3>
             <pre>
                     <code class="hljs tsx" data-trim><script type="text/template">
+                        import { initialState, pokeVisitReducer } from "./pokeVisitReducer";
+
                         const usePokeVisit = () => {
-                          return useReducer((state: Set<string>, action: PokeVisitAction) => {
-                            switch (action.type) {
-                              case "add":
-                                return new Set([...state, action.value]);
-                              case "reset":
-                                return new Set();
-                              default:
-                                throw new Error("unknown action type");
-                            }
-                          }, new Set());
+                          const [state, dispatch] = useReducer(pokeVisitReducer, initialState);
+                          return { state, dispatch };
                         };        
                     </script></code>
                 </pre>
-          </section>
-          <section>
-            <p>dispatching visits</p>
+
+            <h3>using <span class="code">usePokeVisit.ts</span></h3>
             <pre>
-                    <code class="hljs ts" data-trim><script type="text/template">
-                        useEffect(() => {
-                          dispatch({
-                            type: "add",
-                            value: pokemonName
-                          });
-                        }, [dispatch, pokemonName]);      
+                  <code class="hljs tsx" data-trim><script type="text/template">
+                    const { state, dispatch } = usePokeVisit();
+                    
+                    // state contains all visited pokemon
+                    // dispatch is a function to dispatch actions to the reducer 
+                    // (e.g., add a new pokemon, reset the count)
+                  </script></code>
+              </pre>
+          </section>
+
+          <section>
+            <h3>Dispatching Reducer Actions</h3>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              useEffect(() => {
+                dispatch({
+                  type: "add",
+                  value: pokemonName
+                });
+              }, [dispatch, pokemonName]);      
+            </script></code></pre>
+
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              const handleClick = () => dispatch({ type: "reset" });
+            </script></code></pre>
+          </section>
+
+          <section>
+            <h3>Stretch Goal Solution</h3>
+            <pre>
+                    <code class="hljs tsx" data-trim data-line-numbers="|1-2,10"><script type="text/template">
+                      export type PokeVisitState = Set<string>;
+                      export const initialState: PokeVisitState = new Set();
+        
+                      export function pokeVisitReducer(
+                        state: PokeVisitState,
+                        action: PokeVisitAction
+                      ): PokeVisitState {
+                        switch (action.type) {
+                          case "add":
+                            return new Set([...Array.from(state), action.value]);;
+                          case "reset":
+                            return initialState;
+                          default:
+                            throw new Error("unknown action type");
+                        }
+                      }            
                     </script></code>
                 </pre>
           </section>
