@@ -15,6 +15,7 @@
       href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
     />
   </head>
+
   <body>
     <div class="reveal">
       <div class="slides">
@@ -78,30 +79,33 @@
           </section>
 
           <section>
-            <pre>
-                    <code class="hljs tsx" data-trim>
-                        <script type="text/template">
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
             import { createContext, useContext } from "react";
 
-            type YourContextValue = {
-              user: string;
+            type ContextType = {
+              name: string;
+              setName: (name: string) => void;            
             };
             
-            const UserContext = createContext<YourContextValue | undefined>(undefined);
+            const UserContext = createContext<ContextType | undefined>(undefined);
             
             function Parent() {
-              return (<UserContext.Provider value={{ user: "joe" }}>
-                <Child />
-              </UserContext.Provider>)
+              const [name, setName] = useState("Joe");
+              return (
+                <UserContext.Provider value={{ name, setName }}>
+                  <Child />
+                </UserContext.Provider>)
             }
 
             function Child() {
               const context = useContext(UserContext);
-              return <p>{context?.user}</p>; // joe
+              const updateName = () => context?.setName("Jane")
+              return (<>
+                <p>Name: {context?.name}</p> {/* name == "Joe" */}
+                <button onClick={updateName}>Change Name</button>
+              </>)
             }
-                        </script>
-                    </code>
-                </pre>
+            </script></code></pre>
           </section>
 
           <section>
