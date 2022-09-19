@@ -47,16 +47,23 @@
           </section>
           <section>
             <pre><code class="hljs tsx" data-trim><script type="text/template">
-              function MyComponent() {
                 // Define a name state with the initial value of ""
                 const [name, setName] = useState("");
-            
-                // The setName function updates the state
-                setName("Joe");
+            </script></code></pre>
 
-                // The variable 'name' contains the current state value
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+                // The setName function updates the state 
+                setName("Joe");            
+            </script></code></pre>
+
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+                // Alter the existing Name 
+                setName(oldName => `Mr. ${oldName}`); 
+            </script></code></pre>
+
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+                // The variable 'name' contains the current state value 
                 return <p>Name: {name}</p>
-              }
             </script></code></pre>
           </section>
           <section>
