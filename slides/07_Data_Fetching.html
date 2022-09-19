@@ -322,23 +322,22 @@
         <section>
           <h3>Some words about types</h3>
 
-          <pre
-            data-id="code2"
-          ><code class="hljs tsx" data-trim data-line-numbers="9,1,11-14"><script type="text/template">
-            const fetcher = async <T>(uri: string): Promise<T> => {
-              const response = await fetch(uri);
-              if (!response.ok) throw new Error('Could not fetch data!');
+          <pre data-id="code2">
+            <code class="hljs tsx" data-trim data-line-numbers="9,1,11-14">
+              <script type="text/template">
+                async function fetcher<T>(uri: string): Promise<T> {
+                  const response = await fetch(uri);
+                  if (!response.ok) throw new Error('Could not fetch data!');
+                  return response.json();
+                };
 
-              return response.json();
-            };
+                const { data: user } = useQuery(['user'], 
+                    () => fetcher<User>('/user'))
 
-            const { data: user } = useQuery(['user'], 
-                () => fetcher<User>('/user'))
-
-              interface User {
-                firstName: string,
-                /* ... */
-              }
+                  interface User {
+                    firstName: string,
+                    /* ... */
+                  }
           </script></code></pre>
 
           <p>
@@ -389,12 +388,12 @@
               >: <span class="code">npm i @tanstack/react-query</span></span
             >
             <pre>
-              <code class="hljs json" data-trim data-noescape>
-                export const fetcher = async <T>(uri: string): Promise<T> => {
+              <code class="hljs ts" data-trim data-noescape>
+                export async function fetcher&lt;T&gt;(uri: string): Promise&lt;T&gt; {
                   const response = await fetch(uri);
                   if (!response.ok) throw new Error('Could not fetch data!');
                   return response.json();
-                };
+              };
               </code>
           </pre>
             <a
