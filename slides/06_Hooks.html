@@ -31,250 +31,6 @@
         </section>
         <section>
           <section>
-            <h2>How to handle component-level state</h2>
-          </section>
-          <section>
-            <h3>
-              The
-              <span class="warn">useState</span>
-              Hook
-            </h3>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
-                import { useState } from "react";
-
-                function MyComponent() {
-                  const [name, setName] = useState("");
-                }
-            </script></code></pre>
-          </section>
-          <section>
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-              function MyComponent() {
-                // Define a name state with the initial value of ""
-                const [name, setName] = useState("");
-            </script></code></pre>
-
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-                // The setName function updates the state 
-                setName("Joe");            
-            </script></code></pre>
-
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-              // Alter the existing Name 
-              setName(oldName => `Mr. ${oldName}`); 
-            </script></code></pre>
-
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-                // The variable 'name' contains the current state value 
-                return <p>Name: {name}</p>
-            </script></code></pre>
-          </section>
-          <section>
-            <pre>
-                <code class="hljs tsx" data-trim><script type="text/template">
-                  const [name, setName] = useState("");
-                  
-                  const [age, setAge] = useState(0);
-                  
-                  const [meal, setMeal] = useState<Meal>();
-                </script></code>
-            </pre>
-            <p>The array destructuring makes it easy to use multiple states in a component.</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h2>How to handle input</h2>
-          </section>
-          <section data-auto-animate>
-            <p>
-              The
-              <span class="warn">onChange</span>
-              prop is a function which is called when the input is changed.
-            </p>
-
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
-                <input
-                  type="text"
-                  onChange={(event) => {
-                    /* Do something */
-                  }}
-                />
-            </script></code></pre>
-          </section>
-
-          <section data-auto-animate>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
-              <input
-                type="text"
-                onChange={(event) => {
-                  console.log(event.target.value);
-                }}
-              />
-            </script></code></pre>
-
-            <p>
-              Use
-              <span class="warn">event.target.value</span>
-              to access the value which was entered.
-            </p>
-          </section>
-        </section>
-
-        <section>
-          <h2>Exercise</h2>
-
-          <p><img src="../img/state_management_part_1_goal.png" /></p>
-          <ol>
-            <li>Allow the user to enter their name</li>
-            <li>The entered name is displayed as a greeting next to the input field</li>
-            <li>Display the input field on top of the list - routing will come later</li>
-          </ol>
-        </section>
-        <section>
-          <h2>Solution</h2>
-          <pre><code class="hljs tsx" data-trim data-line-numbers="|4,11-14"><script type="text/template">
-            import { useState } from "react";
-
-            function Profile() {
-              const [username, setUsername] = useState("");
-
-              return (<>
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
-                />
-              </>);
-            }
-          </script></code></pre>
-        </section>
-        <section>
-          <section>
-            <h2>How to handle component-level state</h2>
-          </section>
-          <section>
-            <h3>
-              The
-              <span class="warn">useState</span>
-              Hook
-            </h3>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
-                import { useState } from "react";
-
-                function MyComponent() {
-                  const [name, setName] = useState("");
-                }
-            </script></code></pre>
-          </section>
-          <section>
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-                // Define a name state with the initial value of ""
-                const [name, setName] = useState("");
-            </script></code></pre>
-
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-                // The setName function updates the state 
-                setName("Joe");            
-            </script></code></pre>
-
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-                // Alter the existing Name 
-                setName(oldName => `Mr. ${oldName}`); 
-            </script></code></pre>
-
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
-                // The variable 'name' contains the current state value 
-                return <p>Name: {name}</p>
-            </script></code></pre>
-          </section>
-          <section>
-            <pre>
-                <code class="hljs tsx" data-trim><script type="text/template">
-                  const [name, setName] = useState("");
-                  
-                  const [age, setAge] = useState(0);
-                  
-                  const [meal, setMeal] = useState<Meal>();
-                </script></code>
-            </pre>
-            <p>The array destructuring makes it easy to use multiple states in a component.</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h2>How to handle input</h2>
-          </section>
-          <section data-auto-animate>
-            <p>
-              The
-              <span class="warn">onChange</span>
-              prop is a function which is called when the input is changed.
-            </p>
-
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
-  <input
-    type="text"
-    onChange={(event) => {
-      /* Do something */
-    }}
-  />
-  </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
-  <input
-    type="text"
-    onChange={(event) => {
-      console.log(event.target.value);
-    }}
-  />
-  </script></code></pre>
-
-            <p>
-              Use
-              <span class="warn">event.target.value</span>
-              to access the value which was entered.
-            </p>
-          </section>
-        </section>
-        <section>
-          <h2>Exercise</h2>
-
-          <p><img src="../img/state_management_part_1_goal.png" /></p>
-          <ol>
-            <li>Allow the user to enter their name</li>
-            <li>The entered name is displayed as a greeting next to the input field</li>
-            <li>Display the input field on top of the list - routing will come later</li>
-          </ol>
-        </section>
-        <section>
-          <h2>Solution</h2>
-          <pre><code class="hljs tsx" data-trim data-line-numbers="|4,11-14"><script type="text/template">
-import { useState } from "react";
-
-function Profile() {
-  const [username, setUsername] = useState("");
-
-  return (<>
-    <label htmlFor="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      value={username}
-      onChange={(e) => {
-        setUsername(e.target.value);
-      }}
-    />
-  </>);
-}</script></code></pre>
-        </section>
-        <section>
-          <section>
             <h3>What are Hooks?</h3>
             <p>Hooks are functions that let you "hook into" React state and lifecycle features.</p>
           </section>
@@ -410,25 +166,24 @@ function MyComponent() {
             </p>
 
             <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
-  <input
-    type="text"
-    onChange={(event) => {
-      /* Do something */
-    }}
-  />
-  </script></code></pre>
+            <input
+              type="text"
+              onChange={(event) => {
+                /* Do something */
+              }}
+            />
+          </script></code></pre>
           </section>
           <section data-auto-animate>
             <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
-  <input
-    type="text"
-    onChange={(event) => {
-      console.log(event.target.value);
-      setName(event.target.value);
-    }}
-  />
-  </script></code></pre>
-
+            <input
+              type="text"
+              onChange={(event) => {
+                console.log(event.target.value);
+                setName(event.target.value);
+              }}
+            />
+          </script></code></pre>
             <p>
               Use
               <span class="warn">event.target.value</span>
@@ -448,24 +203,23 @@ function MyComponent() {
         </section>
         <section>
           <h2>Solution</h2>
-          <pre><code class="hljs tsx" data-trim data-line-numbers="|4,11-14"><script type="text/template">
-import { useState } from "react";
+          <pre><code class="hljs tsx" data-trim data-line-numbers="|4,12"><script type="text/template">
+            import { useState } from "react";
 
-function Profile() {
-  const [username, setUsername] = useState("");
+            function Profile() {
+              const [username, setUsername] = useState("");
 
-  return (<>
-    <label htmlFor="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      value={username}
-      onChange={(e) => {
-        setUsername(e.target.value);
-      }}
-    />
-  </>);
-}</script></code></pre>
+              return (<>
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </>);
+            }
+        </script></code></pre>
         </section>
         <section>
           <section>
@@ -473,13 +227,13 @@ function Profile() {
           </section>
           <section>
             <pre><code class="hljs tsx" data-trim data-line-numbers="3"><script type="text/template">
-  <input
-    type="text"
-    onChange={(event) => { /* often just called 'e' */
-      console.log(event.target.value);
-    }}
-  />
-  </script></code></pre>
+              <input
+                type="text"
+                onChange={(event) => { /* often just called 'e' */
+                  console.log(event.target.value);
+                }}
+              />
+            </script></code></pre>
             <p>
               Event handlers like
               <span class="code">onChange</span>

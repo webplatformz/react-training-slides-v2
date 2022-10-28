@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Data Fetching | Essential React</title>
 
@@ -21,7 +18,8 @@
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             Data Fetching
           </h1>
         </section>
@@ -32,13 +30,7 @@
           </section>
           <section>
             <h2>PokeAPI</h2>
-            <a
-              href="https://pokeapi.co/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Documentation
-            </a>
+            <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">Documentation</a>
           </section>
           <section>
             <h3>List of Pokemon</h3>
@@ -61,11 +53,7 @@
                 }
               </script></code></pre>
             <p>
-              <a
-                href="https://pokeapi.co/api/v2/pokemon?limit=5"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://pokeapi.co/api/v2/pokemon?limit=5" target="_blank" rel="noopener noreferrer">
                 GET https://pokeapi.co/api/v2/pokemon?limit=5
               </a>
             </p>
@@ -75,22 +63,25 @@
           <section><h2>What to use for data fetching?</h2></section>
           <section>
             <ul>
-              <li>React does <em>not</em> provide data fetching</li>
-              <li><span class="warn">Fetch:</span> standard browser API</li>
+              <li>
+                React does
+                <em>not</em>
+                provide data fetching
+              </li>
+              <li>
+                <span class="warn">Fetch:</span>
+                standard browser API
+              </li>
               <li>&hellip; or any data fetching library</li>
             </ul>
 
             <aside class="notes">
               <p>
-                We will demonstrate here a very basic way to perform data
-                fetching. It works and might be fine for very small
-                applications.
+                We will demonstrate here a very basic way to perform data fetching. It works and might be fine for very
+                small applications.
               </p>
 
-              <p>
-                With React 18: Suspense for data fetching. Should be used with a
-                library.
-              </p>
+              <p>With React 18: Suspense for data fetching. Should be used with a library.</p>
             </aside>
           </section>
           <section>
@@ -113,7 +104,11 @@
         </section>
         <section>
           <section>
-            <h2>How <em>can</em> we use fetch in React?</h2>
+            <h2>
+              How
+              <em>can</em>
+              we use fetch in React?
+            </h2>
           </section>
           <section>
             <p>Does this work?</p>
@@ -128,8 +123,8 @@
                }        
               </script></code></pre>
             <p class="fragment">
-              <span class="warn">Does not work!</span> &ndash; The render
-              function is not async.
+              <span class="warn">Does not work!</span>
+              &ndash; The render function is not async.
             </p>
           </section>
           <section>
@@ -149,8 +144,8 @@
                  return <p>{user?.name}</p>;
                }</script></code></pre>
             <p class="fragment">
-              <span class="warn">Does not work!</span> &ndash; When the promise
-              resolves, the render function already ran.
+              <span class="warn">Does not work!</span>
+              &ndash; When the promise resolves, the render function already ran.
             </p>
           </section>
           <section>
@@ -173,31 +168,30 @@
                 return <p>{user?.name}</p>;
               }</script></code></pre>
             <p class="fragment">
-              <span class="warn">Bad!</span> &ndash; This produces an infinte
-              loop.
+              <span class="warn">Bad!</span>
+              &ndash; This produces an infinte loop.
             </p>
           </section>
           <section>
             <h3>
-              Why we should <em>not</em> run side effects in the render function
+              Why we should
+              <em>not</em>
+              run side effects in the render function
             </h3>
             <ul>
+              <li class="fragment">We don't want the side effect to execute with every render.</li>
+              <li class="fragment">The render function might be executed anytime &ndash; we don't control it.</li>
               <li class="fragment">
-                We don't want the side effect to execute with every render.
-              </li>
-              <li class="fragment">
-                The render function might be executed anytime &ndash; we don't
-                control it.
-              </li>
-              <li class="fragment">
-                In the render function we just want to render and not spend
-                computing on other tasks.
+                In the render function we just want to render and not spend computing on other tasks.
               </li>
             </ul>
           </section>
 
           <section data-auto-animate>
-            <p>Handle side effects with <span class="warn">useEffect</span></p>
+            <p>
+              Handle side effects with
+              <span class="warn">useEffect</span>
+            </p>
 
             <pre
               data-id="code2"
@@ -219,23 +213,21 @@
               }
             </script></code></pre>
 
-            <p><span class="warn">This works!</span>, but ...</p>
+            <p>
+              <span class="warn">This works!</span>
+              , but ...
+            </p>
           </section>
         </section>
         <section>
           <section>
-            <img
-              src="../img/user-duplicate-request.png"
-              alt="Duplicate request"
-            />
+            <img src="../img/user-duplicate-request.png" alt="Duplicate request" />
 
             <p>What's going on here?</p>
           </section>
           <section data-auto-animate>
             <p><span class="code">index.tsx</span></p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
             const root = ReactDOM.createRoot(
               document.getElementById("root") as HTMLElement
             );
@@ -246,26 +238,33 @@
             );
 </script></code></pre>
             <p>
-              In development, when using <em>Strict Mode</em>, components are
-              re-mounted: mount, unmount, mount
+              In development, when using
+              <em>Strict Mode</em>
+              , components are re-mounted: mount, unmount, mount
             </p>
-            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
+            <p>
+              Purpose:
+              <span class="warn">future-proofing</span>
+              the app
+            </p>
           </section>
           <section data-auto-animate>
             <p>
-              In development, when using <em>Strict Mode</em>, components are
-              re-mounted: mount, unmount, mount
-            </p>
-            <p>Purpose: <span class="warn">future-proofing</span> the app</p>
-            <p>
-              &rarr; Effects are executed at least twice in development<br /><small
-                >(not in prod)</small
-              >
+              In development, when using
+              <em>Strict Mode</em>
+              , components are re-mounted: mount, unmount, mount
             </p>
             <p>
-              Therefore it is recommanded to not fetch data with useEffect but
-              rely on a library, so let's do it!
+              Purpose:
+              <span class="warn">future-proofing</span>
+              the app
             </p>
+            <p>
+              &rarr; Effects are executed at least twice in development
+              <br />
+              <small>(not in prod)</small>
+            </p>
+            <p>Therefore it is recommanded to not fetch data with useEffect but rely on a library, so let's do it!</p>
           </section>
           <section data-auto-animate>
             <p>Configure TanStack Query</p>
@@ -290,7 +289,9 @@
 
           <section data-auto-animate>
             <p>
-              Using <span class="warn">Tanstack Query</span> for data fetching
+              Using
+              <span class="warn">Tanstack Query</span>
+              for data fetching
             </p>
 
             <pre
@@ -313,8 +314,8 @@
             </script></code></pre>
 
             <p>
-              <span class="warn">Clean & simple </span> &ndash; also comes with
-              with retry, cache &amp; more functionality
+              <span class="warn">Clean & simple</span>
+              &ndash; also comes with with retry, cache &amp; more functionality
             </p>
             <div class="fragment tip">In a future release, the loading state can be handled with Suspense</div>
           </section>
@@ -341,51 +342,39 @@
           </script></code></pre>
 
           <p>
-            Since we are using TypeScript, we should always work with defined
-            types&mdash;avoid <span class="code">any</span>!
+            Since we are using TypeScript, we should always work with defined types&mdash;avoid
+            <span class="code">any</span>
+            !
           </p>
         </section>
         <section>
           <section data-auto-animate>
             <h2>Exercise</h2>
 
-            <p><img src="../img/data_fetching_goal.png" height="100"/></p>
+            <p><img src="../img/data_fetching_goal.png" height="100" /></p>
             <ul>
               <li>
                 Retrieve the data for the pokemon list from the
-                <a
-                  href="https://pokeapi.co/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >PokeAPI</a
-                >.
+                <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">PokeAPI</a>
+                .
               </li>
               <li>
                 Install
-                <a
-                  href="https://tanstack.com/query"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >TanStack Query</a
-                >: <span class="code">npm i @tanstack/react-query</span>
+                <a href="https://tanstack.com/query" target="_blank" rel="noopener noreferrer">TanStack Query</a>
+                :
+                <span class="code">npm i @tanstack/react-query</span>
               </li>
               <li>
                 API call with TanStack Query:
-                <span class="code"
-                  >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
-                >
+                <span class="code">GET https://pokeapi.co/api/v2/pokemon?limit=50</span>
               </li>
-              <li>Stretch goal: Display loading & error messages
-              </li>
+              <li>Stretch goal: Display loading & error messages</li>
             </ul>
           </section>
           <section data-auto-animate>
-              <a
-                href="https://tanstack.com/query"
-                target="_blank"
-                rel="noopener noreferrer"
-                >TanStack Query</a
-              >: <span class="code">npm i @tanstack/react-query</span></span
+            <a href="https://tanstack.com/query" target="_blank" rel="noopener noreferrer">TanStack Query</a>
+            :
+            <span class="code">npm i @tanstack/react-query</span>
             >
             <pre>
               <code class="hljs ts" data-trim data-noescape>
@@ -396,11 +385,7 @@
               };
               </code>
           </pre>
-            <a
-              href="https://pokeapi.co/api/v2/pokemon?limit=5"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://pokeapi.co/api/v2/pokemon?limit=5" target="_blank" rel="noopener noreferrer">
               https://pokeapi.co/api/v2/pokemon?limit=5
             </a>
             <pre>
