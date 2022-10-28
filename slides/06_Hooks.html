@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Hooks | Essential React</title>
 
@@ -21,7 +18,8 @@
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             Hooks
           </h1>
         </section>
@@ -36,7 +34,11 @@
             <h2>How to handle component-level state</h2>
           </section>
           <section>
-            <h3>The <span class="warn">useState</span> Hook</h3>
+            <h3>
+              The
+              <span class="warn">useState</span>
+              Hook
+            </h3>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
                 import { useState } from "react";
 
@@ -77,10 +79,7 @@
                   const [meal, setMeal] = useState<Meal>();
                 </script></code>
             </pre>
-            <p>
-              The array destructuring makes it easy to use multiple states in a
-              component.
-            </p>
+            <p>The array destructuring makes it easy to use multiple states in a component.</p>
           </section>
         </section>
         <section>
@@ -89,13 +88,12 @@
           </section>
           <section data-auto-animate>
             <p>
-              The <span class="warn">onChange</span> prop is a function which is
-              called when the input is changed.
+              The
+              <span class="warn">onChange</span>
+              prop is a function which is called when the input is changed.
             </p>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
                 <input
                   type="text"
                   onChange={(event) => {
@@ -106,9 +104,7 @@
           </section>
 
           <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
               <input
                 type="text"
                 onChange={(event) => {
@@ -118,8 +114,9 @@
             </script></code></pre>
 
             <p>
-              Use <span class="warn">event.target.value</span> to access the
-              value which was entered.
+              Use
+              <span class="warn">event.target.value</span>
+              to access the value which was entered.
             </p>
           </section>
         </section>
@@ -130,14 +127,8 @@
           <p><img src="../img/state_management_part_1_goal.png" /></p>
           <ol>
             <li>Allow the user to enter their name</li>
-            <li>
-              The entered name is displayed as a greeting next to the input
-              field
-            </li>
-            <li>
-              Display the input field on top of the list - routing will come
-              later
-            </li>
+            <li>The entered name is displayed as a greeting next to the input field</li>
+            <li>Display the input field on top of the list - routing will come later</li>
           </ol>
         </section>
         <section>
@@ -164,11 +155,14 @@
         </section>
         <section>
           <section>
-            =======
             <h2>How to handle component-level state</h2>
           </section>
           <section>
-            <h3>The <span class="warn">useState</span> Hook</h3>
+            <h3>
+              The
+              <span class="warn">useState</span>
+              Hook
+            </h3>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
                 import { useState } from "react";
 
@@ -208,10 +202,7 @@
                   const [meal, setMeal] = useState<Meal>();
                 </script></code>
             </pre>
-            <p>
-              The array destructuring makes it easy to use multiple states in a
-              component.
-            </p>
+            <p>The array destructuring makes it easy to use multiple states in a component.</p>
           </section>
         </section>
         <section>
@@ -220,13 +211,12 @@
           </section>
           <section data-auto-animate>
             <p>
-              The <span class="warn">onChange</span> prop is a function which is
-              called when the input is changed.
+              The
+              <span class="warn">onChange</span>
+              prop is a function which is called when the input is changed.
             </p>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -236,9 +226,7 @@
   </script></code></pre>
           </section>
           <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -248,8 +236,9 @@
   </script></code></pre>
 
             <p>
-              Use <span class="warn">event.target.value</span> to access the
-              value which was entered.
+              Use
+              <span class="warn">event.target.value</span>
+              to access the value which was entered.
             </p>
           </section>
         </section>
@@ -259,14 +248,8 @@
           <p><img src="../img/state_management_part_1_goal.png" /></p>
           <ol>
             <li>Allow the user to enter their name</li>
-            <li>
-              The entered name is displayed as a greeting next to the input
-              field
-            </li>
-            <li>
-              Display the input field on top of the list - routing will come
-              later
-            </li>
+            <li>The entered name is displayed as a greeting next to the input field</li>
+            <li>Display the input field on top of the list - routing will come later</li>
           </ol>
         </section>
         <section>
@@ -292,12 +275,8 @@ function Profile() {
         </section>
         <section>
           <section>
-            >>>>>>> master
             <h3>What are Hooks?</h3>
-            <p>
-              Hooks are functions that let you "hook into" React state and
-              lifecycle features.
-            </p>
+            <p>Hooks are functions that let you "hook into" React state and lifecycle features.</p>
           </section>
           <section>
             <h3>Built-in Hooks</h3>
@@ -323,40 +302,46 @@ function MyComponent() {
 </script></code></pre>
             <p>The Hook function is called in the render function.</p>
             <p>
-              Depending on the Hook, it may have parameters and may provide a
-              return value to access the provided functionality.
+              Depending on the Hook, it may have parameters and may provide a return value to access the provided
+              functionality.
             </p>
           </section>
           <section>
             <h3>Rules of Hooks</h3>
             <ul>
               <li>
-                Only call Hooks at the <span class="warn">top level</span> (not
-                inside loops, conditions, or nested functions)
+                Only call Hooks at the
+                <span class="warn">top level</span>
+                (not inside loops, conditions, or nested functions)
               </li>
               <li>
                 Only call Hooks from
-                <span class="warn">React function components</span> or
+                <span class="warn">React function components</span>
+                or
                 <span class="warn">custom Hooks</span>
               </li>
             </ul>
             <p>
-              The <span class="code">eslint-plugin-react-hooks</span> enforces
-              these rules.
+              The
+              <span class="code">eslint-plugin-react-hooks</span>
+              enforces these rules.
             </p>
           </section>
           <section>
             <h2>History of Hooks</h2>
 
             <p>
-              Before Hooks were introduced in 2019, features like state
-              management required the use of <em>class components</em>.
+              Before Hooks were introduced in 2019, features like state management required the use of
+              <em>class components</em>
+              .
             </p>
 
             <p>
-              With Hooks these features can be used in function components and
-              thereby makes the code <span class="warn">simpler</span> and
-              <span class="warn">better reusable</span>.
+              With Hooks these features can be used in function components and thereby makes the code
+              <span class="warn">simpler</span>
+              and
+              <span class="warn">better reusable</span>
+              .
             </p>
           </section>
         </section>
@@ -365,7 +350,11 @@ function MyComponent() {
             <h2>How to handle component-level state</h2>
           </section>
           <section>
-            <h3>The <span class="warn">useState</span> Hook</h3>
+            <h3>
+              The
+              <span class="warn">useState</span>
+              Hook
+            </h3>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
                 import { useState } from "react";
 
@@ -405,10 +394,7 @@ function MyComponent() {
                   const [meal, setMeal] = useState<Meal>();
                 </script></code>
             </pre>
-            <p>
-              The array destructuring makes it easy to use multiple states in a
-              component.
-            </p>
+            <p>The array destructuring makes it easy to use multiple states in a component.</p>
           </section>
         </section>
 
@@ -418,13 +404,12 @@ function MyComponent() {
           </section>
           <section data-auto-animate>
             <p>
-              The <span class="warn">onChange</span> prop is a function which is
-              called when the input is changed.
+              The
+              <span class="warn">onChange</span>
+              prop is a function which is called when the input is changed.
             </p>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -434,9 +419,7 @@ function MyComponent() {
   </script></code></pre>
           </section>
           <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
   <input
     type="text"
     onChange={(event) => {
@@ -447,8 +430,9 @@ function MyComponent() {
   </script></code></pre>
 
             <p>
-              Use <span class="warn">event.target.value</span> to access the
-              value which was entered.
+              Use
+              <span class="warn">event.target.value</span>
+              to access the value which was entered.
             </p>
           </section>
         </section>
@@ -458,14 +442,8 @@ function MyComponent() {
           <p><img src="../img/state_management_part_1_goal.png" /></p>
           <ol>
             <li>Allow the user to enter their name</li>
-            <li>
-              The entered name is displayed as a greeting next to the input
-              field
-            </li>
-            <li>
-              Display the input field on top of the list - routing will come
-              later
-            </li>
+            <li>The entered name is displayed as a greeting next to the input field</li>
+            <li>Display the input field on top of the list - routing will come later</li>
           </ol>
         </section>
         <section>
@@ -503,13 +481,17 @@ function Profile() {
   />
   </script></code></pre>
             <p>
-              Event handlers like <span class="code">onChange</span> receive an
-              instance of <span class="code">SyntheticEvent</span>.
+              Event handlers like
+              <span class="code">onChange</span>
+              receive an instance of
+              <span class="code">SyntheticEvent</span>
+              .
             </p>
 
             <p class="fragment">
-              This is a <span class="warn">wrapper for the native events</span>,
-              ensuring a consistent API and functionality across browsers.
+              This is a
+              <span class="warn">wrapper for the native events</span>
+              , ensuring a consistent API and functionality across browsers.
             </p>
           </section>
           <section>
@@ -521,17 +503,14 @@ function Profile() {
               <li><span class="code">e.nativeEvent</span></li>
               <li>
                 API for specific event type (e.g.
-                <span class="code">e.keyCode</span>)
+                <span class="code">e.keyCode</span>
+                )
               </li>
             </ul>
           </section>
           <section>
             <p>
-              <a
-                href="https://reactjs.org/docs/events.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://reactjs.org/docs/events.html" target="_blank" rel="noopener noreferrer">
                 SyntheticEvent API
               </a>
             </p>

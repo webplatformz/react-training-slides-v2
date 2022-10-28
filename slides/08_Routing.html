@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Routing | Essential React</title>
 
@@ -21,7 +18,8 @@
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             Routing
           </h1>
         </section>
@@ -47,22 +45,18 @@
           </section>
           <section>
             <h3>Routing</h3>
-            <p class="fragment">
-              We want to define distinct pages within our application.
-            </p>
+            <p class="fragment">We want to define distinct pages within our application.</p>
 
-            <p class="fragment">
-              The current page at a given time is defined by the URL of the
-              browser tab.
-            </p>
+            <p class="fragment">The current page at a given time is defined by the URL of the browser tab.</p>
 
-            <p class="fragment">
-              The URL can contain parameters which are used by a page to show
-              specific data.
-            </p>
+            <p class="fragment">The URL can contain parameters which are used by a page to show specific data.</p>
           </section>
           <section>
-            <p>React does <em>not</em> provide routing.</p>
+            <p>
+              React does
+              <em>not</em>
+              provide routing.
+            </p>
 
             <div class="fragment">
               <p>
@@ -82,18 +76,14 @@
           </section>
           <section>
             <h3>Install the Package</h3>
-            <pre
-              data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs zsh" data-trim><script type="text/template">
           npm install react-router-dom
         </script></code></pre>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
               function App() {
                 return (
                   /* Let's route! */
@@ -119,8 +109,9 @@
               }
             </script></code></pre>
             <p>
-              The <span class="code">BrowserRouter</span> provides the access to
-              the routing functionality.
+              The
+              <span class="code">BrowserRouter</span>
+              provides the access to the routing functionality.
             </p>
           </section>
           <section data-auto-animate>
@@ -144,8 +135,9 @@
             </script></code></pre>
 
             <p>
-              A <span class="code">Routes</span> component renders the most
-              specific matching route (exclusively).
+              A
+              <span class="code">Routes</span>
+              component renders the most specific matching route (exclusively).
             </p>
           </section>
           <section data-auto-animate>
@@ -170,15 +162,14 @@
 
             <p>
               Here we define a route with the path
-              <span class="code">/page1</span>.
+              <span class="code">/page1</span>
+              .
             </p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3,9"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3,9"><script type="text/template">
               import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
               import Page1 from "./Page1.tsx";
@@ -196,16 +187,16 @@
 
             <p>
               The page to be renderered for this route is simply defined as
-              <span class="code">element</span> of
-              <span class="code">Route</span>.
+              <span class="code">element</span>
+              of
+              <span class="code">Route</span>
+              .
             </p>
           </section>
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="4,11"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="4,11"><script type="text/template">
               import { BrowserRouter as Router, Routes, Route }
                 from "react-router-dom";
               import Page1 from "./Page1.tsx";
@@ -253,7 +244,11 @@
               }
             </script></code></pre>
 
-            <p>This route has a parameter <span class="code">carId</span>.</p>
+            <p>
+              This route has a parameter
+              <span class="code">carId</span>
+              .
+            </p>
           </section>
           <section data-auto-animate>
             <h3>Routes with Parameters</h3>
@@ -274,8 +269,9 @@
             </script></code></pre>
 
             <p class="fragment">
-              The <span class="code">useParams</span> Hook returns the
-              parameters of the current route as an object.
+              The
+              <span class="code">useParams</span>
+              Hook returns the parameters of the current route as an object.
             </p>
           </section>
           <section>
@@ -300,8 +296,9 @@
             </script></code></pre>
 
             <p>
-              With the <span class="code">Navigate</span> component, a route can
-              be redirected to another route.
+              With the
+              <span class="code">Navigate</span>
+              component, a route can be redirected to another route.
             </p>
           </section>
           <section>
@@ -326,18 +323,13 @@
             <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
             <p><span class="code">&lt;Routes /&gt;</span></p>
             <p>
-              <span class="code"
-                >&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;}
-                /&gt;</span
-              >
+              <span class="code">&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;} /&gt;</span>
             </p>
             <p>
               <span class="code">&lt;Navigate to="/cars" replace /&gt;</span>
             </p>
             <p>
-              <span class="code"
-                >&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span
-              >
+              <span class="code">&lt;Link to="/cars/42"&gt;Go to Car 42&lt;/Link&gt;</span>
             </p>
           </section>
         </section>
@@ -346,23 +338,24 @@
             <h2>Exercise</h2>
             <ol>
               <li>
-                Implement a detail view to show the detail data of a specific
-                pokemon.
+                Implement a detail view to show the detail data of a specific pokemon.
 
                 <p>
-                  <span class="code"
-                    >GET https://pokeapi.co/api/v2/pokemon/<em>name</em></span
-                  >
+                  <span class="code">
+                    GET https://pokeapi.co/api/v2/pokemon/
+                    <em>name</em>
+                  </span>
                 </p>
               </li>
               <li>
                 Split the app up into two navigatable pages:
                 <ul>
-                  <li>The <em>Home</em> page shows the list of pokemon.</li>
                   <li>
-                    When clicking on a pokemon in the list, the pokemon detail
-                    page is shown.
+                    The
+                    <em>Home</em>
+                    page shows the list of pokemon.
                   </li>
+                  <li>When clicking on a pokemon in the list, the pokemon detail page is shown.</li>
                 </ul>
               </li>
             </ol>
@@ -379,11 +372,7 @@
           </section>
           <section>
             <h2>Detail API</h2>
-            <a
-              href="https://pokeapi.co/api/v2/pokemon/bulbasaur"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://pokeapi.co/api/v2/pokemon/bulbasaur" target="_blank" rel="noopener noreferrer">
               https://pokeapi.co/api/v2/pokemon/bulbasaur
             </a>
             <pre>
@@ -401,14 +390,12 @@
           </section>
           <section>
             <h3>Stretch Goal</h3>
-            <p>
-              Think about what to do with the username input and display
-              functionality.
-            </p>
+            <p>Think about what to do with the username input and display functionality.</p>
 
             <p>
-              Can we have the input on a <em>Profile</em> page but show the name
-              on all pages?
+              Can we have the input on a
+              <em>Profile</em>
+              page but show the name on all pages?
             </p>
           </section>
         </section>
@@ -501,8 +488,9 @@ function MyComponent() {
             </script></code></pre>
 
             <p>
-              A <span class="code">NavLink</span> is marked with the specified
-              CSS class/style when its route is active.
+              A
+              <span class="code">NavLink</span>
+              is marked with the specified CSS class/style when its route is active.
             </p>
           </section>
           <section data-auto-animate>
@@ -531,9 +519,7 @@ function MyComponent() {
           </section>
           <section data-auto-animate>
             <h3>Nested Routes</h3>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1,6"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="1,6"><script type="text/template">
 function Layout() {
   return (<div>
 
@@ -549,11 +535,12 @@ function Layout() {
           <section>
             <h3>useLocation</h3>
 
-            <p>Current URL: <span class="code">/cars?filter=Tesla</span></p>
+            <p>
+              Current URL:
+              <span class="code">/cars?filter=Tesla</span>
+            </p>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
 function MyComponent() {
   const { pathname, search } = useLocation();
 
@@ -568,16 +555,15 @@ function MyComponent() {
             </script></code></pre>
 
             <p>
-              Returns the <span class="warn">location</span> object representing
-              the current URL.
+              Returns the
+              <span class="warn">location</span>
+              object representing the current URL.
             </p>
           </section>
           <section>
             <h3>useNavigate</h3>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
 function MyComponent() {
   const navigate = useNavigate();
 
@@ -597,9 +583,7 @@ function MyComponent() {
           <section>
             <h3>MemoryRouter</h3>
 
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
 function MyComponent() {
   return <MemoryRouter
     initialEntries={['/one', '/two', '/three']}
@@ -611,7 +595,9 @@ function MyComponent() {
             </script></code></pre>
 
             <p>
-              Use instead of <span class="code">BrowserRouter</span> for tests.
+              Use instead of
+              <span class="code">BrowserRouter</span>
+              for tests.
             </p>
           </section>
         </section>
