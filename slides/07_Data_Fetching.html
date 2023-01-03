@@ -375,7 +375,6 @@
             <a href="https://tanstack.com/query" target="_blank" rel="noopener noreferrer">TanStack Query</a>
             :
             <span class="code">npm i @tanstack/react-query</span>
-            >
             <pre>
               <code class="hljs ts" data-trim data-noescape>
                 export async function fetcher&lt;T&gt;(uri: string): Promise&lt;T&gt; {
@@ -410,10 +409,11 @@
 
             <p><span class="code">List.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|6-7|9-15"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|7-8|10-16"><script type="text/template">
             function List() {
-              const { data, isLoading, isError } = useQuery(['pokemon', 'list'], () =>
-                fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
+              const { data, isLoading, isError } = useQuery(['pokelist'], 
+              () => fetcher<PokemonResultDto>('https://pokeapi.co/api/v2
+                /pokemon?limit=1000')
               );
 
               if (isLoading) return <div>LOADING</div>;
