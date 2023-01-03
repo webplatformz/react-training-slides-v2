@@ -74,11 +74,11 @@
                 Don't use useEffect to update state based on props or state, whenever possible calculate all dependent
                 states on the fly.
                 <br />
-                If necessary, use
+                If the calculation is expensive, use
                 <span class="warn">useMemo</span>
               </li>
               <li>
-                Don't notify parents on state change, whenever possible invoke callbacks as part of event handling
+                Don't invoke callbacks on state change, whenever possible invoke callbacks as part of event handling
                 logic.
               </li>
             </ul>
