@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Form | Essential React</title>
 
@@ -20,7 +17,8 @@
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             Forms
           </h1>
         </section>
@@ -37,9 +35,7 @@
           </section>
           <section>
             <h2>input / textarea</h2>
-            <pre
-              data-id="code"
-            ><code class="hljs html" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
                 const [value, setValue] = useState<string | null>(null);
                 …
                 <input
@@ -50,9 +46,7 @@
           </section>
           <section>
             <h2>select</h2>
-            <pre
-              data-id="code"
-            ><code class="hljs html" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
                 const [option, setOption] = useState<string | null>(null);
                 …
                 <select
@@ -66,9 +60,7 @@
           </section>
           <section>
             <h2>checkbox</h2>
-            <pre
-              data-id="code"
-            ><code class="hljs html" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
                 const [checked, setChecked] = useState<boolean>(false);
                 …
                 <input
@@ -80,9 +72,7 @@
           </section>
           <section>
             <h2>radio</h2>
-            <pre
-              data-id="code"
-            ><code class="hljs html" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs html" data-trim><script type="text/template">
                 const [option, setOption] = useState<string | null>(null);
                 …
                 <input
@@ -119,10 +109,7 @@
             <h2>Uncontrolled</h2>
             <ul>
               <li>Form Data is handled by the DOM</li>
-              <li>
-                State is updated only onBlur/onSubmit -> prevents needless
-                re-renders
-              </li>
+              <li>State is updated only onBlur/onSubmit -> prevents needless re-renders</li>
               <li>
                 But, sometimes controlled fields are unavoidable
                 <ul>
@@ -133,9 +120,7 @@
             </ul>
           </section>
           <section>
-            <pre
-              data-id="code"
-            ><code class="hljs javascript" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs javascript" data-trim><script type="text/template">
               import { FormEvent, useRef } from 'react';
 
               export default function RegistrationForm() {
@@ -155,35 +140,22 @@
                 );
               }
             </script></code></pre>
-            <div class="fragment tip">
-              To leverage uncontrolled form fields, using a library is advised
-            </div>
+            <div class="fragment tip">To leverage uncontrolled form fields, using a library is advised</div>
           </section>
           <section>
             <h2>Demo</h2>
-            <a
-              href="https://zb580z.csb.app/controlled-form-demo"
-              target="_blank"
-              >Controlled Form</a
-            >
+            <a href="https://zb580z.csb.app/controlled-form-demo" target="_blank">Controlled Form</a>
             <br />
             vs.
             <br />
-            <a
-              href="https://zb580z.csb.app/uncontrolled-form-demo"
-              target="_blank"
-              >Uncontrolled Form</a
-            >
+            <a href="https://zb580z.csb.app/uncontrolled-form-demo" target="_blank">Uncontrolled Form</a>
           </section>
         </section>
 
         <section>
           <section>
             <h2>Form Libraries</h2>
-            <p>
-              Form handling can be quite repetitive, the usage of a helper
-              library should therefore be considered.
-            </p>
+            <p>Form handling can be quite repetitive, the usage of a helper library should therefore be considered.</p>
             <ul>
               <li>React Hook Form (Uncontrolled)</li>
               <li>Formik (Controlled)</li>
@@ -195,8 +167,8 @@
                   type FormValues = { name: string; };
                   
                   const { register, handleSubmit, formState } = useForm<FormValues>();
-                  const onSubmit = data => { console.log(data); };
-                  const onError = error => { console.log(error); };
+                  const onSubmit: SubmitHandler<FormValues> = (data) => { console.log(data); };
+                  const onError: SubmitErrorHandler<FormValues> = (error) => { console.log(error); };
 
                   return (
                     <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -210,8 +182,8 @@
                     )
                   </script></code></pre>
             <div class="fragment tip">
-              React Hook Form is enabling you to easily set and update form
-              state as well as execute validation with adequate error-handling.
+              React Hook Form is enabling you to easily set and update form state as well as execute validation with
+              adequate error-handling.
             </div>
           </section>
         </section>
@@ -220,9 +192,9 @@
             <h2>Exercise</h2>
             <ol>
               <li>
-                Create a form using react-hook-form<br /><span class="code"
-                  >npm i react-hook-form</span
-                >
+                Create a form using react-hook-form
+                <br />
+                <span class="code">npm i react-hook-form</span>
               </li>
               <li>Allow the user to enter their name & e-mail address</li>
               <li>Validate the inputs and display an error if necessary</li>
@@ -232,14 +204,11 @@
           <section>
             <h3>Exercise: Stretch Goal</h3>
             <p>
-              Look at what validations<a
-                href="https://react-hook-form.com/api/useform/register"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                register() </a
-              >supports and try to validate the e-mail address input as
-              accurately as possible.
+              Look at what validations
+              <a href="https://react-hook-form.com/api/useform/register" target="_blank" rel="noopener noreferrer">
+                register()
+              </a>
+              supports and try to validate the e-mail address input as accurately as possible.
             </p>
           </section>
           <section>

@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Styling | Essential React</title>
 
@@ -15,146 +12,16 @@
       href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
     />
   </head>
+
   <body>
     <div class="reveal">
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             Styling
           </h1>
-        </section>
-
-        <section>
-          <section>
-            <h1>Modern CSS</h1>
-            <p>IE11 is ☠</p>
-            <p>New CSS features are supported in all evergreen browsers</p>
-          </section>
-          <section>
-            <h2>CSS Custom Properties</h2>
-            <h4>aka Variables</h4>
-            <pre>
-              <code class="hljs css" data-trim data-noescape>
-                :root {
-                  --primary-theme-color: #ff0;
-                }
-
-                .someSelector {
-                  background: var(--primary-theme-color);
-                }
-              </code>
-            </pre>
-          </section>
-          <section data-auto-animate>
-            <h2>CSS Custom Properties</h2>
-            <p>How can this scenario benefit from custom properties?</p>
-            <pre data-id="code">
-              <code class="hljs css" data-trim data-noescape>
-                .button {
-                  transition: opacity .1s ease-in-out, color .3s ease-in;
-                }
-
-                .button:hover {
-                  transition: opacity .2s ease-in-out, color .3s ease-in;
-                }
-              </code>
-            </pre>
-          </section>
-          <section data-auto-animate>
-            <h2>CSS Custom Properties</h2>
-            <p>How can this scenario benefit from custom properties?</p>
-            <pre data-id="code">
-              <code class="hljs css" data-trim data-noescape>
-                .button {
-                  --opacity-fade-duration: .1s;
-                  transition: opacity var(--opacity-fade-duration) ease-in-out, color .3s ease-in;
-                }
-
-                .button:hover {
-                  --opacity-fade-duration: .2s;
-                }
-              </code>
-            </pre>
-          </section>
-          <section>
-            <h2>CSS Grid</h2>
-            <p>No need for flexbox grid</p>
-            <pre>
-              <code class="hljs css" data-trim data-noescape>
-                .root {
-                  display: grid;
-                }
-              </code>
-            </pre>
-            <div class="fragment tip">
-              CSS flexbox layout is still a good option, just not for
-              everything.
-            </div>
-          </section>
-          <section>
-            <h2>CSS Grid</h2>
-            <img src="../img/simple-page-layout-screenshot.jpg" />
-          </section>
-          <section>
-            <h2>CSS Grid</h2>
-            <p>No need for flexbox grid</p>
-            <pre>
-              <code class="hljs css" data-trim data-noescape>
-                .root {
-                  display: grid;
-                  grid-template-columns: 1fr 3fr;
-                }
-                
-                .header, .footer {
-                  grid-column: 1 / -1;
-                }
-              </code>
-            </pre>
-          </section>
-          <section>
-            <p>
-              <a
-                href="https://cssgridgarden.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CSS Grid Garden Tutorial
-              </a>
-            </p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h1>CSS Setup</h1>
-            <p>why is there a margin on my page?</p>
-          </section>
-          <section>
-            <h2>User-Agent Style</h2>
-            <p>
-              Every browser must include a <em>User-Agent stylesheet</em> as
-              well as comply with the <em>specification</em>
-            </p>
-            <ul>
-              <li>margin around body</li>
-              <li>margin around heading elements (e.g. h1)</li>
-              <li>img as inline element</li>
-            </ul>
-          </section>
-          <section>
-            <h2>CSS Reset</h2>
-            <p>
-              One possible solution:
-              <a href="https://piccalil.li/blog/a-modern-css-reset/"
-                >A modern CSS Reset</a
-              >
-            </p>
-            <p>
-              Simple stylesheet which resets margins, box-sizing and other "sane
-              defaults"
-            </p>
-          </section>
         </section>
 
         <section>
@@ -191,6 +58,29 @@
               </code>
             </pre>
           </section>
+          <section>
+            <h2>Function</h2>
+            <pre>
+                <code class="hljs scss" data-trim data-noescape>
+                  @function spacing($space) {
+                    @if $space == 4 {
+                      @return "4px";
+                    } @else if $space == 8 {
+                      @return "8px";
+                    }
+                    ...
+                  }
+                </code>
+              </pre>
+            <pre>
+                <code class="hljs scss" data-trim data-noescape>
+                  .root {
+                    padding: spacing(4);
+                  }
+                </code>
+              </pre>
+          </section>
+
           <section>
             <h2>Setup in CRA</h2>
             <pre>
@@ -287,12 +177,7 @@
           <section>
             <h2>More info about classnames:</h2>
             <p>
-              <a
-                href="https://github.com/JedWatson/classnames"
-                target="_blank"
-                rel="noopener noreferrer"
-                >classnames</a
-              >
+              <a href="https://github.com/JedWatson/classnames" target="_blank" rel="noopener noreferrer">classnames</a>
             </p>
           </section>
         </section>
@@ -311,9 +196,7 @@
             <h3>Stretch Goal</h3>
             <ol>
               <li>Make detail view fade in</li>
-              <li>
-                Make pokemon image fade in after it's loaded (check demo app)
-              </li>
+              <li>Make pokemon image fade in after it's loaded (check demo app)</li>
             </ol>
           </section>
         </section>
@@ -348,12 +231,7 @@
             <p><img src="../img/tailwindcss_website.png" /></p>
 
             <p>
-              <a
-                href="https://tailwindcss.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                >tailwindcss.com</a
-              >
+              <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">tailwindcss.com</a>
             </p>
           </section>
         </section>
@@ -382,37 +260,17 @@
             <p>There are different CSS in JS approaches, e.g.:</p>
             <ul>
               <li>
-                <a
-                  href="https://styled-components.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >styled-components</a
-                >
+                <a href="https://styled-components.com/" target="_blank" rel="noopener noreferrer">styled-components</a>
                 ⭐️
               </li>
               <li>
-                <a
-                  href="https://emotion.sh/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Emotion</a
-                >
+                <a href="https://emotion.sh/" target="_blank" rel="noopener noreferrer">Emotion</a>
               </li>
               <li>
-                <a
-                  href="https://cssinjs.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >JSS</a
-                >
+                <a href="https://cssinjs.org/" target="_blank" rel="noopener noreferrer">JSS</a>
               </li>
               <li>
-                <a
-                  href="https://stitches.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Stitches</a
-                >
+                <a href="https://stitches.dev/" target="_blank" rel="noopener noreferrer">Stitches</a>
               </li>
             </ul>
           </section>

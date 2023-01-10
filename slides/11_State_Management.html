@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>State Management | Essential React</title>
 
@@ -15,12 +12,14 @@
       href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
     />
   </head>
+
   <body>
     <div class="reveal">
       <div class="slides">
         <section class="deck-slide">
           <h1>
-            Essential React <br />
+            Essential React
+            <br />
             State Management
           </h1>
         </section>
@@ -50,14 +49,11 @@
           <section>
             <h3>Step by Step</h3>
             <p class="fragment">
-              Context must be created using <br /><span class="code"
-                >const YourContext =
-                createContext&lt;ValueType&gt;(&hellip;)</span
-              >
+              Context must be created using
+              <br />
+              <span class="code">const YourContext = createContext&lt;ValueType&gt;(&hellip;)</span>
             </p>
-            <p class="fragment">
-              The parameter is the default value of the context
-            </p>
+            <p class="fragment">The parameter is the default value of the context</p>
             <p class="fragment">
               Provide context in an ancestor component using
               <span class="code"></span>
@@ -78,37 +74,39 @@
           </section>
 
           <section>
-            <pre>
-                    <code class="hljs tsx" data-trim>
-                        <script type="text/template">
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
             import { createContext, useContext } from "react";
 
-            type YourContextValue = {
-              user: string;
+            type ContextType = {
+              name: string;
+              setName: (name: string) => void;            
             };
             
-            const UserContext = createContext<YourContextValue | undefined>(undefined);
+            const UserContext = createContext<ContextType | undefined>(undefined);
             
             function Parent() {
-              return (<UserContext.Provider value={{ user: "joe" }}>
-                <Child />
-              </UserContext.Provider>)
+              const [name, setName] = useState("Joe");
+              return (
+                <UserContext.Provider value={{ name, setName }}>
+                  <Child />
+                </UserContext.Provider>)
             }
 
             function Child() {
               const context = useContext(UserContext);
-              return <p>{context?.user}</p>; // joe
+              return (<>
+                <p>Name: {context?.name}</p> {/* name == "Joe" */}
+                <button onClick={() => context?.setName("Jane")}>Change Name</button>
+              </>)
             }
-                        </script>
-                    </code>
-                </pre>
+            </script></code></pre>
           </section>
 
           <section>
             <h3>What to put in contexts?</h3>
             <p>
-              <span class="warn">Any JavaScript object</span> can be the value
-              of a context.
+              <span class="warn">Any JavaScript object</span>
+              can be the value of a context.
             </p>
             <ul>
               <li>A JSON object</li>
@@ -132,19 +130,13 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>
-                Enhance the profile component by prefilling the default form
-                values
-              </li>
+              <li>Enhance the profile component by prefilling the default form values</li>
               <li>Display the username globally (e.g. in the header)</li>
               <li>
                 Hint 1: Provide the context in the
                 <span class="code">App.tsx</span>
               </li>
-              <li>
-                Hint 2: The value of the context can rely on values of other
-                hooks
-              </li>
+              <li>Hint 2: The value of the context can rely on values of other hooks</li>
             </ul>
           </section>
           <section>
@@ -238,33 +230,48 @@
           <section>
             <h3>Cycle</h3>
             <ol>
-              <li>Creating an <span class="warn">action</span> object</li>
-              <li><span class="warn">Dispatch</span> the action</li>
               <li>
-                <span class="warn">Reducer</span> will process the action and
-                create a new store based on the previous store and the action
-                itself
+                Creating an
+                <span class="warn">action</span>
+                object
               </li>
-              <li><span class="warn">View</span> rerenders with new store</li>
+              <li>
+                <span class="warn">Dispatch</span>
+                the action
+              </li>
+              <li>
+                <span class="warn">Reducer</span>
+                will process the action and create a new store based on the previous store and the action itself
+              </li>
+              <li>
+                <span class="warn">View</span>
+                rerenders with new store
+              </li>
             </ol>
           </section>
           <section>
             <p>
               React provides
               <span class="warn">built-in hooks for flux-based state</span>
-              management without having to use <span class="warn">Redux</span>.
+              management without having to use
+              <span class="warn">Redux</span>
+              .
             </p>
           </section>
           <section>
             <h3>useReducer hook</h3>
             <p>
-              Takes a <span class="code">reducer</span> function and an
+              Takes a
+              <span class="code">reducer</span>
+              function and an
               <span class="code">initialState</span>
             </p>
             <p>
               Returns an array with two values, the current
-              <span class="code">state</span> and a
-              <span class="code">dispatch</span> function
+              <span class="code">state</span>
+              and a
+              <span class="code">dispatch</span>
+              function
             </p>
             <pre>
                     <code class="hljs js" data-trim>
@@ -294,8 +301,7 @@
                     </code>
                 </pre>
             <div class="fragment tip">
-              Never manipulate the existing state reference. Always return a new
-              state object!
+              Never manipulate the existing state reference. Always return a new state object!
             </div>
           </section>
           <section>
@@ -319,7 +325,10 @@
         </section>
         <section>
           <section>
-            <h2><span class="code">useReducer</span> Exercise</h2>
+            <h2>
+              <span class="code">useReducer</span>
+              Exercise
+            </h2>
             <ul>
               <li>Add a pokemon visit counter to your application</li>
               <li>Count how many pokemon the user has seen</li>
@@ -337,7 +346,10 @@
         <section>
           <section>
             <h2>Solution</h2>
-            <p><span class="code">usePokeVisit.ts</span> types</p>
+            <p>
+              <span class="code">usePokeVisit.ts</span>
+              types
+            </p>
             <pre>
                     <code class="hljs tsx" data-trim><script type="text/template">
                         export type AddPokeVisitAction = {
@@ -355,34 +367,97 @@
           </section>
 
           <section>
-            <p><span class="code">usePokeVisit.ts</span> reducer</p>
+            <h3>
+              <span class="code">usePokeVisit.ts</span>
+              reducer function & initial state
+            </h3>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              export type PokeVisitState = string[];
+              export const initialState: PokeVisitState = [];
+
+              export function pokeVisitReducer(
+                state: PokeVisitState,
+                action: PokeVisitAction
+              ): PokeVisitState {
+                switch (action.type) {
+                  case "add":
+                    return [...state, action.value];
+                  case "reset":
+                    return initialState;
+                  default:
+                    throw new Error("unknown action type");
+                }
+              }      
+            </script></code></pre>
+          </section>
+
+          <section>
+            <h3>
+              <span class="code">usePokeVisit.ts</span>
+              reducer hook
+            </h3>
             <pre>
                     <code class="hljs tsx" data-trim><script type="text/template">
+                        import { initialState, pokeVisitReducer } from "./pokeVisitReducer";
+
                         const usePokeVisit = () => {
-                          return useReducer((state: Set<string>, action: PokeVisitAction) => {
-                            switch (action.type) {
-                              case "add":
-                                return new Set([...state, action.value]);
-                              case "reset":
-                                return new Set();
-                              default:
-                                throw new Error("unknown action type");
-                            }
-                          }, new Set());
+                          const [state, dispatch] = useReducer(pokeVisitReducer, initialState);
+                          return { state, dispatch };
                         };        
                     </script></code>
                 </pre>
-          </section>
-          <section>
-            <p>dispatching visits</p>
+
+            <h3>
+              using
+              <span class="code">usePokeVisit.ts</span>
+            </h3>
             <pre>
-                    <code class="hljs ts" data-trim><script type="text/template">
-                        useEffect(() => {
-                          dispatch({
-                            type: "add",
-                            value: pokemonName
-                          });
-                        }, [dispatch, pokemonName]);      
+                  <code class="hljs tsx" data-trim><script type="text/template">
+                    const { state, dispatch } = usePokeVisit();
+                    
+                    // state contains all visited pokemon
+                    // dispatch is a function to dispatch actions to the reducer 
+                    // (e.g., add a new pokemon, reset the count)
+                  </script></code>
+              </pre>
+          </section>
+
+          <section>
+            <h3>Dispatching Reducer Actions</h3>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              useEffect(() => {
+                dispatch({
+                  type: "add",
+                  value: pokemonName
+                });
+              }, [dispatch, pokemonName]);      
+            </script></code></pre>
+
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              const handleClick = () => dispatch({ type: "reset" });
+            </script></code></pre>
+          </section>
+
+          <section>
+            <h3>Stretch Goal Solution</h3>
+            <pre>
+                    <code class="hljs tsx" data-trim data-line-numbers="|1-2,10"><script type="text/template">
+                      export type PokeVisitState = Set<string>;
+                      export const initialState: PokeVisitState = new Set();
+        
+                      export function pokeVisitReducer(
+                        state: PokeVisitState,
+                        action: PokeVisitAction
+                      ): PokeVisitState {
+                        switch (action.type) {
+                          case "add":
+                            return new Set([...Array.from(state), action.value]);;
+                          case "reset":
+                            return initialState;
+                          default:
+                            throw new Error("unknown action type");
+                        }
+                      }            
                     </script></code>
                 </pre>
           </section>
@@ -394,67 +469,39 @@
           </section>
           <section>
             <h2>
-              <a
-                href="https://redux.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Redux
-              </a>
+              <a href="https://redux.js.org/" target="_blank" rel="noopener noreferrer">Redux</a>
               /
-              <a
-                href="https://github.com/pmndrs/zustand"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Zustand
-              </a>
+              <a href="https://github.com/pmndrs/zustand" target="_blank" rel="noopener noreferrer">Zustand</a>
               (flux-based)
             </h2>
             <p>
               Provide additional features that
-              <span class="code">useReducer</span> does not:
+              <span class="code">useReducer</span>
+              does not:
             </p>
             <ul>
               <li>
-                <span class="warn">Middlewares</span> - code to execute after
-                action dispatching and before reducer (e.g. to start data
-                fetching, logging)
+                <span class="warn">Middlewares</span>
+                - code to execute after action dispatching and before reducer (e.g. to start data fetching, logging)
               </li>
               <li>
-                <span class="warn">Selectors</span> - derive aggregations from
-                store
+                <span class="warn">Selectors</span>
+                - derive aggregations from store
               </li>
             </ul>
           </section>
           <section>
             <h2>
-              <a
-                href="https://github.com/pmndrs/valtio"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Valtio
-              </a>
+              <a href="https://github.com/pmndrs/valtio" target="_blank" rel="noopener noreferrer">Valtio</a>
               /
-              <a
-                href="https://mobx.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                MobX
-              </a>
+              <a href="https://mobx.js.org/" target="_blank" rel="noopener noreferrer">MobX</a>
               (proxy-based)
             </h2>
             <p>Permit direct state mutation</p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     const state = proxy({ count: 0, text: 'hello' })
                 </script></code></pre>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     const snap = useSnapshot(state)
                     return (
                       <div>
@@ -484,56 +531,36 @@
           </section>
           <section>
             <h2>
-              <a
-                href="https://recoiljs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Recoil
-              </a>
+              <a href="https://recoiljs.org/" target="_blank" rel="noopener noreferrer">Recoil</a>
               /
-              <a
-                href="https://github.com/pmndrs/jotai"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Jotai
-              </a>
+              <a href="https://github.com/pmndrs/jotai" target="_blank" rel="noopener noreferrer">Jotai</a>
               (atom-based)
             </h2>
             <p>
-              Primary focus on <span class="warn">state</span> and
+              Primary focus on
+              <span class="warn">state</span>
+              and
               <span class="warn">selectors</span>
             </p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     const textState = atom({
                       key: 'textState',
                       default: '',
                     });
                 </script></code></pre>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim><script type="text/template">
+            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
                     const [text, setText] = useRecoilState(textState);
                 </script></code></pre>
-            <div class="fragment tip">
-              As of 2022 recoil is still experimental
-            </div>
+            <div class="fragment tip">As of 2022 recoil is still experimental</div>
           </section>
           <section>
             <h2>
-              <a
-                href="https://xstate.js.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                XState
-              </a>
+              <a href="https://xstate.js.org/" target="_blank" rel="noopener noreferrer">XState</a>
             </h2>
             <p>
-              Finite <span class="warn">state machines</span> and
+              Finite
+              <span class="warn">state machines</span>
+              and
               <span class="warn">state charts</span>
             </p>
           </section>

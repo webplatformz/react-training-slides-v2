@@ -2,10 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>First Component | Essential React</title>
 
@@ -66,10 +63,13 @@
                         }
                         </script></code></pre>
             <div class="fragment tip">
-              <span
-                >Use a code formatter like
-                <a href="https://prettier.io/">Prettier</a></span
-              >
+              <span>
+                Use a code formatter like
+                <a href="https://prettier.io/">Prettier</a>
+                .
+                <br />
+                Enforce it by integrating it with ESLint
+              </span>
             </div>
           </section>
           <section>
@@ -89,17 +89,21 @@
                             );
                         }
                         </script></code></pre>
-            <div class="fragment tip">
-              Don't build monoliths. Split your components!
-            </div>
+            <div class="fragment tip">Don't build monoliths. Split your components!</div>
           </section>
           <section data-auto-animate>
             <h3>Fragments</h3>
-            <p>Components always return a <em>single node</em>.</p>
+            <p>
+              Components always return a
+              <em>single node</em>
+              .
+            </p>
             <p>
               If you want to return multiple nodes, wrap them in a
-              <span class="warn">Fragment</span> to avoid rendering an
-              unnecessary <span class="code">&lt;div&gt;</span>.
+              <span class="warn">Fragment</span>
+              to avoid rendering an unnecessary
+              <span class="code">&lt;div&gt;</span>
+              .
             </p>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5|3,6|" data-id="code"><script type="text/template">
@@ -129,15 +133,18 @@
                         }
                         </script></code></pre>
             <p>
-              Using the long-form <span class="code">Fragment</span> is
-              equivalent to the shorter
-              <nobr><span class="code">&lt;&gt;…&lt;/&gt;</span></nobr> syntax.
+              Using the long-form
+              <span class="code">Fragment</span>
+              is equivalent to the shorter
+              <nobr><span class="code">&lt;&gt;…&lt;/&gt;</span></nobr>
+              syntax.
             </p>
             <p class="fragment tip">
-              <span
-                >We will see in a bit in which situation the long-form
-                <span class="code">&lt;Fragment&gt;</span> is useful.</span
-              >
+              <span>
+                We will see in a bit in which situation the long-form
+                <span class="code">&lt;Fragment&gt;</span>
+                is useful.
+              </span>
             </p>
           </section>
           <section>
@@ -146,13 +153,10 @@
               <li class="fragment">
                 Setup a new React project with
                 <br />
-                <span class="code"
-                  >npx create-react-app name --template typescript</span
-                >
+                <span class="code">npx create-react-app name --template typescript</span>
               </li>
               <li class="fragment">
-                Create a PokeListEntry component to show a pokémon name like
-                'Bulbasaur' kept in a constant
+                Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant
               </li>
               <li class="fragment">
                 Consume this component in the
@@ -202,16 +206,19 @@
             <h2>Props</h2>
             <p>
               We can pass data to child components by setting their
-              <span class="warn">props</span> (properties)
+              <span class="warn">props</span>
+              (properties)
             </p>
             <p class="fragment">
-              A prop can have any type, e.g. it can be a JavaScript primitive,
-              an object, or a function
+              A prop can have any type, e.g. it can be a JavaScript primitive, an object, or a function
             </p>
             <p class="fragment">Props can be defined as required or optional</p>
             <p class="fragment">
-              Pass <span class="warn">functions as props</span> to listen to
-              <span class="warn">events</span> emitted by child components
+              Pass
+              <span class="warn">functions as props</span>
+              to listen to
+              <span class="warn">events</span>
+              emitted by child components
             </p>
           </section>
           <section>
@@ -244,10 +251,7 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>
-                Create Props for your PokeListEntry component expecting an
-                optional name
-              </li>
+              <li>Create Props for your PokeListEntry component expecting an optional name</li>
               <li>Set a default name if property is not passed by consumer</li>
               <li>Use object destruction</li>
             </ul>
@@ -280,15 +284,10 @@
             <h2>Testing / React Testing Library</h2>
             <p>
               Our components can be tested using the
-              <a
-                href="https://testing-library.com/docs/react-testing-library/intro/"
-                >React Testing Library</a
-              >
+              <a href="https://testing-library.com/docs/react-testing-library/intro/">React Testing Library</a>
             </p>
 
-            <p class="fragment">
-              It is already pre-installed when using Create React App.
-            </p>
+            <p class="fragment">It is already pre-installed when using Create React App.</p>
           </section>
           <section>
             <h2>Testing our dumb component</h2>
@@ -311,8 +310,9 @@
             <h2>TDD - Test Driven Development</h2>
             <p>It is a good practice to conduct TDD wherever possible</p>
             <p>
-              Let us amend the component such that we can set the name through
-              an input property
+              Let us amend the component such that we can set the name through an
+              <span class="code">name</span>
+              property
             </p>
           </section>
           <section>
@@ -350,10 +350,7 @@
           </section>
           <section>
             <h3>Refactor</h3>
-            <p>
-              Refactor your code such that it is extensible and easy to
-              understand
-            </p>
+            <p>Refactor your code such that it is extensible and easy to understand</p>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim><script type="text/template">
               it('should render correct name', () => {
@@ -371,8 +368,8 @@
             <ul>
               <li>
                 <span class="code">getBy*</span>
-                - verify that an element/node is present at this very moment.
-                Throws an error if element/node is not found.
+                - verify that an element/node is present at this very moment. Throws an error if element/node is not
+                found.
               </li>
               <li>
                 <span class="code">queryBy*</span>
@@ -382,30 +379,20 @@
               </li>
               <li>
                 <span class="code">findBy*</span>
-                - verify that an element will be present, e.g. upon completion
-                of an asynchronous API-Call
+                - verify that an element will be present, e.g. upon completion of an asynchronous API-Call
               </li>
             </ul>
             <p>
-              <a
-                target="_blank"
-                href="https://testing-library.com/docs/queries/about/"
-                >Find more about queries here</a
-              >
+              <a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries here</a>
             </p>
           </section>
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>
-                Test your PokeListEntry component with React Testing Library
-              </li>
+              <li>Test your PokeListEntry component with React Testing Library</li>
               <li>
                 Stretch Goal:
-                <a
-                  href="https://jestjs.io/docs/api#testeachtablename-fn-timeout"
-                  target="_blank"
-                >
+                <a href="https://jestjs.io/docs/api#testeachtablename-fn-timeout" target="_blank">
                   Parameterize your test with React Testing Library using
                 </a>
                 <span class="code">it.each(table)(name, fn, timeout)</span>
@@ -460,8 +447,9 @@
             <p>
               To render a list of items, we call the
               <span class="code">map</span>
-              function on an array.<br />In the callback we map the array item
-              to a JSX element.
+              function on an array.
+              <br />
+              In the callback we map the array item to a JSX element.
             </p>
 
             <p>We can map to an HTML element or to a custom component.</p>
@@ -481,7 +469,7 @@
           <section data-auto-animate>
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
-                        const items = ["Apple", "Orange", "Mango"];
+                        const items = ['Apple', 'Orange', 'Mango'];
                         export default function List() {
                             return (
                                 <ul>
@@ -493,21 +481,26 @@
                         }</script></code></pre>
 
             <p>
-              The JSX element returned from <span class="code">map</span> must
-              have a <span class="warn">key</span> prop.
+              The JSX element returned from
+              <span class="code">map</span>
+              must have a
+              <span class="warn">key</span>
+              prop.
             </p>
 
             <p class="fragment">
-              This is a special prop used by React internally to distinguish the
-              elements. It must be
-              <span class="warn">unique within the list</span> (e.g. an entity
-              ID).
+              This is a special prop used by React internally to distinguish the elements. It must be
+              <span class="warn">unique within the list</span>
+              (e.g. an entity ID).
             </p>
           </section>
           <section data-auto-animate>
             <p>
-              Use a <span class="warn">Fragment</span> to return multiple
-              elements from <span class="code">map</span>.
+              Use a
+              <span class="warn">Fragment</span>
+              to return multiple elements from
+              <span class="code">map</span>
+              .
             </p>
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6-9,11-12,14-17|1,10,13"><script type="text/template">
@@ -531,11 +524,13 @@
                             );
                         }</script></code></pre>
             <p class="fragment tip">
-              <span
-                >Here we can't use the shorter
-                <span class="code">&lt;&gt;…&lt;/&gt;</span> syntax. Only
-                <span class="code">Fragment</span> can take the key prop.</span
-              >
+              <span>
+                Here we can't use the shorter
+                <span class="code">&lt;&gt;…&lt;/&gt;</span>
+                syntax. Only
+                <span class="code">Fragment</span>
+                can take the key prop.
+              </span>
             </p>
           </section>
         </section>
@@ -565,7 +560,8 @@
           <section data-auto-animate>
             <p>
               The parent component receives the child components through the
-              <span class="warn">children</span> prop.
+              <span class="warn">children</span>
+              prop.
             </p>
 
             <pre>
@@ -614,9 +610,7 @@
             </code>
         </pre>
 
-            <p>
-              The children prop can be rendered in the parent component's JSX.
-            </p>
+            <p>The children prop can be rendered in the parent component's JSX.</p>
           </section>
         </section>
         <section>
@@ -625,11 +619,7 @@
             <ul>
               <li>
                 Create a (hard-coded)
-                <a
-                  target="_blank"
-                  href="https://pokeapi.co/api/v2/pokemon?limit=50"
-                  >array of Pokémon</a
-                >
+                <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">array of Pokémon</a>
               </li>
               <li class="fragment">Render all Pokémon names in a list</li>
               <li class="fragment">
@@ -639,17 +629,14 @@
               </li>
               <li class="fragment">Write tests for the list</li>
               <li class="fragment">
-                Create a <span class="warn">Layout component</span> which wraps
-                the list with a page structure (containing a nav bar with dummy
-                links)
+                Create a
+                <span class="warn">Layout component</span>
+                which wraps the list with a page structure (containing a nav bar with dummy links)
               </li>
             </ul>
           </section>
           <section>
-            <img
-              src="../img/exercise-goal-list-and-layout.png"
-              alt="Exercise goal"
-            />
+            <img src="../img/exercise-goal-list-and-layout.png" alt="Exercise goal" />
           </section>
         </section>
         <section>
@@ -757,7 +744,8 @@
             <li>Render a list of components</li>
             <li>
               Create wrapper components using the
-              <span class="warn">children</span> prop
+              <span class="warn">children</span>
+              prop
             </li>
           </ul>
         </section>
