@@ -28,6 +28,7 @@ assignees: ""
 ### Day before course
 
 - [ ] Teams meeting has been checked against Moodle participant list (in case of late changes)
+- [ ] Prepare Breakout Rooms
 
 ### Around course date
 
