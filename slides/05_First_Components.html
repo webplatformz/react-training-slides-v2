@@ -429,7 +429,7 @@
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
                         it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
-                          ('should render the passed pokémon name', (name) => {
+                          ('should render the passed pokémon %s', (name) => {
                           render(<PokeListEntry name={name} />);
                           expect(screen.getByText(name)).toBeInTheDocument();
                         });
