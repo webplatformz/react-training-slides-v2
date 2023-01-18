@@ -543,25 +543,24 @@ export default handlers;
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="1,7-11,14-17"><script type="text/template">
                     class ErrorBoundary extends React.Component {
-                    constructor(props) {
+                      constructor(props) {
                         super(props);
                         this.state = { hasError: false };
-                    }
+                      }
                         
-                    static getDerivedStateFromError(error) {
-                        /* Update state so the next render will show
-                           the fallback UI. */
+                      static getDerivedStateFromError(error) {
+                          /* Update state so the next render will show
+                            the fallback UI. */
                         return { hasError: true };
-                    }
-                    
-                    render() {
+                      }
+                      
+                      render() {
                         if (this.state.hasError) {
-                        /* You can render any custom fallback UI */
-                        return <h1>Something went wrong.</h1>;
+                          /* You can render any custom fallback UI */
+                          return <h1>Something went wrong.</h1>;
                         }
-                        
                         return this.props.children; 
-                    }
+                      }
                     }
             </script></code></pre>
           </section>
@@ -636,7 +635,7 @@ export default handlers;
           <section data-auto-animate>
             <h2>React Server Components (RSC)</h2>
             <ul>
-              <li>Still in development</li>
+              <li>Available in React (not yet nextjs)</li>
               <li>Different from server-side rendering</li>
               <li>Server components are never rendered on the client</li>
             </ul>
