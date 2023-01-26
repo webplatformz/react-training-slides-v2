@@ -16,6 +16,7 @@ assignees: ""
   - breaking changes in React, React Router, other tools?
   - any new features to include?
 - [ ] Dev tools work (e.g. with current Node.js version)
+- [ ] Order a new collectors link for the Survey Monkey feedback form. Each link is different but points to the same form (e.g., [Feedback Form](https://de.surveymonkey.com/r/PTSDCGT))
 
 ### Latest 1 week before course
 
@@ -41,15 +42,16 @@ assignees: ""
 
 | Chapter          | Assigned to |
 | ---------------- | ----------- |
-| Intro            | Felix       |
-| Setup            | Moritz      |
-| First Components | Moritz      |
-| Hooks            | Felix       |
-| Data Fetching    | Felix       |
-| Routing          | Felix       |
-| Forms            | Moritz      |
-| State Management | Moritz      |
-| Styling          | Felix       |
+| Intro            | TBD         |
+| Setup            | TBD         |
+| First Components | TBD         |
+| Hooks            | TBD         |
+| Data Fetching    | TBD         |
+| Routing          | TBD         |
+| Forms            | TBD         |
+| SideEffects      | TBD         |
+| State Management | TBD         |
+| Styling          | TBD         |
 
 ### Moderation
 
