@@ -2,26 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>Side Effects | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+      href="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.css"
     />
   </head>
 
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="deck-slide">
-          <h1>
-            Essential React
-            <br />
-            Side Effects
-          </h1>
+        <section class="title-slide">
+          <h1>Side Effects</h1>
+          <h2>Felix Mokross, Christoph Salvisberg</h2>
+          <h3>Essential React</h3>
         </section>
         <section>
           <section>
@@ -71,20 +73,21 @@
             <h3>useEffect as last-resort</h3>
             <ul>
               <li>
-                Don't use useEffect to update state based on props or state, whenever possible calculate all dependent
-                states on the fly.
+                Don't use useEffect to update state based on props or state,
+                whenever possible calculate all dependent states on the fly.
                 <br />
                 If the calculation is expensive, use
-                <span class="warn">useMemo</span>
+                <span class="hl">useMemo</span>
               </li>
               <li>
-                Don't invoke callbacks on state change, whenever possible invoke callbacks as part of event handling
-                logic.
+                Don't invoke callbacks on state change, whenever possible invoke
+                callbacks as part of event handling logic.
               </li>
             </ul>
             <aside class="notes">
-              Treat useEffect as a code smell - if you have to use it, challenge yourself if there is not a better way
-              to solve the underlying issue
+              Treat useEffect as a code smell - if you have to use it, challenge
+              yourself if there is not a better way to solve the underlying
+              issue
             </aside>
           </section>
         </section>
@@ -94,14 +97,14 @@
             <img src="../img/search.png" />
             <p>
               Add a search input and use
-              <span class="warn">useEffect</span>
+              <span class="hl">useEffect</span>
               to implement a debounce on the pokemon list as a filter.
             </p>
           </section>
           <section data-auto-animate>
             <p>
               Add a search input and use
-              <span class="warn">useEffect</span>
+              <span class="hl">useEffect</span>
               to implement a debounce on the pokemon list as a filter.
             </p>
             <p>Use setTimeout & clearTimeout to build a delay</p>
@@ -118,7 +121,9 @@
           </section>
           <section>
             <p><span class="code">SearchPanel.tsx</span></p>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
               type Props = {
                 searchTerm: string;
                 onSearchChanged: (searchTerm: string) => void;
@@ -164,7 +169,9 @@
           </section>
           <section>
             <p><span class="code">ListPage.tsx</span></p>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="5|8"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5|8"><script type="text/template">
 
               function ListPage() {
                 /* ... */
@@ -190,12 +197,14 @@
           <section>
             <p>
               We can reuse a concrete Hook logic by extracting it into a
-              <span class="warn">custom Hook</span>
+              <span class="hl">custom Hook</span>
               .
             </p>
           </section>
           <section data-auto-animate>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
               function MyComponent() {
                 const result = /* logic that uses Hooks */
                 
@@ -234,10 +243,8 @@
 
           <p>Extract the debounce logic for the search into a custom Hook.</p>
 
-          <div class="column-container">
-            <div class="column">
-              <img src="../img/construction_work_refactor.jpg" />
-            </div>
+          <div>
+            <img src="../img/construction_work_refactor.jpg" />
           </div>
         </section>
         <section>
@@ -275,7 +282,9 @@
           <section>
             <p><span class="code">List.tsx</span></p>
 
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="2-6"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2-6"><script type="text/template">
               function ListPage() {
                 const {
                   searchTerm,
@@ -299,24 +308,24 @@
           <ul>
             <li>
               How to use
-              <span class="warn">useEffect</span>
+              <span class="hl">useEffect</span>
             </li>
             <li>
               When to use
-              <span class="warn">useEffect</span>
+              <span class="hl">useEffect</span>
               and when to use a different approach to reach your goal
             </li>
             <li>How to cleanup side effects in useEffect</li>
             <li>How to extract Hook logic from components into Custom Hooks</li>
           </ul>
         </section>
-        <section class="deck-slide">
+        <section class="break-slide">
           <h1>Questions?</h1>
         </section>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.js"></script>
     <script>
       setupZuehlkeRevealPresentation();
     </script>
