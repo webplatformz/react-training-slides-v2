@@ -2,26 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>State Management | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+      href="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.css"
     />
   </head>
 
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="deck-slide">
-          <h1>
-            Essential React
-            <br />
-            State Management
-          </h1>
+        <section class="title-slide">
+          <h1>State Management</h1>
+          <h2>Felix Mokross, Christoph Salvisberg</h2>
+          <h3>Essential React</h3>
         </section>
         <section>
           <section>
@@ -51,9 +53,14 @@
             <p class="fragment">
               Context must be created using
               <br />
-              <span class="code">const YourContext = createContext&lt;ValueType&gt;(&hellip;)</span>
+              <span class="code"
+                >const YourContext =
+                createContext&lt;ValueType&gt;(&hellip;)</span
+              >
             </p>
-            <p class="fragment">The parameter is the default value of the context</p>
+            <p class="fragment">
+              The parameter is the default value of the context
+            </p>
             <p class="fragment">
               Provide context in an ancestor component using
               <span class="code"></span>
@@ -105,7 +112,7 @@
           <section>
             <h3>What to put in contexts?</h3>
             <p>
-              <span class="warn">Any JavaScript object</span>
+              <span class="hl">Any JavaScript object</span>
               can be the value of a context.
             </p>
             <ul>
@@ -130,13 +137,19 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>Enhance the profile component by prefilling the default form values</li>
+              <li>
+                Enhance the profile component by prefilling the default form
+                values
+              </li>
               <li>Display the username globally (e.g. in the header)</li>
               <li>
                 Hint 1: Provide the context in the
                 <span class="code">App.tsx</span>
               </li>
-              <li>Hint 2: The value of the context can rely on values of other hooks</li>
+              <li>
+                Hint 2: The value of the context can rely on values of other
+                hooks
+              </li>
             </ul>
           </section>
           <section>
@@ -232,19 +245,20 @@
             <ol>
               <li>
                 Creating an
-                <span class="warn">action</span>
+                <span class="hl">action</span>
                 object
               </li>
               <li>
-                <span class="warn">Dispatch</span>
+                <span class="hl">Dispatch</span>
                 the action
               </li>
               <li>
-                <span class="warn">Reducer</span>
-                will process the action and create a new store based on the previous store and the action itself
+                <span class="hl">Reducer</span>
+                will process the action and create a new store based on the
+                previous store and the action itself
               </li>
               <li>
-                <span class="warn">View</span>
+                <span class="hl">View</span>
                 rerenders with new store
               </li>
             </ol>
@@ -252,9 +266,9 @@
           <section>
             <p>
               React provides
-              <span class="warn">built-in hooks for flux-based state</span>
+              <span class="hl">built-in hooks for flux-based state</span>
               management without having to use
-              <span class="warn">Redux</span>
+              <span class="hl">Redux</span>
               .
             </p>
           </section>
@@ -301,7 +315,8 @@
                     </code>
                 </pre>
             <div class="fragment tip">
-              Never manipulate the existing state reference. Always return a new state object!
+              Never manipulate the existing state reference. Always return a new
+              state object!
             </div>
           </section>
           <section>
@@ -469,9 +484,19 @@
           </section>
           <section>
             <h2>
-              <a href="https://redux.js.org/" target="_blank" rel="noopener noreferrer">Redux</a>
+              <a
+                href="https://redux.js.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Redux</a
+              >
               /
-              <a href="https://github.com/pmndrs/zustand" target="_blank" rel="noopener noreferrer">Zustand</a>
+              <a
+                href="https://github.com/pmndrs/zustand"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Zustand</a
+              >
               (flux-based)
             </h2>
             <p>
@@ -481,27 +506,42 @@
             </p>
             <ul>
               <li>
-                <span class="warn">Middlewares</span>
-                - code to execute after action dispatching and before reducer (e.g. to start data fetching, logging)
+                <span class="hl">Middlewares</span>
+                - code to execute after action dispatching and before reducer
+                (e.g. to start data fetching, logging)
               </li>
               <li>
-                <span class="warn">Selectors</span>
+                <span class="hl">Selectors</span>
                 - derive aggregations from store
               </li>
             </ul>
           </section>
           <section>
             <h2>
-              <a href="https://github.com/pmndrs/valtio" target="_blank" rel="noopener noreferrer">Valtio</a>
+              <a
+                href="https://github.com/pmndrs/valtio"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Valtio</a
+              >
               /
-              <a href="https://mobx.js.org/" target="_blank" rel="noopener noreferrer">MobX</a>
+              <a
+                href="https://mobx.js.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >MobX</a
+              >
               (proxy-based)
             </h2>
             <p>Permit direct state mutation</p>
-            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim><script type="text/template">
                     const state = proxy({ count: 0, text: 'hello' })
                 </script></code></pre>
-            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim><script type="text/template">
                     const snap = useSnapshot(state)
                     return (
                       <div>
@@ -531,37 +571,58 @@
           </section>
           <section>
             <h2>
-              <a href="https://recoiljs.org/" target="_blank" rel="noopener noreferrer">Recoil</a>
+              <a
+                href="https://recoiljs.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Recoil</a
+              >
               /
-              <a href="https://github.com/pmndrs/jotai" target="_blank" rel="noopener noreferrer">Jotai</a>
+              <a
+                href="https://github.com/pmndrs/jotai"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Jotai</a
+              >
               (atom-based)
             </h2>
             <p>
               Primary focus on
-              <span class="warn">state</span>
+              <span class="hl">state</span>
               and
-              <span class="warn">selectors</span>
+              <span class="hl">selectors</span>
             </p>
-            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim><script type="text/template">
                     const textState = atom({
                       key: 'textState',
                       default: '',
                     });
                 </script></code></pre>
-            <pre data-id="code"><code class="hljs tsx" data-trim><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim><script type="text/template">
                     const [text, setText] = useRecoilState(textState);
                 </script></code></pre>
-            <div class="fragment tip">As of 2022 recoil is still experimental</div>
+            <div class="fragment tip">
+              As of 2022 recoil is still experimental
+            </div>
           </section>
           <section>
             <h2>
-              <a href="https://xstate.js.org/" target="_blank" rel="noopener noreferrer">XState</a>
+              <a
+                href="https://xstate.js.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >XState</a
+              >
             </h2>
             <p>
               Finite
-              <span class="warn">state machines</span>
+              <span class="hl">state machines</span>
               and
-              <span class="warn">state charts</span>
+              <span class="hl">state charts</span>
             </p>
           </section>
           <section>
@@ -578,13 +639,13 @@
             <li>External state management solutions</li>
           </ul>
         </section>
-        <section class="deck-slide">
+        <section class="break-slide">
           <h1>Questions?</h1>
         </section>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.js"></script>
     <script>
       setupZuehlkeRevealPresentation();
     </script>
