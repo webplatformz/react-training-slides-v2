@@ -10,44 +10,32 @@
     <title>Intro | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+      href="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.css"
     />
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="deck-slide">
-          <h1>
-            Essential React
-            <br />
-            Intro
-          </h1>
+        <section class="title-slide">
+          <h1>Essential React</h1>
+          <h2>Felix Mokross, Christoph Salvisberg</h2>
+          <h3>Intro</h3>
         </section>
-        <section>
+        <section class="team-slide" id="team-slide">
           <h2>About us</h2>
-          <div class="column-container">
-            <div class="column-3">
-              <img src="../img/instructors/moec.jpeg" class="portrait" />
-              <h4 class="margin-top">Moritz Eck</h4>
-              <div>
-                <small>@meck___</small>
-              </div>
+          <div class="team">
+            <div class="profile">
+              <img src="../img/instructors/femo.jpeg" />
+              <h3>Felix Mokross</h3>
+              <p>joined 2014</p>
             </div>
-            <div class="column-3">
-              <img src="../img/instructors/femo.jpeg" class="portrait" />
-              <h4 class="margin-top">Felix Mokross</h4>
-              <div>
-                <small>@felixmokross</small>
-              </div>
-            </div>
-            <div class="column-3">
-              <img src="../img/instructors/chsa.jpeg" class="portrait" />
-              <h4 class="margin-top">Christoph Salvisberg</h4>
-              <div>
-                <small></small>
-              </div>
+            <div class="profile">
+              <img src="../img/instructors/chsa.jpeg" />
+              <h3>Christoph Salvisberg</h3>
+              <p>joined 2022</p>
             </div>
           </div>
         </section>
@@ -56,11 +44,11 @@
 
           <!-- standard schedule -->
           <ul>
-            <li>09:00 Start</li>
-            <li>10:30 - 10:45 Coffee break</li>
-            <li>12:00 - 13:00 Lunch break</li>
-            <li>15:00 - 15:15 Coffee break</li>
-            <li>17:00 End</li>
+            <li><strong>09:00</strong> Start</li>
+            <li><strong>10:30</strong> Coffee (15 min.)</li>
+            <li><strong>12:00</strong> Lunch (1h)</li>
+            <li><strong>15:00</strong> Coffee (15 min.)</li>
+            <li><strong>17:00</strong> End</li>
           </ul>
 
           <!-- Asia schedule (starting 06:00 CEST/CET) -->
@@ -100,18 +88,6 @@
             <p>Rate your React experience and course expectancy</p>
             <p>Link will be posted in the teams chat</p>
           </section>
-          <section>
-            <p>Follow the presentation here</p>
-            <p>
-              <a
-                href="https://webplatformz.github.io/react-training-slides-v2/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                https://webplatformz.github.io/react-training-slides-v2/
-              </a>
-            </p>
-          </section>
         </section>
         <section>
           <section>
@@ -121,13 +97,18 @@
               <li>Building an app</li>
               <li>Questions any time</li>
             </ul>
+          </section>
+          <section>
             <p>
               made with
-              <a href="https://revealjs.com/#/">reveal.js</a>
+              <a href="https://revealjs.com/#/">reveal.js</a> &amp;
+              <a href="https://zuehlke.github.io/zuehlke-reveal-package"
+                >zuehlke-reveal-package</a
+              >
             </p>
           </section>
           <section>
-            <p>Follow the presentation here</p>
+            <p>Follow the presentation here:</p>
             <p>
               <a
                 href="https://webplatformz.github.io/react-training-slides-v2/"
@@ -136,6 +117,10 @@
               >
                 https://webplatformz.github.io/react-training-slides-v2/
               </a>
+            </p>
+            <p>
+              Navigate using <kbd>&larr;</kbd> <kbd>&rarr;</kbd> and
+              <kbd>&uarr;</kbd> <kbd>&darr;</kbd> (arrow keys)
             </p>
           </section>
         </section>
@@ -147,24 +132,23 @@
           <section>
             <p>
               React is a library for creating
-              <span class="warn">user interfaces</span>
-              .
+              <span class="hl">user interfaces</span>.
             </p>
             <p class="fragment">
               It is provides the
-              <span class="warn">rendering mechanism</span>
+              <span class="hl">rendering mechanism</span>
               and a
-              <span class="warn">basic state handling</span>
+              <span class="hl">basic state handling</span>
               (for interactivity), but leaves other aspects to the developer.
             </p>
             <p class="fragment">
               Thanks to the huge community, there are
-              <span class="warn">many complementing libraries</span>
+              <span class="hl">many complementing libraries</span>
               , e.g. for routing and data fetching.
             </p>
             <p class="fragment">
               There are also
-              <span class="warn">full-featured frameworks</span>
+              <span class="hl">full-featured frameworks</span>
               based on React, which target common use cases (e.g. Next.js,
               Remix).
             </p>
@@ -276,13 +260,13 @@
                 </script></code></pre>
           </section>
         </section>
-        <section class="deck-slide">
+        <section class="break-slide">
           <h1>Questions?</h1>
         </section>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.js"></script>
     <script>
       setupZuehlkeRevealPresentation();
     </script>
