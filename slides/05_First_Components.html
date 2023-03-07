@@ -2,25 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-    <title>First Component | Essential React</title>
+    <title>First Components | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+      href="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.css"
     />
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="deck-slide">
-          <h1>
-            Essential React
-            <br />
-            First Component
-          </h1>
+        <section class="title-slide">
+          <h1>First Components</h1>
+          <h2>Felix Mokross, Christoph Salvisberg</h2>
+          <h3>Essential React</h3>
         </section>
         <section>
           <section>
@@ -89,7 +91,9 @@
                             );
                         }
                         </script></code></pre>
-            <div class="fragment tip">Don't build monoliths. Split your components!</div>
+            <div class="fragment tip">
+              Don't build monoliths. Split your components!
+            </div>
           </section>
           <section data-auto-animate>
             <h3>Fragments</h3>
@@ -100,7 +104,7 @@
             </p>
             <p>
               If you want to return multiple nodes, wrap them in a
-              <span class="warn">Fragment</span>
+              <span class="hl">Fragment</span>
               to avoid rendering an unnecessary
               <span class="code">&lt;div&gt;</span>
               .
@@ -153,10 +157,13 @@
               <li class="fragment">
                 Setup a new React project with
                 <br />
-                <span class="code">npx create-react-app name --template typescript</span>
+                <span class="code"
+                  >npx create-react-app name --template typescript</span
+                >
               </li>
               <li class="fragment">
-                Create a PokeListEntry component to show a pokémon name like 'Bulbasaur' kept in a constant
+                Create a PokeListEntry component to show a pokémon name like
+                'Bulbasaur' kept in a constant
               </li>
               <li class="fragment">
                 Consume this component in the
@@ -206,18 +213,19 @@
             <h2>Props</h2>
             <p>
               We can pass data to child components by setting their
-              <span class="warn">props</span>
+              <span class="hl">props</span>
               (properties)
             </p>
             <p class="fragment">
-              A prop can have any type, e.g. it can be a JavaScript primitive, an object, or a function
+              A prop can have any type, e.g. it can be a JavaScript primitive,
+              an object, or a function
             </p>
             <p class="fragment">Props can be defined as required or optional</p>
             <p class="fragment">
               Pass
-              <span class="warn">functions as props</span>
+              <span class="hl">functions as props</span>
               to listen to
-              <span class="warn">events</span>
+              <span class="hl">events</span>
               emitted by child components
             </p>
           </section>
@@ -251,7 +259,10 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>Create Props for your PokeListEntry component expecting an optional name</li>
+              <li>
+                Create Props for your PokeListEntry component expecting an
+                optional name
+              </li>
               <li>Set a default name if property is not passed by consumer</li>
               <li>Use object destruction</li>
             </ul>
@@ -284,10 +295,15 @@
             <h2>Testing / React Testing Library</h2>
             <p>
               Our components can be tested using the
-              <a href="https://testing-library.com/docs/react-testing-library/intro/">React Testing Library</a>
+              <a
+                href="https://testing-library.com/docs/react-testing-library/intro/"
+                >React Testing Library</a
+              >
             </p>
 
-            <p class="fragment">It is already pre-installed when using Create React App.</p>
+            <p class="fragment">
+              It is already pre-installed when using Create React App.
+            </p>
           </section>
           <section>
             <h2>Testing our dumb component</h2>
@@ -310,7 +326,8 @@
             <h2>TDD - Test Driven Development</h2>
             <p>It is a good practice to conduct TDD wherever possible</p>
             <p>
-              Let us amend the component such that we can set the name through an
+              Let us amend the component such that we can set the name through
+              an
               <span class="code">name</span>
               property
             </p>
@@ -350,7 +367,10 @@
           </section>
           <section>
             <h3>Refactor</h3>
-            <p>Refactor your code such that it is extensible and easy to understand</p>
+            <p>
+              Refactor your code such that it is extensible and easy to
+              understand
+            </p>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim><script type="text/template">
               it('should render correct name', () => {
@@ -368,8 +388,8 @@
             <ul>
               <li>
                 <span class="code">getBy*</span>
-                - verify that an element/node is present at this very moment. Throws an error if element/node is not
-                found.
+                - verify that an element/node is present at this very moment.
+                Throws an error if element/node is not found.
               </li>
               <li>
                 <span class="code">queryBy*</span>
@@ -379,20 +399,30 @@
               </li>
               <li>
                 <span class="code">findBy*</span>
-                - verify that an element will be present, e.g. upon completion of an asynchronous API-Call
+                - verify that an element will be present, e.g. upon completion
+                of an asynchronous API-Call
               </li>
             </ul>
             <p>
-              <a target="_blank" href="https://testing-library.com/docs/queries/about/">Find more about queries here</a>
+              <a
+                target="_blank"
+                href="https://testing-library.com/docs/queries/about/"
+                >Find more about queries here</a
+              >
             </p>
           </section>
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>Test your PokeListEntry component with React Testing Library</li>
+              <li>
+                Test your PokeListEntry component with React Testing Library
+              </li>
               <li>
                 Stretch Goal:
-                <a href="https://jestjs.io/docs/api#testeachtablename-fn-timeout" target="_blank">
+                <a
+                  href="https://jestjs.io/docs/api#testeachtablename-fn-timeout"
+                  target="_blank"
+                >
                   Parameterize your test with React Testing Library using
                 </a>
                 <span class="code">it.each(table)(name, fn, timeout)</span>
@@ -484,20 +514,21 @@
               The JSX element returned from
               <span class="code">map</span>
               must have a
-              <span class="warn">key</span>
+              <span class="hl">key</span>
               prop.
             </p>
 
             <p class="fragment">
-              This is a special prop used by React internally to distinguish the elements. It must be
-              <span class="warn">unique within the list</span>
+              This is a special prop used by React internally to distinguish the
+              elements. It must be
+              <span class="hl">unique within the list</span>
               (e.g. an entity ID).
             </p>
           </section>
           <section data-auto-animate>
             <p>
               Use a
-              <span class="warn">Fragment</span>
+              <span class="hl">Fragment</span>
               to return multiple elements from
               <span class="code">map</span>
               .
@@ -560,7 +591,7 @@
           <section data-auto-animate>
             <p>
               The parent component receives the child components through the
-              <span class="warn">children</span>
+              <span class="hl">children</span>
               prop.
             </p>
 
@@ -610,7 +641,9 @@
             </code>
         </pre>
 
-            <p>The children prop can be rendered in the parent component's JSX.</p>
+            <p>
+              The children prop can be rendered in the parent component's JSX.
+            </p>
           </section>
         </section>
         <section>
@@ -619,9 +652,16 @@
             <ul>
               <li>
                 Create a (hard-coded)
-                <a target="_blank" href="https://pokeapi.co/api/v2/pokemon?limit=50">array of Pokémon</a>
+                <a
+                  target="_blank"
+                  href="https://pokeapi.co/api/v2/pokemon?limit=50"
+                  >array of Pokémon</a
+                >
               </li>
-              <li class="fragment">Render all Pokémon names in a list (hint: add a new <span class="code">PokeEntry.tsx</span> component)</li>
+              <li class="fragment">
+                Render all Pokémon names in a list (hint: add a new
+                <span class="code">PokeEntry.tsx</span> component)
+              </li>
               <li class="fragment">
                 Make the name in
                 <span class="code">PokeListEntry.tsx</span>
@@ -630,13 +670,17 @@
               <li class="fragment">Write tests for the list</li>
               <li class="fragment">
                 Create a
-                <span class="warn">Layout component</span>
-                which wraps the list with a page structure (containing a nav bar with dummy links)
+                <span class="hl">Layout component</span>
+                which wraps the list with a page structure (containing a nav bar
+                with dummy links)
               </li>
             </ul>
           </section>
           <section>
-            <img src="../img/exercise-goal-list-and-layout.png" alt="Exercise goal" />
+            <img
+              src="../img/exercise-goal-list-and-layout.png"
+              alt="Exercise goal"
+            />
           </section>
         </section>
         <section>
@@ -744,18 +788,18 @@
             <li>Render a list of components</li>
             <li>
               Create wrapper components using the
-              <span class="warn">children</span>
+              <span class="hl">children</span>
               prop
             </li>
           </ul>
         </section>
-        <section class="deck-slide">
+        <section class="break-slide">
           <h1>Questions?</h1>
         </section>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.js"></script>
     <script>
       setupZuehlkeRevealPresentation();
     </script>
