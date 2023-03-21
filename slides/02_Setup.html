@@ -2,25 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>Setup | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+      href="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.css"
     />
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="deck-slide">
-          <h1>
-            Essential React
-            <br />
-            Setup
-          </h1>
+        <section class="title-slide">
+          <h1>Setup</h1>
+          <h2>Essential React</h2>
         </section>
         <section>
           <section>
@@ -28,16 +29,22 @@
 
             <p>
               <a href="https://create-react-app.dev">Create React App</a>
-              (CRA) is the most popular toolchain to build client-side rendered React apps.
+              (CRA) is the most popular toolchain to build client-side rendered
+              React apps.
             </p>
             <p class="fragment">
               In contrast,
-              <span class="warn">full-featured frameworks</span>
-              (e.g. Next.js, Remix) provide advanced rendering mechanisms like server-side rendering (SSR) and static
-              site generation (SSG).
+              <span class="hl">full-featured frameworks</span>
+              (e.g. Next.js, Remix) provide advanced rendering mechanisms like
+              server-side rendering (SSR) and static site generation (SSG).
             </p>
-            <p class="fragment">For our demo app, we will use Create React App.</p>
-            <p class="fragment tip">We will talk about full-featured frameworks and when to use them later.</p>
+            <p class="fragment">
+              For our demo app, we will use Create React App.
+            </p>
+            <p class="fragment tip">
+              We will talk about full-featured frameworks and when to use them
+              later.
+            </p>
           </section>
         </section>
         <section>
@@ -51,14 +58,18 @@
                 </pre>
 
             <aside class="notes">
-              We use NPM as it is more widely known. However, yarn is the default with CRA. Feel free to use it if you
-              are more comfortable with it.
+              We use NPM as it is more widely known. However, yarn is the
+              default with CRA. Feel free to use it if you are more comfortable
+              with it.
             </aside>
           </section>
           <section>
             <h2>What is all this stuff?</h2>
             <p>
-              <img src="../img/create_react_app_initial_files.png" width="300" />
+              <img
+                src="../img/create_react_app_initial_files.png"
+                width="300"
+              />
             </p>
           </section>
         </section>
@@ -152,7 +163,9 @@
                         </script>
                     </code>
                 </pre>
-            <div class="fragment tip">React warns about wrong property names.</div>
+            <div class="fragment tip">
+              React warns about wrong property names.
+            </div>
           </section>
           <section>
             <h2>JSX</h2>
@@ -172,8 +185,8 @@
                 </pre>
 
             <p>
-              The outer pair of curly braces belongs to JSX, while the inner pair comes from the object notation of
-              JavaScript.
+              The outer pair of curly braces belongs to JSX, while the inner
+              pair comes from the object notation of JavaScript.
             </p>
             <div class="fragment tip">
               <span>
@@ -188,7 +201,10 @@
         <section>
           <section>
             <h2>TypeScript</h2>
-            <p>We will be using TypeScript because we highly recommend using it in enterprise projects.</p>
+            <p>
+              We will be using TypeScript because we highly recommend using it
+              in enterprise projects.
+            </p>
             <p>With Create React App TypeScript is supported out of the box:</p>
             <pre>
                     <code class="hljs javascript" data-trim>
@@ -203,7 +219,8 @@
             <h2>NPM scripts</h2>
             <p><span class="code">npm start</span></p>
             <p>
-              Starts the app in dev mode with a hot reload server. The build will fail if you have TypeScript errors.
+              Starts the app in dev mode with a hot reload server. The build
+              will fail if you have TypeScript errors.
             </p>
           </section>
           <section>
@@ -218,28 +235,29 @@
             <p><span class="code">npm test</span></p>
             <p>
               Runs your tests using
-              <span class="warn">jest</span>
+              <span class="hl">jest</span>
               and
-              <span class="warn">react-testing-library</span>
+              <span class="hl">react-testing-library</span>
             </p>
           </section>
           <section>
             <p><span class="code">npm run eject</span></p>
             <p>
-              You may have noticed that there is no webpack config visible. This is hidden from you when using Create
-              React App
-              <span class="warn">(convention over configuration)</span>
+              You may have noticed that there is no webpack config visible. This
+              is hidden from you when using Create React App
+              <span class="hl">(convention over configuration)</span>
               .
             </p>
             <p>
-              In most cases, this will be fine. If you need to make custom changes to the config, you can
-              <span class="warn">eject</span>
+              In most cases, this will be fine. If you need to make custom
+              changes to the config, you can
+              <span class="hl">eject</span>
               .
             </p>
             <p>This cannot be undone and you lose Create React App support.</p>
             <div class="fragment tip">
-              We recommend starting &amp; staying with Create React App until there is absolutely no way around
-              ejecting.
+              We recommend starting &amp; staying with Create React App until
+              there is absolutely no way around ejecting.
             </div>
           </section>
           <section>
@@ -254,8 +272,7 @@
                 (similar to
                 <span class="code">npm test</span>
                 but configured in package.json with the flag
-                <span class="warn">--watchAll=false</span>
-                )
+                <span class="hl">--watchAll=false</span>)
               </li>
               <li><span class="code">npm run build</span></li>
             </ul>
@@ -266,14 +283,12 @@
             <h2>ESLint</h2>
 
             <p>
-              ESLint is a tool that statically analyzes your code to discover potential problems (
-              <span class="warn">linting</span>
-              ).
+              ESLint is a tool that statically analyzes your code to discover
+              potential problems (<span class="hl">linting</span>).
             </p>
             <p class="fragment">
               Create React App comes with ESLint
-              <em>built-in</em>
-              . Problems are shown in the terminal.
+              <em>built-in</em>. Problems are shown in the terminal.
             </p>
             <p class="fragment">
               <em>Recommendation:</em>
@@ -299,7 +314,7 @@
             <p>In case of errors, the build fails.</p>
             <p class="fragment">
               On CI environments,
-              <span class="warn">warnings are treated like errors</span>
+              <span class="hl">warnings are treated like errors</span>
               to ensure a clean production build.
             </p>
             <p class="fragment">
@@ -359,7 +374,12 @@
             <a href="https://pokeapi.co">PokeAPI</a>
             .
           </p>
-          <a href="https://zb580z.csb.app/pokemon" target="_blank" rel="noopener noreferrer">Codesandbox Demo</a>
+          <a
+            href="https://zb580z.csb.app/pokemon"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Codesandbox Demo</a
+          >
         </section>
         <section>
           <h2>Recap</h2>
@@ -370,20 +390,20 @@
             <li>How React can be used?</li>
             <li>
               How to
-              <span class="warn">Create React App</span>
+              <span class="hl">Create React App</span>
               (CRA)
             </li>
             <li>What the JSX syntax is</li>
             <li>Which npm scripts are available in CRA</li>
           </ul>
         </section>
-        <section class="deck-slide">
+        <section class="break-slide">
           <h1>Questions?</h1>
         </section>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.js"></script>
     <script>
       setupZuehlkeRevealPresentation();
     </script>

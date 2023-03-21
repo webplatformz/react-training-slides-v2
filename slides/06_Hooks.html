@@ -2,26 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>Hooks | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.css"
+      href="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.css"
     />
   </head>
 
   <body>
     <div class="reveal">
       <div class="slides">
-        <section class="deck-slide">
-          <h1>
-            Essential React
-            <br />
-            Hooks
-          </h1>
+        <section class="title-slide">
+          <h1>Hooks</h1>
+          <h2>Essential React</h2>
         </section>
         <section>
           <p>Let's build a real app!</p>
@@ -32,7 +33,10 @@
         <section>
           <section>
             <h3>What are Hooks?</h3>
-            <p>Hooks are functions that let you "hook into" React state and lifecycle features.</p>
+            <p>
+              Hooks are functions that let you "hook into" React state and
+              lifecycle features.
+            </p>
           </section>
           <section>
             <h3>Built-in Hooks</h3>
@@ -58,8 +62,8 @@ function MyComponent() {
 </script></code></pre>
             <p>The Hook function is called in the render function.</p>
             <p>
-              Depending on the Hook, it may have parameters and may provide a return value to access the provided
-              functionality.
+              Depending on the Hook, it may have parameters and may provide a
+              return value to access the provided functionality.
             </p>
           </section>
           <section>
@@ -67,14 +71,14 @@ function MyComponent() {
             <ul>
               <li>
                 Only call Hooks at the
-                <span class="warn">top level</span>
+                <span class="hl">top level</span>
                 (not inside loops, conditions, or nested functions)
               </li>
               <li>
                 Only call Hooks from
-                <span class="warn">React function components</span>
+                <span class="hl">React function components</span>
                 or
-                <span class="warn">custom Hooks</span>
+                <span class="hl">custom Hooks</span>
               </li>
             </ul>
             <p>
@@ -87,16 +91,18 @@ function MyComponent() {
             <h2>History of Hooks</h2>
 
             <p>
-              Before Hooks were introduced in 2019, features like state management required the use of
+              Before Hooks were introduced in 2019, features like state
+              management required the use of
               <em>class components</em>
               .
             </p>
 
             <p>
-              With Hooks these features can be used in function components and thereby makes the code
-              <span class="warn">simpler</span>
+              With Hooks these features can be used in function components and
+              thereby makes the code
+              <span class="hl">simpler</span>
               and
-              <span class="warn">better reusable</span>
+              <span class="hl">better reusable</span>
               .
             </p>
           </section>
@@ -108,7 +114,7 @@ function MyComponent() {
           <section>
             <h3>
               The
-              <span class="warn">useState</span>
+              <span class="hl">useState</span>
               Hook
             </h3>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,4"><script type="text/template">
@@ -150,7 +156,10 @@ function MyComponent() {
                   const [meal, setMeal] = useState<Meal>();
                 </script></code>
             </pre>
-            <p>The array destructuring makes it easy to use multiple states in a component.</p>
+            <p>
+              The array destructuring makes it easy to use multiple states in a
+              component.
+            </p>
           </section>
         </section>
 
@@ -161,11 +170,13 @@ function MyComponent() {
           <section data-auto-animate>
             <p>
               The
-              <span class="warn">onChange</span>
+              <span class="hl">onChange</span>
               prop is a function which is called when the input is changed.
             </p>
 
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="|3-5"><script type="text/template">
             <input
               type="text"
               onChange={(event) => {
@@ -175,7 +186,9 @@ function MyComponent() {
           </script></code></pre>
           </section>
           <section data-auto-animate>
-            <pre data-id="code"><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="3-5"><script type="text/template">
             <input
               type="text"
               onChange={(event) => {
@@ -186,7 +199,7 @@ function MyComponent() {
           </script></code></pre>
             <p>
               Use
-              <span class="warn">event.target.value</span>
+              <span class="hl">event.target.value</span>
               to access the value which was entered.
             </p>
           </section>
@@ -197,8 +210,14 @@ function MyComponent() {
           <p><img src="../img/state_management_part_1_goal.png" /></p>
           <ol>
             <li>Allow the user to enter their name</li>
-            <li>The entered name is displayed as a greeting next to the input field</li>
-            <li>Display the input field on top of the list - routing will come later</li>
+            <li>
+              The entered name is displayed as a greeting next to the input
+              field
+            </li>
+            <li>
+              Display the input field on top of the list - routing will come
+              later
+            </li>
           </ol>
         </section>
         <section>
@@ -244,7 +263,7 @@ function MyComponent() {
 
             <p class="fragment">
               This is a
-              <span class="warn">wrapper for the native events</span>
+              <span class="hl">wrapper for the native events</span>
               , ensuring a consistent API and functionality across browsers.
             </p>
           </section>
@@ -264,7 +283,11 @@ function MyComponent() {
           </section>
           <section>
             <p>
-              <a href="https://reactjs.org/docs/events.html" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://reactjs.org/docs/events.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 SyntheticEvent API
               </a>
             </p>
@@ -279,7 +302,7 @@ function MyComponent() {
           <ul>
             <li>
               How to handle component-level state with
-              <span class="warn">useState</span>
+              <span class="hl">useState</span>
             </li>
             <li>How to handle input</li>
             <li>What Hooks are and how to use them</li>
@@ -289,13 +312,13 @@ function MyComponent() {
             </li>
           </ul>
         </section>
-        <section class="deck-slide">
+        <section class="break-slide">
           <h1>Questions?</h1>
         </section>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/webplatformz/zuehlke-reveal-package@aa0782bae9e270f4153d310e9f42bea172788e21/release/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Zuehlke/zuehlke-reveal-package@f42658c99dec0812d754d935263a70b93b81f54b/release/index.js"></script>
     <script>
       setupZuehlkeRevealPresentation();
     </script>
