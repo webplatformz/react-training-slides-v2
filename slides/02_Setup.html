@@ -28,7 +28,10 @@
             <h2>How React can be used</h2>
 
             <p>
-              <a href="https://create-react-app.dev">Create React App</a>
+              <a
+                href="https://github.com/vitejs/vite/tree/main/packages/create-vite"
+                >Vite with React</a
+              >
               (CRA) is the most popular toolchain to build client-side rendered
               React apps.
             </p>
@@ -39,37 +42,40 @@
               server-side rendering (SSR) and static site generation (SSG).
             </p>
             <p class="fragment">
-              For our demo app, we will use Create React App.
+              For our demo app, we will start with Vite and compare some aspects
+              later on with a framework supporting SSR.
             </p>
             <p class="fragment tip">
-              We will talk about full-featured frameworks and when to use them
-              later.
+              For all those that know
+              <em>Create React app</em>, please notice that this project is
+              discontinued since April 2022.
             </p>
           </section>
         </section>
         <section>
           <section>
-            <h2>Create React App</h2>
+            <h2>Create Vite-React app</h2>
             <pre>
                     <code class="hljs javascript" data-trim>
-                        $ npx create-react-app your-app-name
-                          --template typescript
+                        $ npm create vite@latest pokedex-vite
+                          > React
+                          > Typescript + SWC
+                        $ cd ./pokedex-vite
+                        $ npm install
+                        $ npm run dev
                     </code>
                 </pre>
 
             <aside class="notes">
-              We use NPM as it is more widely known. However, yarn is the
-              default with CRA. Feel free to use it if you are more comfortable
-              with it.
+              We use NPM as it is more widely known. Feel free to use another
+              package manager (yarn, pnpm, ...) you are more comfortable with
+              it.
             </aside>
           </section>
           <section>
             <h2>What is all this stuff?</h2>
             <p>
-              <img
-                src="../img/create_react_app_initial_files.png"
-                width="300"
-              />
+              <img src="../img/vite_react_initial-files.png" width="260" />
             </p>
           </section>
         </section>
@@ -205,19 +211,23 @@
               We will be using TypeScript because we highly recommend using it
               in enterprise projects.
             </p>
-            <p>With Create React App TypeScript is supported out of the box:</p>
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                        --template typescript
-                    </code>
-                </pre>
+            <p>
+              With React in Vite, a typescript template supports this out of the
+              box.
+            </p>
+            <p>
+              Select
+              <a href="https://www.typescriptlang.org/">typescript</a> and
+              <a href="https://swc.rs/">SWC</a>
+            </p>
+
             <div class="fragment tip">JSX + TypeScript = TSX</div>
           </section>
         </section>
         <section>
           <section>
             <h2>NPM scripts</h2>
-            <p><span class="code">npm start</span></p>
+            <p><span class="code">npm run dev</span></p>
             <p>
               Starts the app in dev mode with a hot reload server. The build
               will fail if you have TypeScript errors.
