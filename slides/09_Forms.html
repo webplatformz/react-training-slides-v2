@@ -137,7 +137,7 @@
             ><code class="hljs javascript" data-trim><script type="text/template">
               import { FormEvent, useRef } from 'react';
 
-              export  function RegistrationForm() {
+              export function RegistrationForm() {
                 const inputEl = useRef<HTMLInputElement | null>(null);
               
                 const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -248,7 +248,7 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4-5|11|10,12"><script type="text/template">
                   type FormValues = { name: string; email: string; };
 
-                  export  function Form() {
+                  export function Form() {
                     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
                     const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
                   
@@ -267,7 +267,7 @@
           <section>
             <h2>Solution (E-Mail Input)</h2>
             <pre><code class="hljs tsx" data-trim data-line-numbers="|9-12"><script type="text/template">
-                  export  function Form() {
+                  export function Form() {
                     /* ... (see previous slide) */
                     return (
                       <form onSubmit={handleSubmit(onSubmit)}>
