@@ -79,7 +79,7 @@
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="1,6|"><script type="text/template">
-                        import Greeting from './Greeting';
+                        import { Greeting } from './Greeting';
 
                         export function WelcomePage() {
                             return (
@@ -155,10 +155,16 @@
             <ul>
               <li class="fragment">
                 Setup a new React project with
-                <br />
-                <span class="code"
-                  >npx create-react-app name --template typescript</span
-                >
+                <pre>
+                  <code class="hljs javascript" data-trim>
+                      $ npm create vite@latest pokedex-vite
+                        > React
+                        > Typescript + SWC
+                      $ cd ./pokedex-vite
+                      $ npm install
+                      $ npm run dev
+                  </code>
+              </pre>
               </li>
               <li class="fragment">
                 Create a PokeListEntry component to show a pokémon name like
@@ -310,7 +316,7 @@
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8|"><script type="text/template">
               import { render, screen } from '@testing-library/react';
-              import Greeting from './Greeting';
+              import { Greeting } from './Greeting';
 
               describe('Greeting', () => {
                   it('should render "Hello World"', () => {
