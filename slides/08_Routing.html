@@ -235,7 +235,7 @@
             <p><span class="code">Page1.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-              export default function Page1() {
+              export  function Page1() {
                 return <p>This is page 1.</p>;
               }
             </script></code></pre>
@@ -275,7 +275,7 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
               import { useParams } from "react-router-dom";
 
-              export default function CarDetailPage() {
+              export  function CarDetailPage() {
                 const { carId } = useParams<"carId">();
                 return <p>This is the car with the ID {carId}.</p>;
               }
@@ -437,7 +437,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import List from "./pages/list/List";
 import DetailPage from "./pages/detail/DetailPage";
 
-export default function App() {
+export  function App() {
   return (<Router>
     <Routes>
       <Route path="/" element={<Navigate to="/pokemon" replace />} />
@@ -463,7 +463,7 @@ function PokeListEntry({ name }: PokeListEntryProps) {
   </div>);
 }
 
-export default PokeListEntry;
+export  PokeListEntry;
             </script></code></pre>
           </section>
           <section>
@@ -472,7 +472,7 @@ export default PokeListEntry;
             <pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
 import { useParams } from "react-router-dom";
 
-export default function DetailPage() {
+export  function DetailPage() {
   const { name } = useParams<"name">();
   const { data, isLoading, isError } = useQuery(['pokemon', name], () =>
     fetcher<PokemonDetailDto>(`https://pokeapi.co/api/v2/pokemon/${name}`)

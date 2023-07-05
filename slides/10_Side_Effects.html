@@ -43,7 +43,7 @@
                 const { innerWidth: width, innerHeight: height } = window;
                 return { width, height };
               }
-              export default function MyComponent() {
+              export  function MyComponent() {
                 const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
               
                 const handleResize = useCallback(() => {
@@ -145,7 +145,7 @@
                 );
               }
               
-              export default SearchPanel;
+              export  SearchPanel;
             </script></code></pre>
           </section>
           <section>
@@ -274,7 +274,7 @@
                 };
               }
               
-              export default useDebouncedSearch;
+              export  useDebouncedSearch;
               
 </script></code></pre>
           </section>
@@ -295,7 +295,7 @@
                 /* … */
               }
               
-              export default ListPage;
+              export  ListPage;
               
     
 </script></code></pre>
