@@ -32,8 +32,8 @@
                 href="https://github.com/vitejs/vite/tree/main/packages/create-vite"
                 >Vite with React</a
               >
-              (CRA) is the most popular toolchain to build client-side rendered
-              React apps.
+              is the most popular toolchain to build client-side rendered React
+              apps.
             </p>
             <p class="fragment">
               In contrast,
@@ -237,11 +237,41 @@
             <p><span class="code">npm run build</span></p>
             <p>
               Creates a production build of your app and puts it into in the
-              <span class="code">build</span>
+              <span class="code">dist</span>
               folder.
             </p>
           </section>
           <section>
+            <p><span class="code">npm run preview</span></p>
+            <p>
+              Runs a local http server and serving the production build from the <span class="code">dist</span>
+              folder.
+            </p>
+          </section>
+
+          <section>
+            <p><span class="code">npm run lint</span></p>
+            <p>
+              ESLint is a tool that statically analyzes your code to discover
+              potential problems (<span class="hl">linting</span>).
+            </p>
+            <p class="fragment">
+              Vite comes preconfigured with ESLint. Problems are shown in the terminal.
+            </p>
+            <p class="fragment">
+              <em>Recommendation:</em>
+              Install the
+              <a
+                href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                VS Code plugin for ESLint
+              </a>
+              for highlighting and fix assistance in the editor.
+            </p>
+          </section>
+          <!-- <section>
             <p><span class="code">npm test</span></p>
             <p>
               Runs your tests using
@@ -249,8 +279,8 @@
               and
               <span class="hl">react-testing-library</span>
             </p>
-          </section>
-          <section>
+          </section> -->
+          <!-- <section>
             <p><span class="code">npm run eject</span></p>
             <p>
               You may have noticed that there is no webpack config visible. This
@@ -269,8 +299,8 @@
               We recommend starting &amp; staying with Create React App until
               there is absolutely no way around ejecting.
             </div>
-          </section>
-          <section>
+          </section> -->
+          <!-- <section>
             <h3>CI setup</h3>
 
             <p>On the CI, you will typically run at least these scripts:</p>
@@ -286,9 +316,9 @@
               </li>
               <li><span class="code">npm run build</span></li>
             </ul>
-          </section>
+          </section> -->
         </section>
-        <section>
+        <!-- <section>
           <section>
             <h2>ESLint</h2>
 
@@ -312,8 +342,8 @@
               </a>
               for highlighting and fix assistance in the editor.
             </p>
-          </section>
-          <section>
+          </section> -->
+          <!-- <section>
             <h3>Linting on CI</h3>
 
             <p>
@@ -336,7 +366,7 @@
                 for this to work.)
               </small>
             </p>
-          </section>
+          </section> -->
         </section>
 
         <section>
@@ -377,19 +407,22 @@
         </section>
 
         <section>
-          <h2>Demo App</h2>
+          <h2>Excercise App</h2>
           <p>This is the app we will build within this course.</p>
           <p>
             It is based on the open
             <a href="https://pokeapi.co">PokeAPI</a>
             .
           </p>
-          <a
-            href="https://zb580z.csb.app/pokemon"
+          <p>If you need to have a working base for a future excercise, you can build on top of a sample implementation git repo:
+            <a
+            href="https://github.com/webplatformz/react-pokedex-vite"
             target="_blank"
             rel="noopener noreferrer"
-            >Codesandbox Demo</a
+            >https://github.com/webplatformz/react-pokedex-vite</a
           >
+          </p>
+         
         </section>
         <section>
           <h2>Recap</h2>
@@ -400,11 +433,10 @@
             <li>How React can be used?</li>
             <li>
               How to
-              <span class="hl">Create React App</span>
-              (CRA)
+              <span class="hl">Vite with React</span>
             </li>
             <li>What the JSX syntax is</li>
-            <li>Which npm scripts are available in CRA</li>
+            <li>Which npm scripts are available with Vite</li>
           </ul>
         </section>
         <section class="break-slide">
