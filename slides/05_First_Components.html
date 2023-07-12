@@ -498,7 +498,6 @@
           <section>
             <h3>Solution continued</h3>
             <span class="code">PokeListEntry.test.tsx</span>
-            <!-- prettier-ignore -->
             <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
@@ -510,6 +509,18 @@
                         </script>
                     </code>
                 </pre>
+          </section>
+          <section>
+            <h3>Follow-Up: Continouos Integration</h3>
+
+            <p>On your CI pipeline you typically want to ensure the quality of the solution</p>
+            <ul>
+              <li>
+                <span class="code">npm run test:ci</span> which is defined in package.json with the command <span class="code">vitest run</span> without watchmode
+              </li>
+              <li><span class="code">npm run lint</span></li>
+              <li><span class="code">npm run build</span></li>
+            </ul>
           </section>
         </section>
 
