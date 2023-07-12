@@ -525,23 +525,27 @@ function MyComponent() {
             <h3>Nested Routes</h3>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5,13|6,7|7,12|8,10"><script type="text/template">
-function MyComponent() {
-  return (<>
-    // …
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="boats" element={<BoatPage />} />
-        <Route path="cars" element={<CarLayout />}>
-          <Route index
-                 element={<CarListPage />} />
-          <Route path=":carId"
-                 element={<CarDetailPage />} />
-        </Route>
-      </Route>
-    </Routes>
-  </>);
-}
+            ><code class="hljs tsx" data-trim data-line-numbers="|5-14"><script type="text/template">
+              const router = createBrowserRouter([
+              {
+                path: "/",
+                element: <Layout />,
+                children: [
+                  {
+                    path: "pokemon",
+                    element: <ListPage />,
+                  },
+                  {
+                    path: "pokemon/:pokemonName",
+                    element: <DetailPage />,
+                  },
+                ],
+              },
+            ]);
+            
+            function App() {
+              return <RouterProvider router={router} />;
+            }
             </script></code></pre>
             <p></p>
           </section>
@@ -620,14 +624,16 @@ function MyComponent() {
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-function MyComponent() {
-  return <MemoryRouter
-    initialEntries={['/one', '/two', '/three']}
-    initialIndex={1}
-  >
-    // …
-  </MemoryRouter>;
-}
+              import { RouterProvider, createMemoryRouter } from "react-router-dom";
+
+              const router = createMemoryRouter(routes, {
+                initialEntries: ["/", "/events/123"],
+                initialIndex: 1,
+              });
+
+              function MyComponent() {
+                return <RouterProvider router={router} />;
+              }
             </script></code></pre>
 
             <p>
