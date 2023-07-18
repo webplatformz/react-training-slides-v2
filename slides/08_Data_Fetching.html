@@ -310,6 +310,63 @@
           </section>
         </section>
         <section>
+          <section>
+            <h2>Mutating resources</h2>
+            <ul>
+              <li>
+                useQuery hook is resolved immediately - we want to mutate upon a form submit or button click
+              </li>
+              <li>useQuery results are cached, which makes no sense in mutations</li>
+              <li>useQuery results are cached, which doesn't make sense for mutations</li>
+            </ul>
+          </section>
+          <section>
+            <h2>useMutation</h2>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|6-9"><script type="text/template">
+              function AddPokemon() {
+                const {mutate,
+                  isLoading: isMutationLoading,
+                  isError: isMutationerror,
+                } = useMutation((name: string) =>
+                  fetcher<PokemonDetailDto>("https://pokeapi.co/api/v2/pokemon?limit=1000", {
+                    method: "POST",
+                    body: JSON.stringify({ name }),
+                  })
+                );
+              
+                return <button onClick={() => mutate("zuehlkemon")} />;
+              }
+        </script></code></pre>
+        <p>notice how there is no query key and no data</p>
+          </section>
+          <section>
+            <h2>useMutation cache update</h2>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|4|6-11|12-17"><script type="text/template">
+              const { data, isLoading, isError } = useQuery(['pokemonList'], () =>
+                fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
+              );
+              const queryClient = useQueryClient();
+
+              const { mutate } = useMutation(
+                (name: string) =>
+                  fetcher<PokemonDetailDto>('https://pokeapi.co/api/v2/pokemon?limit=1000', {
+                    method: 'POST',
+                    body: JSON.stringify({ name }),
+                  }),
+                {
+                  onSuccess: (mutateResult, mutateParams) => {
+                    const newPokeList = data ? [...data.results, mutateResult] : [mutateResult];
+                    queryClient.setQueryData(['pokemonList'], { results: newPokeList });
+                  },
+                }
+              );
+              }
+        </script></code></pre>
+          </section>
+        </section>
+        <section>
           <h2>Data Fetching Libraries</h2>
 
           <ul>
@@ -326,6 +383,8 @@
             <li>Why fetching data is tricky with React render mechanism</li>
             <li>How to fetch data in React with a library</li>
             <li>Display details relating to loading & errors</li>
+            <li>Using useMutation for data manipulation</li>
+            <li>How to update the local cache without refetch</li>
           </ul>
         </section>
         <section class="break-slide">
