@@ -312,20 +312,21 @@
         <section>
           <section>
             <h2>Mutating resources</h2>
+            <p>Why doesnt <span class="code">useQuery</span> fit?</p>
             <ul>
               <li>
-                useQuery hook is resolved immediately - we want to mutate upon a form submit or button click
+                useQuery hook is resolved immediately – we want to mutate upon a form submit or button click
               </li>
               <li>useQuery results are cached, which makes no sense in mutations</li>
-              <li>useQuery results are cached, which doesn't make sense for mutations</li>
             </ul>
           </section>
           <section>
             <h2>useMutation</h2>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|6-9"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-6|7-10|13"><script type="text/template">
               function AddPokemon() {
-                const {mutate,
+                const {
+                  mutate,
                   isLoading: isMutationLoading,
                   isError: isMutationerror,
                 } = useMutation((name: string) =>
