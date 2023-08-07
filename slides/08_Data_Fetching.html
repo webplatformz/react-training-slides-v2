@@ -328,7 +328,7 @@
                 const {
                   mutate,
                   isLoading: isMutationLoading,
-                  isError: isMutationerror,
+                  isError: isMutationerror
                 } = useMutation((name: string) =>
                   fetcher<PokemonDetailDto>("https://pokeapi.co/api/v2/pokemon?limit=1000", {
                     method: "POST",
