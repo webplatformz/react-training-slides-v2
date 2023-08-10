@@ -222,7 +222,7 @@ function MyComponent() {
         </section>
         <section>
           <h2>Solution</h2>
-          <pre><code class="hljs tsx" data-trim data-line-numbers="|4,12"><script type="text/template">
+          <pre><code class="hljs tsx" data-trim data-line-numbers="|4,11,12|14"><script type="text/template">
             import { useState } from "react";
 
             function Profile() {
@@ -236,6 +236,7 @@ function MyComponent() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
+                <span>{`Hello, ${username}`}</span>
               </>);
             }
         </script></code></pre>

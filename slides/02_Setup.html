@@ -28,9 +28,12 @@
             <h2>How React can be used</h2>
 
             <p>
-              <a href="https://create-react-app.dev">Create React App</a>
-              (CRA) is the most popular toolchain to build client-side rendered
-              React apps.
+              <a
+                href="https://vitejs.dev/guide/#scaffolding-your-first-vite-project"
+                >Vite</a
+              >
+              is the most popular toolchain to build client-side rendered React
+              apps.
             </p>
             <p class="fragment">
               In contrast,
@@ -39,37 +42,42 @@
               server-side rendering (SSR) and static site generation (SSG).
             </p>
             <p class="fragment">
-              For our demo app, we will use Create React App.
+              For our demo app, we will start with Vite and compare some aspects
+              later on with a framework supporting SSR.
             </p>
             <p class="fragment tip">
-              We will talk about full-featured frameworks and when to use them
-              later.
+              For all those that know
+              <em>Create React App</em>, please notice that this project is
+              discontinued since April 2022.
             </p>
           </section>
         </section>
         <section>
           <section>
-            <h2>Create React App</h2>
+            <h2>Create Vite-React app</h2>
             <pre>
                     <code class="hljs javascript" data-trim>
-                        $ npx create-react-app your-app-name
-                          --template typescript
+                        $ npm create vite@latest pokedex-vite
+                          > React
+                          > Typescript + SWC
+                        $ cd ./pokedex-vite
+                        $ npm install
+                        $ npm run dev
                     </code>
                 </pre>
-
+            <div class="fragment tip">
+              Use SWC instead of Babel for better build performance.
+            </div>
             <aside class="notes">
-              We use NPM as it is more widely known. However, yarn is the
-              default with CRA. Feel free to use it if you are more comfortable
-              with it.
+              We use NPM as it is more widely known. Feel free to use another
+              package manager (yarn, pnpm, ...) you are more comfortable with
+              it.
             </aside>
           </section>
           <section>
             <h2>What is all this stuff?</h2>
             <p>
-              <img
-                src="../img/create_react_app_initial_files.png"
-                width="300"
-              />
+              <img src="../img/vite_react_initial-files.png" width="260" />
             </p>
           </section>
         </section>
@@ -205,19 +213,18 @@
               We will be using TypeScript because we highly recommend using it
               in enterprise projects.
             </p>
-            <p>With Create React App TypeScript is supported out of the box:</p>
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                        --template typescript
-                    </code>
-                </pre>
+            <p>
+              With React in Vite, a TypeScript template supports this out of the
+              box.
+            </p>
+
             <div class="fragment tip">JSX + TypeScript = TSX</div>
           </section>
         </section>
         <section>
           <section>
             <h2>NPM scripts</h2>
-            <p><span class="code">npm start</span></p>
+            <p><span class="code">npm run dev</span></p>
             <p>
               Starts the app in dev mode with a hot reload server. The build
               will fail if you have TypeScript errors.
@@ -227,68 +234,28 @@
             <p><span class="code">npm run build</span></p>
             <p>
               Creates a production build of your app and puts it into in the
-              <span class="code">build</span>
+              <span class="code">dist</span>
               folder.
             </p>
           </section>
           <section>
-            <p><span class="code">npm test</span></p>
+            <p><span class="code">npm run preview</span></p>
             <p>
-              Runs your tests using
-              <span class="hl">jest</span>
-              and
-              <span class="hl">react-testing-library</span>
+              Runs a local HTTP server that serves the production build from the
+              <span class="code">dist</span>
+              folder.
             </p>
           </section>
-          <section>
-            <p><span class="code">npm run eject</span></p>
-            <p>
-              You may have noticed that there is no webpack config visible. This
-              is hidden from you when using Create React App
-              <span class="hl">(convention over configuration)</span>
-              .
-            </p>
-            <p>
-              In most cases, this will be fine. If you need to make custom
-              changes to the config, you can
-              <span class="hl">eject</span>
-              .
-            </p>
-            <p>This cannot be undone and you lose Create React App support.</p>
-            <div class="fragment tip">
-              We recommend starting &amp; staying with Create React App until
-              there is absolutely no way around ejecting.
-            </div>
-          </section>
-          <section>
-            <h3>CI setup</h3>
 
-            <p>On the CI, you will typically run at least these scripts:</p>
-
-            <ul>
-              <li>
-                <span class="code">npm test:ci</span>
-                <br />
-                (similar to
-                <span class="code">npm test</span>
-                but configured in package.json with the flag
-                <span class="hl">--watchAll=false</span>)
-              </li>
-              <li><span class="code">npm run build</span></li>
-            </ul>
-          </section>
-        </section>
-        <section>
           <section>
-            <h2>ESLint</h2>
-
+            <p><span class="code">npm run lint</span></p>
             <p>
               ESLint is a tool that statically analyzes your code to discover
               potential problems (<span class="hl">linting</span>).
             </p>
             <p class="fragment">
-              Create React App comes with ESLint
-              <em>built-in</em>. Problems are shown in the terminal.
+              Vite comes preconfigured with ESLint. Problems are shown in the
+              terminal.
             </p>
             <p class="fragment">
               <em>Recommendation:</em>
@@ -301,30 +268,6 @@
                 VS Code plugin for ESLint
               </a>
               for highlighting and fix assistance in the editor.
-            </p>
-          </section>
-          <section>
-            <h3>Linting on CI</h3>
-
-            <p>
-              ESLint is also run as part of
-              <span class="code">npm run build</span>
-              .
-            </p>
-            <p>In case of errors, the build fails.</p>
-            <p class="fragment">
-              On CI environments,
-              <span class="hl">warnings are treated like errors</span>
-              to ensure a clean production build.
-            </p>
-            <p class="fragment">
-              <small>
-                (Ensure that the environment variable
-                <span class="code">CI</span>
-                is set to
-                <span class="code">true</span>
-                for this to work.)
-              </small>
             </p>
           </section>
         </section>
@@ -367,19 +310,23 @@
         </section>
 
         <section>
-          <h2>Demo App</h2>
+          <h2>Excercise App</h2>
           <p>This is the app we will build within this course.</p>
           <p>
             It is based on the open
             <a href="https://pokeapi.co">PokeAPI</a>
             .
           </p>
-          <a
-            href="https://zb580z.csb.app/pokemon"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Codesandbox Demo</a
-          >
+          <p>
+            If you need to have a working base for a future excercise, you can
+            build on top of a sample implementation git repo:
+            <a
+              href="https://github.com/webplatformz/react-pokedex-vite"
+              target="_blank"
+              rel="noopener noreferrer"
+              >https://github.com/webplatformz/react-pokedex-vite</a
+            >
+          </p>
         </section>
         <section>
           <h2>Recap</h2>
@@ -390,11 +337,10 @@
             <li>How React can be used?</li>
             <li>
               How to
-              <span class="hl">Create React App</span>
-              (CRA)
+              <span class="hl">Vite with React</span>
             </li>
             <li>What the JSX syntax is</li>
-            <li>Which npm scripts are available in CRA</li>
+            <li>Which npm scripts are available with Vite</li>
           </ul>
         </section>
         <section class="break-slide">

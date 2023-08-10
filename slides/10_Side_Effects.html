@@ -37,13 +37,87 @@
               <li>Cancelling a network request/asynchronous operation</li>
             </ul>
           </section>
+          <!-- <section>
+            <img
+              src="../img/user-duplicate-request.png"
+              alt="Duplicate request"
+            />
+
+            <p>What's going on here?</p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">index.tsx</span></p>
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
+            const root = ReactDOM.createRoot(
+              document.getElementById("root") as HTMLElement
+            );
+            root.render(
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            );
+</script></code></pre>
+            <p>
+              In development, when using
+              <em>Strict Mode</em>
+              , components are re-mounted: mount, unmount, mount
+            </p>
+            <p>
+              Purpose:
+              <span class="hl">future-proofing</span>
+              the app
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>
+              In development, when using
+              <em>Strict Mode</em>
+              , components are re-mounted: mount, unmount, mount
+            </p>
+            <p>
+              Purpose:
+              <span class="hl">future-proofing</span>
+              the app
+            </p>
+            <p>
+              &rarr; Effects are executed at least twice in development
+              <br />
+              <small>(not in prod)</small>
+            </p>
+            <p>
+              Therefore it is recommanded to not fetch data with useEffect but
+              rely on a library, so let's do it!
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>Configure TanStack Query</p>
+            <p>
+              <span class="code">npm i @tanstack/react-query</span>
+            </p>
+            <pre
+              data-id="code2"
+            ><code class="hljs tsx" data-trim data-line-numbers="1|6-8"><script type="text/template">
+              const queryClient = new QueryClient();
+
+              function App() {
+                /* Provide the client to your App */
+                return (
+                  <QueryClientProvider client={queryClient}>
+                    <MyComponent />
+                  </QueryClientProvider>
+                );
+              }
+            </script></code></pre>
+          </section> -->
           <section>
             <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
               function getWindowDimensions() {
                 const { innerWidth: width, innerHeight: height } = window;
                 return { width, height };
               }
-              export default function MyComponent() {
+              export function MyComponent() {
                 const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
               
                 const handleResize = useCallback(() => {
@@ -145,7 +219,7 @@
                 );
               }
               
-              export default SearchPanel;
+              export { SearchPanel };
             </script></code></pre>
           </section>
           <section>
@@ -274,7 +348,7 @@
                 };
               }
               
-              export default useDebouncedSearch;
+              export { useDebouncedSearch };
               
 </script></code></pre>
           </section>
@@ -295,7 +369,7 @@
                 /* … */
               }
               
-              export default ListPage;
+              export { ListPage };
               
     
 </script></code></pre>

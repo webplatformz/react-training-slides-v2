@@ -109,74 +109,47 @@
 
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1-2,6-8"><script type="text/template">
-              import { BrowserRouter as Router }
-                from "react-router-dom";
+            ><code class="hljs tsx" data-trim data-line-numbers="1,3,7"><script type="text/template">
+              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+              const router = createBrowserRouter([]);
 
               function App() {
                 return (
-                  <Router>
-
-                  </Router>
+                  <RouterProvider router={router} />
                 );
               }
             </script></code></pre>
             <p>
-              The
-              <span class="code">BrowserRouter</span>
-              provides the access to the routing functionality.
+              <span class="code">createBrowserRouter</span>
+              creates an instance of a router that will be used.
             </p>
           </section>
+
           <section data-auto-animate>
             <h3>How to Define Routes</h3>
 
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
-              import { BrowserRouter as Router, Routes }
-                from "react-router-dom";
+            ><code class="hljs tsx" data-trim data-line-numbers="2,4-7"><script type="text/template">
+              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+              import { Page1 } from "./Page1.tsx";
+
+              const router = createBrowserRouter([
+                { path: '/page1', element: <Page1 /> },
+              ]);
 
               function App() {
                 return (
-                  <Router>
-                    <Routes>
-
-                    </Routes>
-                  </Router>
-                );
-              }
-            </script></code></pre>
-
-            <p>
-              A
-              <span class="code">Routes</span>
-              component renders the most specific matching route (exclusively).
-            </p>
-          </section>
-          <section data-auto-animate>
-            <h3>How to Define Routes</h3>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1-2,6-10"><script type="text/template">
-              import { BrowserRouter as Router, Routes, Route }
-                from "react-router-dom";
-
-              function App() {
-                return (
-                  <Router>
-                    <Routes>
-                      <Route path="/page1" />
-                    </Routes>
-                  </Router>
+                  <RouterProvider router={router} />
                 );
               }
             </script></code></pre>
 
             <p>
               Here we define a route with the path
-              <span class="code">/page1</span>
-              .
+              <span class="code">/page1</span> and tell it to render the
+              <span class="code">Page1</span> component .
             </p>
           </section>
           <section data-auto-animate>
@@ -184,49 +157,19 @@
 
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3,9"><script type="text/template">
-              import { BrowserRouter as Router, Routes, Route }
-                from "react-router-dom";
-              import Page1 from "./Page1.tsx";
+            ><code class="hljs tsx" data-trim data-line-numbers="3,7"><script type="text/template">
+              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+              import { Page1 } from "./Page1.tsx";
+              import { Page2 } from "./Page2.tsx";
+
+              const router = createBrowserRouter([
+                {path: '/page1', element: <Page1 /> },
+                {path: '/page2', element: <Page2 /> },
+              ]);
 
               function App() {
                 return (
-                  <Router>
-                    <Routes>
-                      <Route path="/page1" element={<Page1 />} />
-                    </Routes>
-                  </Router>
-                );
-              }
-            </script></code></pre>
-
-            <p>
-              The page to be renderered for this route is simply defined as
-              <span class="code">element</span>
-              of
-              <span class="code">Route</span>
-              .
-            </p>
-          </section>
-          <section data-auto-animate>
-            <h3>How to Define Routes</h3>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="4,11"><script type="text/template">
-              import { BrowserRouter as Router, Routes, Route }
-                from "react-router-dom";
-              import Page1 from "./Page1.tsx";
-              import Page2 from "./Page2.tsx";
-
-              function App() {
-                return (
-                  <Router>
-                    <Routes>
-                      <Route path="/page1" element={<Page1 />} />
-                      <Route path="/page2" element={<Page2 />} />
-                    </Routes>
-                  </Router>
+                  <RouterProvider router={router} />
                 );
               }
             </script></code></pre>
@@ -235,7 +178,7 @@
             <p><span class="code">Page1.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-              export default function Page1() {
+              export function Page1() {
                 return <p>This is page 1.</p>;
               }
             </script></code></pre>
@@ -245,20 +188,10 @@
           <section data-auto-animate>
             <h3>Routes with Parameters</h3>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="7|"><script type="text/template">
-              function App() {
-                return (
-                  <Router>
-                    <Routes>
-                      /* … */
-                      <Route
-                        path="/cars/:carId"
-                        element={<CarDetailPage />}
-                      />
-                    </Routes>
-                  </Router>
-                );
-              }
+            <pre><code class="hljs tsx" data-trim data-line-numbers="3"><script type="text/template">
+              const router = createBrowserRouter(
+                […,
+                {path: '/cars/:carId', element: <CarDetailPage/>}]);
             </script></code></pre>
 
             <p>
@@ -275,7 +208,7 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
               import { useParams } from "react-router-dom";
 
-              export default function CarDetailPage() {
+              export function CarDetailPage() {
                 const { carId } = useParams<"carId">();
                 return <p>This is the car with the ID {carId}.</p>;
               }
@@ -290,20 +223,19 @@
           <section>
             <h3>Route Redirection</h3>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,7-10"><script type="text/template">
-              import { Route, Navigate } from "react-router-dom";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,7"><script type="text/template">
+              import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
+
+              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+              import { Page1 } from "./Page1.tsx";
+
+              const router = createBrowserRouter([
+                 {path: '/', element: <Navigate to="/page1" replace />},
+                 {path: '/page2', element: <Page2/>}]);
 
               function App() {
                 return (
-                  <Router>
-                    <Routes>
-                      <Route
-                        path="/"
-                        element={<Navigate to="/page1" replace />}
-                      />
-                      <Route path="/page1" element={<Page1 />} />
-                    </Routes>
-                  </Router>
+                  <RouterProvider router={router} />
                 );
               }
             </script></code></pre>
@@ -312,6 +244,12 @@
               With the
               <span class="code">Navigate</span>
               component, a route can be redirected to another route.
+            </p>
+            <p class="fragment tip">
+              <span>
+                With using the <span class="code">replace</span> prop, no entry
+                will be added to the browser history.
+              </span>
             </p>
           </section>
           <section>
@@ -333,12 +271,18 @@
           <section>
             <h3>Cheat Sheet</h3>
 
-            <p><span class="code">&lt;BrowserRouter /&gt;</span></p>
-            <p><span class="code">&lt;Routes /&gt;</span></p>
             <p>
               <span class="code"
-                >&lt;Route path="/cars/:carId" element={&lt;CarDetailPage /&gt;}
-                /&gt;</span
+                >const router = createBrowserRouter([...]);</span
+              >
+            </p>
+            <p>
+              <span class="code">&lt;RouterProvider router={router} /&gt;</span>
+            </p>
+
+            <p>
+              <span class="code"
+                >{path: '/cars/:carId', element: &lt;Car/&gt;}</span
               >
             </p>
             <p>
@@ -356,15 +300,6 @@
             <h2>Exercise</h2>
             <ol>
               <li>
-                Implement a detail view to show the detail data of a specific
-                pokemon.
-                <p>
-                  <span class="code">
-                    GET https://pokeapi.co/api/v2/pokemon/${name}
-                  </span>
-                </p>
-              </li>
-              <li>
                 Split the app up into two navigatable pages:
                 <ul>
                   <li>
@@ -376,7 +311,23 @@
                     When clicking on a pokemon in the list, the pokemon detail
                     page is shown.
                   </li>
+                  <li>
+                    When clicking on a pokemon in the list, the pokemon detail
+                    page is shown.
+                  </li>
                 </ul>
+              </li>
+              <li>
+                Use the mock data provided in the github repository
+                <p>
+                  <a
+                    href="https://github.com/webplatformz/react-pokedex-vite/tree/chapter-05-routing/src/mockData"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    https://github.com/webplatformz/react-pokedex-vite/tree/chapter-05-routing/src/mockData
+                  </a>
+                </p>
               </li>
             </ol>
           </section>
@@ -390,7 +341,7 @@
               </div>
             </div>
           </section>
-          <section>
+          <!-- <section>
             <h2>Detail API</h2>
             <a
               href="https://pokeapi.co/api/v2/pokemon/bulbasaur"
@@ -411,7 +362,7 @@
                     }
                 </code>
             </pre>
-          </section>
+          </section> -->
           <section>
             <h3>Stretch Goal</h3>
             <p>
@@ -432,61 +383,114 @@
 
             <p><span class="code">App.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|6,12|7,11|9,10|8|"><script type="text/template">
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import List from "./pages/list/List";
-import DetailPage from "./pages/detail/DetailPage";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,15|2-4|5-8|9-12|"><script type="text/template">
+const router = createBrowserRouter([{
+    path: "/",
+    element: <Navigate to="/pokemon" replace />,
+  },
+  {
+    path: "/pokemon",
+    element: <ListPage />,
+  },
+  {
+    path: "/pokemon/:pokemonName",
+    element: <DetailPage />,
+  }]);
 
-export default function App() {
-  return (<Router>
-    <Routes>
-      <Route path="/" element={<Navigate to="/pokemon" replace />} />
-      <Route path="/pokemon" element={<ListPage />} />
-      <Route path="/pokemon/:name" element={<DetailPage />} />
-    </Routes>
-  </Router>);
+function App() {
+  return <RouterProvider router={router} />;
 }
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">Layout.tsx</span></p>
 
+            <pre><code class="hljs tsx" data-trim data-line-numbers="11"><script type="text/template">
+              import { Link } from "react-router-dom";
+              import { PropsWithChildren } from "react";
+              
+              type LayoutProps = PropsWithChildren;
+              
+              export function Layout({ children }: LayoutProps) {
+                return (
+                  <div>
+                    <header>
+                      <nav>
+                        <Link to="/">Home</Link> | <Link to="/profile">Profile</Link>
+                      </nav>
+                    </header>
+                    <main>{children}</main>
+                  </div>
+                );
+              }
+              
+              
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">ListPage.tsx</span></p>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="8"><script type="text/template">
+              import { Layout } from "../../components/layout/Layout";
+              import { PokeList } from "../../components/poke-list/PokeList";
+              import { pokemonList } from "../../mockData/list";
+              
+              function ListPage() {
+                return (
+                  <Layout>
+                    <PokeList pokemons={pokemonList.results} />
+                  </Layout>
+                );
+              }
+              
+              export { ListPage };
+              
             </script></code></pre>
           </section>
           <section>
             <p><span class="code">PokeListEntry.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|7|"><script type="text/template">
-import { Link } from "react-router-dom";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|10-12"><script type="text/template">
+              import { Link } from "react-router-dom";
 
-interface PokeListEntryProps { name: string; }
-
-function PokeListEntry({ name }: PokeListEntryProps) {
-  return (<div className="uppercase">
-    <Link to={`/pokemon/${name}`}>{name}</Link>
-  </div>);
-}
-
-export default PokeListEntry;
+              interface PokeListEntryProps {
+                name: string;
+              }
+              
+              export function PokeListEntry({ name }: PokeListEntryProps) {
+                return (
+                  <li>
+                    <Link className="uppercase" to={`./${name}`}>
+                      {name}
+                    </Link>
+                  </li>
+                );
+              }
+              
             </script></code></pre>
           </section>
           <section>
             <p><span class="code">DetailPage.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|7|8-9|11-18|"><script type="text/template">
-import { useParams } from "react-router-dom";
-
-export default function DetailPage() {
-  const { name } = useParams<"name">();
-  const { data, isLoading, isError } = useQuery(['pokemon', name], () =>
-    fetcher<PokemonDetailDto>(`https://pokeapi.co/api/v2/pokemon/${name}`)
-  );
-  if (!data) return null;
-  return (<>
-    <h1>{data.name}</h1>
-    <dl>
-      <dt>hp</dt>
-      <dd>{data.hp}</dd>
-      // …
-    </dl>
-  </>);
-}           
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|6|8-9|11-18|"><script type="text/template">
+              import { useParams } from "react-router-dom";
+              import { pokeDetails } from "../../mockData/details";
+              import { Layout } from "../../components/layout/Layout";
+              
+              function DetailPage() {
+                const { pokemonName } = useParams<"pokemonName">();
+              
+                const pokemon = pokeDetails.find((p) => p.name === pokemonName);
+              
+                return (
+                  <Layout>
+                    <h1 className="uppercase">{pokemonName}</h1>
+                    <img src={pokemon?.sprites.front_shiny} alt={pokemonName} />
+                  </Layout>
+                );
+              }
+              
+              export { DetailPage };
             </script></code></pre>
           </section>
         </section>
@@ -523,23 +527,27 @@ function MyComponent() {
             <h3>Nested Routes</h3>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5,13|6,7|7,12|8,10"><script type="text/template">
-function MyComponent() {
-  return (<>
-    // …
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="boats" element={<BoatPage />} />
-        <Route path="cars" element={<CarLayout />}>
-          <Route index
-                 element={<CarListPage />} />
-          <Route path=":carId"
-                 element={<CarDetailPage />} />
-        </Route>
-      </Route>
-    </Routes>
-  </>);
-}
+            ><code class="hljs tsx" data-trim data-line-numbers="|5-14"><script type="text/template">
+              const router = createBrowserRouter([
+              {
+                path: "/",
+                element: <Layout />,
+                children: [
+                  {
+                    path: "pokemon",
+                    element: <ListPage />,
+                  },
+                  {
+                    path: "pokemon/:pokemonName",
+                    element: <DetailPage />,
+                  },
+                ],
+              },
+            ]);
+            
+            function App() {
+              return <RouterProvider router={router} />;
+            }
             </script></code></pre>
             <p></p>
           </section>
@@ -618,14 +626,16 @@ function MyComponent() {
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-function MyComponent() {
-  return <MemoryRouter
-    initialEntries={['/one', '/two', '/three']}
-    initialIndex={1}
-  >
-    // …
-  </MemoryRouter>;
-}
+              import { RouterProvider, createMemoryRouter } from "react-router-dom";
+
+              const router = createMemoryRouter(routes, {
+                initialEntries: ["/", "/events/123"],
+                initialIndex: 1,
+              });
+
+              function MyComponent() {
+                return <RouterProvider router={router} />;
+              }
             </script></code></pre>
 
             <p>

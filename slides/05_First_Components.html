@@ -33,7 +33,7 @@
                         <script type="text/template">
                         const name = 'World';
 
-                        export default function Greeting() {
+                        export function Greeting() {
                             return (
                                 <div>
                                   <h1>Hello, {name}</h1>
@@ -79,9 +79,9 @@
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="1,6|"><script type="text/template">
-                        import Greeting from './Greeting';
+                        import { Greeting } from './Greeting';
 
-                        export default function WelcomePage() {
+                        export function WelcomePage() {
                             return (
                               <div>
                                 <Greeting />
@@ -155,10 +155,16 @@
             <ul>
               <li class="fragment">
                 Setup a new React project with
-                <br />
-                <span class="code"
-                  >npx create-react-app name --template typescript</span
-                >
+                <pre>
+                  <code class="hljs javascript" data-trim>
+                      $ npm create vite@latest pokedex-vite
+                        > React
+                        > Typescript + SWC
+                      $ cd ./pokedex-vite
+                      $ npm install
+                      $ npm run dev
+                  </code>
+              </pre>
               </li>
               <li class="fragment">
                 Create a PokeListEntry component to show a pokémon name like
@@ -179,7 +185,7 @@
                         <script type="text/template">
                         const name = 'World';
 
-                        export default function PokeListEntry() {
+                        export function PokeListEntry() {
                             return (
                                 <div>{name}</div>
                             );
@@ -195,9 +201,9 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        import PokeListEntry from "./PokeListEntry"
+                        import { PokeListEntry } from "./PokeListEntry"
 
-                        export default function App() {
+                        export function App() {
                             return (
                                 <PokeListEntry />
                             );
@@ -240,7 +246,7 @@
                               wearsHat?: boolean; // optional prop with default value
                           };
   
-                          export default function MyComponent({
+                          export function MyComponent({
                             name,
                             age,
                             wearsHat = false,
@@ -277,7 +283,7 @@
                             name?: string;
                         };
 
-                        export default function PokeListEntry({
+                        export function PokeListEntry({
                           name = 'Bulbasaur'
                         }: PokeListEntryProps) {
                             return (
@@ -291,26 +297,66 @@
         </section>
         <section>
           <section>
-            <h2>Testing / React Testing Library</h2>
+            <h2>Testing</h2>
             <p>
               Our components can be tested using the
-              <a
-                href="https://testing-library.com/docs/react-testing-library/intro/"
-                >React Testing Library</a
-              >
+              <a href="https://vitest.dev/">Vitest</a> and <a href="https://testing-library.com/">React Testing Library</a>
             </p>
-
-            <p class="fragment">
-              It is already pre-installed when using Create React App.
-            </p>
+            <p>
+              Add the library
+            <pre
+              data-id="code"
+            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom --save-dev</script></code></pre>
+          </p>
+          <p>Add in the <span class="code">package.json</span> in the scripts section</p>
+          <pre
+            data-id="code"
+          ><code class="hljs zsh" data-trim><script type="text/template">"test": "vitest",</script></code></pre>
+        </p>
           </section>
+          <section>
+            <h2>Configure</h2>
+            <span class="code">setup.ts</span>
+            <pre><code class="hljs javascript" data-trim data-line-numbers="5,6|8-11"><script type="text/template">
+              import { expect, afterEach } from "vitest";
+              import { cleanup } from "@testing-library/react";
+              import matchers from "@testing-library/jest-dom/matchers";
+              
+              /* extends Vitest's expect method with methods from react-testing-library */
+              expect.extend(matchers);
+              
+              /* runs a cleanup after each test case (e.g. clearing jsdom) */
+              afterEach(() => {
+                cleanup();
+              });
+            </script></code></pre>
+          </section>
+          <section>
+            <h2>Configure</h2>
+            <span class="code">vite.config.ts</span>
+            <pre><code class="hljs javascript" data-trim data-line-numbers="1|6-10"><script type="text/template">
+              import { defineConfig } from "vitest/config";
+              import react from "@vitejs/plugin-react-swc";
+              
+              export default defineConfig({
+                plugins: [react()],
+                test: {
+                  globals: true,
+                  environment: "jsdom",
+                  setupFiles: "./tests/setup.ts",
+                },
+              });
+            </script></code></pre>
+          </section>
+        </section>
+        <section>
           <section>
             <h2>Testing our dumb component</h2>
             <span class="code">Greeting.test.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8|"><script type="text/template">
               import { render, screen } from '@testing-library/react';
-              import Greeting from './Greeting';
+              import { Greeting } from './Greeting';
 
               describe('Greeting', () => {
                   it('should render "Hello World"', () => {
@@ -320,6 +366,7 @@
                   });
               });
             </script></code></pre>
+            <span class="code">npm run test</span>
           </section>
           <section>
             <h2>TDD - Test Driven Development</h2>
@@ -357,11 +404,9 @@
                   name?: string;
               };
 
-              function Greeting({ name = 'World' }: Props) {
+              export function Greeting({ name = 'World' }: Props) {
                   return <div>Hello {name}</div>;
               }
-
-              export default Greeting;
             </script></code></pre>
           </section>
           <section>
@@ -453,7 +498,6 @@
           <section>
             <h3>Solution continued</h3>
             <span class="code">PokeListEntry.test.tsx</span>
-            <!-- prettier-ignore -->
             <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
@@ -465,6 +509,18 @@
                         </script>
                     </code>
                 </pre>
+          </section>
+          <section>
+            <h3>Follow-Up: Continuous Integration</h3>
+
+            <p>On your CI pipeline you typically want to ensure the quality of the solution</p>
+            <ul>
+              <li>
+                <span class="code">npm run test:ci</span> which is defined in package.json with the command <span class="code">vitest run</span> without watchmode
+              </li>
+              <li><span class="code">npm run lint</span></li>
+              <li><span class="code">npm run build</span></li>
+            </ul>
           </section>
         </section>
 
@@ -485,7 +541,7 @@
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="5-7|"><script type="text/template">
                         const items = ['Apple', 'Orange', 'Mango'];
-                        export default function List() {
+                        export function List() {
                             return (
                                 <ul>
                                     {items.map(
@@ -499,7 +555,7 @@
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
                         const items = ['Apple', 'Orange', 'Mango'];
-                        export default function List() {
+                        export function List() {
                             return (
                                 <ul>
                                     {items.map(
@@ -537,7 +593,7 @@
                         import { Fragment } from "react";
 
                         const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
-                        export default function List() {
+                        export function List() {
                             return (
                                 <table>
                                   <tbody>
@@ -572,7 +628,7 @@
             <pre>
             <code class="hljs jsx" data-trim>
                 <script type="text/template">
-                export default function App() {
+                export function App() {
                   return (
                     <ContentContainer title="Profile">
                       <ProfilePicture />
@@ -659,7 +715,7 @@
               </li>
               <li class="fragment">
                 Render all Pokémon names in a list (hint: add a new
-                <span class="code">PokeEntry.tsx</span> component)
+                <span class="code">PokeList.tsx</span> component)
               </li>
               <li class="fragment">
                 Make the name in
@@ -695,7 +751,7 @@
 
                         const pokemons = […];
 
-                        export default function PokeList() {
+                        export function PokeList() {
                           return (
                             <ul>
                               {pokemons.map((pokemon) => (
@@ -721,7 +777,7 @@
                           name: string;
                         };
 
-                        export default function PokeListEntry({
+                        export function PokeListEntry({
                           name
                         }: PokeListEntryProps) {
                           return <li>{name}</li>;
@@ -736,9 +792,9 @@
             <pre>
                     <code class="hljs javascript" data-trim>
                         <script type="text/template">
-                        type LayoutProps = PropsWithChildren<{}>;
+                        type LayoutProps = PropsWithChildren;
 
-                        export default function Layout({ children }: LayoutProps) {
+                        export function Layout({ children }: LayoutProps) {
                           return (
                             <>
                               <header>
@@ -763,7 +819,7 @@
                         import Layout from "./Layout";
                         import PokeList from "./PokeList";
   
-                        export default function App() {
+                        export function App() {
                           return (
                             <Layout>
                               <PokeList />
