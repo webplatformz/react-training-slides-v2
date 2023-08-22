@@ -465,7 +465,7 @@
             <h3>Dispatching Reducer Actions</h3>
             <pre><code class="hljs tsx" data-trim><script type="text/template">
               useEffect(() => {
-                dispatch({
+                pokemonName && dispatch({
                   type: "add",
                   value: pokemonName
                 });
