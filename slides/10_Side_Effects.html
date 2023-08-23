@@ -229,7 +229,7 @@
             ><code class="hljs tsx" data-trim data-line-numbers="2,3|5-8"><script type="text/template">
 
               function ListPage() {
-                const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+                const [searchTerm, setSearchTerm] = useState("");
                 const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
               
                 useEffect(() => {
@@ -325,7 +325,7 @@
             <h2>Solution</h2>
           </section>
           <section>
-            <p><span class="code">usePokeList.ts</span></p>
+            <p><span class="code">useDebouncedSearch.ts</span></p>
 
             <pre
               data-id="code"

@@ -88,7 +88,7 @@
               setName: (name: string) => void;            
             };
             
-            const UserContext = createContext<ContextType | undefined>(undefined);
+            export const UserContext = createContext<ContextType | undefined>(undefined);
             
             function Parent() {
               const [name, setName] = useState("Joe");
@@ -179,7 +179,7 @@
                       setUsername: (username: string) => void;
                     };
                     
-                    const UserContext = createContext<UserContextValue | undefined>(undefined);
+                    export const UserContext = createContext<UserContextValue | undefined>(undefined);
                     
                     export function useUserContext(): UserContextValue {
                       const context = useContext(UserContext);
@@ -193,14 +193,15 @@
             <h3>Solution continued</h3>
             <p><span class="code">Profile.tsx</span></p>
             <pre>
-                    <code class="hljs javascript" data-trim data-line-numbers="2"><script type="text/template">
+                    <code class="hljs javascript" data-trim data-line-numbers="2|4"><script type="text/template">
                         function Profile() {
-                          const { username, setUsername } = useUserContext();
-                          
+                          const { setUsername } = useUserContext();
+  
+                          const onSubmit: SubmitHandler<FormValues> = (data) => setUsername(data.name);
                           return (
-                            <>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                               …
-                            </>
+                            </form>
                           );
                         }
                         </script></code>
@@ -210,22 +211,46 @@
             <h3>Solution continued</h3>
             <p><span class="code">App.tsx</span></p>
             <pre>
-                    <code class="hljs javascript" data-trim><script type="text/template">
-                        export function App() {
-                          const [username, setUsername] = useState("");
-                          return (
-                            <UserContext.Provider
-                              value={{
-                                username,
-                                setUsername
-                              }}
-                            >
-                              <Router>
-                                …
-                              </Router>
-                            </UserContext.Provider>
-                          );
-                        }
+                    <code class="hljs javascript" data-trim data-line-numbers="2|4-9,13"><script type="text/template">
+                      export function App() {
+                        const [username, setUsername] = useState("");
+                        return (
+                          <UserContext.Provider
+                            value={{
+                              username,
+                              setUsername
+                            }}
+                          >
+                            <Router>
+                              …
+                            </Router>
+                          </UserContext.Provider>
+                        );
+                      }
+                    </script></code>
+                </pre>
+          </section>
+          <section>
+            <h3>Solution continued</h3>
+            <p><span class="code">Layout.tsx</span></p>
+            <pre>
+                    <code class="hljs javascript" data-trim data-line-numbers="2|9"><script type="text/template">
+                      export function Layout() {
+                        const { username } = useUserContext();
+                        return (
+                          <div className={styles.root}>
+                            <header>
+                              <nav>
+                                <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
+                              </nav>
+                              {username && <span>{`Hello, ${username}`}</span>}
+                            </header>
+                            <main>
+                              <Outlet />
+                            </main>
+                          </div>
+                        );
+                      }
                     </script></code>
                 </pre>
           </section>
@@ -440,7 +465,7 @@
             <h3>Dispatching Reducer Actions</h3>
             <pre><code class="hljs tsx" data-trim><script type="text/template">
               useEffect(() => {
-                dispatch({
+                pokemonName && dispatch({
                   type: "add",
                   value: pokemonName
                 });
