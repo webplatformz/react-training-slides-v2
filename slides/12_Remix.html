@@ -24,6 +24,56 @@
           <h1>Remix</h1>
           <h3>Essential React</h3>
         </section>
+
+        <section>
+          <p>Why Remix?</p>
+          <!--TODO should we add this slide?-->
+          <ul>
+            <li>Example for classical <em>Server-Side Rendering</em> (SSR)</li>
+            <li>
+              Same routing core as we have used for client-side rendered app
+              (powered by React Router)
+            </li>
+            <li><em>Use the Platform</em> philosophy</li>
+            <li>Next.js is currently in transition phase</li>
+          </ul>
+        </section>
+
+        <section>
+          <pre>
+            <code class="hljs shell" data-trim>
+                $ npx create-remix@latest react-pokedex-remix
+                  > Just the basics
+                  > Remix App Server
+                  > TypeScript
+                  > Yes
+                $ cd ./react-pokedex-remix
+                $ npm run dev
+            </code>
+          </pre>
+        </section>
+
+        <section>
+          <!-- Should we show this? -->
+          <pre>
+            <code class="hljs shell" data-trim>
+                $ npm install --save-dev --save-exact prettier
+                $ echo {}> .prettierrc.json
+                $ cp .gitignore .prettierignore
+                $ npx prettier . --write
+            </code>
+          </pre>
+
+          <p><span class="code">.vscode/settings.json</span></p>
+
+          <pre>
+            <code class="hljs json" data-trim>
+              {
+                "editor.formatOnSave": true
+              }              
+            </code>
+          </pre>
+        </section>
       </div>
     </div>
 
