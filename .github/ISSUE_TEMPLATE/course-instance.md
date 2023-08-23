@@ -16,12 +16,14 @@ assignees: ""
   - breaking changes in React, React Router, other tools?
   - any new features to include?
 - [ ] Dev tools work (e.g. with current Node.js version)
+- [ ] Teams call/invite with course participants has been sent out
+  - incl. setup instructions/prerequesites
+  - possibly with hybrid approach (exercise room in camp zulu for interested people)
 - [ ] Order a new collectors link for the Survey Monkey feedback form. Each link is different but points to the same form (e.g., [Feedback Form](https://de.surveymonkey.com/r/PTSDCGT))
 
 ### Latest 1 week before course
 
-- [ ] Teams call/invite with course participants has been sent out
-  - incl. setup instructions/prerequesites
+
 - [ ] Miro board has been prepared
   - [template](https://miro.com/app/dashboard/?tpTemplate=uXjVPb8UJMw%3D&isCustom=true&share_link_id=176973458557)
 - [ ] Chapter assignments are clear
@@ -46,11 +48,12 @@ assignees: ""
 | Setup            | TBD         |
 | First Components | TBD         |
 | Hooks            | TBD         |
-| Data Fetching    | TBD         |
 | Routing          | TBD         |
+| Data Fetching    | TBD         |
 | Forms            | TBD         |
 | SideEffects      | TBD         |
 | State Management | TBD         |
+| Remix            | TBD         |
 | Styling          | TBD         |
 
 ### Moderation
