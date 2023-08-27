@@ -24,6 +24,34 @@
           <h1>Remix</h1>
           <h3>Essential React</h3>
         </section>
+        <section class="agenda" id="agenda-slide">
+          <div class="wrapper">
+            <div>
+              <span class="number">01</span>
+              <span class="title">Server-Side Rendering</span>
+            </div>
+            <div>
+              <span class="number">02</span>
+              <span class="title">Setup</span>
+            </div>
+            <div>
+              <span class="number">03</span>
+              <span class="title">Routing</span>
+            </div>
+            <div>
+              <span class="number">04</span>
+              <span class="title">Data Fetching</span>
+            </div>
+            <div>
+              <span class="number">05</span>
+              <span class="title">Forms & Actions</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="subtitle-slide">
+          <h1>Server-Side Rendering</h1>
+        </section>
 
         <section>
           <p>Why Remix?</p>
@@ -44,9 +72,11 @@
         </section>
 
         <section>
-          <h2>Create a new Remix app</h2>
-
-          <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|2-3|4-5|6-7|8-9|1-9|11|12|">
+          <section>
+            <h3>Create a new Remix app</h3>
+          </section>
+          <section>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|2-3|4-5|6-7|8-9|1-9|11|12|">
                 $ npx create-remix@latest pokedex-remix
                   ? What type of app do you want to create?
                     > Just the basics
@@ -60,11 +90,14 @@
                 $ cd ./pokedex-remix
                 $ npm run dev
             </code></pre>
+          </section>
         </section>
 
         <section>
-          <section data-auto-animate>
+          <section>
             <h3>File Structure</h3>
+          </section>
+          <section data-auto-animate>
             <img
               src="../img/remix_initial-files.png"
               alt="Initial files of Remix app folder"
@@ -111,19 +144,200 @@
               </div>
             </div>
           </section>
+          <section>
+            <h3><span class="code">app/root.tsx</span></h3>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|8,9,14,15,20,21|2,12,13,16-19|16|1,4|"><script type="text/template">
+import type { LinksFunction } from "@remix-run/node";
+import { Links, LiveReload, Meta, … } from "@remix-run/react";
+
+export const links: LinksFunction = () => […];
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+          </script></code></pre>
+            <aside class="notes">
+              Some notes:
+              <ol>
+                <li>Describes complete document (&lt;html&gt; element)</li>
+                <li>
+                  Special Remix components for app setup (again, full control)
+                </li>
+                <li>
+                  Router outlet (same as in React Router): your page is rendered
+                  here
+                </li>
+                <li>
+                  <em>links</em> export: e.g. global stylesheets. Conventions
+                  explained in next chapter
+                </li>
+              </ol>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>NPM Scripts</h3>
+            <p><span class="code">npm run dev</span></p>
+            <p>Starts the app in dev mode with hot reload</p>
+          </section>
+          <section>
+            <p><span class="code">npm run build</span></p>
+            <p>
+              Creates a production build of your app (output in
+              <span class="code">build</span> and
+              <span class="code">public/build</span> folders)
+            </p>
+          </section>
+          <section>
+            <p><span class="code">npm start</span></p>
+            <p>
+              Starts Node.js server in <span class="code">build</span> folder
+            </p>
+            <div class="tip fragment">
+              For deployment to common platforms consider using a template (see
+              <span class="code">README.md</span>)
+            </div>
+          </section>
+          <section>
+            <p><span class="code">npm run typecheck</span></p>
+            <p>
+              Runs TypeScript compiler to ensure type-safety in build pipeline
+              (<em>not</em>
+              done automatically by Remix compiler)
+            </p>
+          </section>
         </section>
 
         <section class="subtitle-slide">
           <h1>Routing</h1>
+          (exercises 1+2)
+        </section>
+
+        <section>
+          <section>
+            <h3>Intro to Route File Conventions</h3>
+          </section>
+          <section>
+            <h4>General conventions</h4>
+            <ul>
+              <li>
+                Route files are placed in <span class="code">app/routes</span>
+              </li>
+              <li>Flat file structure (no nested route folders)</li>
+              <li>Co-location of non-route files is possible</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                Flat file structure was introduced as new convention (initially
+                also used nested route folders). Legacy file structure will not
+                be supported anymore in Remix v2.
+              </ul>
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">_index</span> indicates an index route</p>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="2,5" data-id="code"><script type="text/template">
+app/routes/
+    ├── _index.tsx
+    ├── about.tsx
+    ├── pricing.tsx
+    ├── blog._index.tsx
+    ├── blog.$slug.tsx
+    ├── blog.archive.tsx
+    └── blog.authors.tsx
+              </script></code></pre>
+            <p>
+              &rarr; URLs <span class="code">/</span> and
+              <span class="code">/blog</span>
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>Static route segments</p>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="3,4,7,8" data-id="code"><script type="text/template">
+app/routes/
+    ├── _index.tsx
+    ├── about.tsx
+    ├── pricing.tsx
+    ├── blog._index.tsx
+    ├── blog.$slug.tsx
+    ├── blog.archive.tsx
+    └── blog.authors.tsx
+              </script></code></pre>
+            <p>
+              &rarr; e.g.
+              <span class="code">/about</span> and<span class="code"
+                >/blog/archive</span
+              >
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>Use the dot delimiter for nested routes</p>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="5-8" data-id="code"><script type="text/template">
+app/routes/
+    ├── _index.tsx
+    ├── about.tsx
+    ├── pricing.tsx
+    ├── blog._index.tsx
+    ├── blog.$slug.tsx
+    ├── blog.archive.tsx
+    └── blog.authors.tsx
+              </script></code></pre>
+            <p>&rarr; URLs <span class="code">/blog/…</span></p>
+          </section>
+          <section data-auto-animate>
+            <p>
+              Dynamic route segments (parameters) start with a dollar symbol
+            </p>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
+app/routes/
+    ├── _index.tsx
+    ├── about.tsx
+    ├── pricing.tsx
+    ├── blog._index.tsx
+    ├── blog.$slug.tsx
+    ├── blog.archive.tsx
+    └── blog.authors.tsx
+              </script></code></pre>
+            <p>
+              &rarr; e.g.
+              <span class="code">/blog/five-great-tips-for-2024</span>
+            </p>
+          </section>
+          <section>
+            See
+            <a
+              href="https://remix.run/docs/en/1.19.3/file-conventions/route-files-v2"
+              >Remix docs</a
+            >
+            for more details.
+          </section>
         </section>
 
         <section class="subtitle-slide">
           <h1>Data Fetching</h1>
+          (exercise 3)
         </section>
 
         <section class="subtitle-slide">
           <h1>Forms/Actions</h1>
-          (2 exercises)
+          (exercise 4) (exercise 5)
         </section>
       </div>
     </div>
