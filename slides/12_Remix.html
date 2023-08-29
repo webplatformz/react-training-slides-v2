@@ -227,12 +227,11 @@ export default function App() {
 
         <section class="subtitle-slide">
           <h1>Routing</h1>
-          (exercises 1+2)
         </section>
 
         <section>
           <section>
-            <h3>Intro to Route File Conventions</h3>
+            <h3>Intro to Route File Naming</h3>
           </section>
           <section>
             <h4>General conventions</h4>
@@ -250,6 +249,18 @@ export default function App() {
                 be supported anymore in Remix v2.
               </ul>
             </aside>
+          </section>
+          <section data-auto-animate>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1" data-id="code"><script type="text/template">
+app/routes/
+    ├── _index.tsx
+    ├── about.tsx
+    ├── pricing.tsx
+    ├── blog._index.tsx
+    ├── blog.$slug.tsx
+    ├── blog.archive.tsx
+    └── blog.authors.tsx
+              </script></code></pre>
           </section>
           <section data-auto-animate>
             <p><span class="code">_index</span> indicates an index route</p>
@@ -327,6 +338,198 @@ app/routes/
               >Remix docs</a
             >
             for more details.
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h3>Route Module API</h3>
+          </section>
+          <section data-auto-animate>
+            <h3>Route Module API</h3>
+
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
+              app/routes/
+                  ├── _index.tsx
+                  ├── about.tsx
+                  ├── pricing.tsx
+                  ├── blog._index.tsx
+                  ├── blog.$slug.tsx
+                  ├── blog.archive.tsx
+                  └── blog.authors.tsx
+                            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|3,10|5-9|1,4" data-id="code"><script type="text/template">
+          import { useParams } from "@remix-run/react";
+
+          export default function BlogPostPage() {
+            const { slug } = useParams();
+            return (
+              <p>
+                This is the blog post with slug {slug}.
+              </p>
+            );
+          }
+        </script></code></pre>
+            <aside class="notes">
+              <ol>
+                <li>Must be default export</li>
+                <li>It's a React component, return JSX</li>
+                <li>
+                  useParams like in React Router (Disclaimer: just as an example
+                  – Data fetching will work differently (later)
+                </li>
+              </ol>
+            </aside>
+          </section>
+          <section data-auto-animate>
+            <p>How can we redirect to a different route?</p>
+
+            <p class="fragment">
+              E.g. <span class="code">/</span> &rarr;
+              <span class="code">/blog</span>
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>How can we redirect to a different route?</p>
+            <p>
+              E.g. <span class="code">/</span> &rarr;
+              <span class="code">/blog</span>
+            </p>
+
+            <div>
+              <p><span class="code">_index.tsx</span></p>
+              <pre><code class="hljs tsx" data-trim data-line-numbers="3,5|1,4|" data-id="code"><script type="text/template">
+import { redirect } from "@remix-run/node";
+
+export function loader() {
+  return redirect("blog");
+}
+        </script></code></pre>
+              <p class="fragment">
+                Must be a named export called <span class="code">loader</span>.
+              </p>
+              <aside class="notes">
+                We will learn more about loaders in the next section.
+              </aside>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <div>
+              <p><span class="code">_index.tsx</span></p>
+              <pre><code class="hljs tsx" data-trim data-id="code"><script type="text/template">
+import { redirect } from "@remix-run/node";
+
+export function loader() {
+  return redirect("blog");
+}
+        </script></code></pre>
+              <p>&rarr; redirects to <span class="code">blog.tsx</span></p>
+            </div>
+          </section>
+          <section>
+            <h4>Other Useful Route Module Exports</h4>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="21-23|1-7|9-15|17-19|" data-id="code"><script type="text/template">
+              export const links: LinksFunction = () => {
+                return [
+                  { rel: "icon", href: "/favicon.png", type: "image/png" },
+                  { rel: "stylesheet", href: "https://example.com/some/styles.css" },
+                  …
+                ];
+              };
+
+              export const meta: V2_MetaFunction = () => {
+                return [
+                  { title: "Very cool app | Remix" },
+                  { property: "og:title", content: "Very cool app" },
+                  …
+                ];
+              };
+
+              export const headers: HeadersFunction = () => ({
+                "Cache-Control": "max-age=300, s-maxage=3600",
+              });
+
+              export default function BlogPostPage() {
+                …
+              }
+            </script></code></pre>
+
+            <aside class="notes">
+              And there are more… We will get to know loaders and actions in
+              later sections.
+            </aside>
+          </section>
+        </section>
+        <section>
+          <h2>Exercise</h2>
+          <ol>
+            <li>
+              <span class="code">npx create-remix@latest &lt;app-name&gt;</span>
+            </li>
+            <li>
+              Set up routes for pokemon list, pokemon detail, and profile pages
+            </li>
+            <li>Display mock data</li>
+          </ol>
+        </section>
+        <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section>
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
+              app/routes/
+                  ├── _index.tsx
+                  ├── pokemon._index.tsx
+                  ├── pokemon.$pokemonName.tsx
+                  └── profile.tsx
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">_index.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              export function loader(_: DataFunctionArgs) {
+                return redirect("pokemon");
+              }                     
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">pokemon._index.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              export default function ListPage() {
+                return <PokeList pokemons={pokemonList.results} />;
+              }                        
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">pokemon.$pokemonName.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              export default function DetailPage() {
+                const { pokemonName } = useParams();
+              
+                const pokemon = pokeDetails.find((p) => p.name === pokemonName);
+              
+                return (
+                  <div>
+                    <span>{pokemonName}</span>
+                    <img src={pokemon?.sprites.front_shiny} alt={pokemonName} />
+                  </div>
+                );
+              }                          
+            </script></code></pre>
+          </section>
+          <section>
+            <p>
+              Complete solution code can be found on GitHub on the branch
+              <a
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-02-routing"
+                target="_blank"
+                ><span class="code">exercise-02-routing</span></a
+              >.
+            </p>
           </section>
         </section>
 
