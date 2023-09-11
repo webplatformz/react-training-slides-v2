@@ -693,6 +693,16 @@ export function loader() {
               Show the Not Found page if an unknown pokemon name is passed in
               the URL
             </li>
+            <li class="fragment">
+              <span class="hl">Stretch goal:</span> Transform the data from the
+              PokeAPI so that only the needed data is sent to the client
+            </li>
+            <aside class="notes">
+              <p>
+                Hint: Inspect the Network Tab to better understand the data
+                loading in Remix.
+              </p>
+            </aside>
           </ul>
         </section>
         <section>
@@ -716,44 +726,55 @@ export function loader() {
           </section>
           <section>
             <p><span class="code">pokemon._index.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-7|10|" data-id="code"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-7|10|11|" data-id="code"><script type="text/template">
               export async function loader() {
                 const pokemonList = await fetcher<PokemonResultDto>(
                   "https://pokeapi.co/api/v2/pokemon?limit=1000",
                 );
               
-                return json(pokemonList);
+                return json(pokemonList.results.map((p) => p.name));
               }
               
               export default function ListPage() {
-                const pokemonList = useLoaderData<typeof loader>();
-
-                return <PokeList pokemons={pokemonList.results} />;
+                const pokemons = useLoaderData<typeof loader>();
+                return <PokeList pokemons={pokemons} />;
               }
             </script></code></pre>
           </section>
           <section>
             <p><span class="code">pokemon.$pokemonName.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-7|10|" data-id="code"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-10|13|14-19|" data-id="code"><script type="text/template">
               export async function loader({ params }: LoaderArgs) {
                 const pokemonDetail = await fetcher<PokemonDetailDto>(
                   `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`,
                 );
               
-                return json(pokemonDetail);
+                return json({
+                  name: pokemonDetail.name,
+                  imageUrl: pokemonDetail.sprites.front_shiny,
+                });
               }
               
               export default function DetailPage() {
                 const pokemonDetail = useLoaderData<typeof loader>();
-                
                 return (
                   <div>
                     <span>{pokemonDetail.name}</span>
-                    <img src={pokemonDetail.sprites.front_shiny} alt={pokemonDetail.name} />
+                    <img src={pokemonDetail.imageUrl} alt={pokemonDetail.name} />
                   </div>
                 );
               }
             </script></code></pre>
+          </section>
+          <section>
+            <p>
+              Complete solution code can be found on GitHub on the branch
+              <a
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-03-data-fetching"
+                target="_blank"
+                ><span class="code">exercise-03-data-fetching</span></a
+              >.
+            </p>
           </section>
         </section>
 
