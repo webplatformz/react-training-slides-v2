@@ -793,11 +793,302 @@ export function loader() {
           </section>
         </section>
 
-        <!--WIP-->
-        <!--<section class="subtitle-slide">
-          <h1>Forms/Actions</h1>
-          (exercise 4) (exercise 5)
-        </section> -->
+        <section class="subtitle-slide">
+          <h1>Forms & Actions</h1>
+        </section>
+        <section>
+          <section>
+            <h2>Creating a form</h2>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="5,9|6-8|" data-id="code-1"><script type="text/template">
+            export default function BlogPostPage() {
+              return (
+                <>
+                  …
+                  <form method="post">
+                    <input type="text" name="name" />
+                    <textarea name="comment" />
+                    <button type="submit">Submit</button>
+                  </form>
+                </>
+              );
+            }
+        </script></code></pre>
+            <p>Let's start simple: We can use a native HTML form.</p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,3" data-id="code-2"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                …
+              }
+
+              export default function BlogPostPage() {
+                return (
+                  <>
+                    …
+                    <form method="post">
+                      …
+                    </form>
+                  </>
+                );
+              }
+        </script></code></pre>
+            <p>
+              On the server, the form is processed by an
+              <span class="code">action</span>.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-4" data-id="code-3"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                const form = await request.formData();
+                const name = form.get("name");
+                const comment = form.get("comment");
+
+                console.log(`name: ${name}`);
+                console.log(`comment: ${comment}`);
+
+                return redirect(".");
+              }
+
+              …
+        </script></code></pre>
+            <p>
+              Form data is read from the request using the standard
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Request/formData"
+                target="_blank"
+                ><span class="code">Request.formData()</span></a
+              >
+              method.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="6-7" data-id="code-3"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                const form = await request.formData();
+                const name = form.get("name");
+                const comment = form.get("comment");
+
+                console.log(`name: ${name}`);
+                console.log(`comment: ${comment}`);
+
+                return redirect(".");
+              }
+
+              …
+        </script></code></pre>
+            <p>
+              The data can then be processed as desired (validated, stored,
+              etc.).
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="9" data-id="code-3"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                const form = await request.formData();
+                const name = form.get("name");
+                const comment = form.get("comment");
+
+                console.log(`name: ${name}`);
+                console.log(`comment: ${comment}`);
+
+                return redirect(".");
+              }
+
+              …
+        </script></code></pre>
+            <p>
+              Like the <span class="code">loader</span>, the
+              <span class="code">action</span> function can return a Response
+              object.<br />
+              Typically, a <span class="code">redirect</span> is returned to
+              implement the
+              <a
+                href="https://en.wikipedia.org/wiki/Post/Redirect/Get"
+                target="_blank"
+                >Post/Redirect/Get</a
+              >
+              pattern.
+            </p>
+          </section>
+          <!--TODO add error handling here -->
+          <!--TODO introduce <Form> component and explain its benefit -->
+        </section>
+        <!-- <section>Cookies/session handling</section> -->
+        <section>
+          <section>
+            <h2>Exercise</h2>
+            <ul>
+              <li class="fragment">
+                Add a form for name and email to the Profile page
+              </li>
+              <li class="fragment">
+                When the form is submitted, submit the data to the server and
+                store name and email in a cookie
+                <ul>
+                  <li class="fragment">User stays on the same page</li>
+                  <li class="fragment">
+                    Use the session handling utilities provided on the next
+                    slide
+                  </li>
+                </ul>
+              </li>
+              <li class="fragment">Display the name in the navigation bar</li>
+            </ul>
+          </section>
+          <section>
+            <p><span class="code">app/sessions.ts</span></p>
+            <pre><code class="hljs ts" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              import { createCookieSessionStorage } from "@remix-run/node";
+
+              type SessionData = {
+                name: string;
+                email: string;
+              };
+
+              const { getSession, commitSession, destroySession } =
+                createCookieSessionStorage<SessionData>({
+                  cookie: {
+                    name: "__session",
+                    domain: "localhost",
+                    httpOnly: true,
+                    maxAge: 60 * 60 * 24, /* cookie lives for 24 hours */
+                    path: "/",
+                    sameSite: "lax",
+                    secrets: ["s3cret1"],
+                    secure: true,
+                  },
+                });
+
+              export { getSession, commitSession, destroySession };
+            </script></code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section>
+            <p><span class="code">app/components/profile/Profile.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,20|3,18|6,10-15,17|" data-id="code"><script type="text/template">
+                export function Profile() {
+                  return (
+                    <Form method="post">
+                      <div>
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" id="name" name="name" placeholder="Dr. React" />
+                      </div>
+                      <div>
+                        <label htmlFor="email">E-Mail: </label>
+                        <input
+                          type="text"
+                          placeholder="react@zuhlke.com"
+                          id="email"
+                          name="email"
+                        />
+                      </div>
+                      <input type="submit" value="save" />
+                    </Form>
+                  );
+                }
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">app/routes/profile.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,17|2|4-9|11-12|14-16|" data-id="code"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                const session = await getSession(request.headers.get("Cookie"));
+              
+                const form = await request.formData();
+                const name = form.get("name");
+                const email = form.get("email");
+              
+                if (typeof name !== "string") throw new Error("name must be a string");
+                if (typeof email !== "string") throw new Error("email must be a string");
+              
+                session.set("name", name);
+                session.set("email", email);
+              
+                return redirect(".", {
+                  headers: { "Set-Cookie": await commitSession(session) },
+                });
+              }
+
+              …
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">app/components/layout/Layout.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3,5,12" data-id="code"><script type="text/template">
+              type LayoutProps = {
+                username?: string;
+              };
+              
+              export function Layout({ username }: LayoutProps) {
+                return (
+                  <div className={styles.root}>
+                    <header>
+                      <nav>
+                        <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
+                      </nav>
+                      <span>{username && `Hello, ${username}`}</span>
+                    </header>
+                    <main>
+                      <Outlet />
+                    </main>
+                  </div>
+                );
+              }
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">app/root.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,5|2-4|8|18|1-5,8,18" data-id="code"><script type="text/template">
+              export async function loader({ request }: LoaderArgs) {
+                const session = await getSession(request.headers.get("Cookie"));
+
+                return json({ username: session.get("name") });
+              }
+
+              export default function App() {
+                const { username } = useLoaderData<typeof loader>();
+                return (
+                  <html lang="en">
+                    <head>
+                      <meta charSet="utf-8" />
+                      <meta name="viewport" content="width=device-width,initial-scale=1" />
+                      <Meta />
+                      <Links />
+                    </head>
+                    <body>
+                      <Layout username={username} />
+                      <ScrollRestoration />
+                      <Scripts />
+                      <LiveReload />
+                    </body>
+                  </html>
+                );
+              }
+            </script></code></pre>
+          </section>
+          <section>
+            <p>
+              Complete solution code can be found on GitHub on the branch
+              <a
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-04-forms-actions"
+                target="_blank"
+                ><span class="code">exercise-04-forms-actions</span></a
+              >.
+            </p>
+          </section>
+        </section>
       </div>
     </div>
 
