@@ -366,7 +366,7 @@ app/routes/
           import { useParams } from "@remix-run/react";
 
           export default function BlogPostPage() {
-            const { slug } = useParams();
+            const { slug } = useParams<'slug'>();
             return (
               <p>
                 This is the blog post with slug {slug}.
@@ -380,7 +380,7 @@ app/routes/
                 <li>It's a React component, return JSX</li>
                 <li>
                   useParams like in React Router (Disclaimer: just as an example
-                  – Data fetching will work differently (later)
+                  – Data fetching will work differently -> later)
                 </li>
               </ol>
             </aside>
@@ -510,7 +510,7 @@ export function loader() {
             <p><span class="code">pokemon.$pokemonName.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
               export default function DetailPage() {
-                const { pokemonName } = useParams();
+                const { pokemonName } = useParams<"pokemonName">();
               
                 const pokemon = pokeDetails.find((p) => p.name === pokemonName);
               
