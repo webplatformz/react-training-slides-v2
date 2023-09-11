@@ -236,6 +236,9 @@ export default function App() {
           <section>
             <h4>General conventions</h4>
             <ul>
+              <li>
+                Remix uses the same concepts and core logic as React Router
+              </li>
               <li class="fragment">Use file names to define routes</li>
               <li class="fragment">
                 Route files are placed in <span class="code">app/routes</span>
@@ -310,7 +313,9 @@ app/routes/
             </p>
           </section>
           <section data-auto-animate>
-            <p>Use the dot delimiter for nested routes</p>
+            <p>
+              Use the dot delimiter for <span class="hl">nested routes</span>
+            </p>
             <pre><code class="hljs no-highlight" data-trim data-line-numbers="5-8" data-id="code"><script type="text/template">
 app/routes/
     ├── _index.tsx
