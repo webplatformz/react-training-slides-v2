@@ -236,17 +236,19 @@ export default function App() {
           <section>
             <h4>General conventions</h4>
             <ul>
-              <li>
+              <li class="fragment">Use file names to define routes</li>
+              <li class="fragment">
                 Route files are placed in <span class="code">app/routes</span>
-              </li>
-              <li>Flat file structure (no nested route folders)</li>
-              <li>Co-location of non-route files is possible</li>
+              </li class="fragment">
+              <li class="fragment">Flat file structure (no nested route folders)</li>
+              <li class="fragment">Co-location of non-route files is possible</li>
             </ul>
             <aside class="notes">
               <ul>
-                Flat file structure was introduced as new convention (initially
+                <li>Although the routing core is the same as React Router (also developed by Remix), in Remix routing is file-based</li>
+                <li>Flat file structure was introduced as new convention (initially
                 also used nested route folders). Legacy file structure will not
-                be supported anymore in Remix v2.
+                be supported anymore in Remix v2.</li>
               </ul>
             </aside>
           </section>
