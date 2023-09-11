@@ -239,16 +239,25 @@ export default function App() {
               <li class="fragment">Use file names to define routes</li>
               <li class="fragment">
                 Route files are placed in <span class="code">app/routes</span>
-              </li class="fragment">
-              <li class="fragment">Flat file structure (no nested route folders)</li>
-              <li class="fragment">Co-location of non-route files is possible</li>
+              </li>
+              <li class="fragment">
+                Flat file structure (no nested route folders)
+              </li>
+              <li class="fragment">
+                Co-location of non-route files is possible
+              </li>
             </ul>
             <aside class="notes">
               <ul>
-                <li>Although the routing core is the same as React Router (also developed by Remix), in Remix routing is file-based</li>
-                <li>Flat file structure was introduced as new convention (initially
-                also used nested route folders). Legacy file structure will not
-                be supported anymore in Remix v2.</li>
+                <li>
+                  Although the routing core is the same as React Router (also
+                  developed by Remix), in Remix routing is file-based
+                </li>
+                <li>
+                  Flat file structure was introduced as new convention
+                  (initially also used nested route folders). Legacy file
+                  structure will not be supported anymore in Remix v2.
+                </li>
               </ul>
             </aside>
           </section>
@@ -413,7 +422,13 @@ export function loader() {
                 Must be a named export called <span class="code">loader</span>.
               </p>
               <aside class="notes">
-                We will learn more about loaders in the next section.
+                <ul>
+                  <li>We will learn more about loaders in the next section.</li>
+                  <li>
+                    Depending on how the URL is reached, this redirect is either
+                    performed server-side or client-side
+                  </li>
+                </ul>
               </aside>
             </div>
           </section>
