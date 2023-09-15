@@ -49,23 +49,67 @@
           </div>
         </section>
 
-        <!-- WIP -->
-        <!-- <section class="subtitle-slide">
-          <h1>Server-Side Rendering</h1>
+        <section class="subtitle-slide">
+          <h1>Server-Side Rendering (SSR)</h1>
         </section>
 
         <section>
-          <p>Why Remix?</p>
-          <ul>
-            <li>Example for classical <em>Server-Side Rendering</em> (SSR)</li>
-            <li>
-              Same routing core as we have used for client-side rendered app
-              (powered by React Router)
-            </li>
-            <li><em>Use the Platform</em> philosophy</li>
-            <li>Next.js is currently in transition phase</li>
-          </ul>
-        </section> -->
+          <section>
+            <h2>React Rendering Mechanisms</h2>
+          </section>
+          <section>
+            <h3>Overview</h3>
+            <img
+              src="../img/rendering-mechanisms.png"
+              alt="Rendering Mechanisms"
+            />
+          </section>
+          <section>
+            <h3>How does Pre-Rendering work?</h3>
+            <img
+              src="../img/pre-rendering-flow.png"
+              alt="How does Pre-Rendering work?"
+            />
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Remix</h2>
+          </section>
+          <section>
+            <ul>
+              <li>
+                Created by Michael Jackson and Ryan Florence (same as React
+                Router)
+              </li>
+              <li>Remix v1 in November 2021</li>
+              <li><span class="hl">Use the Platform</span> philosophy</li>
+              <li>Only Server-Side Rendering (no SSG)</li>
+              <li>Supports <span class="hl">Progressive Enhancement</span></li>
+            </ul>
+            <aside class="notes">
+              <p>Why do we use Remix for the course?</p>
+              <ul>
+                <li>
+                  Example for classical <em>Server-Side Rendering</em> (SSR),
+                  RSC is very new still
+                </li>
+                <li>
+                  Same routing core as we have used for client-side rendered app
+                  (powered by React Router)
+                </li>
+                <li>Next.js is currently in transition phase</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <img
+              src="../img/remix_website_screenshot.jpeg"
+              alt="Remix Website Screenshot"
+            />
+            <a href="https://remix.run" target="_blank">remix.run</a>
+          </section>
+        </section>
 
         <section class="subtitle-slide">
           <h1>Setup</h1>
@@ -1437,6 +1481,7 @@ export function loader() {
           <p>We learned&hellip;</p>
           <ul>
             <li>What server-side rendering (SSR) is</li>
+            <li>How to set up a Remix app</li>
             <li>How to do routing in Remix</li>
             <li>How to fetch data in Remix</li>
             <li>How to create and process forms in Remix</li>
