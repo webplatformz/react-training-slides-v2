@@ -868,7 +868,7 @@ export function loader() {
               }
         </script></code></pre>
             <p>
-              On the server, the form is processed by an
+              On the server the form is processed by an
               <span class="code">action</span>.
             </p>
           </section>
@@ -971,7 +971,7 @@ export function loader() {
               What will happen when the user clicks the
               <em>Submit</em> button?
             </p>
-            <p>
+            <p class="fragment">
               &rarr; It works! But it does a <em>full document request</em>:
               <span class="code">POST&nbsp;/blog/…</span>
             </p>
@@ -1017,8 +1017,8 @@ export function loader() {
             </p>
             <ul>
               <li>Cookies</li>
-              <li>Memory (dev only)</li>
-              <li>File</li>
+              <li>In-memory (dev only)</li>
+              <li>Files</li>
               <li>Cloudflare Workers</li>
               <li>Amazon DynamoDB</li>
             </ul>
@@ -1029,11 +1029,13 @@ export function loader() {
               <li>Cookies</li>
             </ul>
           </section>
-          <section>
+          <section data-auto-animate="">
             <p><span class="code">app/sessions.ts</span></p>
-            <pre
-              class="fragment"
-            ><code class="hljs ts" data-trim data-line-numbers="1,6,17|3,6|7-16|5,19|" data-id="code"><script type="text/template">
+            <p>We set up our session handling utilities.</p>
+          </section>
+          <section data-auto-animate="">
+            <p><span class="code">app/sessions.ts</span></p>
+            <pre><code class="hljs ts" data-trim data-line-numbers="1,6,17|3,6|7-16|5,19|" data-id="code"><script type="text/template">
               import { createCookieSessionStorage } from "@remix-run/node";
 
               type SessionData = { … };
@@ -1061,7 +1063,7 @@ export function loader() {
               And can use them in server-side code (typically
               <em>loaders</em> and <em>actions</em>):
             </p>
-            <pre><code class="hljs ts" data-trim data-line-numbers="|1-2|4-5|7-8|10-12|" data-id="code"><script type="text/template">
+            <pre><code class="hljs ts" data-trim data-line-numbers="|1-2|4-5|7-8|10-13|" data-id="code"><script type="text/template">
               /* Getting a session object from a request */
               const session = await getSession(request.headers.get("Cookie"));
 
@@ -1086,14 +1088,13 @@ export function loader() {
                 Add a form for name and email to the Profile page
               </li>
               <li class="fragment">
-                When the form is submitted, submit the data to the server and
-                store name and email in a cookie
+                When the form is submitted:
                 <ul>
-                  <li class="fragment">User stays on the same page</li>
                   <li class="fragment">
-                    Use the session handling utilities provided on the next
-                    slide
+                    Submit the data to the server and store name and email in a
+                    cookie
                   </li>
+                  <li class="fragment">User stays on the same page</li>
                 </ul>
               </li>
               <li class="fragment">Display the name in the navigation bar</li>
@@ -1102,33 +1103,6 @@ export function loader() {
               Do not build in validation yet, this will follow in the next
               exercise.
             </aside>
-          </section>
-          <section>
-            <p><span class="code">app/sessions.ts</span></p>
-            <pre><code class="hljs ts" data-trim data-line-numbers="" data-id="code"><script type="text/template">
-              import { createCookieSessionStorage } from "@remix-run/node";
-
-              type SessionData = {
-                name: string;
-                email: string;
-              };
-
-              const { getSession, commitSession, destroySession } =
-                createCookieSessionStorage<SessionData>({
-                  cookie: {
-                    name: "__session",
-                    domain: "localhost",
-                    httpOnly: true,
-                    maxAge: 60 * 60 * 24, /* cookie lives for 24 hours */
-                    path: "/",
-                    sameSite: "lax",
-                    secrets: ["s3cret1"],
-                    secure: true,
-                  },
-                });
-
-              export { getSession, commitSession, destroySession };
-            </script></code></pre>
           </section>
         </section>
         <section>
@@ -1158,6 +1132,33 @@ export function loader() {
                     </Form>
                   );
                 }
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">app/sessions.ts</span></p>
+            <pre><code class="hljs ts" data-trim data-line-numbers="|3-6|" data-id="code"><script type="text/template">
+              import { createCookieSessionStorage } from "@remix-run/node";
+
+              type SessionData = {
+                name: string;
+                email: string;
+              };
+
+              const { getSession, commitSession, destroySession } =
+                createCookieSessionStorage<SessionData>({
+                  cookie: {
+                    name: "__session",
+                    domain: "localhost",
+                    httpOnly: true,
+                    maxAge: 60 * 60 * 24, /* cookie lives for 24 hours */
+                    path: "/",
+                    sameSite: "lax",
+                    secrets: ["s3cret1"],
+                    secure: true,
+                  },
+                });
+
+              export { getSession, commitSession, destroySession };
             </script></code></pre>
           </section>
           <section>
@@ -1282,11 +1283,11 @@ export function loader() {
 
 
 
+                
+
+
+
                 /* Process form data… */
-
-
-
-
               
                 return redirect(…);
               }
@@ -1475,16 +1476,26 @@ export function loader() {
               }
             </script></code></pre>
           </section>
+          <section>
+            <p>
+              Complete solution code can be found on GitHub on the branch
+              <a
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-05-improve-forms-actions"
+                target="_blank"
+                ><span class="code">exercise-05-improve-forms-actions</span></a
+              >.
+            </p>
+          </section>
         </section>
         <section>
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
-            <li>What server-side rendering (SSR) is</li>
-            <li>How to set up a Remix app</li>
-            <li>How to do routing in Remix</li>
-            <li>How to fetch data in Remix</li>
-            <li>How to create and process forms in Remix</li>
+            <li>What <em>server-side rendering (SSR)</em> is</li>
+            <li>How to <em>set up</em> a Remix app</li>
+            <li>How to do <em>routing</em> in Remix</li>
+            <li>How to <em>fetch data</em> in Remix</li>
+            <li>How to create and process <em>forms</em> in Remix</li>
           </ul>
         </section>
         <section class="break-slide">
