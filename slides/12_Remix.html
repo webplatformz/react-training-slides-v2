@@ -579,23 +579,9 @@ export function loader() {
               </li>
             </ul>
           </section>
-          <section data-auto-animate data-auto-animate-id="2">
+          <section>
             <p><span class="code">blog.$slug.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,3-5" data-id="code"><script type="text/template">
-              import type { LoaderArgs } from "@remix-run/node";
-
-              export async function loader({ request, params, context }: LoaderArgs) {
-                …
-              }
-
-              export default function BlogPostPage() {
-                …
-              }
-            </script></code></pre>
-          </section>
-          <section data-auto-animate data-auto-animate-id="2">
-            <p><span class="code">blog.$slug.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="4,8|2,5-9|2,13-15" data-id="code"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4,10|2,5-9|2,13-15" data-id="code"><script type="text/template">
               import type { LoaderArgs } from "@remix-run/node";
               import { json, useLoaderData } from "@remix-run/node";
 
@@ -831,6 +817,7 @@ export function loader() {
                     …
                     <form method="post">
                       …
+                      <button type="submit">Submit</button>
                     </form>
                   </>
                 );
@@ -918,10 +905,135 @@ export function loader() {
               pattern.
             </p>
           </section>
-          <!--TODO add error handling here -->
-          <!--TODO introduce <Form> component and explain its benefit -->
+          <section data-auto-animate data-auto-animate-id="2">
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="7-11" data-id="code-2"><script type="text/template">
+              …
+
+              export default function BlogPostPage() {
+                return (
+                  <>
+                    …
+                    <form method="post">
+                      <input type="text" name="name" />
+                      <textarea name="comment" />
+                      <button type="submit">Submit</button>
+                    </form>
+                  </>
+                );
+              }
+        </script></code></pre>
+            <p>
+              What will happen when the user clicks the
+              <em>Submit</em> button?
+            </p>
+            <p>
+              &rarr; It works! But it does a <em>full document request</em>:
+              <span class="code">POST&nbsp;/blog/…</span>
+            </p>
+          </section>
+          <section data-auto-animate data-auto-animate-id="2">
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,7,11" data-id="code-2"><script type="text/template">
+              import { Form } from "@remix-run/react";
+
+              export default function BlogPostPage() {
+                return (
+                  <>
+                    …
+                    <Form method="post">
+                      <input type="text" name="name" />
+                      <textarea name="comment" />
+                      <button type="submit">Submit</button>
+                    </Form>
+                  </>
+                );
+              }
+        </script></code></pre>
+            <p>
+              The Remix <span class="code">Form</span> component brings the
+              expected SPA behavior.
+            </p>
+            <p class="fragment">
+              It still has the native <span class="code">form</span> behavior as
+              long as JS has not loaded yet.<br /><span class="hl"
+                >&rarr; Progressive Enhancement</span
+              >
+            </p>
+          </section>
         </section>
-        <!-- <section>Cookies/session handling</section> -->
+        <section>
+          <section>
+            <h2>Sessions and Cookies 🍪</h2>
+          </section>
+          <section data-auto-animate>
+            <p>
+              Remix has built-in support for
+              <span class="hl">sessions</span>:
+            </p>
+            <ul>
+              <li>Cookies</li>
+              <li>Memory (dev only)</li>
+              <li>File</li>
+              <li>Cloudflare Workers</li>
+              <li>Amazon DynamoDB</li>
+            </ul>
+          </section>
+          <section data-auto-animate>
+            <p>Let's work with the most versatile one:</p>
+            <ul>
+              <li>Cookies</li>
+            </ul>
+          </section>
+          <section>
+            <p><span class="code">app/sessions.ts</span></p>
+            <pre
+              class="fragment"
+            ><code class="hljs ts" data-trim data-line-numbers="1,6,17|3,6|7-16|5,19|" data-id="code"><script type="text/template">
+              import { createCookieSessionStorage } from "@remix-run/node";
+
+              type SessionData = { … };
+
+              const { getSession, commitSession, destroySession } =
+                createCookieSessionStorage<SessionData>({
+                  cookie: {
+                    name: "__session",
+                    domain: "localhost",
+                    httpOnly: true,
+                    maxAge: 60 * 60 * 24, /* cookie lives for 24 hours */
+                    path: "/",
+                    sameSite: "lax",
+                    secrets: ["s3cret1"],
+                    secure: true,
+                  },
+                });
+
+              export { getSession, commitSession, destroySession };
+            </script></code></pre>
+            <p>We set up our session handling utilities.</p>
+          </section>
+          <section>
+            <p>
+              And can use them in server-side code (typically
+              <em>loaders</em> and <em>actions</em>):
+            </p>
+            <pre><code class="hljs ts" data-trim data-line-numbers="|1-2|4-5|7-8|10-12|" data-id="code"><script type="text/template">
+              /* Getting a session object from a request */
+              const session = await getSession(request.headers.get("Cookie"));
+
+              /* Reading a value from the session */
+              const color = session.get("color");
+
+              /* Update a value in the session */
+              session.set("color", "orange");
+
+              /* Commit a session in a Response (required if it was modified) */
+              return redirect(…, {
+                headers: { "Set-Cookie": await commitSession(session) },
+              });
+            </script></code></pre>
+          </section>
+        </section>
         <section>
           <section>
             <h2>Exercise</h2>
@@ -942,6 +1054,10 @@ export function loader() {
               </li>
               <li class="fragment">Display the name in the navigation bar</li>
             </ul>
+            <aside class="notes">
+              Do not build in validation yet, this will follow in the next
+              exercise.
+            </aside>
           </section>
           <section>
             <p><span class="code">app/sessions.ts</span></p>
@@ -1088,6 +1204,246 @@ export function loader() {
               >.
             </p>
           </section>
+        </section>
+        <section>
+          <section>
+            <h2>Validation <span class="fragment">(server-side)</span></h2>
+            <aside class="notes">
+              We want to build in server side validation as a minimum.
+              Client-side validation can be added e.g. with
+              <a href="https://remix-forms.seasoned.cc" target="_blank">
+                <strong>Remix Forms</strong></a
+              >.
+            </aside>
+          </section>
+          <section data-auto-animate="">
+            <p>What do we want to show in case of validation errors?</p>
+            <p class="fragment" data-fragment-index="0">The form, with:</p>
+            <ul>
+              <li class="fragment" data-fragment-index="2">The field values</li>
+              <li class="fragment" data-fragment-index="1">
+                Validation error messages per field
+              </li>
+            </ul>
+            <p class="fragment">
+              Thus, what do we need to do differently in our action?
+            </p>
+          </section>
+          <section data-auto-animate="">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                /* Get form data from request… */
+                
+
+
+
+
+                /* Process form data… */
+
+
+
+
+              
+                return redirect(…);
+              }
+
+              …
+            </script></code></pre>
+            <p>Thus, what do we need to do differently in our action?</p>
+          </section>
+          <section data-auto-animate="">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="4|5,10|6-9|4-10" data-id="code"><script type="text/template">
+              export async function action({ request }: ActionArgs) {
+                /* Get form data from request… */
+
+                const requestIsValid = …
+                if (!requestIsValid) {
+                  return json(
+                    { values: { name }, errors: { name: "Name is invalid" } },
+                    { status: 400 }  
+                  );
+                }
+
+                /* Process form data… */
+              
+                return redirect(…);
+              }
+
+              …
+            </script></code></pre>
+            <p class="fragment">
+              If request is invalid, return a HTTP
+              <span class="code">400</span> response with the field values and
+              errors.
+            </p>
+          </section>
+          <section>
+            <p>
+              In the component, <span class="code">useActionData</span> to
+              access the data returned by the action:
+            </p>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="4|12|14|" data-id="code"><script type="text/template">
+              …
+
+              export default function MyPage() {
+                const actionData = useActionData<typeof action>();
+
+                return <>
+                  …
+                  <Form method="post">
+                    <input
+                      type="text"
+                      name="name"
+                      defaultValue={actionData?.values.name}
+                    />
+                    {actionData?.errors.name}
+                    …
+                  </Form>
+                </>;
+              }
+            </script></code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Exercise</h2>
+          </section>
+          <section>
+            <ul>
+              <li>
+                Validate the profile form, e.g.
+                <ul>
+                  <li>Name and email are required</li>
+                  <li>Name is max. 25 characters</li>
+                  <li>Email is a valid email address</li>
+                </ul>
+              </li>
+              <li>Ensure the submitted data is displayed</li>
+              <li>Show the validation error messages at the form fields</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section data-auto-animate="" data-auto-animate-id="1">
+            <p><span class="code">app/routes/profile.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="4-8|13-17|20-21" data-id="code-1"><script type="text/template">
+                export async function action({ request }: ActionArgs) {
+                  …
+
+                  const errors = validateProfile({ name, email });
+                
+                  if (hasErrors(errors)) {
+                    return json({ values: { name, email }, errors }, { status: 400 });
+                  }
+                
+                  …
+                }
+
+                function validateProfile({ name, email }: ProfileValues) { … }
+
+                function hasErrors(errors: ProfileErrors) {
+                  return Object.values(errors).length > 0;
+                }
+                
+                export default function ProfilePage() {
+                  const actionData = useActionData<typeof action>();
+                  return <Profile values={actionData?.values} errors={actionData?.errors} />;
+                }
+            </script></code></pre>
+          </section>
+          <section data-auto-animate="" data-auto-animate-id="1">
+            <p><span class="code">app/routes/profile.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="4,18|6-16" data-id="code-2"><script type="text/template">
+              …
+
+              function validateProfile({ name, email }: ProfileValues) {
+                const errors: ProfileErrors = {};
+
+                if (!name || typeof name !== "string") {
+                  errors.name = "Name is required!";
+                } else if (name.length > 25) {
+                  errors.name = "The name should be max. 25 characters long!";
+                }
+              
+                if (!email || typeof email !== "string") {
+                  errors.email = "Email is required!";
+                } else if (!email.match(/^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
+                  errors.email = "Invalid email!";
+                }
+              
+                return errors;
+              }
+
+              …
+            </script></code></pre>
+          </section>
+          <section data-auto-animate="" data-auto-animate-id="2">
+            <p><span class="code">app/components/profile/Profile.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4,15|2,6-9|3,11-13" data-id="code-1"><script type="text/template">
+              type ProfileProps = {
+                values?: ProfileValues;
+                errors?: ProfileErrors;
+              };
+              
+              export type ProfileValues = {
+                name: string;
+                email: string;
+              };
+              
+              export type ProfileErrors = {
+                [K in keyof ProfileValues]?: string;
+              };
+
+              export function Profile({ values, errors }: ProfileProps) { … }
+            </script></code></pre>
+          </section>
+          <section data-auto-animate="" data-auto-animate-id="2">
+            <p><span class="code">app/components/profile/Profile.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="9,18|8,17|11,20|" data-id="code-2"><script type="text/template">
+              export function Profile({ values, errors }: ProfileProps) {
+                return (
+                  <Form method="post">
+                    <div>
+                      <label htmlFor="name">Name: </label>
+                      <input
+                        …
+                        className={errors?.name ? styles.inputError : ""}
+                        defaultValue={values?.name}
+                      />
+                      {errors?.name && <span>{errors.name}</span>}
+                    </div>
+                    <div>
+                      <label htmlFor="email">E-Mail: </label>
+                      <input
+                        …
+                        className={errors?.email ? styles.inputError : ""}
+                        defaultValue={values?.email}
+                      />
+                      {errors?.email && <span>{errors.email}</span>}
+                    </div>
+                    <input type="submit" value="save" />
+                  </Form>
+                );
+              }
+            </script></code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>Recap</h2>
+          <p>We learned&hellip;</p>
+          <ul>
+            <li>What server-side rendering (SSR) is</li>
+            <li>How to do routing in Remix</li>
+            <li>How to fetch data in Remix</li>
+            <li>How to create and process forms in Remix</li>
+          </ul>
+        </section>
+        <section class="break-slide">
+          <h1>Questions?</h1>
         </section>
       </div>
     </div>
