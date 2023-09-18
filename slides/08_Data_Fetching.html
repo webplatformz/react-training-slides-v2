@@ -150,9 +150,19 @@
               &ndash; also comes with with retry, cache &amp; more functionality
             </p>
             <div class="fragment tip">
-              In a future release, the loading state can be handled with
-              Suspense
+              The loading state can also be handled with React's
+              <em>Suspense for Data Fetching API</em> (opt-in).
             </div>
+            <aside class="notes">
+              <p>
+                Suspense for Data Fetching: in v4 can be enabled by setting the
+                <span class="code">suspense</span> option to
+                <span class="code">true</span> and is still marked as
+                expiremental.<br />
+                In v5 it is not expiremental anymore, but offered via the
+                separate hook <span class="code">useSuspenseQuery</span>.
+              </p>
+            </aside>
           </section>
         </section>
         <section>
@@ -377,7 +387,6 @@
                   },
                 }
               );
-              }
         </script></code></pre>
             <div class="fragment tip">
               You can even go further to use <em>optimistic UI</em> to update
