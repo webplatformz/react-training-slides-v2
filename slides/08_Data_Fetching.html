@@ -86,11 +86,16 @@
             </ul>
           </section>
           <section>
-            <p>We will use              <a
-              href="https://tanstack.com/query"
-              target="_blank"
-              rel="noopener noreferrer"
-              >TanStack Query</a> in this course</p>
+            <p>
+              We will use
+              <a
+                href="https://tanstack.com/query"
+                target="_blank"
+                rel="noopener noreferrer"
+                >TanStack Query</a
+              >
+              in this course
+            </p>
           </section>
         </section>
         <section>
@@ -133,8 +138,8 @@
               };
 
               function MyComponent() {
-                const { data: user, isLoading, error } = useQuery(
-                  ['user'],() => fetcher('/user'))
+                const { data: user, isLoading, error } = useQuery(['user'], 
+                  () => fetcher('/user'));
                 
                 return <p>{user?.name}</p>;
               }
@@ -156,19 +161,20 @@
           <pre data-id="code2">
             <code class="hljs tsx" data-trim data-line-numbers="9,1,11-14">
               <script type="text/template">
-                async function fetcher<T>(uri: string): Promise<T> {
+                const fetcher = async <T>(uri: string): Promise<T> => {
                   const response = await fetch(uri);
                   if (!response.ok) throw new Error('Could not fetch data!');
+
                   return response.json();
                 };
 
                 const { data: user } = useQuery(['user'], 
-                    () => fetcher<User>('/user'))
+                  () => fetcher<User>('/user'));
 
-                  interface User {
-                    firstName: string,
-                    /* ... */
-                  }
+                interface User {
+                  firstName: string,
+                  /* ... */
+                }
           </script></code></pre>
 
           <p>
@@ -206,11 +212,12 @@
                 <span class="code">npm i @tanstack/react-query</span>
               </li>
               <li>
-                API call with TanStack Query:<br/>
+                API call with TanStack Query:<br />
                 <span class="code"
-                  >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
-                ><br/><span class="code">GET https://pokeapi.co/api/v2/pokemon/{name}/</span
-                </span
+                  >GET https://pokeapi.co/api/v2/pokemon?limit=1000</span
+                ><br /><span class="code"
+                  >GET https://pokeapi.co/api/v2/pokemon/{name}/</span
+                >
               </li>
               <li>Stretch goal: Display loading & error messages</li>
             </ul>
@@ -229,11 +236,12 @@
               export async function fetcher&lt;T&gt;(uri: string): Promise&lt;T&gt; {
                 const response = await fetch(uri);
                 if (!response.ok) throw new Error('Could not fetch data!');
+
                 return response.json();
               };
               </code>
           </pre>
-          <pre
+            <pre
               data-id="code2"
             ><code class="hljs tsx" data-trim data-line-numbers="1,6,8"><script type="text/template">
               const queryClient = new QueryClient();
@@ -254,13 +262,12 @@
               https://pokeapi.co/api/v2/pokemon?limit=5
             </a>
             <a
-            href="https://pokeapi.co/api/v2/pokemon/bulbasaur/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-          https://pokeapi.co/api/v2/pokemon/bulbasaur/
-          </a>
-
+              href="https://pokeapi.co/api/v2/pokemon/bulbasaur/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://pokeapi.co/api/v2/pokemon/bulbasaur/
+            </a>
           </section>
         </section>
         <section>
@@ -269,11 +276,13 @@
 
             <p><span class="code">ListPage.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|7-8|10-16"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-7|9-10|12"><script type="text/template">
             function List() {
-              const { data, isLoading, isError } = useQuery(['pokelist'], 
-              () => fetcher<PokemonResultDto>('https://pokeapi.co/api/v2
-                /pokemon?limit=1000')
+              const { data, isLoading, isError } = useQuery(
+                ['pokelist'], 
+                () => fetcher<PokemonResultDto>(
+                  'https://pokeapi.co/api/v2/pokemon?limit=1000'
+                )
               );
 
               if (isLoading) return <div>LOADING</div>;
@@ -315,9 +324,12 @@
             <p>Why doesnt <span class="code">useQuery</span> fit?</p>
             <ul>
               <li>
-                useQuery hook is resolved immediately – we want to mutate upon a form submit or button click
+                useQuery hook is resolved immediately – we want to mutate upon a
+                form submit or button click
               </li>
-              <li>useQuery results are cached, which makes no sense in mutations</li>
+              <li>
+                useQuery results are cached, which makes no sense in mutations
+              </li>
             </ul>
           </section>
           <section>
@@ -339,12 +351,12 @@
                 return <button onClick={() => mutate("zuehlkemon")} />;
               }
         </script></code></pre>
-        <p>notice how there is no query key and no data</p>
+            <p>notice how there is no query key and no data</p>
           </section>
           <section>
             <h2>useMutation cache update</h2>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|4|6-11|12-17"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|4|6-11|12-19"><script type="text/template">
               const { data, isLoading, isError } = useQuery(['pokemonList'], () =>
                 fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
               );
@@ -358,15 +370,19 @@
                   }),
                 {
                   onSuccess: (mutateResult, mutateParams) => {
-                    const newPokeList = data ? [...data.results, mutateResult] : [mutateResult];
+                    const newPokeList = data 
+                      ? [...data.results, mutateResult] 
+                      : [mutateResult];
                     queryClient.setQueryData(['pokemonList'], { results: newPokeList });
                   },
                 }
               );
               }
         </script></code></pre>
-        <div class="fragment tip">You can even go further to use <em>optimistic UI</em> to update the cache prior to the mutation and rollback in the error case.
-        </div>
+            <div class="fragment tip">
+              You can even go further to use <em>optimistic UI</em> to update
+              the cache prior to the mutation and rollback in the error case.
+            </div>
           </section>
         </section>
         <section>
