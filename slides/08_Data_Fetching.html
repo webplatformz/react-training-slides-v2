@@ -138,8 +138,8 @@
               };
 
               function MyComponent() {
-                const { data: user, isLoading, error } = useQuery(
-                  ['user'],() => fetcher('/user'))
+                const { data: user, isLoading, error } = useQuery(['user'], 
+                  () => fetcher('/user'));
                 
                 return <p>{user?.name}</p>;
               }
@@ -171,19 +171,20 @@
           <pre data-id="code2">
             <code class="hljs tsx" data-trim data-line-numbers="9,1,11-14">
               <script type="text/template">
-                async function fetcher<T>(uri: string): Promise<T> {
+                const fetcher = async <T>(uri: string): Promise<T> => {
                   const response = await fetch(uri);
                   if (!response.ok) throw new Error('Could not fetch data!');
+
                   return response.json();
                 };
 
                 const { data: user } = useQuery(['user'], 
-                    () => fetcher<User>('/user'))
+                  () => fetcher<User>('/user'));
 
-                  interface User {
-                    firstName: string,
-                    /* ... */
-                  }
+                interface User {
+                  firstName: string,
+                  /* ... */
+                }
           </script></code></pre>
 
           <p>
@@ -223,7 +224,7 @@
               <li>
                 API call with TanStack Query:<br />
                 <span class="code"
-                  >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
+                  >GET https://pokeapi.co/api/v2/pokemon?limit=1000</span
                 ><br /><span class="code"
                   >GET https://pokeapi.co/api/v2/pokemon/{name}/</span
                 >
@@ -245,6 +246,7 @@
               export async function fetcher&lt;T&gt;(uri: string): Promise&lt;T&gt; {
                 const response = await fetch(uri);
                 if (!response.ok) throw new Error('Could not fetch data!');
+
                 return response.json();
               };
               </code>
@@ -284,11 +286,13 @@
 
             <p><span class="code">ListPage.tsx</span></p>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="2-5|7-8|10-16"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-7|9-10|12"><script type="text/template">
             function List() {
-              const { data, isLoading, isError } = useQuery(['pokelist'], 
-              () => fetcher<PokemonResultDto>('https://pokeapi.co/api/v2
-                /pokemon?limit=1000')
+              const { data, isLoading, isError } = useQuery(
+                ['pokelist'], 
+                () => fetcher<PokemonResultDto>(
+                  'https://pokeapi.co/api/v2/pokemon?limit=1000'
+                )
               );
 
               if (isLoading) return <div>LOADING</div>;
@@ -362,7 +366,7 @@
           <section>
             <h2>useMutation cache update</h2>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|4|6-11|12-17"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|4|6-11|12-19"><script type="text/template">
               const { data, isLoading, isError } = useQuery(['pokemonList'], () =>
                 fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
               );
@@ -376,7 +380,9 @@
                   }),
                 {
                   onSuccess: (mutateResult, mutateParams) => {
-                    const newPokeList = data ? [...data.results, mutateResult] : [mutateResult];
+                    const newPokeList = data 
+                      ? [...data.results, mutateResult] 
+                      : [mutateResult];
                     queryClient.setQueryData(['pokemonList'], { results: newPokeList });
                   },
                 }
