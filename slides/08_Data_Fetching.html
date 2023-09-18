@@ -86,11 +86,16 @@
             </ul>
           </section>
           <section>
-            <p>We will use              <a
-              href="https://tanstack.com/query"
-              target="_blank"
-              rel="noopener noreferrer"
-              >TanStack Query</a> in this course</p>
+            <p>
+              We will use
+              <a
+                href="https://tanstack.com/query"
+                target="_blank"
+                rel="noopener noreferrer"
+                >TanStack Query</a
+              >
+              in this course
+            </p>
           </section>
         </section>
         <section>
@@ -145,9 +150,19 @@
               &ndash; also comes with with retry, cache &amp; more functionality
             </p>
             <div class="fragment tip">
-              In a future release, the loading state can be handled with
-              Suspense
+              The loading state can also be handled with React's
+              <em>Suspense for Data Fetching API</em> (opt-in).
             </div>
+            <aside class="notes">
+              <p>
+                Suspense for Data Fetching: in v4 can be enabled by setting the
+                <span class="code">suspense</span> option to
+                <span class="code">true</span> and is still marked as
+                expiremental.<br />
+                In v5 it is not expiremental anymore, but offered via the
+                separate hook <span class="code">useSuspenseQuery</span>.
+              </p>
+            </aside>
           </section>
         </section>
         <section>
@@ -206,11 +221,12 @@
                 <span class="code">npm i @tanstack/react-query</span>
               </li>
               <li>
-                API call with TanStack Query:<br/>
+                API call with TanStack Query:<br />
                 <span class="code"
                   >GET https://pokeapi.co/api/v2/pokemon?limit=50</span
-                ><br/><span class="code">GET https://pokeapi.co/api/v2/pokemon/{name}/</span
-                </span
+                ><br /><span class="code"
+                  >GET https://pokeapi.co/api/v2/pokemon/{name}/</span
+                >
               </li>
               <li>Stretch goal: Display loading & error messages</li>
             </ul>
@@ -233,7 +249,7 @@
               };
               </code>
           </pre>
-          <pre
+            <pre
               data-id="code2"
             ><code class="hljs tsx" data-trim data-line-numbers="1,6,8"><script type="text/template">
               const queryClient = new QueryClient();
@@ -254,13 +270,12 @@
               https://pokeapi.co/api/v2/pokemon?limit=5
             </a>
             <a
-            href="https://pokeapi.co/api/v2/pokemon/bulbasaur/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-          https://pokeapi.co/api/v2/pokemon/bulbasaur/
-          </a>
-
+              href="https://pokeapi.co/api/v2/pokemon/bulbasaur/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://pokeapi.co/api/v2/pokemon/bulbasaur/
+            </a>
           </section>
         </section>
         <section>
@@ -315,9 +330,12 @@
             <p>Why doesnt <span class="code">useQuery</span> fit?</p>
             <ul>
               <li>
-                useQuery hook is resolved immediately – we want to mutate upon a form submit or button click
+                useQuery hook is resolved immediately – we want to mutate upon a
+                form submit or button click
               </li>
-              <li>useQuery results are cached, which makes no sense in mutations</li>
+              <li>
+                useQuery results are cached, which makes no sense in mutations
+              </li>
             </ul>
           </section>
           <section>
@@ -339,7 +357,7 @@
                 return <button onClick={() => mutate("zuehlkemon")} />;
               }
         </script></code></pre>
-        <p>notice how there is no query key and no data</p>
+            <p>notice how there is no query key and no data</p>
           </section>
           <section>
             <h2>useMutation cache update</h2>
@@ -363,10 +381,11 @@
                   },
                 }
               );
-              }
         </script></code></pre>
-        <div class="fragment tip">You can even go further to use <em>optimistic UI</em> to update the cache prior to the mutation and rollback in the error case.
-        </div>
+            <div class="fragment tip">
+              You can even go further to use <em>optimistic UI</em> to update
+              the cache prior to the mutation and rollback in the error case.
+            </div>
           </section>
         </section>
         <section>
