@@ -352,7 +352,7 @@
                   isLoading: isMutationLoading,
                   isError: isMutationerror
                 } = useMutation((name: string) =>
-                  fetcher<PokemonDetailDto>("https://pokeapi.co/api/v2/pokemon?limit=1000", {
+                  fetcher<PokemonDetailDto>("https://pokeapi.co/api/v2/pokemon/", {
                     method: "POST",
                     body: JSON.stringify({ name }),
                   })
@@ -368,13 +368,13 @@
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|4|6-11|12-19"><script type="text/template">
               const { data, isLoading, isError } = useQuery(['pokemonList'], () =>
-                fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon?limit=1000')
+                fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon/')
               );
               const queryClient = useQueryClient();
 
               const { mutate } = useMutation(
                 (name: string) =>
-                  fetcher<PokemonDetailDto>('https://pokeapi.co/api/v2/pokemon?limit=1000', {
+                  fetcher<PokemonDetailDto>('https://pokeapi.co/api/v2/pokemon/', {
                     method: 'POST',
                     body: JSON.stringify({ name }),
                   }),
