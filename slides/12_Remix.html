@@ -120,15 +120,11 @@
             <h3>Create a new Remix app</h3>
           </section>
           <section>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|2-3|4-5|6-7|8-9|1-9|11|12|">
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|2-3|4-5|1-5|7|8|">
                 $ npx create-remix@latest pokedex-remix
-                  ? What type of app do you want to create?
-                    > Just the basics
-                  ? Where do you want to deploy?
-                    > Remix App Server
-                  ?  TypeScript or JavaScript?
-                    > TypeScript
-                  ?  Do you want me to run `npm install`?
+                  ? Initialize a new git repository?
+                    > Yes
+                  ? Install dependencies with npm?
                     > Yes
  
                 $ cd ./pokedex-remix
@@ -555,24 +551,32 @@ export function loader() {
             </script></code></pre>
           </section>
           <section>
-            <p><span class="code">_index.tsx</span></p>
+            <p><span class="code">app/routes/_index.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              import { redirect } from "@remix-run/node";
+
               export function loader() {
                 return redirect("pokemon");
               }                     
             </script></code></pre>
           </section>
           <section>
-            <p><span class="code">pokemon._index.tsx</span></p>
+            <p><span class="code">app/routes/pokemon._index.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              import { PokeList } from "~/components/poke-list/PokeList";
+              import { pokemonList } from "~/mock-data/list";
+
               export default function ListPage() {
                 return <PokeList pokemons={pokemonList.results} />;
               }                        
             </script></code></pre>
           </section>
           <section>
-            <p><span class="code">pokemon.$pokemonName.tsx</span></p>
+            <p><span class="code">app/routes/pokemon.$pokemonName.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              import { useParams } from "@remix-run/react";
+              import { pokeDetails } from "~/mock-data/details";
+
               export default function DetailPage() {
                 const { pokemonName } = useParams<"pokemonName">();
               
@@ -588,12 +592,59 @@ export function loader() {
             </script></code></pre>
           </section>
           <section>
+            <p><span class="code">app/components/layout/Layout.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
+              import { Link, Outlet } from "@remix-run/react";
+              import styles from "./Layout.module.css";
+              
+              export function Layout() {
+                return (
+                  <div className={styles.root}>
+                    <header>
+                      <nav>
+                        <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
+                      </nav>
+                    </header>
+                    <main>
+                      <Outlet />
+                    </main>
+                  </div>
+                );
+              }                                   
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">app/root.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="13" data-id="code"><script type="text/template">
+            …
+
+            export default function App() {
+              return (
+                <html lang="en">
+                  <head>
+                    <meta charSet="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <Meta />
+                    <Links />
+                  </head>
+                  <body>
+                    <Layout />
+                    <ScrollRestoration />
+                    <Scripts />
+                    <LiveReload />
+                  </body>
+                </html>
+              );
+            }                         
+            </script></code></pre>
+          </section>
+          <section>
             <p>
               Complete solution code can be found on GitHub on the branch
               <a
-                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-02-routing"
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/01-routing"
                 target="_blank"
-                ><span class="code">exercise-02-routing</span></a
+                ><span class="code">01-routing</span></a
               >.
             </p>
           </section>
@@ -626,10 +677,10 @@ export function loader() {
           <section>
             <p><span class="code">blog.$slug.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,4,10|2,5-9|2,13-15" data-id="code"><script type="text/template">
-              import type { LoaderArgs } from "@remix-run/node";
+              import type { LoaderFunctionArgs } from "@remix-run/node";
               import { json, useLoaderData } from "@remix-run/node";
 
-              export async function loader({ request, params, context }: LoaderArgs) {
+              export async function loader({ request, params, context }: LoaderFunctionArgs) {
                 if (!params.slug) throw new Error("slug is required");
 
                 const post = await getBlogPost(params.slug);
@@ -669,7 +720,7 @@ export function loader() {
 
             <p>Return a <span class="code">Response</span> object…</p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="4-6" data-id="code-1"><script type="text/template">
-              export async function loader({ request, params, context }: LoaderArgs) {
+              export async function loader({ request, params, context }: LoaderFunctionArgs) {
                 …
 
                 if (notFound) {
@@ -689,7 +740,7 @@ export function loader() {
             <h3>Modifying the HTTP response</h3>
             <p>…or <em>throw</em> it!</p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="9,17|12-14|4-6" data-id="code-2"><script type="text/template">
-              export async function loader({ request, params, context }: LoaderArgs) {
+              export async function loader({ request, params, context }: LoaderFunctionArgs) {
                 …
 
                 const post = await getBlogPost(params.slug);
@@ -755,7 +806,7 @@ export function loader() {
             <h2>Solution</h2>
           </section>
           <section>
-            <p><span class="code">fetcher.ts</span></p>
+            <p><span class="code">app/api/fetcher.ts</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="|4-6" data-id="code"><script type="text/template">
               export async function fetcher<T>(uri: string, init?: RequestInit): Promise<T> {
                 const response = await fetch(uri, init);
@@ -789,7 +840,7 @@ export function loader() {
           <section>
             <p><span class="code">pokemon.$pokemonName.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1-10|13|14-19|" data-id="code"><script type="text/template">
-              export async function loader({ params }: LoaderArgs) {
+              export async function loader({ params }: LoaderFunctionArgs) {
                 const pokemonDetail = await fetcher<PokemonDetailDto>(
                   `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`,
                 );
@@ -815,9 +866,9 @@ export function loader() {
             <p>
               Complete solution code can be found on GitHub on the branch
               <a
-                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-03-data-fetching"
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/02-data-fetching"
                 target="_blank"
-                ><span class="code">exercise-03-data-fetching</span></a
+                ><span class="code">02-data-fetching</span></a
               >.
             </p>
           </section>
@@ -851,7 +902,7 @@ export function loader() {
           <section data-auto-animate>
             <p><span class="code">blog.$slug.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,3" data-id="code-2"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 …
               }
 
@@ -875,7 +926,7 @@ export function loader() {
           <section data-auto-animate>
             <p><span class="code">blog.$slug.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="2-4" data-id="code-3"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 const form = await request.formData();
                 const name = form.get("name");
                 const comment = form.get("comment");
@@ -901,7 +952,7 @@ export function loader() {
           <section data-auto-animate>
             <p><span class="code">blog.$slug.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="6-7" data-id="code-3"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 const form = await request.formData();
                 const name = form.get("name");
                 const comment = form.get("comment");
@@ -922,7 +973,7 @@ export function loader() {
           <section data-auto-animate>
             <p><span class="code">blog.$slug.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="9" data-id="code-3"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 const form = await request.formData();
                 const name = form.get("name");
                 const comment = form.get("comment");
@@ -1164,7 +1215,7 @@ export function loader() {
           <section>
             <p><span class="code">app/routes/profile.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,17|2|4-9|11-12|14-16|" data-id="code"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 const session = await getSession(request.headers.get("Cookie"));
               
                 const form = await request.formData();
@@ -1212,7 +1263,7 @@ export function loader() {
           <section>
             <p><span class="code">app/root.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,5|2-4|8|18|1-5,8,18" data-id="code"><script type="text/template">
-              export async function loader({ request }: LoaderArgs) {
+              export async function loader({ request }: LoaderFunctionArgs) {
                 const session = await getSession(request.headers.get("Cookie"));
 
                 return json({ username: session.get("name") });
@@ -1243,9 +1294,9 @@ export function loader() {
             <p>
               Complete solution code can be found on GitHub on the branch
               <a
-                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-04-forms-actions"
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/03-forms-actions"
                 target="_blank"
-                ><span class="code">exercise-04-forms-actions</span></a
+                ><span class="code">03-forms-actions</span></a
               >.
             </p>
           </section>
@@ -1276,7 +1327,7 @@ export function loader() {
           </section>
           <section data-auto-animate="">
             <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 /* Get form data from request… */
                 
 
@@ -1298,7 +1349,7 @@ export function loader() {
           </section>
           <section data-auto-animate="">
             <pre><code class="hljs tsx" data-trim data-line-numbers="4|5,10|6-9|4-10" data-id="code"><script type="text/template">
-              export async function action({ request }: ActionArgs) {
+              export async function action({ request }: ActionFunctionArgs) {
                 /* Get form data from request… */
 
                 const requestIsValid = …
@@ -1376,7 +1427,7 @@ export function loader() {
           <section data-auto-animate="" data-auto-animate-id="1">
             <p><span class="code">app/routes/profile.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="4-8|13-17|20-21" data-id="code-1"><script type="text/template">
-                export async function action({ request }: ActionArgs) {
+                export async function action({ request }: ActionFunctionArgs) {
                   …
 
                   const errors = validateProfile({ name, email });
@@ -1480,9 +1531,9 @@ export function loader() {
             <p>
               Complete solution code can be found on GitHub on the branch
               <a
-                href="https://github.com/webplatformz/react-pokedex-remix/tree/exercise-05-improve-forms-actions"
+                href="https://github.com/webplatformz/react-pokedex-remix/tree/04-validation"
                 target="_blank"
-                ><span class="code">exercise-05-improve-forms-actions</span></a
+                ><span class="code">04-validation</span></a
               >.
             </p>
           </section>
