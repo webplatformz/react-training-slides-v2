@@ -797,13 +797,44 @@ export { handlers };
             <h1>React Server Components (RSC)</h1>
           </section>
           <section>
-            <h2>React Server Components (RSC)</h2>
             <ul>
-              <li>Available in React (not yet nextjs)</li>
-              <li>Different from server-side rendering</li>
-              <li>Server components are never rendered on the client</li>
+              <li class="fragment">Different from classical SSR/SSG</li>
+              <li class="fragment">
+                Server components are a
+                <span class="hl">new type of component</span>
+                <ul>
+                  <li class="fragment">
+                    Cannot be interactive, i.e. no state and no event handlers
+                  </li>
+                  <li class="fragment">
+                    <em>Always</em> render on the server; never on the client
+                  </li>
+                </ul>
+              </li>
+              <li class="fragment">
+                Server and client components
+                <span class="hl">can be mixed</span>
+              </li>
+              <li class="fragment">
+                Requires deep integration with bundler and routing<br />&rarr;
+                <span class="hl">Next.js App Router</span>
+              </li>
+              <li class="fragment">Prevents roundtrips, reduces bundle size</li>
             </ul>
-            <p>&rarr;Eliminates roundtrips, reduces bundle size</p>
+          </section>
+          <section>
+            <img src="../img/react-server-components.png" alt="" width="500" />
+            <p>
+              <em>
+                Source:
+                <a
+                  href="https://www.plasmic.app/blog/how-react-server-components-work"
+                  target="_blank"
+                  >Plasmic Blog – How React server components work: an in-depth
+                  guide</a
+                ></em
+              >
+            </p>
           </section>
         </section>
       </div>
