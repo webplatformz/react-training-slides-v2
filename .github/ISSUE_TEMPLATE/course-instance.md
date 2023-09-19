@@ -19,6 +19,7 @@ assignees: ""
 - [ ] Teams call/invite with course participants has been sent out
   - incl. setup instructions/prerequesites
   - check with all in a non-european timezone if they're aware and fine with CET course time
+  - Communicate that we appreciate participation for the full course duration and no partial participation with come&go
   - possibly with hybrid approach (exercise room in camp zulu for interested people)
 - [ ] Order a new collectors link for the Survey Monkey feedback form. Each link is different but points to the same form (e.g., [Feedback Form](https://de.surveymonkey.com/r/PTSDCGT))
 
