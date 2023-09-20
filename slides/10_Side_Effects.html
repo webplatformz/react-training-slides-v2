@@ -314,13 +314,112 @@
         <section>
           <h2>Exercise</h2>
 
-          <p>Extract the debounce logic for the search into a custom Hook.</p>
-
+          <ul>
+            <li>
+              Extract the data fetching logic of the pokemon details page to a
+              custom Hook.
+            </li>
+            <li>
+              Stretch goal: Find a way to not have to know how the url is
+              composed within the custom hook
+            </li>
+          </ul>
           <div>
             <img src="../img/construction_work_refactor.jpg" />
           </div>
         </section>
         <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section>
+            <p><span class="code">usePokemonDetails.ts</span></p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="3|4-9|11"><script type="text/template">
+              /* import ... */
+
+              export function usePokemonDetails() {
+                const { pokemonName } = useParams<"pokemonName">();
+                const uri = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+              
+                const result = useQuery(["pokemon", "detail", pokemonName], () =>
+                  fetcher<PokemonDetailDto>(uri)
+                );
+              
+                return result;
+              }
+</script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">DetailPage.tsx</span></p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
+              function DetailPage() {
+                const { data, isLoading, isError } = usePokemonDetails();
+              
+                if (isLoading) return <div>LOADING</div>;
+                if (isError) return <div>ERROR while loading data</div>;
+              
+                return (
+                  <div>
+                    <span>{data.name}</span>
+                    <img src={data.sprites.front_shiny} alt={data?.name} />
+                  </div>
+                );
+              }
+</script></code></pre>
+          </section>
+          <section>
+            <p><span class="code">Stretch Goal: usePokemonDetails.ts</span></p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="3|5"><script type="text/template">
+              /* import ... */
+
+              export function usePokemonDetails(uriBuilder: (pokemonName?: string) => string) {
+                const { pokemonName } = useParams<"pokemonName">();
+                const uri = uriBuilder(pokemonName);
+              
+                const result = useQuery(["pokemon", "detail", pokemonName], () =>
+                  fetcher<PokemonDetailDto>(uri)
+                );
+              
+                return result;
+              }
+</script></code></pre>
+        </section>
+        <section>
+          <p><span class="code">Stretch Goal: DetailPage.tsx</span></p>
+
+          <pre
+            data-id="code"
+          ><code class="hljs tsx" data-trim data-line-numbers="3-4|7"><script type="text/template">
+            /* import ... */
+
+            const queryUrlBuilder = (pokemonName?: string) =>
+              `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+            
+            function DetailPage() {
+              const { data, isLoading, isError } = usePokemonDetails(queryUrlBuilder);
+            
+              if (isLoading) return <div>LOADING</div>;
+              if (isError) return <div>ERROR while loading data</div>;
+            
+              return (
+                <div>
+                  <span>{data.name}</span>
+                  <img src={data.sprites.front_shiny} alt={data?.name} />
+                </div>
+              );
+            }
+</script></code></pre>
+      </section>
+        <!-- <section>
           <section>
             <h2>Solution</h2>
           </section>
@@ -374,7 +473,7 @@
     
 </script></code></pre>
           </section>
-        </section>
+        </section> -->
         <section>
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
