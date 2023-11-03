@@ -171,12 +171,11 @@
           <pre data-id="code2">
             <code class="hljs tsx" data-trim data-line-numbers="9,1,11-14">
               <script type="text/template">
-                const fetcher = async <T>(uri: string): Promise<T> => {
+                async function fetcher<T>(uri: string): Promise<T> {
                   const response = await fetch(uri);
-                  if (!response.ok) throw new Error('Could not fetch data!');
-
+                  if (!response.ok) throw new Error("Could not fetch data!");
                   return response.json();
-                };
+                }                
 
                 const { data: user } = useQuery(['user'], 
                   () => fetcher<User>('/user'));
@@ -361,7 +360,7 @@
                 return <button onClick={() => mutate("zuehlkemon")} />;
               }
         </script></code></pre>
-            <p>notice how there is no query key and no data</p>
+            <p>note how there is no query key and no data</p>
           </section>
           <section>
             <h2>useMutation cache update</h2>
