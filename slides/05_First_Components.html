@@ -332,8 +332,9 @@
           <section>
             <h2>Configure</h2>
             <span class="code">vite.config.ts</span>
-            <pre><code class="hljs javascript" data-trim data-line-numbers="1|6-10"><script type="text/template">
-              import { defineConfig } from "vitest/config";
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|6-10"><script type="text/template">
+              /// <reference types="vitest" />
+              import { defineConfig } from "vite";
               import react from "@vitejs/plugin-react-swc";
               
               export default defineConfig({
@@ -367,13 +368,12 @@
             <span class="code">npm run test</span>
           </section>
           <section>
-            <h2>TDD - Test Driven Development</h2>
-            <p>It is a good practice to conduct TDD wherever possible</p>
+            <h2>TDD – Test Driven Development</h2>
             <p>
               Let us amend the component such that we can set the name through
               an
               <span class="code">name</span>
-              property
+              property.
             </p>
           </section>
           <section>
@@ -405,24 +405,6 @@
               export function Greeting({ name = 'World' }: Props) {
                   return <div>Hello {name}</div>;
               }
-            </script></code></pre>
-          </section>
-          <section>
-            <h3>Refactor</h3>
-            <p>
-              Refactor your code such that it is extensible and easy to
-              understand
-            </p>
-            <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim><script type="text/template">
-              it('should render correct name', () => {
-                const name = 'React Master';
-
-                render(<Greeting name={name} />);
-
-                expect(screen.getByText(`Hello ${name}`))
-                  .toBeInTheDocument();
-              });
             </script></code></pre>
           </section>
           <section>
