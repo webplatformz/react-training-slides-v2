@@ -102,13 +102,13 @@
           <section>
             <h2>Controlled</h2>
             <ul>
-              <li>Form Data is handled by a React component</li>
-              <li>Change Event &rarr; State Update &rarr; Re-Render</li>
+              <li>Form data is handled by a React component</li>
+              <li>Change event &rarr; state update &rarr; re-render</li>
               <li>
                 For example,
                 <ul>
                   <li>on a keystroke</li>
-                  <li>when selecting an option form a Dropdown</li>
+                  <li>when selecting an option from a dropdown</li>
                 </ul>
               </li>
             </ul>
@@ -117,7 +117,7 @@
           <section>
             <h2>Uncontrolled</h2>
             <ul>
-              <li>Form Data is handled by the DOM</li>
+              <li>Form data is handled by the DOM</li>
               <li>
                 State is updated only onBlur/onSubmit &rarr; prevents needless
                 re-renders
@@ -192,21 +192,27 @@
             <h2>React Hook Form</h2>
             <pre><code class="hljs tsx" data-trim data-noescape><script type="text/template">
                   type FormValues = { name: string; };
-                  
-                  const { register, handleSubmit, formState } = useForm<FormValues>();
-                  const onSubmit: SubmitHandler<FormValues> = (data) => { console.log(data); };
-                  const onError: SubmitErrorHandler<FormValues> = (error) => { console.log(error); };
 
-                  return (
-                    <form onSubmit={handleSubmit(onSubmit, onError)}>
-                      <input defaultValue="Dr. React" {...register("name", 
-                        { required: { 
-                          value: true, 
-                          message: "The field 'name' is required!" }
-                        })}/>
-                      <input type="submit" />
-                    </form>
-                    )
+                  function MyForm() {
+                    const { register, handleSubmit, formState } = useForm<FormValues>();
+                    const onSubmit: SubmitHandler<FormValues> = (data) => { console.log(data); };
+                    const onError: SubmitErrorHandler<FormValues> = (error) => { console.log(error); };
+
+                    return (
+                      <form onSubmit={handleSubmit(onSubmit, onError)}>
+                        <input
+                          defaultValue="Dr. React"
+                          {...register("name", {
+                            required: { 
+                              value: true, 
+                              message: "The field 'name' is required!"
+                            },
+                          })}
+                        />
+                        <input type="submit" />
+                      </form>
+                    );
+                  }
                   </script></code></pre>
             <div class="fragment tip">
               React Hook Form is enabling you to easily set and update form
@@ -225,7 +231,7 @@
               </li>
               <li>Allow the user to enter their name & e-mail address</li>
               <li>Validate the inputs and display an error if necessary</li>
-              <li>Log the result of the form submisson to the console</li>
+              <li>Log the result of the form submission to the console</li>
             </ol>
           </section>
           <section>
@@ -245,7 +251,7 @@
           </section>
           <section>
             <h2>Solution (Name Input)</h2>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4-5|11|10,12"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4-5|13-16|12,18"><script type="text/template">
                   type FormValues = { name: string; email: string; };
 
                   export function Form() {
@@ -254,10 +260,17 @@
                   
                     return (
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" placeholder="Dr. React" 
-                              className={errors?.name?.type ? styles.inputError : ''}
-                              {...register('name', { required: { value: true, message: "Name is required!" }, maxLength: { value: 25, message: "The name should be shorter than 25 characters!" } })} />
+                        <input
+                          type="text"
+                          placeholder="Dr. React" 
+                          className={errors?.name?.type ? styles.inputError : ''}
+                          {...register('name', {
+                            required: { value: true, message: "Name is required!" },
+                            maxLength: { value: 25, message: "The name should be shorter than 25 characters!" }
+                          })}
+                        />
                         {errors?.name?.type && <span className={styles.errorMessage}>{errors.name.message}</span>}
+                        
                         <input type="submit" value="save" />
                       </form>
                     );
@@ -268,10 +281,10 @@
             <h2>Solution (E-Mail Input)</h2>
             <pre><code class="hljs tsx" data-trim data-line-numbers="|9-12"><script type="text/template">
                   export function Form() {
-                    /* ... (see previous slide) */
+                    …
                     return (
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        /* ... (see previous slide) */
+                        …
                         <input
                           type="text" placeholder="react@zuhlke.com"
                           className={errors?.email?.type ? styles.inputError : ''}
