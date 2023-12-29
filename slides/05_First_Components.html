@@ -66,8 +66,7 @@
             <div class="fragment tip">
               <span>
                 Use a code formatter like
-                <em>Prettier</em>.
-                Enforce it by integrating it with ESLint.
+                <em>Prettier</em>. Enforce it by integrating it with ESLint.
               </span>
             </div>
           </section>
@@ -148,68 +147,6 @@
               </span>
             </p>
           </section>
-          <section>
-            <h2>Exercise</h2>
-            <ul>
-              <li class="fragment">
-                Setup a new React project with
-                <pre>
-                  <code class="hljs javascript" data-trim>
-                      $ npm create vite@latest pokedex-vite
-                        > React
-                        > Typescript + SWC
-                      $ cd ./pokedex-vite
-                      $ npm install
-                      $ npm run dev
-                  </code>
-              </pre>
-              </li>
-              <li class="fragment">
-                Create a PokeListEntry component to show a pokémon name like
-                'Bulbasaur' kept in a constant
-              </li>
-              <li class="fragment">
-                Consume this component in the
-                <span class="code">App.tsx</span>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <h2>Solution</h2>
-            <span class="code">PokeListEntry.tsx</span>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
-                        const name = 'Bulbasaur';
-
-                        export function PokeListEntry() {
-                            return (
-                                <div>{name}</div>
-                            );
-                        }
-                        </script>
-                    </code>
-                </pre>
-          </section>
-          <section>
-            <h3>Solution continued</h3>
-            <span class="code">App.tsx</span>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
-                        import { PokeListEntry } from "./PokeListEntry"
-
-                        export function App() {
-                            return (
-                                <PokeListEntry />
-                            );
-                        }
-                        </script>
-                    </code>
-                </pre>
-          </section>
         </section>
         <section>
           <section>
@@ -259,58 +196,27 @@
                           }
                         </script></code></pre>
           </section>
-          <section>
-            <h2>Exercise</h2>
-            <ul>
-              <li>
-                Create Props for your PokeListEntry component expecting an
-                optional name
-              </li>
-              <li>Set a default name if property is not passed by consumer</li>
-              <li>Use object destruction</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Solution</h2>
-            <span class="code">PokeListEntry.tsx</span>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
-                        type PokeListEntryProps = {
-                            name?: string;
-                        };
-
-                        export function PokeListEntry({
-                          name = 'Bulbasaur'
-                        }: PokeListEntryProps) {
-                            return (
-                                <div>{name}</div>
-                            );
-                        }
-                        </script>
-                    </code>
-                </pre>
-          </section>
         </section>
         <section>
           <section>
             <h2>Testing</h2>
             <p>
               Our components can be tested using the
-              <a href="https://vitest.dev/">Vitest</a> and <a href="https://testing-library.com/">React Testing Library</a>
+              <a href="https://vitest.dev/">Vitest</a> and
+              <a href="https://testing-library.com/">React Testing Library</a>
             </p>
-            <p>
-              Add the library
+            <p>Add the library:</p>
             <pre
               data-id="code"
             ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom@5.16.5 --save-dev</script></code></pre>
-          </p>
-          <p>Add in the <span class="code">package.json</span> in the scripts section</p>
-          <pre
-            data-id="code"
-          ><code class="hljs zsh" data-trim><script type="text/template">"test": "vitest",</script></code></pre>
-        </p>
+
+            <p>
+              Add in the <span class="code">package.json</span> in the scripts
+              section:
+            </p>
+            <pre
+              data-id="code"
+            ><code class="hljs zsh" data-trim><script type="text/template">"test": "vitest",</script></code></pre>
           </section>
           <section>
             <h2>Configure</h2>
@@ -332,8 +238,9 @@
           <section>
             <h2>Configure</h2>
             <span class="code">vite.config.ts</span>
-            <pre><code class="hljs javascript" data-trim data-line-numbers="1|6-10"><script type="text/template">
-              import { defineConfig } from "vitest/config";
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|6-10"><script type="text/template">
+              /// <reference types="vitest" />
+              import { defineConfig } from "vite";
               import react from "@vitejs/plugin-react-swc";
               
               export default defineConfig({
@@ -367,13 +274,12 @@
             <span class="code">npm run test</span>
           </section>
           <section>
-            <h2>TDD - Test Driven Development</h2>
-            <p>It is a good practice to conduct TDD wherever possible</p>
+            <h2>TDD – Test Driven Development</h2>
             <p>
               Let us amend the component such that we can set the name through
               an
               <span class="code">name</span>
-              property
+              property.
             </p>
           </section>
           <section>
@@ -408,24 +314,6 @@
             </script></code></pre>
           </section>
           <section>
-            <h3>Refactor</h3>
-            <p>
-              Refactor your code such that it is extensible and easy to
-              understand
-            </p>
-            <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim><script type="text/template">
-              it('should render correct name', () => {
-                const name = 'React Master';
-
-                render(<Greeting name={name} />);
-
-                expect(screen.getByText(`Hello ${name}`))
-                  .toBeInTheDocument();
-              });
-            </script></code></pre>
-          </section>
-          <section>
             <h2>Cheat Sheet</h2>
             <ul>
               <li>
@@ -453,68 +341,19 @@
               >
             </p>
           </section>
-          <section>
-            <h2>Exercise</h2>
-            <ul>
-              <li>
-                Test your PokeListEntry component with React Testing Library
-              </li>
-              <li>
-                Stretch Goal:
-                <a
-                  href="https://jestjs.io/docs/api#testeachtablename-fn-timeout"
-                  target="_blank"
-                >
-                  Parameterize your test with React Testing Library using
-                </a>
-                <span class="code">it.each(table)(name, fn, timeout)</span>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <h2>Solution</h2>
-            <span class="code">PokeListEntry.test.tsx</span>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                        <script type="text/template">
-                        it('should render Bulbasaur if no name is passed', () => {
-                            const name = 'Bulbasaur';
-                            render(<PokeListEntry />);
-                            expect(screen.getByText(name)).toBeInTheDocument();
-                        });
 
-                        it('should render the passed pokémon name', () => {
-                            const name = 'Pickachu';
-                            render(<PokeListEntry name={name} />);
-                            expect(screen.getByText(name)).toBeInTheDocument();
-                        });
-                        </script>
-                    </code>
-                </pre>
-          </section>
-          <section>
-            <h3>Solution continued</h3>
-            <span class="code">PokeListEntry.test.tsx</span>
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                        <script type="text/template">
-                        it.each(['Bulbasaur', 'Eevee', 'Pickachu'])
-                          ('should render the passed pokémon %s', (name) => {
-                          render(<PokeListEntry name={name} />);
-                          expect(screen.getByText(name)).toBeInTheDocument();
-                        });
-                        </script>
-                    </code>
-                </pre>
-          </section>
           <section>
             <h3>Follow-Up: Continuous Integration</h3>
 
-            <p>On your CI pipeline you typically want to ensure the quality of the solution</p>
+            <p>
+              On your CI pipeline you typically want to ensure the quality of
+              the solution
+            </p>
             <ul>
               <li>
-                <span class="code">npm run test:ci</span> which is defined in package.json with the command <span class="code">vitest run</span> without watchmode
+                <span class="code">npm run test:ci</span> which is defined in
+                package.json with the command
+                <span class="code">vitest run</span> without watchmode
               </li>
               <li><span class="code">npm run lint</span></li>
               <li><span class="code">npm run build</span></li>
@@ -702,7 +541,44 @@
         <section>
           <section>
             <h2>Exercise</h2>
+          </section>
+          <section>
+            <ol>
+              <li class="fragment">Set up a new React project using Vite</li>
+              <li class="fragment">Show a list of pokemon names</li>
+              <li class="fragment">
+                Wrap the list in a page structure (containing a nav bar with
+                dummy links)
+              </li>
+              <li class="fragment">
+                <span class="hl">Stretch Goal:</span> Test your components using
+                Vitest and React Testing Library
+              </li>
+            </ol>
+          </section>
+          <section>
+            <img
+              src="../img/exercise-goal-list-and-layout.png"
+              alt="Exercise goal"
+            />
+          </section>
+          <section>
+            <h3>Hints</h3>
             <ul>
+              <li>
+                Setting up a new React app:
+                <pre>
+                <code class="hljs javascript" data-trim>
+                    $ npm create vite@latest pokedex-vite
+                      > React
+                      > Typescript + SWC
+                    $ cd ./pokedex-vite
+                    $ npm install
+                    $ npm run dev
+                </code>
+            </pre>
+              </li>
+              <li>Start building in <span class="code">App.tsx</span></li>
               <li>
                 Create a (hard-coded)
                 <a
@@ -710,30 +586,15 @@
                   href="https://pokeapi.co/api/v2/pokemon?limit=50"
                   >array of Pokémon</a
                 >
+                and render it as a list
               </li>
-              <li class="fragment">
-                Render all Pokémon names in a list (hint: add a new
-                <span class="code">PokeList.tsx</span> component)
+              <li>Create components for the list entry, list, and layout</li>
+              <li>
+                Extract components into separate files before a file gets too
+                big
               </li>
-              <li class="fragment">
-                Make the name in
-                <span class="code">PokeListEntry.tsx</span>
-                required
-              </li>
-              <li class="fragment">Write tests for the list</li>
-              <li class="fragment">
-                Create a
-                <span class="hl">Layout component</span>
-                which wraps the list with a page structure (containing a nav bar
-                with dummy links)
-              </li>
+              <li></li>
             </ul>
-          </section>
-          <section>
-            <img
-              src="../img/exercise-goal-list-and-layout.png"
-              alt="Exercise goal"
-            />
           </section>
         </section>
         <section>
@@ -743,7 +604,7 @@
           <section>
             <!-- prettier-ignore -->
             <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs tsx" data-trim>
                         <script type="text/template">
                         import PokeListEntry from "./PokeListEntry";
 
@@ -769,15 +630,13 @@
             <h3>Solution continued</h3>
             <!-- prettier-ignore -->
             <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs tsx" data-trim>
                         <script type="text/template">
                         type PokeListEntryProps = {
                           name: string;
                         };
 
-                        export function PokeListEntry({
-                          name
-                        }: PokeListEntryProps) {
+                        export function PokeListEntry({ name }: PokeListEntryProps) {
                           return <li>{name}</li>;
                         }
                         </script>
@@ -788,7 +647,7 @@
             <h3>Solution continued</h3>
             <!-- prettier-ignore -->
             <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs tsx" data-trim>
                         <script type="text/template">
                         type LayoutProps = PropsWithChildren;
 
@@ -812,7 +671,7 @@
             <h3>Solution continued</h3>
             <!-- prettier-ignore -->
             <pre>
-                    <code class="hljs javascript" data-trim>
+                    <code class="hljs tsx" data-trim>
                         <script type="text/template">
                         import Layout from "./Layout";
                         import PokeList from "./PokeList";
@@ -824,6 +683,23 @@
                             </Layout>
                           );
                         }
+                        </script>
+                    </code>
+                </pre>
+          </section>
+
+          <section>
+            <h3>Solution continued</h3>
+            <span class="code">PokeListEntry.test.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
+                    <code class="hljs tsx" data-trim>
+                        <script type="text/template">
+                        it('should render the passed pokémon name', () => {
+                            const name = 'Pickachu';
+                            render(<PokeListEntry name={name} />);
+                            expect(screen.getByText(name)).toBeInTheDocument();
+                        });
                         </script>
                     </code>
                 </pre>
