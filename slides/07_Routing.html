@@ -645,6 +645,103 @@ function MyComponent() {
           </section>
         </section>
         <section>
+          <section data-auto-animate>
+            <h2>How should I structure the code?</h2>
+            <ul>
+              <li>What is the best application structure?</li>
+              <li>What best practices are out there?</li>
+            </ul>
+          </section>
+
+          <section data-auto-animate>
+            <h3>Folder structure</h3>
+
+            <p>
+              No official guidelines on
+              <a
+                href="https://react.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >React.dev</a
+              >
+            </p>
+            <p>
+              For component structure & hierarchy, align as closely as possibly
+              with the UX&UI experts on the team. A very common approach is
+              <a
+                href="https://bradfrost.com/blog/post/atomic-web-design/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Atomic Design</a
+              >
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3>Folder structure</h3>
+            <h4>Divide & conquer</h4>
+            <ul>
+              <li>Split components in multiple reusable components</li>
+              <li>Extract hook logic to custom hooks (upcoming chapter)</li>
+              <li>Extract non-react logic to functions</li>
+              <li>Make reusable things reusable</li>
+              <li>Group similar application elements in same directories</li>
+            </ul>
+            <p class="fragment tip">
+              <span> Evolve your folder structure as you need it </span>
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3>Folder structure</h3>
+            <p>
+              For component structure & hierarchy, align as closely as possibly
+              with the UX&UI experts on the team.
+            </p>
+            <p>
+              Build a clear hierarchy for your components. A very common
+              approach is
+              <a
+                href="https://bradfrost.com/blog/post/atomic-web-design/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Atomic Design</a
+              >.
+            </p>
+          </section>
+          <section>
+            <h3>Folder structures</h3>
+            <div
+              style="
+                display: flex;
+                flex-grow: 1;
+                flex-direction: row;
+                justify-content: center;
+                gap: 2rem;
+                height: 60vh;
+              "
+            >
+              <img src="../img/bestpractices/folders_pokedex.png" />
+              <img src="../img/bestpractices/atomic_design.png" />
+            </div>
+          </section>
+          <section>
+            <h3>Best practices</h3>
+            <ul>
+              <li>Read the documentation of react and used libraries</li>
+              <li>Use ESLint & Prettier</li>
+              <li>Use Typescript</li>
+              <li>Write tests</li>
+              <li>
+                Verify all those things in continuous integration (and do so
+                strictly)
+              </li>
+              <li>
+                Use <a href="https://storybook.js.org/">storybook.js</a> to
+                collaborate with UX/UI designers
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
@@ -653,6 +750,7 @@ function MyComponent() {
             <li>How to redirect routes</li>
             <li>How to link to a route</li>
             <li>Further useful React Router features</li>
+            <li>Thoughts about folder structures & best practices</li>
           </ul>
         </section>
         <section class="break-slide">
