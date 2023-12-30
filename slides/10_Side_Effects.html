@@ -37,27 +37,50 @@
               <li>Cancelling a network request/asynchronous operation</li>
             </ul>
           </section>
-          <!-- <section>
+        
+          <section>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
+              function getWindowDimensions() {
+                const { innerWidth: width, innerHeight: height } = window;
+                return { width, height };
+              }
+              export function MyComponent() {
+                const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+              
+                const handleResize = useCallback(() => {
+                  setWindowDimensions(getWindowDimensions());
+                }, []);
+              
+                useEffect(() => {
+                  console.log("useEffect: Evaluated");
+                  handleResize();
+                  window.addEventListener('resize', handleResize);
+                  return () => {
+                    console.log("useEffect: Cleanup evaluated");
+                    window.removeEventListener('resize', handleResize);
+                  };
+                }, [handleResize]);
+              /* ... */
+              
+          </script></code></pre>
+          </section>
+          <section>
             <img
-              src="../img/user-duplicate-request.png"
-              alt="Duplicate request"
+              src="../img/duplicate-useeffect-eval.png"
+              alt="Duplicate evaluation"
             />
-
             <p>What's going on here?</p>
           </section>
           <section data-auto-animate>
             <p><span class="code">index.tsx</span></p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
-            const root = ReactDOM.createRoot(
-              document.getElementById("root") as HTMLElement
-            );
-            root.render(
-              <React.StrictMode>
-                <App />
-              </React.StrictMode>
-            );
+            ><code class="hljs tsx" data-trim data-line-numbers="2,4"><script type="text/template">
+              ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+                <React.StrictMode>
+                  <App />
+                </React.StrictMode>
+              );
 </script></code></pre>
             <p>
               In development, when using
@@ -87,53 +110,10 @@
               <small>(not in prod)</small>
             </p>
             <p>
-              Therefore it is recommanded to not fetch data with useEffect but
-              rely on a library, so let's do it!
+              So if your code with useEffect doesn't behave as desired,
+               you should follow up on a different approach.
             </p>
           </section>
-          <section data-auto-animate>
-            <p>Configure TanStack Query</p>
-            <p>
-              <span class="code">npm i @tanstack/react-query</span>
-            </p>
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="1|6-8"><script type="text/template">
-              const queryClient = new QueryClient();
-
-              function App() {
-                /* Provide the client to your App */
-                return (
-                  <QueryClientProvider client={queryClient}>
-                    <MyComponent />
-                  </QueryClientProvider>
-                );
-              }
-            </script></code></pre>
-          </section> -->
-          <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
-              function getWindowDimensions() {
-                const { innerWidth: width, innerHeight: height } = window;
-                return { width, height };
-              }
-              export function MyComponent() {
-                const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-              
-                const handleResize = useCallback(() => {
-                  setWindowDimensions(getWindowDimensions());
-                }, []);
-              
-                useEffect(() => {
-                  handleResize();
-                  window.addEventListener('resize', handleResize);
-                  return () => window.removeEventListener('resize', handleResize);
-                }, [handleResize]);
-              /* ... */
-              
-          </script></code></pre>
-          </section>
-
           <section>
             <h3>Cleanup is necessary for...</h3>
             <ul>
