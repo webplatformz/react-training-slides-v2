@@ -17,7 +17,7 @@ assignees: ""
   - any new features to include?
 - [ ] Dev tools work (e.g. with current Node.js version)
 - [ ] Teams call/invite with course participants has been sent out
-  - incl. setup instructions/prerequesites
+  - incl. setup instructions/prerequesites & info about JS recap (see wiki)
   - check with all in a non-european timezone if they're aware and fine with CET course time
   - Communicate that we appreciate participation for the full course duration and no partial participation with come&go
   - possibly with hybrid approach (exercise room in camp zulu for interested people)
