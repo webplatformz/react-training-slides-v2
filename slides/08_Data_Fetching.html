@@ -149,7 +149,7 @@
 
             <p>
               <span class="hl">Clean & simple</span>
-              &ndash; also comes with with retry, cache &amp; more functionality
+              &ndash; also comes with retry, cache &amp; more functionality
             </p>
             <div class="fragment tip">
               The loading state can also be handled with React's
@@ -171,7 +171,7 @@
           <h3>Some words about types</h3>
 
           <pre data-id="code2">
-            <code class="hljs tsx" data-trim data-line-numbers="9,1,11-14">
+            <code class="hljs tsx" data-trim data-line-numbers="1,9,12-15">
               <script type="text/template">
                 async function fetcher<T>(uri: string): Promise<T> {
                   const response = await fetch(uri);
@@ -192,7 +192,7 @@
 
           <p>
             Since we are using TypeScript, we should always work with defined
-            types&mdash;avoid
+            types &mdash; avoid
             <span class="code">any</span>
             !
           </p>
@@ -249,7 +249,6 @@
               export async function fetcher&lt;T&gt;(uri: string): Promise&lt;T&gt; {
                 const response = await fetch(uri);
                 if (!response.ok) throw new Error('Could not fetch data!');
-
                 return response.json();
               };
               </code>
@@ -348,7 +347,7 @@
           <section>
             <h2>useMutation</h2>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="2-6|7-11|14"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2-6,12"><script type="text/template">
               function AddPokemon() {
                 const {
                   mutate,
@@ -356,24 +355,24 @@
                   isError: isMutationerror
                 } = useMutation({
                   mutationFn: (name: string) =>
-                  fetcher<PokemonDetailDto>("https://pokeapi.co/api/v2/pokemon/", {
-                    method: "POST",
-                    body: JSON.stringify({ name }),
-                  }),
+                    fetcher<PokemonDetailDto>("https://pokeapi.co/api/v2/pokemon/", {
+                      method: "POST",
+                      body: JSON.stringify({ name }),
+                    }),
                 });
               
                 return <button onClick={() => mutate("zuehlkemon")} />;
               }
         </script></code></pre>
-            <p>note how there is no query key and no data</p>
+            <p>Note how there is no query key and no data.</p>
           </section>
           <section>
             <h2>useMutation cache update</h2>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-4|5|6-12|13-18"><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-4|5|8-12|13-18"><script type="text/template">
               const { data, isLoading, isError } = useQuery({
                 queryKey: ['pokemonList'], 
-                queryFn: () =>fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon/'),
+                queryFn: () => fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon/'),
               });
               const queryClient = useQueryClient();
 
