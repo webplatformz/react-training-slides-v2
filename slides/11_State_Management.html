@@ -58,29 +58,29 @@
               >
             </p>
             <p class="fragment">
-              The parameter is the default value of the context
+              The parameter is the default value of the context.
             </p>
             <p class="fragment">
               Provide context in an ancestor component using
-              <span class="code"></span>
             </p>
             <pre class="fragment">
-                    <code class="hljs html" data-trim>
-                        <script type="text/template">
-                        <YourContext.Provider value={…}>
-                            … <!-- child components -->
-                        <YourContext.Provider>
-                        </script>
-                    </code>
-                </pre>
+              <code class="hljs html" data-trim>
+                <script type="text/template">
+                <YourContext.Provider value={…}>
+                  … <!-- child components -->
+                <YourContext.Provider>
+                </script>
+              </code>
+            </pre>
             <p class="fragment">
               Consume within any descendant component using
+              <br />
               <span class="code">const value = useContext(YourContext)</span>
             </p>
           </section>
 
           <section>
-            <pre><code class="hljs tsx" data-trim><script type="text/template">
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-8|13,15|19,21,22|"><script type="text/template">
             import { createContext, useContext } from "react";
 
             type ContextType = {
