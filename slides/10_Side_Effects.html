@@ -37,31 +37,32 @@
               <li>Cancelling a network request/asynchronous operation</li>
             </ul>
           </section>
-        
+
           <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
-              function getWindowDimensions() {
+            <pre><code class="hljs tsx" data-trim data-line-numbers="13-22|9-11|7,1-4|"><script type="text/template">
+              function getDimensions() {
                 const { innerWidth: width, innerHeight: height } = window;
                 return { width, height };
               }
+
               export function MyComponent() {
-                const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+                const [windowDimensions, setWindowDimensions] = useState(getDimensions());
               
                 const handleResize = useCallback(() => {
-                  setWindowDimensions(getWindowDimensions());
+                  setWindowDimensions(getDimensions());
                 }, []);
               
                 useEffect(() => {
                   console.log("useEffect: Evaluated");
                   handleResize();
                   window.addEventListener('resize', handleResize);
+
                   return () => {
                     console.log("useEffect: Cleanup evaluated");
                     window.removeEventListener('resize', handleResize);
                   };
                 }, [handleResize]);
-              /* ... */
-              
+              }
           </script></code></pre>
           </section>
           <section>
@@ -81,38 +82,35 @@
                   <App />
                 </React.StrictMode>
               );
-</script></code></pre>
+            </script></code></pre>
             <p>
               In development, when using
               <em>Strict Mode</em>
-              , components are re-mounted: mount, unmount, mount
+              , components are remounted: mount, unmount, mount.
             </p>
             <p>
               Purpose:
               <span class="hl">future-proofing</span>
-              the app
+              the app.
             </p>
           </section>
           <section data-auto-animate>
             <p>
-              In development, when using
-              <em>Strict Mode</em>
-              , components are re-mounted: mount, unmount, mount
-            </p>
-            <p>
               Purpose:
               <span class="hl">future-proofing</span>
               the app
             </p>
-            <p>
-              &rarr; Effects are executed at least twice in development
-              <br />
-              <small>(not in prod)</small>
-            </p>
-            <p>
-              So if your code with useEffect doesn't behave as desired,
-               you should follow up on a different approach.
-            </p>
+            <ul>
+              <li>
+                Effects are executed at least twice in development
+                <br />
+                <small>(not in production)</small>
+              </li>
+              <li>
+                If your code with useEffect doesn't behave as desired, you
+                should follow up on a different approach
+              </li>
+            </ul>
           </section>
           <section>
             <h3>Cleanup is necessary for...</h3>
@@ -127,14 +125,14 @@
             <ul>
               <li>
                 Don't use useEffect to update state based on props or state,
-                whenever possible calculate all dependent states on the fly.
+                whenever possible calculate all dependent states on the fly
                 <br />
-                If the calculation is expensive, use
-                <span class="hl">useMemo</span>
+                (if the calculation is expensive, use the
+                <span class="hl">useMemo</span> Hook)
               </li>
               <li>
                 Don't invoke callbacks on state change, whenever possible invoke
-                callbacks as part of event handling logic.
+                callbacks as part of event handling logic
               </li>
             </ul>
             <aside class="notes">
@@ -144,14 +142,13 @@
             </aside>
           </section>
         </section>
-      
+
         <section>
           <section><h2>Custom Hooks</h2></section>
           <section>
             <p>
               We can reuse a concrete Hook logic by extracting it into a
-              <span class="hl">custom Hook</span>
-              .
+              <br /><span class="hl">custom Hook</span>.
             </p>
           </section>
           <section data-auto-animate>
@@ -163,7 +160,7 @@
                 
                 return <p>{result}</p>;
               }
-          </script></code></pre>
+            </script></code></pre>
             <p>The logic to be extracted can use a single or multiple Hooks.</p>
           </section>
           <section data-auto-animate>
@@ -181,8 +178,8 @@
 
                 return <p>{result}</p>;
               }
-          </script></code></pre>
-            <p class="fragment">In the component we just call this function.</p>
+            </script></code></pre>
+            <p class="fragment">In the component we then call this function.</p>
             <p class="fragment tip">
               <span>
                 Stick to the Hooks naming convention:
@@ -196,16 +193,22 @@
             <h2>Exercise</h2>
             <img src="../img/profile.png" />
             <ul>
-              <li>Using useEffect, listen on the profile form for the window <span class="hl">paste</span>
-                event and set the pasted text to the forms name field.</li>
-              <li>Extract the newly created logic to a custom hook.</li>
+              <li>
+                Using useEffect, listen on the profile form for the window
+                <span class="hl">paste</span> event and set the pasted text to
+                the forms name field
+              </li>
+              <li>Extract the newly created logic to a custom Hook</li>
             </ul>
           </section>
           <section data-auto-animate>
             <ul>
-              <li>Using useEffect, listen on the profile form for the window <span class="hl">paste</span>
-                event and set the pasted text to the forms name field.</li>
-              <li>Extract the newly created logic to a custom hook.</li>
+              <li>
+                Using useEffect, listen on the profile form for the window
+                <span class="hl">paste</span> event and set the pasted text to
+                the forms name field
+              </li>
+              <li>Extract the newly created logic to a custom Hook</li>
             </ul>
             <pre><code class="hljs tsx" data-trim><script type="text/template">
               /* logs the paste event to the console */
@@ -216,7 +219,7 @@
 
               /* get the form setValue function */
               const { setValue } = useForm<FormValues>();
-          </script></code></pre>
+            </script></code></pre>
           </section>
         </section>
         <section>
@@ -229,7 +232,7 @@
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="1|10-13|2-8"><script type="text/template">
               export function useWindowPaste(onPasted: (value: string) => void) {
-                const hanndlePaste = useCallback(
+                const handlePaste = useCallback(
                   (event: ClipboardEvent) => {
                     const value = event.clipboardData?.getData("Text");
                     value && onPasted(value);
@@ -238,11 +241,10 @@
                 );
               
                 useEffect(() => {
-                  window.addEventListener("paste", hanndlePaste);
-                  return () => window.removeEventListener("paste", hanndlePaste);
-                }, [hanndlePaste]);
+                  window.addEventListener("paste", handlePaste);
+                  return () => window.removeEventListener("paste", handlePaste);
+                }, [handlePaste]);
               }
-              
             </script></code></pre>
           </section>
           <section>
@@ -270,15 +272,17 @@
           <p>We learned&hellip;</p>
           <ul>
             <li>
-              How to use
-              <span class="hl">useEffect</span>
+              How to use the
+              <span class="hl">useEffect</span> Hook
             </li>
             <li>
               When to use
               <span class="hl">useEffect</span>
               and when to use a different approach to reach your goal
             </li>
-            <li>How to cleanup side effects in useEffect</li>
+            <li>
+              How to cleanup side effects in <span class="hl">useEffect</span>
+            </li>
             <li>How to extract Hook logic from components into Custom Hooks</li>
           </ul>
         </section>
