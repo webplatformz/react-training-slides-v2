@@ -37,103 +37,81 @@
               <li>Cancelling a network request/asynchronous operation</li>
             </ul>
           </section>
-          <!-- <section>
-            <img
-              src="../img/user-duplicate-request.png"
-              alt="Duplicate request"
-            />
 
+          <section>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="13-22|9-11|7,1-4|"><script type="text/template">
+              function getDimensions() {
+                const { innerWidth: width, innerHeight: height } = window;
+                return { width, height };
+              }
+
+              export function MyComponent() {
+                const [windowDimensions, setWindowDimensions] = useState(getDimensions());
+              
+                const handleResize = useCallback(() => {
+                  setWindowDimensions(getDimensions());
+                }, []);
+              
+                useEffect(() => {
+                  console.log("useEffect: Evaluated");
+                  handleResize();
+                  window.addEventListener('resize', handleResize);
+
+                  return () => {
+                    console.log("useEffect: Cleanup evaluated");
+                    window.removeEventListener('resize', handleResize);
+                  };
+                }, [handleResize]);
+              }
+          </script></code></pre>
+          </section>
+          <section>
+            <img
+              src="../img/duplicate-useeffect-eval.png"
+              alt="Duplicate evaluation"
+            />
             <p>What's going on here?</p>
           </section>
           <section data-auto-animate>
             <p><span class="code">index.tsx</span></p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5,7"><script type="text/template">
-            const root = ReactDOM.createRoot(
-              document.getElementById("root") as HTMLElement
-            );
-            root.render(
-              <React.StrictMode>
-                <App />
-              </React.StrictMode>
-            );
-</script></code></pre>
-            <p>
-              In development, when using
-              <em>Strict Mode</em>
-              , components are re-mounted: mount, unmount, mount
-            </p>
-            <p>
-              Purpose:
-              <span class="hl">future-proofing</span>
-              the app
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>
-              In development, when using
-              <em>Strict Mode</em>
-              , components are re-mounted: mount, unmount, mount
-            </p>
-            <p>
-              Purpose:
-              <span class="hl">future-proofing</span>
-              the app
-            </p>
-            <p>
-              &rarr; Effects are executed at least twice in development
-              <br />
-              <small>(not in prod)</small>
-            </p>
-            <p>
-              Therefore it is recommanded to not fetch data with useEffect but
-              rely on a library, so let's do it!
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>Configure TanStack Query</p>
-            <p>
-              <span class="code">npm i @tanstack/react-query</span>
-            </p>
-            <pre
-              data-id="code2"
-            ><code class="hljs tsx" data-trim data-line-numbers="1|6-8"><script type="text/template">
-              const queryClient = new QueryClient();
-
-              function App() {
-                /* Provide the client to your App */
-                return (
-                  <QueryClientProvider client={queryClient}>
-                    <MyComponent />
-                  </QueryClientProvider>
-                );
-              }
+            ><code class="hljs tsx" data-trim data-line-numbers="2,4"><script type="text/template">
+              ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+                <React.StrictMode>
+                  <App />
+                </React.StrictMode>
+              );
             </script></code></pre>
-          </section> -->
-          <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
-              function getWindowDimensions() {
-                const { innerWidth: width, innerHeight: height } = window;
-                return { width, height };
-              }
-              export function MyComponent() {
-                const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-              
-                const handleResize = useCallback(() => {
-                  setWindowDimensions(getWindowDimensions());
-                }, []);
-              
-                useEffect(() => {
-                  handleResize();
-                  window.addEventListener('resize', handleResize);
-                  return () => window.removeEventListener('resize', handleResize);
-                }, [handleResize]);
-              /* ... */
-              
-          </script></code></pre>
+            <p>
+              In development, when using
+              <em>Strict Mode</em>
+              , components are remounted: mount, unmount, mount.
+            </p>
+            <p>
+              Purpose:
+              <span class="hl">future-proofing</span>
+              the app.
+            </p>
           </section>
-
+          <section data-auto-animate>
+            <p>
+              Purpose:
+              <span class="hl">future-proofing</span>
+              the app
+            </p>
+            <ul>
+              <li>
+                Effects are executed at least twice in development
+                <br />
+                <small>(not in production)</small>
+              </li>
+              <li>
+                If your code with useEffect doesn't behave as desired, you
+                should follow up on a different approach
+              </li>
+            </ul>
+          </section>
           <section>
             <h3>Cleanup is necessary for...</h3>
             <ul>
@@ -147,14 +125,14 @@
             <ul>
               <li>
                 Don't use useEffect to update state based on props or state,
-                whenever possible calculate all dependent states on the fly.
+                whenever possible calculate all dependent states on the fly
                 <br />
-                If the calculation is expensive, use
-                <span class="hl">useMemo</span>
+                (if the calculation is expensive, use the
+                <span class="hl">useMemo</span> Hook)
               </li>
               <li>
                 Don't invoke callbacks on state change, whenever possible invoke
-                callbacks as part of event handling logic.
+                callbacks as part of event handling logic
               </li>
             </ul>
             <aside class="notes">
@@ -164,114 +142,13 @@
             </aside>
           </section>
         </section>
-        <section>
-          <section data-auto-animate>
-            <h2>Exercise</h2>
-            <img src="../img/search.png" />
-            <p>
-              Add a search input and use
-              <span class="hl">useEffect</span>
-              to implement a debounce on the pokemon list as a filter.
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>
-              Add a search input and use
-              <span class="hl">useEffect</span>
-              to implement a debounce on the pokemon list as a filter.
-            </p>
-            <p>Use setTimeout & clearTimeout to build a delay</p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="12-16|8-10|6,1-4|"><script type="text/template">
-              const timeoutId = setTimeout(
-                () => console.log('execute with timeout'), 300);
-              clearTimeout(timeoutId); 
-          </script></code></pre>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h2>Solution</h2>
-          </section>
-          <section>
-            <p><span class="code">SearchPanel.tsx</span></p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-              type Props = {
-                searchTerm: string;
-                onSearchChanged: (searchTerm: string) => void;
-              };
-              
-              function SearchPanel({ searchTerm, onSearchChanged }: Props) {
-                return (
-                  <div >
-                    <label htmlFor="searchTerm">Search</label>
-                    <input
-                      type="text"
-                      id="searchTerm"
-                      value={searchTerm}
-                      placeholder="Pokemon name"
-                      onChange={(e) => {
-                        onSearchChanged(e.target.value);
-                      }}
-                    />
-                  </div>
-                );
-              }
-              
-              export { SearchPanel };
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">ListPage.tsx</span></p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2,3|5-8"><script type="text/template">
 
-              function ListPage() {
-                const [searchTerm, setSearchTerm] = useState("");
-                const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-              
-                useEffect(() => {
-                  const timeoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
-                  return () => clearTimeout(timeoutId);
-                }, [searchTerm]);
-                /* ... */
-              }
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">ListPage.tsx</span></p>
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="5|8"><script type="text/template">
-
-              function ListPage() {
-                /* ... */
-                return (
-                  <>
-                    <SearchPanel searchTerm={searchTerm} onSearchChanged={setSearchTerm} />
-                    {pokemons ? (
-                      pokemons
-                        ?.filter((p) => p.name.includes(debouncedSearchTerm))
-                        .map((pokemon) => (
-                          <PokeListEntry key={pokemon.name} name={pokemon.name} />
-                        ))
-                    ) : (
-                      <div>LOADING</div>
-                    )}
-                  </>
-              }
-            </script></code></pre>
-          </section>
-        </section>
         <section>
           <section><h2>Custom Hooks</h2></section>
           <section>
             <p>
               We can reuse a concrete Hook logic by extracting it into a
-              <span class="hl">custom Hook</span>
-              .
+              <br /><span class="hl">custom Hook</span>.
             </p>
           </section>
           <section data-auto-animate>
@@ -283,7 +160,7 @@
                 
                 return <p>{result}</p>;
               }
-          </script></code></pre>
+            </script></code></pre>
             <p>The logic to be extracted can use a single or multiple Hooks.</p>
           </section>
           <section data-auto-animate>
@@ -301,8 +178,8 @@
 
                 return <p>{result}</p>;
               }
-          </script></code></pre>
-            <p class="fragment">In the component we just call this function.</p>
+            </script></code></pre>
+            <p class="fragment">In the component we then call this function.</p>
             <p class="fragment tip">
               <span>
                 Stick to the Hooks naming convention:
@@ -312,182 +189,100 @@
           </section>
         </section>
         <section>
-          <h2>Exercise</h2>
+          <section data-auto-animate>
+            <h2>Exercise</h2>
+            <img src="../img/profile.png" />
+            <ul>
+              <li>
+                Using useEffect, listen on the profile form for the window
+                <span class="hl">paste</span> event and set the pasted text to
+                the forms name field
+              </li>
+              <li>Extract the newly created logic to a custom Hook</li>
+            </ul>
+          </section>
+          <section data-auto-animate>
+            <ul>
+              <li>
+                Using useEffect, listen on the profile form for the window
+                <span class="hl">paste</span> event and set the pasted text to
+                the forms name field
+              </li>
+              <li>Extract the newly created logic to a custom Hook</li>
+            </ul>
+            <pre><code class="hljs tsx" data-trim><script type="text/template">
+              /* logs the paste event to the console */
+              window.addEventListener("paste", console.log); 
 
-          <ul>
-            <li>
-              Extract the data fetching logic of the pokemon details page to a
-              custom Hook.
-            </li>
-            <li>
-              Stretch goal: Find a way to not have to know how the url is
-              composed within the custom hook
-            </li>
-          </ul>
-          <div>
-            <img src="../img/construction_work_refactor.jpg" />
-          </div>
+              /* returns the clipboard text */
+              (e: ClipboardEvent) =>  e.clipboardData?.getData("Text") 
+
+              /* get the form setValue function */
+              const { setValue } = useForm<FormValues>();
+            </script></code></pre>
+          </section>
         </section>
         <section>
           <section>
             <h2>Solution</h2>
           </section>
           <section>
-            <p><span class="code">usePokemonDetails.ts</span></p>
-
+            <p><span class="code">useWindowPaste.ts</span></p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3|4-9|11"><script type="text/template">
-              /* import ... */
-
-              export function usePokemonDetails() {
-                const { pokemonName } = useParams<"pokemonName">();
-                const uri = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-              
-                const result = useQuery(["pokemon", "detail", pokemonName], () =>
-                  fetcher<PokemonDetailDto>(uri)
+            ><code class="hljs tsx" data-trim data-line-numbers="1|10-13|2-8"><script type="text/template">
+              export function useWindowPaste(onPasted: (value: string) => void) {
+                const handlePaste = useCallback(
+                  (event: ClipboardEvent) => {
+                    const value = event.clipboardData?.getData("Text");
+                    value && onPasted(value);
+                  },
+                  [onPasted]
                 );
-              
-                return result;
-              }
-</script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">DetailPage.tsx</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2"><script type="text/template">
-              function DetailPage() {
-                const { data, isLoading, isError } = usePokemonDetails();
-              
-                if (isLoading) return <div>LOADING</div>;
-                if (isError) return <div>ERROR while loading data</div>;
-              
-                return (
-                  <div>
-                    <span>{data.name}</span>
-                    <img src={data.sprites.front_shiny} alt={data?.name} />
-                  </div>
-                );
-              }
-</script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">Stretch Goal: usePokemonDetails.ts</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3|5"><script type="text/template">
-              /* import ... */
-
-              export function usePokemonDetails(uriBuilder: (pokemonName?: string) => string) {
-                const { pokemonName } = useParams<"pokemonName">();
-                const uri = uriBuilder(pokemonName);
-              
-                const result = useQuery(["pokemon", "detail", pokemonName], () =>
-                  fetcher<PokemonDetailDto>(uri)
-                );
-              
-                return result;
-              }
-</script></code></pre>
-        </section>
-        <section>
-          <p><span class="code">Stretch Goal: DetailPage.tsx</span></p>
-
-          <pre
-            data-id="code"
-          ><code class="hljs tsx" data-trim data-line-numbers="3-4|7"><script type="text/template">
-            /* import ... */
-
-            const queryUrlBuilder = (pokemonName?: string) =>
-              `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-            
-            function DetailPage() {
-              const { data, isLoading, isError } = usePokemonDetails(queryUrlBuilder);
-            
-              if (isLoading) return <div>LOADING</div>;
-              if (isError) return <div>ERROR while loading data</div>;
-            
-              return (
-                <div>
-                  <span>{data.name}</span>
-                  <img src={data.sprites.front_shiny} alt={data?.name} />
-                </div>
-              );
-            }
-</script></code></pre>
-      </section>
-        <!-- <section>
-          <section>
-            <h2>Solution</h2>
-          </section>
-          <section>
-            <p><span class="code">useDebouncedSearch.ts</span></p>
-
-            <pre
-              data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3|12-16"><script type="text/template">
-              import { useEffect, useState } from "react";
-
-              function useDebouncedSearch(initialSearchTerm: string) {
-                const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-                const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
               
                 useEffect(() => {
-                  const timoutId = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
-                  return () => clearTimeout(timoutId);
-                }, [searchTerm]);
-              
-                return {
-                  searchTerm,
-                  setSearchTerm,
-                  debouncedSearchTerm
-                };
+                  window.addEventListener("paste", handlePaste);
+                  return () => window.removeEventListener("paste", handlePaste);
+                }, [handlePaste]);
               }
-              
-              export { useDebouncedSearch };
-              
-</script></code></pre>
+            </script></code></pre>
           </section>
           <section>
-            <p><span class="code">List.tsx</span></p>
-
+            <p><span class="code">Profile.tsx</span></p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2-6"><script type="text/template">
-              function ListPage() {
+            ><code class="hljs tsx" data-trim data-line-numbers="6|10"><script type="text/template">
+              export function Profile() {
                 const {
-                  searchTerm,
-                  setSearchTerm,
-                  debouncedSearchTerm
-                } = useDebouncedSearch("");
+                  register,
+                  handleSubmit,
+                  formState: { errors },
+                  setValue,
+                } = useForm<FormValues>();
+                const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
               
-                const pokemons = usePokeList();
-                /* … */
+                useWindowPaste((value) => setValue("name", `Dr. ${value}`));
+                /* … */  
               }
-              
-              export { ListPage };
-              
-    
-</script></code></pre>
+            </script></code></pre>
           </section>
-        </section> -->
+        </section>
         <section>
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
             <li>
-              How to use
-              <span class="hl">useEffect</span>
+              How to use the
+              <span class="hl">useEffect</span> Hook
             </li>
             <li>
               When to use
               <span class="hl">useEffect</span>
               and when to use a different approach to reach your goal
             </li>
-            <li>How to cleanup side effects in useEffect</li>
+            <li>
+              How to cleanup side effects in <span class="hl">useEffect</span>
+            </li>
             <li>How to extract Hook logic from components into Custom Hooks</li>
           </ul>
         </section>
