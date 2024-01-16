@@ -130,7 +130,7 @@
               data-id="code2"
             ><code class="hljs tsx" data-trim data-line-numbers="9-13|1-6"><script type="text/template">
               
-              const fetcher = async (uri: string): Promise => {
+              async function fetcher(uri: string): Promise {
                 const response = await fetch(uri);
                 if (!response.ok) throw new Error('Could not fetch data!');
 
