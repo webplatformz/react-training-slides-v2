@@ -281,6 +281,45 @@
               https://pokeapi.co/api/v2/pokemon/bulbasaur/
             </a>
           </section>
+          <section>
+            <p>Poke-API DTOs</p>
+            <small>pokeApi.ts</small>
+            <pre
+              style="font-size: small"
+            ><code class="hljs tsx" data-trim><script type="text/template">
+              export type Stat = { name: string; baseStat: number };
+
+              type PokemonDetailBase = {
+                name: string;
+                sprites: {
+                  front_shiny: string;
+                };
+              };
+
+              export type PokemonDetail = PokemonDetailBase & {
+                stats: Stat[];
+              };
+
+              export type Pokemon = {
+                name: string;
+              };
+
+              export type PokemonResultDto = {
+                results: Pokemon[];
+              };
+
+              export type PokemonDetailDto = PokemonDetailBase & {
+                stats: StatDto[];
+              };
+
+              export type StatDto = {
+                base_stat: number;
+                stat: {
+                  name: string;
+                };
+              };
+            </script></code></pre>
+          </section>
         </section>
         <section>
           <section>
