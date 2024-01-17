@@ -20,7 +20,7 @@ assignees: ""
   - incl. setup instructions/prerequesites & info about JS recap (see wiki)
   - check with all in a non-european timezone if they're aware and fine with CET course time
   - Communicate that we appreciate participation for the full course duration and no partial participation with come&go
-  - possibly with hybrid approach (exercise room in camp zulu for interested people)
+  - possibly with hybrid approach (exercise room in camp zulu for interested people). People have to commit to the days on site - as we will organize lunch (at least, can add croisants)
 - [ ] Order a new collectors link for the Survey Monkey feedback form. Each link is different but points to the same form (e.g., [Feedback Form](https://de.surveymonkey.com/r/PTSDCGT))
 
 ### Latest 1 week before course
