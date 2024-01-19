@@ -130,7 +130,7 @@
               data-id="code2"
             ><code class="hljs tsx" data-trim data-line-numbers="9-13|1-6"><script type="text/template">
               
-              const fetcher = async (uri: string): Promise => {
+              async function fetcher(uri: string): Promise {
                 const response = await fetch(uri);
                 if (!response.ok) throw new Error('Could not fetch data!');
 
@@ -229,7 +229,7 @@
                 <span class="code"
                   >GET https://pokeapi.co/api/v2/pokemon?limit=1000</span
                 ><br /><span class="code"
-                  >GET https://pokeapi.co/api/v2/pokemon/{name}/</span
+                  >GET https://pokeapi.co/api/v2/pokemon/{name}</span
                 >
               </li>
               <li>Stretch goal: Display loading & error messages</li>
@@ -274,11 +274,11 @@
               https://pokeapi.co/api/v2/pokemon?limit=5
             </a>
             <a
-              href="https://pokeapi.co/api/v2/pokemon/bulbasaur/"
+              href="https://pokeapi.co/api/v2/pokemon/bulbasaur"
               target="_blank"
               rel="noopener noreferrer"
             >
-              https://pokeapi.co/api/v2/pokemon/bulbasaur/
+              https://pokeapi.co/api/v2/pokemon/bulbasaur
             </a>
           </section>
         </section>
@@ -419,7 +419,6 @@
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
-            <li>Why fetching data is tricky with React render mechanism</li>
             <li>How to fetch data in React with a library</li>
             <li>Display details relating to loading & errors</li>
             <li>Using useMutation for data manipulation</li>

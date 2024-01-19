@@ -189,9 +189,10 @@
             <h3>Routes with Parameters</h3>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="3"><script type="text/template">
-              const router = createBrowserRouter(
-                […,
-                {path: '/cars/:carId', element: <CarDetailPage/>}]);
+              const router = createBrowserRouter([
+                  …,
+                  { path: '/cars/:carId', element: <CarDetailPage/> }
+              ]);
             </script></code></pre>
 
             <p>
@@ -554,7 +555,9 @@ function MyComponent() {
             <h3>Nested Routes</h3>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1,6"><script type="text/template">
+            ><code class="hljs tsx" data-trim data-line-numbers="1,3,8"><script type="text/template">
+import { Outlet } from "react-router-dom";
+
 function Layout() {
   return (<div>
 
