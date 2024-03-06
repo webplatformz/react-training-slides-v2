@@ -41,7 +41,7 @@
               …
               <input
                 value={value}
-                onChange={e => { setValue(e.target.value) }}
+                onChange={(e) => setValue(e.target.value)}
               />
             </script></code></pre>
           </section>
@@ -52,7 +52,7 @@
               …
               <select
                 value={option}
-                onChange={e => { setOption(e.target.value) }}
+                onChange={(e) => setOption(e.target.value)}
               >
                 <option value="grapefruit">Grapefruit</option>
                 <option value="lime">Lime</option>
@@ -67,7 +67,7 @@
               <input
                 type="checkbox"
                 checked={checked}
-                onChange={(e) => { setChecked(e.target.checked) }}
+                onChange={(e) => setChecked(e.target.checked)}
               />
             </script></code></pre>
           </section>
@@ -81,7 +81,7 @@
                 name="preference"
                 value="tomato"
                 checked={option === "tomato"}
-                onChange={(e) => { setOption(e.target.value) }}
+                onChange={(e) => setOption(e.target.value)}
               />
             </script></code></pre>
           </section>
