@@ -95,15 +95,13 @@
             <h3>Fragments</h3>
             <p>
               Components always return a
-              <em>single node</em>
-              .
+              <em>single node</em>.
             </p>
             <p>
               If you want to return multiple nodes, wrap them in a
               <span class="hl">Fragment</span>
               to avoid rendering an unnecessary
-              <span class="code">&lt;div&gt;</span>
-              .
+              <span class="code">&lt;div&gt;</span>.
             </p>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5|3,6|" data-id="code"><script type="text/template">
@@ -376,7 +374,7 @@
 
             <p>We can map to an HTML element or to a custom component.</p>
             <!-- prettier-ignore -->
-            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="5-7|"><script type="text/template">
+            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,5-7|"><script type="text/template">
                         const items = ['Apple', 'Orange', 'Mango'];
                         export function List() {
                             return (
@@ -607,7 +605,7 @@
                         <script type="text/template">
                         import PokeListEntry from "./PokeListEntry";
 
-                        const pokemons = […];
+                        const pokemons = [{name: 'Bulbasaur'}, {name: 'Pikachu'}];
 
                         export function PokeList() {
                           return (

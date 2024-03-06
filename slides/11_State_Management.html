@@ -488,7 +488,7 @@
                       ): PokeVisitState {
                         switch (action.type) {
                           case "add":
-                            return new Set([...Array.from(state), action.value]);;
+                            return new Set([...Array.from(state), action.value]);
                           case "reset":
                             return initialState;
                           default:
