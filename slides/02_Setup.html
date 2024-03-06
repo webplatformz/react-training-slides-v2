@@ -247,7 +247,16 @@
             <p><span class="code">npm run dev</span></p>
             <p>
               Starts the app in dev mode with a hot reload server. The build
-              will fail if you have TypeScript errors.
+              will <strong>not</strong> run typescript checks.
+            </p>
+            <p>
+              Integrate typescript checking in the dev mode with the
+              <a
+                href="https://github.com/fi3ework/vite-plugin-checker"
+                target="_blank"
+                >vite-plugin-checker</a
+              >
+              or by running <span class="code">tsc --watch</span>.
             </p>
           </section>
           <section>
@@ -256,6 +265,10 @@
               Creates a production build of your app and puts it into in the
               <span class="code">dist</span>
               folder.
+            </p>
+            <p>
+              The configuration of the build task will also ensure that there
+              are no typescript errors.
             </p>
           </section>
           <section>
