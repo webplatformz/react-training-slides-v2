@@ -247,7 +247,12 @@
             <p><span class="code">npm run dev</span></p>
             <p>
               Starts the app in dev mode with a hot reload server. The build
-              will fail if you have TypeScript errors.
+              will <strong>not</strong> run typescript checks.
+            </p>
+            <p>
+              If the type errors from the IDE are not enough, you can
+              additionally run the compiler in the terminal:
+              <span class="code">tsc --noEmit --watch</span>.
             </p>
           </section>
           <section>
@@ -256,6 +261,10 @@
               Creates a production build of your app and puts it into in the
               <span class="code">dist</span>
               folder.
+            </p>
+            <p>
+              The configuration of the build task will also ensure that there
+              are no typescript errors.
             </p>
           </section>
           <section>
@@ -326,6 +335,25 @@
           </section>
           <section>
             <p><img src="../img/react_developer_tools.png" /></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Code formatting with <span class="hl">Prettier</span></h2>
+            <p>
+              <a href="https://prettier.io/" target="_blank">Prettier</a> is a
+              powerful code formatter that helps a lot to keep your code
+              consistent in the team.
+            </p>
+            <p>
+              Configuring Prettier as default formatter in VS Code and format on
+              save is highly recommanded.
+            </p>
+            <p>
+              Running <span class="code">prettier --check .</span> in CI/CD to
+              ensure are files can be a good idea.
+            </p>
           </section>
         </section>
 
