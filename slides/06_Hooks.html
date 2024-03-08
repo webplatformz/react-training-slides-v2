@@ -25,15 +25,36 @@
           <h2>Essential React</h2>
         </section>
         <section>
-          <section>
+          <section data-auto-animate>
             <h2>Let's add interactivity!</h2>
             <img src="../img/hooks_counter.png" />
 
             <p>How can this be achieved?</p>
           </section>
-          <section>
+          <section data-auto-animate>
             <h2>Add a counter functionality</h2>
-            <span class="code">Greeting.tsx</span>
+            <span class="code" data-id="file">Greeting.tsx</span>
+            <!-- prettier-ignore -->
+            <pre>
+                    <code class="hljs jsx" data-trim>
+                        <script type="text/template">
+                        var counter = 0;
+
+                        function Counter() {
+                            return (
+                                <div>
+                                  <span>Current count: {counter}</span>
+                                  <button onClick={() => ++counter}>increment</button>
+                                </div>
+                            );
+                        }
+                        </script>
+                    </code>
+                </pre>
+          </section>
+          <section data-auto-animate>
+            <h2>Add a counter functionality</h2>
+            <span class="code" data-id="file">Greeting.tsx</span>
             <!-- prettier-ignore -->
             <pre>
                     <code class="hljs jsx" data-trim>
@@ -53,7 +74,21 @@
                 </pre>
             <p>That does not work, the updated counter is not shown</p>
           </section>
-          <section>
+          <section data-auto-animate>
+            <h2>Rendering in React</h2>
+
+            <p><img src="../img/diagrams/react-rendering.drawio.png" /></p>
+          </section>
+          <section data-auto-animate>
+            <h2>Rendering in React</h2>
+
+            <p><img src="../img/diagrams/react-rendering.drawio.png" /></p>
+            <p>
+              When clicking the button, the counter is incremented, but no
+              rerender is triggered.
+            </p>
+          </section>
+          <section data-auto-animate>
             <h2>Rendering in React</h2>
 
             <p><img src="../img/diagrams/react-rendering.drawio.png" /></p>
@@ -63,7 +98,7 @@
             </p>
             <p>This can be solved through Hooks.</p>
           </section>
-          <section>
+          <section data-auto-animate>
             <h3>How to get it running with Hooks</h3>
             <pre><code class="hljs tsx" data-trim data-line-numbers="5|10"><script type="text/template">
             import { useState } from "react";
