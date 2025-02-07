@@ -204,7 +204,7 @@
             <p>Add the library:</p>
             <pre
               data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom@5.16.5 --save-dev</script></code></pre>
+            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom --save-dev</script></code></pre>
 
             <p>
               Add in the <span class="code">package.json</span> in the scripts
@@ -214,18 +214,16 @@
               data-id="code"
             ><code class="hljs zsh" data-trim><script type="text/template">"test": "vitest",</script></code></pre>
           </section>
+          <section>TODO Explain testing library setup (why jest-dom, )</section>
           <section>
             <h2>Configure</h2>
-            <span class="code">setup.ts</span>
-            <pre><code class="hljs javascript" data-trim data-line-numbers="5,6|8-11"><script type="text/template">
-              import { expect, afterEach } from "vitest";
+            <span class="code">src/vitest-setup.ts</span>
+            <pre><code class="hljs typescript" data-trim data-line-numbers="3|5-8"><script type="text/template">
+              import { afterEach } from "vitest";
               import { cleanup } from "@testing-library/react";
-              import matchers from "@testing-library/jest-dom/matchers";
-              
-              /* extends Vitest's expect method with methods from react-testing-library */
-              expect.extend(matchers);
-              
-              /* runs a cleanup after each test case (e.g. clearing jsdom) */
+              import "@testing-library/jest-dom/vitest";
+
+              // runs a cleanup after each test case (e.g. clearing jsdom)
               afterEach(() => {
                 cleanup();
               });
@@ -234,7 +232,7 @@
           <section>
             <h2>Configure</h2>
             <span class="code">vite.config.ts</span>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|6-10"><script type="text/template">
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|7-11"><script type="text/template">
               /// <reference types="vitest" />
               import { defineConfig } from "vite";
               import react from "@vitejs/plugin-react-swc";
@@ -244,7 +242,7 @@
                 test: {
                   globals: true,
                   environment: "jsdom",
-                  setupFiles: "./tests/setup.ts",
+                  setupFiles: ["./src/vitest-setup.ts"],
                 },
               });
             </script></code></pre>
