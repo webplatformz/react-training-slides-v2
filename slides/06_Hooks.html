@@ -38,7 +38,7 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        var counter = 0;
+                        let counter = 0;
 
                         function Counter() {
                             return (
@@ -59,7 +59,7 @@
             <pre>
                     <code class="hljs jsx" data-trim>
                         <script type="text/template">
-                        var counter = 0;
+                        let counter = 0;
 
                         function Counter() {
                             return (
@@ -105,7 +105,9 @@
               return (
                 <div>
                   <span>Current count: {counter}</span>
-                  <button onClick={() => setCounter((val) => ++val)}>increment</button>
+                  <button onClick={() => setCounter((val) => val + 1)}>
+                    increment
+                  </button>
                 </div>
               );
             }
