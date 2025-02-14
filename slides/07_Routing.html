@@ -34,11 +34,6 @@
               <div class="column">
                 <img src="../img/routing_home.png" />
               </div>
-            </div>
-          </section>
-          <section data-auto-animate>
-            <p>Let's make this more interesting&hellip;</p>
-            <div class="column-container">
               <div class="column">
                 <img src="../img/routing_detail.png" />
               </div>
@@ -62,7 +57,7 @@
           </section>
           <section>
             <p>
-              React does
+              React itself does
               <em>not</em>
               provide routing.
             </p>
@@ -87,6 +82,35 @@
               >
               which is fully typed.
             </aside>
+          </section>
+          <section>
+            <p>React Router can be used in two different manners:</p>
+            <div class="comparison">
+              <div class="fragment">
+                <h2 class="hl">Library</h2>
+                <ul>
+                  <li>'Classic' React Router</li>
+                  <li>For client-side-rendered React apps</li>
+                  <li>Focused on routing</li>
+                </ul>
+                <p>We will start with this.</p>
+              </div>
+              <div class="fragment fade-in-then-semi-out">
+                <h2 class="hl">Framework</h2>
+                <ul>
+                  <li>
+                    Integrated solution with data fetching, actions, bundling,
+                    etc.
+                  </li>
+                  <li>Enables server-side rendering (SSR)</li>
+                  <li>Previously known as <span class="hl">Remix</span></li>
+                </ul>
+                <p>
+                  &rarr; Will be covered in
+                  <a href="./12_Remix.html">chapter 10</a>
+                </p>
+              </div>
+            </div>
           </section>
         </section>
         <section>
@@ -633,6 +657,35 @@ function MyComponent() {
             </script></code></pre>
 
             <p>Navigate programmatically</p>
+          </section>
+          <section>
+            <h3>useSearchParams</h3>
+
+            <p>
+              Current URL:
+              <span class="code">/cars?filter=Porsche</span>
+            </p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
+function MyComponent() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(searchParams.get("filter"));
+  
+  /* … */
+}
+            </script></code></pre>
+
+            <p>
+              Read and write search params using the standard
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams"
+                >URLSearchParams</a
+              >
+              interface.
+            </p>
           </section>
           <section>
             <h3>MemoryRouter</h3>
