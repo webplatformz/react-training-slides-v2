@@ -34,11 +34,6 @@
               <div class="column">
                 <img src="../img/routing_home.png" />
               </div>
-            </div>
-          </section>
-          <section data-auto-animate>
-            <p>Let's make this more interesting&hellip;</p>
-            <div class="column-container">
               <div class="column">
                 <img src="../img/routing_detail.png" />
               </div>
@@ -62,7 +57,7 @@
           </section>
           <section>
             <p>
-              React does
+              React itself does
               <em>not</em>
               provide routing.
             </p>
@@ -88,6 +83,35 @@
               which is fully typed.
             </aside>
           </section>
+          <section>
+            <p>React Router can be used in two different manners:</p>
+            <div class="comparison">
+              <div class="fragment">
+                <h2 class="hl">Library</h2>
+                <ul>
+                  <li>'Classic' React Router</li>
+                  <li>For client-side-rendered React apps</li>
+                  <li>Focused on routing</li>
+                </ul>
+                <p>We will start with this.</p>
+              </div>
+              <div class="fragment fade-in-then-semi-out">
+                <h2 class="hl">Framework</h2>
+                <ul>
+                  <li>
+                    Integrated solution with data fetching, actions, bundling,
+                    etc.
+                  </li>
+                  <li>Enables server-side rendering (SSR)</li>
+                  <li>Previously known as <span class="hl">Remix</span></li>
+                </ul>
+                <p>
+                  &rarr; Will be covered in
+                  <a href="./12_Remix.html">chapter 10</a>
+                </p>
+              </div>
+            </div>
+          </section>
         </section>
         <section>
           <section>
@@ -98,7 +122,7 @@
             <pre
               data-id="code"
             ><code class="hljs zsh" data-trim><script type="text/template">
-          npm install react-router-dom
+          npm install react-router
         </script></code></pre>
           </section>
           <section data-auto-animate>
@@ -119,8 +143,9 @@
 
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1,3,7"><script type="text/template">
-              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+            ><code class="hljs tsx" data-trim data-line-numbers="1-2,4,8"><script type="text/template">
+              import { createBrowserRouter } from "react-router";
+              import { RouterProvider } from "react-router/dom";
 
               const router = createBrowserRouter([]);
 
@@ -141,8 +166,9 @@
 
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="2,4-7"><script type="text/template">
-              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+            ><code class="hljs tsx" data-trim data-line-numbers="3,5-8"><script type="text/template">
+              import { createBrowserRouter } from "react-router";
+              import { RouterProvider } from "react-router/dom";
               import { Page1 } from "./Page1.tsx";
 
               const router = createBrowserRouter([
@@ -167,8 +193,9 @@
 
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="3,7"><script type="text/template">
-              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+            ><code class="hljs tsx" data-trim data-line-numbers="4,8"><script type="text/template">
+              import { createBrowserRouter } from "react-router";
+              import { RouterProvider } from "react-router/dom";
               import { Page1 } from "./Page1.tsx";
               import { Page2 } from "./Page2.tsx";
 
@@ -217,7 +244,7 @@
             <p><span class="code">CarDetailPage.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
-              import { useParams } from "react-router-dom";
+              import { useParams } from "react-router";
 
               export function CarDetailPage() {
                 const { carId } = useParams<"carId">();
@@ -234,10 +261,9 @@
           <section>
             <h3>Route Redirection</h3>
 
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,8"><script type="text/template">
-              import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
-
-              import { RouterProvider, createBrowserRouter } from "react-router-dom";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,7"><script type="text/template">
+              import { createBrowserRouter, Navigate } from "react-router";
+              import { RouterProvider } from "react-router/dom";
               import { Page1 } from "./Page1.tsx";
               import { Page2 } from "./Page2.tsx";
 
@@ -270,7 +296,7 @@
             <h3>How to Link to a Route</h3>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,6-7|"><script type="text/template">
-              import { Link } from "react-router-dom";
+              import { Link } from "react-router";
 
               function NavBar() {
                 return (
@@ -416,7 +442,7 @@ function App() {
             <p><span class="code">Layout.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="11"><script type="text/template">
-              import { Link } from "react-router-dom";
+              import { Link } from "react-router";
               import { PropsWithChildren } from "react";
               
               type LayoutProps = PropsWithChildren;
@@ -461,7 +487,7 @@ function App() {
             <p><span class="code">PokeListEntry.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="|10-12"><script type="text/template">
-              import { Link } from "react-router-dom";
+              import { Link } from "react-router";
 
               interface PokeListEntryProps {
                 name: string;
@@ -483,7 +509,7 @@ function App() {
             <p><span class="code">DetailPage.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="|6|8-9|11-18|"><script type="text/template">
-              import { useParams } from "react-router-dom";
+              import { useParams } from "react-router";
               import { pokeDetails } from "../../mockData/details";
               import { Layout } from "../../components/layout/Layout";
               
@@ -566,7 +592,7 @@ function MyComponent() {
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="1,3,8"><script type="text/template">
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 
 function Layout() {
   return (<div>
@@ -585,7 +611,7 @@ function Layout() {
 
             <p>
               Current URL:
-              <span class="code">/cars?filter=Tesla</span>
+              <span class="code">/cars?filter=Porsche</span>
             </p>
 
             <pre
@@ -598,7 +624,7 @@ function MyComponent() {
   /* Pathname: /cars */
 
   console.log(`Query string: ${search}`);
-  /* Query string: ?filter=Tesla */
+  /* Query string: ?filter=Porsche */
   
   /* … */
 }
@@ -633,12 +659,41 @@ function MyComponent() {
             <p>Navigate programmatically</p>
           </section>
           <section>
+            <h3>useSearchParams</h3>
+
+            <p>
+              Current URL:
+              <span class="code">/cars?filter=Porsche</span>
+            </p>
+
+            <pre
+              data-id="code"
+            ><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
+function MyComponent() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(searchParams.get("filter"));
+  
+  /* … */
+}
+            </script></code></pre>
+
+            <p>
+              Read and write search params using the standard
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams"
+                >URLSearchParams</a
+              >
+              interface.
+            </p>
+          </section>
+          <section>
             <h3>MemoryRouter</h3>
 
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-              import { RouterProvider, createMemoryRouter } from "react-router-dom";
+              import { RouterProvider, createMemoryRouter } from "react-router";
 
               const router = createMemoryRouter(routes, {
                 initialEntries: ["/", "/events/123"],

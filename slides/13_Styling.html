@@ -212,6 +212,76 @@
               >
             </p>
           </section>
+          <section data-auto-animate>
+            <h2>Setup</h2>
+            <pre><code class="hljs shell" data-trim>
+              <script type="text/template">
+                npm install tailwindcss @tailwindcss/vite
+              </script>
+            </code></pre>
+          </section>
+          <section data-auto-animate>
+            <h2>Setup</h2>
+            <p><span class="code">vite.config.ts</span></p>
+            <pre><code class="hljs ts" data-trim data-line-numbers="|3,8">
+              <script type="text/template">
+import { defineConfig } from 'vite';
+import react from "@vitejs/plugin-react-swc";
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+});
+              </script>
+            </code></pre>
+          </section>
+          <section data-auto-animate>
+            <h2>Setup</h2>
+            <p>Import into your CSS</p>
+            <pre><code class="hljs css" data-trim data-line-numbers>
+              <script type="text/template">
+/* src/styles.css */
+
+@import "tailwindcss";
+              </script>
+            </code></pre>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|6">
+              <script type="text/template">
+/* src/main.tsx */
+
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import "./styles.css";
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+
+              </script>
+            </code></pre>
+          </section>
+          <section data-auto-animate>
+            <h2>Setup</h2>
+            <p>Use the utility classes in any component</p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="|3">
+              <script type="text/template">
+function MyComponent() {
+  return (
+    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  );
+}
+              </script>
+            </code></pre>
+          </section>
         </section>
         <section>
           <section>
