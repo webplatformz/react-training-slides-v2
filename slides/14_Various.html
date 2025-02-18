@@ -433,7 +433,7 @@ export { handlers };
             <p>Or: How to break out of Virtual DOM</p>
           </section>
           <section>
-            <p>Refs permit to obtain a reference to a real dom element</p>
+            <p>Refs permit to obtain a reference to a real DOM element</p>
           </section>
           <section>
             <h2>Focus</h2>
@@ -474,9 +474,13 @@ export { handlers };
                     <CustomInput ref={ref} />
                 </script></code></pre>
             <p class="fragment">
-              <span class="hl">Does not work!</span>
-              &ndash; ref is a special prop (the other one is key)
+              <span class="hl">Simply pass it as prop</span>
+              &ndash; This works since React 19.
             </p>
+            <aside class="notes">
+              Background: Before React 19, a special handling using `forwardRef`
+              was needed.
+            </aside>
           </section>
           <section>
             <h2>forwardRef!</h2>

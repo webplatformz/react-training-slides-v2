@@ -194,18 +194,38 @@
           </section>
         </section>
         <section>
-          <section>
+          <section data-auto-animate>
             <h2>Testing</h2>
             <p>
-              Our components can be tested using the
+              Our components can be tested using
               <a href="https://vitest.dev/">Vitest</a> and
-              <a href="https://testing-library.com/">React Testing Library</a>
+              <a href="https://testing-library.com/">React Testing Library</a>.
             </p>
-            <p>Add the library:</p>
             <pre
               data-id="code"
             ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom --save-dev</script></code></pre>
+          </section>
+          <section data-auto-animate>
+            <pre
+              data-id="code"
+            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom --save-dev</script></code></pre>
+            <p>
+              The <span class="hl">jest-dom</span> package is required to
+              integrate React Testing Library with Vitest.
+            </p>
 
+            <aside class="notes">
+              <p>
+                jest-dom sets up the so-called matchers (see later code
+                examples).
+              </p>
+              <p>
+                Although this package is named after jest (another test runner),
+                it is also compatible with Vitest.
+              </p>
+            </aside>
+          </section>
+          <section>
             <p>
               Add in the <span class="code">package.json</span> in the scripts
               section:
@@ -214,7 +234,6 @@
               data-id="code"
             ><code class="hljs zsh" data-trim><script type="text/template">"test": "vitest",</script></code></pre>
           </section>
-          <section>TODO Explain testing library setup (why jest-dom, )</section>
           <section>
             <h2>Configure</h2>
             <span class="code">src/vitest-setup.ts</span>
@@ -246,6 +265,17 @@
                 },
               });
             </script></code></pre>
+
+            <aside class="notes">
+              <p>
+                jsdom: Emulates the browser DOM in Node.js so that we can run
+                browser code in Node.js.
+              </p>
+              <p>
+                globals: Provides extra convenience, otherwise expect and other
+                Vitest functions need to be imported explicitly.
+              </p>
+            </aside>
           </section>
         </section>
         <section>
