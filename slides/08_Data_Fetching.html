@@ -82,7 +82,10 @@
                 Using the <span class="hl">Fetch standard browser API</span> is
                 not straightforward to use due to its asynchronicity
               </li>
-              <li>Therefore a data fetching library</li>
+              <li>
+                Therefore we recommend using a
+                <span class="hl">data fetching library</span>
+              </li>
             </ul>
           </section>
           <section>
@@ -157,12 +160,16 @@
             </div>
             <aside class="notes">
               <p>
-                Suspense for Data Fetching: in v4 can be enabled by setting the
-                <span class="code">suspense</span> option to
-                <span class="code">true</span> and is still marked as
-                expiremental.<br />
-                In v5 it is not expiremental anymore, but offered via the
-                separate Hook <span class="code">useSuspenseQuery</span>.
+                Suspense for Data Fetching: In v5 it is offered via the separate
+                <span class="code">useSuspenseQuery</span> Hook.
+              </p>
+              <p>
+                TanStack Query states this works best with a server-side
+                framework and streaming, not so much in client-rendered apps
+                (see
+                <a href="https://github.com/TanStack/query/discussions/6327"
+                  >GitHub discussion</a
+                >)
               </p>
             </aside>
           </section>
@@ -184,7 +191,7 @@
                   queryFn: () => fetcher<User>('/user')
                 });
 
-                interface User {
+                type User = {
                   firstName: string,
                   /* ... */
                 }
@@ -405,7 +412,7 @@
               const queryClient = useQueryClient();
 
               const { mutate } = useMutation({
-                queryFn: (name: string) =>
+                mutationFn: (name: string) =>
                   fetcher<PokemonDetailDto>('https://pokeapi.co/api/v2/pokemon/', {
                     method: 'POST',
                     body: JSON.stringify({ name }),
@@ -429,7 +436,6 @@
           <ul>
             <li>TanStack Query</li>
             <li>SWR</li>
-            <li>Axios (for fetch abstraction)</li>
             <li>Apollo Client (GraphQL)</li>
             <li>...</li>
           </ul>
