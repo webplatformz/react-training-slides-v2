@@ -352,10 +352,12 @@ export const server = setupServer(...handlers);
           </section>
 
           <section>
-            <p><span class="code">src/setupTests.ts</span></p>
+            <p><span class="code">src/vitest-setup.ts</span></p>
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
+import { cleanup } from "@testing-library/react";
+import "@testing-library/jest-dom/vitest";
 import { server } from "./mocks/server.js";
 
 /* Establish API mocking before all tests. */
@@ -363,7 +365,10 @@ beforeAll(() => server.listen());
 
 /* Reset any request handlers that we may add during
    the tests, so they don't affect other tests. */
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  cleanup();
+  server.resetHandlers();
+});
 
 /* Clean up after the tests are finished. */
 afterAll(() => server.close());
@@ -377,14 +382,14 @@ afterAll(() => server.close());
             ><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
 
 const handlers = [
-  rest.get(
+  http.get(
       "/api/v2/pokemon?limit=50",
-      (_, res, ctx) => res(ctx.json({
+      ({ request }) => HttpResponse.json({
         results: [
           { name: "Pikachu", url: "…" },
           …
         ]
-      }))
+      })
   )
 ];
 

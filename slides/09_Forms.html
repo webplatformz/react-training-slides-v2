@@ -118,7 +118,7 @@
                 But, sometimes controlled fields are unavoidable
                 <ul>
                   <li>React-Select</li>
-                  <li>Material-UI</li>
+                  <li>Material UI</li>
                 </ul>
               </li>
             </ul>
@@ -190,6 +190,7 @@
               function MyForm() {
                 const { register, handleSubmit, formState } = useForm<FormValues>();
                 const onSubmit: SubmitHandler<FormValues> = (data) => { console.log(data); };
+                const onError: SubmitErrorHandler<FormValues> = (errors) => console.warn(errors);
 
                 return (
                   <form onSubmit={handleSubmit(onSubmit, onError)}>
