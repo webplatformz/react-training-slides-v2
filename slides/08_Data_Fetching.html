@@ -141,7 +141,7 @@
               };
 
               function MyComponent() {
-                const { data: user, isLoading, error } = useQuery({
+                const { data: user, isPending, error } = useQuery({
                   queryKey: ['user'], 
                   queryFn: () => fetcher('/user')
                 });
@@ -325,14 +325,14 @@
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="2-7|9-10|12"><script type="text/template">
             function List() {
-              const { data, isLoading, isError } = useQuery({
+              const { data, isPending, isError } = useQuery({
                 queryKey: ['pokelist'], 
                 queryFn: () => fetcher<PokemonResultDto>(
                   'https://pokeapi.co/api/v2/pokemon?limit=1000'
                 ),
               });
 
-              if (isLoading) return <div>LOADING</div>;
+              if (isPending) return <div>LOADING</div>;
               if (isError) return <div>ERROR while loading data</div>;
             
               return <PokeList pokemons={data.results} />;
@@ -347,12 +347,12 @@
                 const { pokemonName } = useParams<"pokemonName">();
                 const uri = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
               
-                const { data, isLoading, isError } = useQuery({
+                const { data, isPending, isError } = useQuery({
                   queryKey: ["pokemon", "detail", pokemonName],
                   queryFn: () => fetcher<PokemonDetailDto>(uri),
                 });
               
-                if (isLoading) return <div>LOADING</div>;
+                if (isPending) return <div>LOADING</div>;
                 if (isError) return <div>ERROR while loading data</div>;
               
                 return (
@@ -386,7 +386,7 @@
               function AddPokemon() {
                 const {
                   mutate,
-                  isLoading: isMutationLoading,
+                  isPending: isMutationPending,
                   isError: isMutationerror
                 } = useMutation({
                   mutationFn: (name: string) =>
@@ -405,7 +405,7 @@
             <h2>useMutation cache update</h2>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="1-4|5|8-12|13-18"><script type="text/template">
-              const { data, isLoading, isError } = useQuery({
+              const { data, isPending, isError } = useQuery({
                 queryKey: ['pokemonList'], 
                 queryFn: () => fetcher<PokemonResultDto>('https://pokeapi.co/api/v2/pokemon/'),
               });

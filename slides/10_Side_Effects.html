@@ -33,8 +33,9 @@
             <h3>Valid use cases</h3>
             <ul>
               <li>Subscribing to events (window, ...)</li>
-              <li>Releasing resources to prevent a memory leak</li>
-              <li>Cancelling a network request/asynchronous operation</li>
+              <li>Controlling a non-React component</li>
+              <li>Manually setting up a server connection</li>
+              <li>Sending an analytics log when a component appears</li>
             </ul>
           </section>
 
@@ -66,6 +67,9 @@
                 …
               }
           </script></code></pre>
+            <aside class="notes">
+              <p>Explain the dependency array here</p>
+            </aside>
           </section>
           <section>
             <img
@@ -92,15 +96,13 @@
             </p>
             <p>
               Purpose:
-              <span class="hl">future-proofing</span>
-              the app.
+              <span class="hl">preventing bugs</span> in the app.
             </p>
           </section>
           <section data-auto-animate>
             <p>
               Purpose:
-              <span class="hl">future-proofing</span>
-              the app
+              <span class="hl">preventing bugs</span> in the app
             </p>
             <ul>
               <li>
@@ -109,8 +111,8 @@
                 <small>(not in production)</small>
               </li>
               <li>
-                If your code with useEffect doesn't behave as desired, you
-                should follow up on a different approach
+                This makes it easy to
+                <span class="hl">spot forgotten or incorrect cleanups</span>
               </li>
             </ul>
           </section>
