@@ -89,6 +89,54 @@
               Don't build monoliths. Split your components!
             </div>
           </section>
+          <section>
+            <h2>Smart vs. Dumb Components</h2>
+            <table>
+              <tr>
+                <th></th>
+                <th>Smart 🧠</th>
+                <th>Dumb 🎨</th>
+              </tr>
+              <tr>
+                <td>Holds state</td>
+                <td>✅</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td>Fetches data</td>
+                <td>✅</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td>Handles logic</td>
+                <td>✅</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td>Pure component</td>
+                <td>❌</td>
+                <td>✅</td>
+              </tr>
+              <tr>
+                <td>Focus</td>
+                <td>Behaviour & data</td>
+                <td>Layout & presentation</td>
+              </tr>
+            </table>
+            <aside class="notes">
+              <div>
+                Since React Hooks, the smart/dumb distinction is less rigid. You
+                can now have logic in function components, and split logic via
+                custom hooks instead of dedicated smart components.
+              </div>
+              <div>
+                It's more common to focus on presentational and logical
+                separation of components (resp. hooks). Further advantages to
+                follow this separation patterns can be: Reusability,
+                testability, maintainability, etc.
+              </div>
+            </aside>
+          </section>
           <section data-auto-animate>
             <h3>Fragments</h3>
             <p>
@@ -280,7 +328,7 @@
         </section>
         <section>
           <section>
-            <h2>Testing our dumb component</h2>
+            <h2>Testing our component</h2>
             <span class="code">Greeting.test.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8|"><script type="text/template">
