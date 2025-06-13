@@ -21,7 +21,7 @@
     <div class="reveal">
       <div class="slides">
         <section class="title-slide">
-          <h1>Remix</h1>
+          <h1>Server Side Rendering <br/> (React Router Framework mode)</h1>
           <h3>Essential React</h3>
         </section>
         <section class="agenda" id="agenda-slide">
@@ -42,10 +42,6 @@
               <span class="number">04</span>
               <span class="title">Data Fetching</span>
             </div>
-            <div>
-              <span class="number">05</span>
-              <span class="title">Forms & Actions</span>
-            </div>
           </div>
         </section>
 
@@ -59,6 +55,7 @@
           </section>
           <section>
             <h3>Overview</h3>
+            <!-- TODO: Update Image -->
             <img
               src="../img/rendering-mechanisms.png"
               alt="Rendering Mechanisms"
@@ -81,7 +78,8 @@
         </section>
         <section>
           <section data-auto-animate>
-            <h2>Remix</h2>
+            <h2>React Router (Framework Mode)</h2>
+            <h3>Previously Remix</h3>
           </section>
           <section data-auto-animate>
             <h2>Remix</h2>
@@ -90,10 +88,8 @@
                 Created by Michael Jackson and Ryan Florence (same as React
                 Router)
               </li>
-              <li>Remix v1 in November 2021</li>
-              <li><span class="hl">Use the Platform</span> philosophy</li>
-              <li>Only Server-Side Rendering (no SSG)</li>
-              <li>Supports <span class="hl">Progressive Enhancement</span></li>
+              <li>Remix v1 in November 2021 (SSR only, no SSG)</li>
+              <li>As of December 2024, Remix was merged into React Router</li>
             </ul>
             <aside class="notes">
               <p>Why do we use Remix for the course?</p>
@@ -112,10 +108,10 @@
           </section>
           <section>
             <img
-              src="../img/remix_website_screenshot.jpeg"
+              src="../img/remix-react-router-merge.png"
               alt="Remix Website Screenshot"
             />
-            <a href="https://remix.run" target="_blank">remix.run</a>
+            <a href="https://reactrouter.com/start/framework/installation" target="_blank">React Router Framework Mode</a>
           </section>
         </section>
 
@@ -125,19 +121,23 @@
 
         <section>
           <section>
-            <h3>Create a new Remix app</h3>
+            <h3>Create from scratch</h3>
           </section>
           <section>
             <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|2-3|4-5|1-5|7|8|">
-                $ npx create-remix@latest pokedex-remix
+                $ npx create-react-router@latest my-react-router-app
                   ? Initialize a new git repository?
                     > Yes
                   ? Install dependencies with npm?
                     > Yes
  
-                $ cd ./pokedex-remix
+                $ cd ./my-react-router-app
                 $ npm run dev
             </code></pre>
+          </section>
+          <section>
+            <h3>Migrate from component Routes to Framework</h3>
+            <a href="https://reactrouter.com/upgrading/component-routes" target="_blank">Migration Guide</a>
           </section>
         </section>
 
@@ -279,120 +279,136 @@ export default function App() {
 
         <section>
           <section>
-            <h3>Intro to Route File Naming</h3>
+            <h3>Routing in Framework Mode</h3>
           </section>
           <section>
             <h4>General conventions</h4>
             <ul>
               <li>
-                Remix uses the same concepts and core logic as React Router
+                Routes are configured in a <span class="code">routes.ts</span> file
               </li>
-              <li class="fragment">Use file names to define routes</li>
-              <li class="fragment">
-                Route files are placed in <span class="code">app/routes</span>
-              </li>
-              <li class="fragment">
-                Flat file structure (no nested route folders)
-              </li>
-              <li class="fragment">
-                Co-location of non-route files is possible
-              </li>
+              <li class="fragment">Each route has two required parts: a URL pattern to match the URL, and a file path to the route module that defines its behavior.</li>
+              <pre class="fragment"><code class="hljs tsx" data-trim data-id="code"><script type="text/template">
+import { type RouteConfig, route } from "@react-router/dev/routes";
+
+export default [
+  route("some/path", "./some/file.tsx"),
+  // pattern ^           ^ module file
+] satisfies RouteConfig;
+              </script></code></pre>
             </ul>
-            <aside class="notes">
-              <ul>
-                <li>
-                  Although the routing core is the same as React Router (also
-                  developed by Remix), in Remix routing is file-based
-                </li>
-                <li>
-                  Flat file structure was introduced as new convention
-                  (initially also used nested route folders). Legacy file
-                  structure will not be supported anymore in Remix v2.
-                </li>
-              </ul>
-            </aside>
           </section>
           <section data-auto-animate>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1" data-id="code"><script type="text/template">
-app/routes/
-    ├── _index.tsx
-    ├── about.tsx
-    ├── pricing.tsx
-    ├── blog._index.tsx
-    ├── blog.$slug.tsx
-    ├── blog.archive.tsx
-    └── blog.authors.tsx
+            <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers data-id="code"><script type="text/template">
+export default [
+  index("./home.tsx"),
+  route("about", "./about.tsx"),
+
+  layout("./auth/layout.tsx", [
+    route("login", "./auth/login.tsx"),
+    route("register", "./auth/register.tsx"),
+  ]),
+  ...prefix("concerts", [
+    index("./concerts/home.tsx"),
+    route(":city", "./concerts/city.tsx"),
+    route("trending", "./concerts/trending.tsx"),
+  ]),
+] satisfies RouteConfig;
               </script></code></pre>
           </section>
           <section data-auto-animate>
-            <p><span class="code">_index</span> indicates an index route</p>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="2,5" data-id="code"><script type="text/template">
-app/routes/
-    ├── _index.tsx
-    ├── about.tsx
-    ├── pricing.tsx
-    ├── blog._index.tsx
-    ├── blog.$slug.tsx
-    ├── blog.archive.tsx
-    └── blog.authors.tsx
+            <p><span class="code">index()</span> indicates an index route</p>
+            <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers="2,10" data-id="code"><script type="text/template">
+export default [
+  index("./home.tsx"),
+  route("about", "./about.tsx"),
+
+  layout("./auth/layout.tsx", [
+    route("login", "./auth/login.tsx"),
+    route("register", "./auth/register.tsx"),
+  ]),
+  ...prefix("concerts", [
+    index("./concerts/home.tsx"),
+    route(":city", "./concerts/city.tsx"),
+    route("trending", "./concerts/trending.tsx"),
+  ]),
+] satisfies RouteConfig;
               </script></code></pre>
             <p>
               &rarr; URLs <span class="code">/</span> and
-              <span class="code">/blog</span>
+              <span class="code">/concerts</span>
             </p>
           </section>
           <section data-auto-animate>
             <p>Static route segments</p>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="3,4,7,8" data-id="code"><script type="text/template">
-app/routes/
-    ├── _index.tsx
-    ├── about.tsx
-    ├── pricing.tsx
-    ├── blog._index.tsx
-    ├── blog.$slug.tsx
-    ├── blog.archive.tsx
-    └── blog.authors.tsx
+            <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers="3,6,7,12" data-id="code"><script type="text/template">
+export default [
+  index("./home.tsx"),
+  route("about", "./about.tsx"),
+
+  layout("./auth/layout.tsx", [
+    route("login", "./auth/login.tsx"),
+    route("register", "./auth/register.tsx"),
+  ]),
+  ...prefix("concerts", [
+    index("./concerts/home.tsx"),
+    route(":city", "./concerts/city.tsx"),
+    route("trending", "./concerts/trending.tsx"),
+  ]),
+] satisfies RouteConfig;
               </script></code></pre>
             <p>
               &rarr; e.g.
               <span class="code">/about</span> and<span class="code"
-                >/blog/archive</span
+                >/concerts/trending</span
               >
             </p>
           </section>
           <section data-auto-animate>
             <p>
-              Use the dot delimiter for <span class="hl">nested routes</span>
+              Routes can be nested inside parent routes (e.g. <span class="code">layout</span>,<span class="code">route</span>).
             </p>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="5-8" data-id="code"><script type="text/template">
-app/routes/
-    ├── _index.tsx
-    ├── about.tsx
-    ├── pricing.tsx
-    ├── blog._index.tsx
-    ├── blog.$slug.tsx
-    ├── blog.archive.tsx
-    └── blog.authors.tsx
+            <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers="5-8" data-id="code"><script type="text/template">
+export default [
+  index("./home.tsx"),
+  route("about", "./about.tsx"),
+
+  layout("./auth/layout.tsx", [
+    route("login", "./auth/login.tsx"),
+    route("register", "./auth/register.tsx"),
+  ]),
+  ...prefix("concerts", [
+    index("./concerts/home.tsx"),
+    route(":city", "./concerts/city.tsx"),
+    route("trending", "./concerts/trending.tsx"),
+  ]),
+] satisfies RouteConfig;
               </script></code></pre>
-            <p>&rarr; URLs <span class="code">/blog/…</span></p>
+            <p>&rarr; URLs <span class="code">/login</span> (layouts don't add any segments to the URL)</p>
           </section>
           <section data-auto-animate>
             <p>
-              Dynamic route segments (parameters) start with a dollar symbol
+              Dynamic route segments (parameters) start with <span class="code">:</span>
             </p>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
-app/routes/
-    ├── _index.tsx
-    ├── about.tsx
-    ├── pricing.tsx
-    ├── blog._index.tsx
-    ├── blog.$slug.tsx
-    ├── blog.archive.tsx
-    └── blog.authors.tsx
+            <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers="11" data-id="code"><script type="text/template">
+export default [
+  index("./home.tsx"),
+  route("about", "./about.tsx"),
+
+  layout("./auth/layout.tsx", [
+    route("login", "./auth/login.tsx"),
+    route("register", "./auth/register.tsx"),
+  ]),
+  ...prefix("concerts", [
+    index("./concerts/home.tsx"),
+    route(":city", "./concerts/city.tsx"),
+    route("trending", "./concerts/trending.tsx"),
+  ]),
+] satisfies RouteConfig;
               </script></code></pre>
             <p>
               &rarr; e.g.
-              <span class="code">/blog/five-great-tips-for-2024</span>
+              <span class="code">/concerts/schlieren</span>
             </p>
           </section>
           <section>
