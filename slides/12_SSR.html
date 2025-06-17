@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Remix | Essential React</title>
+    <title>SSR | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
 
@@ -21,7 +21,8 @@
     <div class="reveal">
       <div class="slides">
         <section class="title-slide">
-          <h1>Server Side Rendering <br/> (React Router Framework mode)</h1>
+          <h1>Server Side Rendering</h1>
+          <h2>(React Router Framework mode)</h2>
           <h3>Essential React</h3>
         </section>
         <section class="agenda" id="agenda-slide">
@@ -41,6 +42,10 @@
             <div>
               <span class="number">04</span>
               <span class="title">Data Fetching</span>
+            </div>
+            <div>
+              <span class="number">05</span>
+              <span class="title">Forms & Actions</span>
             </div>
           </div>
         </section>
@@ -78,8 +83,16 @@
         </section>
         <section>
           <section data-auto-animate>
-            <h2>React Router (Framework Mode)</h2>
-            <h3>Previously Remix</h3>
+            <h2>Using react-router for SSR</h2>
+            <p>todo: add some details why we want to do so</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Modes of react-router</h2>
+            <p>todo: Show the three modes of the react-router side-by-side</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Explain advantages of the three modes</h2>
+            <p>todo: Show the three modes of the react-router side-by-side</p>
           </section>
           <section data-auto-animate>
             <h2>Remix</h2>
@@ -91,35 +104,27 @@
               <li>Remix v1 in November 2021 (SSR only, no SSG)</li>
               <li>As of December 2024, Remix was merged into React Router</li>
             </ul>
-            <aside class="notes">
-              <p>Why do we use Remix for the course?</p>
-              <ul>
-                <li>
-                  Example for classical <em>Server-Side Rendering</em> (SSR),
-                  RSC is very new still
-                </li>
-                <li>
-                  Same routing core as we have used for client-side rendered app
-                  (powered by React Router)
-                </li>
-                <li>Next.js is currently in transition phase</li>
-              </ul>
-            </aside>
           </section>
           <section>
+            <p>
+              todo: Remove image, explain why this link might be of interest
+            </p>
             <img
               src="../img/remix-react-router-merge.png"
               alt="Remix Website Screenshot"
             />
-            <a href="https://reactrouter.com/start/framework/installation" target="_blank">React Router Framework Mode</a>
+            <a
+              href="https://reactrouter.com/start/framework/installation"
+              target="_blank"
+              >React Router Framework Mode</a
+            >
           </section>
         </section>
 
-        <section class="subtitle-slide">
-          <h1>Setup</h1>
-        </section>
-
         <section>
+          <section class="subtitle-slide">
+            <h1>Setup</h1>
+          </section>
           <section>
             <h3>Create from scratch</h3>
           </section>
@@ -137,15 +142,20 @@
           </section>
           <section>
             <h3>Migrate from component Routes to Framework</h3>
-            <a href="https://reactrouter.com/upgrading/component-routes" target="_blank">Migration Guide</a>
+            <a
+              href="https://reactrouter.com/upgrading/component-routes"
+              target="_blank"
+              >Migration Guide</a
+            >
           </section>
         </section>
 
         <section>
           <section>
-            <h3>File Structure</h3>
+            <h3>Structure of the new setup</h3>
           </section>
           <section data-auto-animate>
+            <p>todo: folder structure</p>
             <img
               src="../img/remix_initial-files.png"
               alt="Initial files of Remix app folder"
@@ -153,6 +163,7 @@
             />
             <aside class="notes">Ask: What do you notice?</aside>
           </section>
+
           <section data-auto-animate>
             <div class="comparison">
               <div>
@@ -241,7 +252,7 @@ export default function App() {
 
         <section>
           <section>
-            <h3>NPM Scripts</h3>
+            <h3>todo: show new package.json NPM Scripts</h3>
             <p><span class="code">npm run dev</span></p>
             <p>Starts the app in dev mode with hot reload</p>
           </section>
@@ -285,10 +296,17 @@ export default function App() {
             <h4>General conventions</h4>
             <ul>
               <li>
-                Routes are configured in a <span class="code">routes.ts</span> file
+                Routes are configured in a
+                <span class="code">routes.ts</span> file
               </li>
-              <li class="fragment">Each route has two required parts: a URL pattern to match the URL, and a file path to the route module that defines its behavior.</li>
-              <pre class="fragment"><code class="hljs tsx" data-trim data-id="code"><script type="text/template">
+              <li class="fragment">
+                Each route has two required parts: a URL pattern to match the
+                URL, and a file path to the route module that defines its
+                behavior.
+              </li>
+              <pre
+                class="fragment"
+              ><code class="hljs tsx" data-trim data-id="code"><script type="text/template">
 import { type RouteConfig, route } from "@react-router/dev/routes";
 
 export default [
@@ -296,6 +314,11 @@ export default [
   // pattern ^           ^ module file
 ] satisfies RouteConfig;
               </script></code></pre>
+
+              <li class="fragment">
+                The react component to be rendered on that route must be the
+                default export of that js module.
+              </li>
             </ul>
           </section>
           <section data-auto-animate>
@@ -366,7 +389,8 @@ export default [
           </section>
           <section data-auto-animate>
             <p>
-              Routes can be nested inside parent routes (e.g. <span class="code">layout</span>,<span class="code">route</span>).
+              Routes can be nested inside parent routes (e.g.
+              <span class="code">layout</span>,<span class="code">route</span>).
             </p>
             <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers="5-8" data-id="code"><script type="text/template">
 export default [
@@ -384,11 +408,15 @@ export default [
   ]),
 ] satisfies RouteConfig;
               </script></code></pre>
-            <p>&rarr; URLs <span class="code">/login</span> (layouts don't add any segments to the URL)</p>
+            <p>
+              &rarr; URLs <span class="code">/login</span> (layouts don't add
+              any segments to the URL)
+            </p>
           </section>
           <section data-auto-animate>
             <p>
-              Dynamic route segments (parameters) start with <span class="code">:</span>
+              Dynamic route segments (parameters) start with
+              <span class="code">:</span>
             </p>
             <pre><code class="hljs tsx no-highlight" data-trim data-line-numbers="11" data-id="code"><script type="text/template">
 export default [
@@ -412,142 +440,27 @@ export default [
             </p>
           </section>
           <section>
-            See
-            <a
-              href="https://remix.run/docs/en/1.19.3/file-conventions/route-files-v2"
-              >Remix docs</a
-            >
-            for more details.
-          </section>
-        </section>
-        <section>
-          <section data-auto-animate>
-            <h3>Route Module API</h3>
-          </section>
-          <section data-auto-animate>
-            <h3>Route Module API</h3>
-
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
-              app/routes/
-                  ├── _index.tsx
-                  ├── about.tsx
-                  ├── pricing.tsx
-                  ├── blog._index.tsx
-                  ├── blog.$slug.tsx
-                  ├── blog.archive.tsx
-                  └── blog.authors.tsx
-                            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">blog.$slug.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|3,10|5-9|1,4" data-id="code"><script type="text/template">
-          import { useParams } from "@remix-run/react";
-
-          export default function BlogPostPage() {
-            const { slug } = useParams<'slug'>();
-            return (
-              <p>
-                This is the blog post with slug {slug}.
-              </p>
-            );
-          }
-        </script></code></pre>
-            <aside class="notes">
-              <ol>
-                <li>Must be default export</li>
-                <li>It's a React component, return JSX</li>
-                <li>
-                  useParams like in React Router (Disclaimer: just as an example
-                  – Data fetching will work differently -> later)
-                </li>
-              </ol>
-            </aside>
-          </section>
-          <section data-auto-animate>
-            <p>How can we redirect to a different route?</p>
-
-            <p class="fragment">
-              E.g. <span class="code">/</span> &rarr;
-              <span class="code">/blog</span>
-            </p>
-          </section>
-          <section data-auto-animate>
-            <p>How can we redirect to a different route?</p>
-            <p>
-              E.g. <span class="code">/</span> &rarr;
-              <span class="code">/blog</span>
-            </p>
-
-            <div>
-              <p><span class="code">_index.tsx</span></p>
-              <pre><code class="hljs tsx" data-trim data-line-numbers="3,5|1,4|" data-id="code"><script type="text/template">
-import { redirect } from "@remix-run/node";
-
-export function loader() {
-  return redirect("blog");
-}
-        </script></code></pre>
-              <p class="fragment">
-                Must be a named export called <span class="code">loader</span>.
-              </p>
-              <aside class="notes">
-                <ul>
-                  <li>We will learn more about loaders in the next section.</li>
-                  <li>
-                    Depending on how the URL is reached, this redirect is either
-                    performed as an HTTP Redirect or client-side (but note that
-                    the loader code is never executed client-side)
-                  </li>
-                </ul>
-              </aside>
-            </div>
-          </section>
-          <section data-auto-animate>
-            <div>
-              <p><span class="code">_index.tsx</span></p>
-              <pre><code class="hljs tsx" data-trim data-line-numbers data-id="code"><script type="text/template">
-import { redirect } from "@remix-run/node";
-
-export function loader() {
-  return redirect("blog");
-}
-        </script></code></pre>
-              <p>&rarr; redirects to <span class="code">blog.tsx</span></p>
-            </div>
-          </section>
-          <section>
-            <h4>Other Useful Route Module Exports</h4>
-
-            <pre><code class="hljs tsx" data-trim data-line-numbers="21-23|1-7|9-15|17-19|" data-id="code"><script type="text/template">
-              export const links: LinksFunction = () => {
-                return [
-                  { rel: "icon", href: "/favicon.png", type: "image/png" },
-                  { rel: "stylesheet", href: "https://example.com/some/styles.css" },
-                  …
-                ];
-              };
-
-              export const meta: V2_MetaFunction = () => {
-                return [
-                  { title: "Very cool app | Remix" },
-                  { property: "og:title", content: "Very cool app" },
-                  …
-                ];
-              };
-
-              export const headers: HeadersFunction = () => ({
-                "Cache-Control": "max-age=300, s-maxage=3600",
-              });
-
-              export default function BlogPostPage() {
-                …
-              }
-            </script></code></pre>
-
-            <aside class="notes">
-              And there are more… We will get to know loaders and actions in
-              later sections.
-            </aside>
+            <ul>
+              <li>
+                See
+                <a
+                  href="https://reactrouter.com/start/framework/routing"
+                  target="_blank"
+                  >React router docs</a
+                >
+                for more details.
+              </li>
+              <li>
+                Check the
+                <a
+                  href="https://remix.run/docs/en/1.19.3/file-conventions/route-files-v2"
+                  target="_blank"
+                  >Remix docs</a
+                >
+                for ideas on how to structure the files referenced in the
+                router.
+              </li>
+            </ul>
           </section>
         </section>
 
@@ -568,6 +481,10 @@ export function loader() {
               <li class="fragment">Run on the server (only)</li>
               <li class="fragment">
                 Define a HTTP endpoint: request &rarr; response
+              </li>
+              <li class="fragment">
+                Result either serverside rendered and hydrated or fetched pre
+                rendering
               </li>
               <li class="fragment">
                 <span class="code">useLoaderData</span> to access response data
@@ -679,7 +596,8 @@ export function loader() {
             <ol>
               <li class="fragment">
                 <span class="code"
-                  >npx create-remix@latest &lt;app-name&gt;</span
+                  >TODO: how to continue from here npx create-remix@latest
+                  &lt;app-name&gt;</span
                 >
               </li>
               <li class="fragment">
@@ -725,7 +643,7 @@ export function loader() {
 
         <section>
           <section>
-            <h2>Solution</h2>
+            <h2>todo: copy&paste Solution from sample branch</h2>
           </section>
 
           <section>
@@ -866,6 +784,89 @@ export function loader() {
                 ><span class="code">02-data-fetching</span></a
               >.
             </p>
+          </section>
+        </section>
+
+        <section>
+          <section data-auto-animate>
+            <h3>Additional framework mode features</h3>
+          </section>
+
+          <section data-auto-animate>
+            <p>How can we redirect to a different route?</p>
+
+            <p class="fragment">
+              E.g. <span class="code">/</span> &rarr;
+              <span class="code">/blog</span>
+            </p>
+          </section>
+          <section data-auto-animate>
+            <p>How can we redirect to a different route?</p>
+            <p>
+              E.g. <span class="code">/</span> &rarr;
+              <span class="code">/blog</span>
+            </p>
+
+            <div>
+              <p><span class="code">_index.tsx</span></p>
+              <pre><code class="hljs tsx" data-trim data-line-numbers="3,5|1,4|" data-id="code"><script type="text/template">
+import { redirect } from "react-router";
+
+export function loader() {
+  return redirect("/blog");
+}
+        </script></code></pre>
+              <p class="fragment">
+                Must be a named export called <span class="code">loader</span>.
+              </p>
+              <aside class="notes">
+                Depending on how the URL is reached, this redirect is either
+                performed as an HTTP Redirect or client-side (but note that the
+                loader code is never executed client-side)
+              </aside>
+            </div>
+          </section>
+          <section data-auto-animate>
+            <div>
+              <p><span class="code">_index.tsx</span></p>
+              <pre><code class="hljs tsx" data-trim data-line-numbers data-id="code"><script type="text/template">
+import { redirect } from "react-router";
+
+export function loader() {
+  return redirect("blog");
+}
+        </script></code></pre>
+              <p>&rarr; redirects to <span class="code">blog.tsx</span></p>
+            </div>
+          </section>
+          <section>
+            <h4>Other Useful Route Module Exports</h4>
+
+            <pre><code class="hljs tsx" data-trim data-line-numbers="21-23|1-7|9-15|17-19|" data-id="code"><script type="text/template">
+              export const links: LinksFunction = () => {
+                return [
+                  { rel: "icon", href: "/favicon.png", type: "image/png" },
+                  { rel: "stylesheet", href: "https://example.com/some/styles.css" },
+                  …
+                ];
+              };
+
+              export const meta: MetaFunction = () => {
+                return [
+                  { title: "Very cool app | React Router" },
+                  { property: "og:title", content: "Very cool app" },
+                  …
+                ];
+              };
+
+              export const headers: HeadersFunction = () => ({
+                "Cache-Control": "max-age=300, s-maxage=3600",
+              });
+
+              export default function BlogPostPage() {
+                …
+              }
+            </script></code></pre>
           </section>
         </section>
 
@@ -1024,25 +1025,25 @@ export function loader() {
           </section>
           <section data-auto-animate data-auto-animate-id="2">
             <p><span class="code">blog.$slug.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,7,11" data-id="code-2"><script type="text/template">
-              import { Form } from "@remix-run/react";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3|5|7,11" data-id="code-2"><script type="text/template">
+              export async function clientAction({ request }: ClientActionFunctionArgs) {
+                 …
+              }
 
-              export default function BlogPostPage() {
+              export default function BlogPostPage({ actionData }: Route.ComponentProps) {
                 return (
-                  <>
-                    …
-                    <Form method="post">
-                      <input type="text" name="name" />
-                      <textarea name="comment" />
-                      <button type="submit">Submit</button>
-                    </Form>
-                  </>
+                  <Form  method="post">
+                    <input type="text" name="name" />
+                    <textarea name="comment" />
+                    <button type="submit">Submit</button>
+                  </Form >
                 );
               }
         </script></code></pre>
             <p>
-              The Remix <span class="code">Form</span> component brings the
-              expected SPA behavior.
+              The React-Router <span class="code">Form</span> component together
+              with the <span class="code">clientAction</span> brings the
+              expected SPA behavior
             </p>
             <p class="fragment">
               It still has the native <span class="code">form</span> behavior as
@@ -1051,463 +1052,85 @@ export function loader() {
               >
             </p>
           </section>
-        </section>
-        <section>
-          <section>
-            <h2>Sessions and Cookies 🍪</h2>
-          </section>
-          <section data-auto-animate>
-            <p>
-              Remix has built-in support for
-              <span class="hl">sessions</span>:
-            </p>
-            <ul>
-              <li>Cookies</li>
-              <li>In-memory (dev only)</li>
-              <li>Files</li>
-              <li>Cloudflare Workers</li>
-              <li>Amazon DynamoDB</li>
-            </ul>
-          </section>
-          <section data-auto-animate>
-            <p>Let's work with the most versatile one:</p>
-            <ul>
-              <li>Cookies</li>
-            </ul>
-          </section>
-          <section data-auto-animate="">
-            <p><span class="code">app/sessions.ts</span></p>
-            <p>We set up our session handling utilities.</p>
-          </section>
-          <section data-auto-animate="">
-            <p><span class="code">app/sessions.ts</span></p>
-            <pre><code class="hljs ts" data-trim data-line-numbers="1,6,17|3,6|7-16|5,19|" data-id="code"><script type="text/template">
-              import { createCookieSessionStorage } from "@remix-run/node";
+          <section data-auto-animate data-auto-animate-id="2">
+            <p><span class="code">blog.$slug.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="2,4|10" data-id="code-2"><script type="text/template">
+              /* route('/blog/:slug', './blog.$slug.tsx') */
+              import type { Route } from "./+types/blog";
 
-              type SessionData = { … };
-
-              const { getSession, commitSession, destroySession } =
-                createCookieSessionStorage<SessionData>({
-                  cookie: {
-                    name: "__session",
-                    domain: "localhost",
-                    httpOnly: true,
-                    maxAge: 60 * 60 * 24, /* cookie lives for 24 hours */
-                    path: "/",
-                    sameSite: "lax",
-                    secrets: ["s3cret1"],
-                    secure: true,
-                  },
-                });
-
-              export { getSession, commitSession, destroySession };
-            </script></code></pre>
-            <p>We set up our session handling utilities.</p>
-          </section>
-          <section>
-            <p>
-              And can use them in server-side code (typically
-              <em>loaders</em> and <em>actions</em>):
-            </p>
-            <pre><code class="hljs ts" data-trim data-line-numbers="|1-2|4-5|7-8|10-13|" data-id="code"><script type="text/template">
-              /* Getting a session object from a request */
-              const session = await getSession(request.headers.get("Cookie"));
-
-              /* Reading a value from the session */
-              const color = session.get("color");
-
-              /* Update a value in the session */
-              session.set("color", "orange");
-
-              /* Commit a session in a Response (required if it was modified) */
-              return redirect(…, {
-                headers: { "Set-Cookie": await commitSession(session) },
-              });
-            </script></code></pre>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Validation <span class="fragment">(server-side)</span></h2>
-            <aside class="notes">
-              We want to build in server side validation as a minimum.
-              Client-side validation can be added e.g. with
-              <a href="https://remix-forms.seasoned.cc" target="_blank">
-                <strong>Remix Forms</strong></a
-              >.
-            </aside>
-          </section>
-          <section data-auto-animate="">
-            <p>What do we want to show in case of validation errors?</p>
-            <p class="fragment" data-fragment-index="0">The form, with:</p>
-            <ul>
-              <li class="fragment" data-fragment-index="2">The field values</li>
-              <li class="fragment" data-fragment-index="1">
-                Validation error messages per field
-              </li>
-            </ul>
-            <p class="fragment">
-              Thus, what do we need to do differently in our action?
-            </p>
-          </section>
-          <section data-auto-animate="">
-            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
-              export async function action({ request }: ActionFunctionArgs) {
-                /* Get form data from request… */
-                
-
-
-
-
-                
-
-
-
-                /* Process form data… */
-              
-                return redirect(…);
-              }
-
-              …
-            </script></code></pre>
-            <p>Thus, what do we need to do differently in our action?</p>
-          </section>
-          <section data-auto-animate="">
-            <pre><code class="hljs tsx" data-trim data-line-numbers="4|5,10|6-9|4-10" data-id="code"><script type="text/template">
-              export async function action({ request }: ActionFunctionArgs) {
-                /* Get form data from request… */
-
-                const requestIsValid = …
-                if (!requestIsValid) {
-                  return json(
-                    { values: { name }, errors: { name: "Name is invalid" } },
-                    { status: 400 }  
-                  );
-                }
-
-                /* Process form data… */
-              
-                return redirect(…);
-              }
-
-              …
-            </script></code></pre>
-            <p class="fragment">
-              If request is invalid, return a HTTP
-              <span class="code">400</span> response with the field values and
-              errors.
-            </p>
-          </section>
-          <section>
-            <p>
-              In the component, <span class="code">useActionData</span> to
-              access the data returned by the action:
-            </p>
-
-            <pre><code class="hljs tsx" data-trim data-line-numbers="4|12|14|" data-id="code"><script type="text/template">
-              …
-
-              export default function MyPage() {
-                const actionData = useActionData<typeof action>();
-
-                return <>
-                  …
-                  <Form method="post">
-                    <input
-                      type="text"
-                      name="name"
-                      defaultValue={actionData?.values.name}
-                    />
-                    {actionData?.errors.name}
-                    …
-                  </Form>
-                </>;
-              }
-            </script></code></pre>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Exercise</h2>
-          </section>
-          <section>
-            <h3>Forms & Actions</h3>
-            <ol>
-              <li class="fragment">
-                Add a form for name and email to the Profile page
-              </li>
-              <li class="fragment">
-                When the form is submitted:
-                <ul>
-                  <li class="fragment">
-                    Submit the data to the server and store name and email in a
-                    cookie
-                  </li>
-                  <li class="fragment">User stays on the same page</li>
-                </ul>
-              </li>
-              <li class="fragment">Display the name in the navigation bar</li>
-            </ol>
-          </section>
-          <section>
-            <h3>Validation</h3>
-            <ol>
-              <li class="fragment">
-                Validate the profile form, e.g.
-                <ul>
-                  <li>Name and email are required</li>
-                  <li>Name is max. 25 characters</li>
-                  <li>Email is a valid email address</li>
-                </ul>
-              </li>
-              <li class="fragment">Ensure the submitted data is displayed</li>
-              <li class="fragment">
-                Show the validation error messages at the form fields
-              </li>
-            </ol>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Solution Forms & Actions</h2>
-          </section>
-
-          <section data-auto-animate="">
-            <p><span class="code">app/components/profile/Profile.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,4,15|2,6-9|3,11-13"><script type="text/template">
-              type ProfileProps = {
-                values?: ProfileValues;
-                errors?: ProfileErrors;
-              };
-              
-              export type ProfileValues = {
-                name: string;
-                email: string;
-              };
-              
-              export type ProfileErrors = {
-                [K in keyof ProfileValues]?: string;
-              };
-
-              export function Profile({ values, errors }: ProfileProps) { … }
-            </script></code></pre>
-          </section>
-          <section data-auto-animate="">
-            <p><span class="code">app/components/profile/Profile.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="3,23|5,21|6-11,13-18,20|9,12,16,19|10,17|"><script type="text/template">
-                …
-
-                export function Profile() {
-                  return (
-                    <Form method="post">
-                      <input
-                        …
-                        name="name"
-                        className={errors?.name ? styles.inputError : ""}
-                        defaultValue={values?.name}
-                      />
-                      {errors?.name && <span>{errors.name}</span>}
-                      <input
-                        …
-                        name="email"
-                        className={errors?.email ? styles.inputError : ""}
-                        defaultValue={values?.email}
-                      />
-                      {errors?.email && <span>{errors.email}</span>}
-                      <button type="submit">Save</button>
-                    </Form>
-                  );
-                }
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">app/sessions.ts</span></p>
-            <pre><code class="hljs ts" data-trim data-line-numbers="|3-6|" data-id="code"><script type="text/template">
-              import { createCookieSessionStorage } from "@remix-run/node";
-
-              type SessionData = {
-                name: string;
-                email: string;
-              };
-
-              const { getSession, commitSession, destroySession } =
-                createCookieSessionStorage<SessionData>({
-                  cookie: {
-                    name: "__session",
-                    domain: "localhost",
-                    httpOnly: true,
-                    maxAge: 60 * 60 * 24, /* cookie lives for 24 hours */
-                    path: "/",
-                    sameSite: "lax",
-                    secrets: ["s3cret1"],
-                    secure: true,
-                  },
-                });
-
-              export { getSession, commitSession, destroySession };
-            </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <p><span class="code">app/routes/profile.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,23|2|4-9|17-18|20-22|11-15|"><script type="text/template">
-              export async function action({ request }: ActionFunctionArgs) {
-                const session = await getSession(request.headers.get("Cookie"));
-              
-                const form = await request.formData();
-                const name = form.get("name");
-                const email = form.get("email");
-              
-                if (typeof name !== "string") throw new Error("name must be a string");
-                if (typeof email !== "string") throw new Error("email must be a string");
-              
-                const errors = validateProfile({ name, email });
-                
-                if (hasErrors(errors)) {
-                  return json({ values: { name, email }, errors }, { status: 400 });
-                }
-
-                session.set("name", name);
-                session.set("email", email);
-              
-                return redirect(".", {
-                  headers: { "Set-Cookie": await commitSession(session) },
-                });
-              }
-
-              …
-            </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <p><span class="code">app/routes/profile.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="4,6,13-17|20-21"><script type="text/template">
-              export async function action({ request }: ActionFunctionArgs) {
-                …
-
-                const errors = validateProfile({ name, email });
-
-                if (hasErrors(errors)) {
-                  …
-                }
-   
-                …
-              }
-
-              function validateProfile({ name, email }: ProfileValues) { … }
-
-              function hasErrors(errors: ProfileErrors) {
-                return Object.values(errors).length > 0;
-              }
-              
-              export default function ProfilePage() {
-                const actionData = useActionData<typeof action>();
-                return <Profile values={actionData?.values} errors={actionData?.errors} />;
-              }
-            </script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <p><span class="code">app/routes/profile.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="4,18|6-16"><script type="text/template">
-              …
-
-              function validateProfile({ name, email }: ProfileValues) {
-                const errors: ProfileErrors = {};
-
-                if (!name || typeof name !== "string") {
-                  errors.name = "Name is required!";
-                } else if (name.length > 25) {
-                  errors.name = "The name should be max. 25 characters long!";
-                }
-              
-                if (!email || typeof email !== "string") {
-                  errors.email = "Email is required!";
-                } else if (!email.match(/^[A-Z0-9._+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
-                  errors.email = "Invalid email!";
-                }
-              
-                return errors;
-              }
-
-              …
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">app/components/layout/Layout.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1-3,5,12" data-id="code"><script type="text/template">
-              type LayoutProps = {
-                username?: string;
-              };
-              
-              export function Layout({ username }: LayoutProps) {
+              export default function BlogPostPage({ actionData }: Route.ComponentProps) {
                 return (
-                  <div className={styles.root}>
-                    <header>
-                      <nav>
-                        <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
-                      </nav>
-                      <span>{username && `Hello, ${username}`}</span>
-                    </header>
-                    <main>
-                      <Outlet />
-                    </main>
-                  </div>
+                  <Form  method="post">
+                    <input type="text" name="name" />
+                    <textarea name="comment" />
+                    <button type="submit">Submit</button>
+                    {actionData && <Link to=`/blog/${actionData.blogId}}`>Details</Link>}
+                  </Form >
                 );
               }
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">app/root.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="1,5|2-4|8|18|1-5,8,18" data-id="code"><script type="text/template">
-              export async function loader({ request }: LoaderFunctionArgs) {
-                const session = await getSession(request.headers.get("Cookie"));
-
-                return json({ username: session.get("name") });
-              }
-
-              export default function App() {
-                const { username } = useLoaderData<typeof loader>();
-                return (
-                  <html lang="en">
-                    <head>
-                      <meta charSet="utf-8" />
-                      <meta name="viewport" content="width=device-width,initial-scale=1" />
-                      <Meta />
-                      <Links />
-                    </head>
-                    <body>
-                      <Layout username={username} />
-                      <ScrollRestoration />
-                      <Scripts />
-                      <LiveReload />
-                    </body>
-                  </html>
-                );
-              }
-            </script></code></pre>
-          </section>
-          <section>
+        </script></code></pre>
             <p>
-              Complete solution code can be found on GitHub on the branch
-              <a
-                href="https://github.com/webplatformz/react-pokedex-remix/tree/03-forms-actions"
-                target="_blank"
-                ><span class="code">03-forms-actions</span></a
-              >.
+              The React-Router allows to access the generated types for
+              typesafety on this level.
+            </p>
+            <p class="fragment">
+              It also provides typse for <span class="code">actions</span> and
+              <span class="code">clientActions</span>!
             </p>
           </section>
         </section>
 
+        <section data-auto-animate>
+          <h2>Things to consider when picking a mode</h2>
+          <div class="comparison" class="fragment">
+            <div>
+              <h2>Client side rendered</h2>
+              <ul>
+                <li>In most cases simple and lightweight</li>
+                <li>Low hosting cost - just need a CDN</li>
+                <li>
+                  Many many projects have been built and run successfully and
+                  perform very well
+                </li>
+                <li>Simpler mental model - all code only runs in browser</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Server side rendered</h2>
+              <ul>
+                <li>Best possible performance needed</li>
+                <li>
+                  Added complexity due to part of serverside/clientside logic
+                </li>
+                <li>
+                  Additional vulnerability through all packages involved due to
+                  nodejs running
+                </li>
+                <li>
+                  Can hide/abstract API's and acts as backend-for-frontend
+                </li>
+                <li>
+                  Serverside dependencies can leak into the delivered bundle...
+                </li>
+                <li>Hydration error... 😠</li>
+              </ul>
+            </div>
+          </div>
+          <p class="fragment tip">
+            If unsure, go for client side rendering with framework mode (and
+            loaders)
+          </p>
+        </section>
         <section>
           <h2>Recap</h2>
           <p>We learned&hellip;</p>
           <ul>
             <li>What <em>server-side rendering (SSR)</em> is</li>
-            <li>How to <em>set up</em> a Remix app</li>
-            <li>How to do <em>routing</em> in Remix</li>
-            <li>How to <em>fetch data</em> in Remix</li>
-            <li>How to create and process <em>forms</em> in Remix</li>
+            <li>How to <em>set up</em> a React Router app from scratch</li>
+            <li>How to do <em>routing</em> in React Router framework mode</li>
+            <li>How to <em>fetch data</em> with loaders</li>
+            <li>How to create and process <em>forms</em> on the server</li>
+            <li>What to consider when deciding on SSR/CSR</li>
           </ul>
         </section>
         <section class="break-slide">
