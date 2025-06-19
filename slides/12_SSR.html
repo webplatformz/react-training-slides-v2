@@ -82,42 +82,33 @@
           </section>
         </section>
         <section>
-          <section data-auto-animate>
-            <h2>Using react-router for SSR</h2>
-            <p>todo: add some details why we want to do so</p>
-          </section>
-          <section data-auto-animate>
-            <h2>Modes of react-router</h2>
-            <p>todo: Show the three modes of the react-router side-by-side</p>
-          </section>
-          <section data-auto-animate>
-            <h2>Explain advantages of the three modes</h2>
-            <p>todo: Show the three modes of the react-router side-by-side</p>
-          </section>
-          <section data-auto-animate>
-            <h2>Remix</h2>
-            <ul>
-              <li>
-                Created by Michael Jackson and Ryan Florence (same as React
-                Router)
-              </li>
-              <li>Remix v1 in November 2021 (SSR only, no SSG)</li>
-              <li>As of December 2024, Remix was merged into React Router</li>
-            </ul>
-          </section>
           <section>
-            <p>
-              todo: Remove image, explain why this link might be of interest
-            </p>
-            <img
-              src="../img/remix-react-router-merge.png"
-              alt="Remix Website Screenshot"
-            />
-            <a
-              href="https://reactrouter.com/start/framework/installation"
-              target="_blank"
-              >React Router Framework Mode</a
-            >
+            <p>React Router can be used in two different modes:</p>
+            <div class="comparison">
+              <div class="fragment fade-in-then-semi-out">
+                <h2 class="hl">Data</h2>
+                <ul>
+                  <li>'Classic' React Router</li>
+                  <li>For client-side-rendered React apps</li>
+                  <li>Focused on routing</li>
+                  <li>Provides API to optimize data fetching</li>
+                </ul>
+                <p>
+                  &rarr; We used that in
+                  <a href="./07_Routing.html">chapter 05</a>
+                </p>
+              </div>
+              <div class="fragment">
+                <h2 class="hl">Framework</h2>
+                <ul>
+                  <li>Brings typesafety and intelligent code splitting</li>
+                  <li>Enables SSR & static site generation</li>
+                  <li>Wraps the data mode</li>
+                  <li>Previously known as <span class="hl">Remix</span></li>
+                </ul>
+                <p></p>
+              </div>
+            </div>
           </section>
         </section>
 
@@ -157,9 +148,9 @@
           <section data-auto-animate>
             <p>todo: folder structure</p>
             <img
-              src="../img/remix_initial-files.png"
+              src="../img/react-router.png"
               alt="Initial files of Remix app folder"
-              width="450"
+              width="300"
             />
             <aside class="notes">Ask: What do you notice?</aside>
           </section>
@@ -169,17 +160,17 @@
               <div>
                 <ul>
                   <li class="fragment" data-fragment-index="4">
-                    <span class="code">app/routes/*.tsx</span><br />route files
-                    (more details in next chapter)
-                  </li>
-
-                  <li class="fragment" data-fragment-index="2">
-                    <span class="code">app/entry.*.tsx</span>
-                    <br />complete control over server and client entry points
-                    (optional)
+                    <span class="code">app/routes/*.tsx</span><br />
+                    the component referenced in
+                    <span class="code">app/routes.tsx</span>
                   </li>
 
                   <li class="fragment" data-fragment-index="3">
+                    <span class="code">app/routes.tsx</span><br />configures the
+                    routes (more details in next chapter)
+                  </li>
+
+                  <li class="fragment" data-fragment-index="2">
                     <span class="code">app/root.tsx</span><br />describes the
                     app's HTML document / root layout
                   </li>
@@ -189,98 +180,93 @@
                   </li>
 
                   <li class="fragment" data-fragment-index="1">
-                    <span class="code">remix.config.js</span><br />dev server /
-                    build options
+                    <span class="code">react-router.config.ts</span><br />build
+                    options
                   </li>
                 </ul>
               </div>
               <div>
                 <img
-                  src="../img/remix_initial-files.png"
+                  src="../img/react-router.png"
                   alt="Initial files of Remix app folder"
-                  width="450"
+                  width="300"
                 />
               </div>
             </div>
           </section>
           <section>
             <h3><span class="code">app/root.tsx</span></h3>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|8,9,14,15,20,21|2,12,13,16-19|16|1,4|"><script type="text/template">
-import type { LinksFunction } from "@remix-run/node";
-import { Links, LiveReload, Meta, … } from "@remix-run/react";
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1,2,4,18,20,22,24|5,6,11,12,16,17|4,13,20-22|2,10|9"><script type="text/template">
+/* import statments */
+export const links: Route.LinksFunction = () => […];
 
-export const links: LinksFunction = () => […];
+export function Layout({ children }: { children: React.ReactNode }) {
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <Meta />
+      <Links />
+    </head>
+    <body>
+      {children}
+      <ScrollRestoration />
+      <Scripts />
+    </body>
+  </html>
+}
 
 export default function App() {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
-  );
+  return <Outlet />;
 }
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) { … }
           </script></code></pre>
             <aside class="notes">
               Some notes:
               <ol>
+                <li>High level view over the components exposed</li>
                 <li>Describes complete document (&lt;html&gt; element)</li>
                 <li>
-                  Special Remix components for app setup (again, full control)
+                  Layout Wrapper component and router outlet: your page is
+                  rendered here
                 </li>
                 <li>
-                  Router outlet (same as in React Router): your page is rendered
-                  here
-                </li>
-                <li>
-                  <em>links</em> export: e.g. global stylesheets. Conventions
-                  explained in next chapter
+                  <em>links & meta</em> export: e.g. global stylesheets.
+                  Conventions explained in next chapter
                 </li>
               </ol>
             </aside>
+          </section>
+          <section>
+            <h3><span class="code">react-router.config.ts</span></h3>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="6"><script type="text/template">
+import type { Config } from "@react-router/dev/config";
+
+export default {
+  /* Config options...
+     Server-side render by default, to enable SPA mode set this to `false` */
+  ssr: true,
+} satisfies Config;
+          </script></code></pre>
           </section>
         </section>
 
         <section>
           <section>
-            <h3>todo: show new package.json NPM Scripts</h3>
-            <p><span class="code">npm run dev</span></p>
-            <p>Starts the app in dev mode with hot reload</p>
-          </section>
-          <section>
-            <p><span class="code">npm run build</span></p>
-            <p>
-              Creates a production build of your app (output in
-              <span class="code">build</span> and
-              <span class="code">public/build</span> folders)
-            </p>
-          </section>
-          <section>
-            <p><span class="code">npm start</span></p>
-            <p>
-              Starts Node.js server in <span class="code">build</span> folder
-            </p>
-            <div class="tip fragment">
-              For deployment to common platforms consider using a template (see
-              <span class="code">README.md</span>)
-            </div>
-          </section>
-          <section>
-            <p><span class="code">npm run typecheck</span></p>
-            <p>
-              Runs TypeScript compiler to ensure type-safety in build pipeline
-              (<em>not</em>
-              done automatically by Remix compiler)
-            </p>
+            <h3><span class="code">NPM scripts (package.json)</span></h3>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="7|6,8|9"><script type="text/template">
+{
+  "name": "my-react-router-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
+  },
+          </script></code></pre>
           </section>
         </section>
 
