@@ -146,11 +146,11 @@
             <h3>Structure of the new setup</h3>
           </section>
           <section data-auto-animate>
-            <p>todo: folder structure</p>
+            <p>Folder structure</p>
             <img
               src="../img/react-router.png"
               alt="Initial files of Remix app folder"
-              width="300"
+              width="250"
             />
             <aside class="notes">Ask: What do you notice?</aside>
           </section>
@@ -189,7 +189,7 @@
                 <img
                   src="../img/react-router.png"
                   alt="Initial files of Remix app folder"
-                  width="300"
+                  width="250"
                 />
               </div>
             </div>
@@ -632,9 +632,10 @@ export default [
 
         <section>
           <section>
-            <h2>todo: copy&paste Solution from sample branch</h2>
+            <h2>Solution</h2>
+            <p>Matches the solution branch chapter-10-framework-mode</p>
           </section>
-
+          <!-- 
           <section>
             <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
               app/routes/
@@ -643,134 +644,109 @@ export default [
                   ├── pokemon.$pokemonName.tsx
                   └── profile.tsx
             </script></code></pre>
-          </section>
+          </section> -->
 
           <section>
-            <p><span class="code">app/routes/_index.tsx</span></p>
+            <p><span class="code">root.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
-              import { redirect } from "@remix-run/node";
+/* … imports, links & Layout component*/ 
 
-              export function loader() {
-                return redirect("pokemon");
-              }                     
+export default function Root() {
+const [username, setUsername] = useState("");
+
+const pokeVisit = usePokeVisit();
+
+return <PokeVisitContext.Provider value={pokeVisit}>
+    <UserContext.Provider
+      value={{
+        username,
+        setUsername,
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <Outlet/>
+      </QueryClientProvider>
+    </UserContext.Provider>
+  </PokeVisitContext.Provider>;
+}       
             </script></code></pre>
           </section>
 
           <section>
-            <p><span class="code">app/routes/pokemon._index.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="9,11-12|1-7|10|11|" data-id="code"><script type="text/template">
-              export async function loader() {
-                const pokemonList = await fetcher<PokemonResultDto>(
-                  "https://pokeapi.co/api/v2/pokemon?limit=1000",
-                );
-              
-                return json(pokemonList.results.map((p) => p.name));
-              }
-              
-              export default function ListPage() {
-                const pokemons = useLoaderData<typeof loader>();
-                return <PokeList pokemons={pokemons} />;
-              }
-            </script></code></pre>
-          </section>
-          <section>
-            <p><span class="code">app/routes/pokemon.$pokemonName.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="12,14-20|1-10|13|14-19|" data-id="code"><script type="text/template">
-              export async function loader({ params }: LoaderFunctionArgs) {
-                const pokemonDetail = await fetcher<PokemonDetailDto>(
-                  `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`,
-                );
-              
-                return json({
-                  name: pokemonDetail.name,
-                  imageUrl: pokemonDetail.sprites.front_shiny,
-                });
-              }
-              
-              export default function DetailPage() {
-                const pokemonDetail = useLoaderData<typeof loader>();
-                return (
-                  <div>
-                    <span>{pokemonDetail.name}</span>
-                    <img src={pokemonDetail.imageUrl} alt={pokemonDetail.name} />
-                  </div>
-                );
-              }
+            <p><span class="code">routes.ts</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="4|5-7" data-id="code"><script type="text/template">
+import {type RouteConfig, route} from "@react-router/dev/routes";
+
+export default [
+  route("/", "components/layout/Layout.tsx", [
+    route('pokemon', 'pages/list/ListPage.tsx'),
+    route('pokemon/:pokemonName', 'pages/details/DetailPage.tsx'),
+    route('profile', 'pages/profile/ProfilePage.tsx'),
+  ])
+] satisfies RouteConfig;
             </script></code></pre>
           </section>
 
           <section>
-            <p><span class="code">app/api/fetcher.ts</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="|4-6" data-id="code"><script type="text/template">
-              export async function fetcher<T>(uri: string, init?: RequestInit): Promise<T> {
-                const response = await fetch(uri, init);
-              
-                if (response.status === 404) {
-                  throw new Response(null, { status: 404, statusText: "Not found" });
-                }
+            <p><span class="code">pages/list/ListPage.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="6-8|10,12|11|4,10" data-id="code"><script type="text/template">
+import { fetcher } from "../../api/fetcher";
+import { type PokemonListDto } from "../../api/pokeApi";
+import { PokeList } from "../../components/poke-list/PokeList";
+import {type Route} from "../../../.react-router/types/src/pages/list/+types/ListPage";
 
-                if (!response.ok) throw new Error("Could not fetch data!");
-                return response.json();
-              }
+export async function loader(){
+  return fetcher<PokemonListDto>("https://pokeapi.co/api/v2/pokemon");
+}
+
+function ListPage({loaderData: data}: Route.ComponentProps) {
+  /* const data = useLoaderData<typeof loader>(); */
+  return <PokeList pokemons={data.results} />;
+}
             </script></code></pre>
+            <aside class="notes">
+              This implementation relies on the types created by react router
+              for the ComponentProps. The loaderData field is correctly typed,
+              the useLoaderData becomes obsolete. The component is only caring
+              about rendering, not data fetching and state handling. The
+              component has become so slim, that it should be merged with
+              PokeList
+            </aside>
           </section>
 
           <section>
-            <p><span class="code">app/components/layout/Layout.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="" data-id="code"><script type="text/template">
-              import { Link, Outlet } from "@remix-run/react";
-              import styles from "./Layout.module.css";
-              
-              export function Layout() {
-                return (
-                  <div className={styles.root}>
-                    <header>
-                      <nav>
-                        <Link to="/pokemon">Home</Link> | <Link to="/profile">Profile</Link>
-                      </nav>
-                    </header>
-                    <main>
-                      <Outlet />
-                    </main>
-                  </div>
-                );
-              }                                   
+            <p><span class="code">src\pages\details\DetailPage.tsx</span></p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="1-9|1-3|4-8|11-19" data-id="code"><script type="text/template">
+export async function loader({params}: Route.ComponentProps) {
+  const { pokemonName } = params
+  const uri = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+  try {
+    return fetcher<PokemonDetailDto>(uri);
+  } catch {
+    throw data("Pokemon Not Found", { status: 404 });
+  }
+}
+
+function DetailPage({loaderData: data, params: {pokemonName}}: Route.ComponentProps) {
+/* dispatch & useEffect for poke visit tracking */
+
+  return (
+    <div>
+      <h1>{pokemonName}</h1>
+      <img src={data?.sprites.front_shiny} alt={pokemonName} />
+    </div>
+  );
+}
+
             </script></code></pre>
           </section>
-
-          <section>
-            <p><span class="code">app/root.tsx</span></p>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="13" data-id="code"><script type="text/template">
-            …
-
-            export default function App() {
-              return (
-                <html lang="en">
-                  <head>
-                    <meta charSet="utf-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <Meta />
-                    <Links />
-                  </head>
-                  <body>
-                    <Layout />
-                    <ScrollRestoration />
-                    <Scripts />
-                    <LiveReload />
-                  </body>
-                </html>
-              );
-            }                         
-            </script></code></pre>
-          </section>
-
           <section>
             <p>
               Complete solution code can be found on GitHub on the branch
               <a
-                href="https://github.com/webplatformz/react-pokedex-remix/tree/02-data-fetching"
+                href="https://github.com/webplatformz/react-pokedex-vite/tree/chapter-10-framework-mode"
                 target="_blank"
-                ><span class="code">02-data-fetching</span></a
+                ><span class="code">chapter-10-framework-mode</span></a
               >.
             </p>
           </section>
