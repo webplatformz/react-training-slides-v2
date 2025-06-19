@@ -55,7 +55,7 @@ assignees: ""
 | Forms            | TBD         |
 | SideEffects      | TBD         |
 | State Management | TBD         |
-| Remix            | TBD         |
+| SSR              | TBD         |
 | Styling          | TBD         |
 
 ### Moderation

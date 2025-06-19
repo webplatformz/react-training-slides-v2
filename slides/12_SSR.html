@@ -149,7 +149,7 @@
             <p>Folder structure</p>
             <img
               src="../img/react-router.png"
-              alt="Initial files of Remix app folder"
+              alt="Initial files of react router app folder"
               width="250"
             />
             <aside class="notes">Ask: What do you notice?</aside>
@@ -162,11 +162,11 @@
                   <li class="fragment" data-fragment-index="4">
                     <span class="code">app/routes/*.tsx</span><br />
                     the component referenced in
-                    <span class="code">app/routes.tsx</span>
+                    <span class="code">app/routes.ts</span>
                   </li>
 
                   <li class="fragment" data-fragment-index="3">
-                    <span class="code">app/routes.tsx</span><br />configures the
+                    <span class="code">app/routes.ts</span><br />configures the
                     routes (more details in next chapter)
                   </li>
 
@@ -188,7 +188,7 @@
               <div>
                 <img
                   src="../img/react-router.png"
-                  alt="Initial files of Remix app folder"
+                  alt="Initial files of react router app folder"
                   width="250"
                 />
               </div>
@@ -237,6 +237,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) { … }
                 </li>
               </ol>
             </aside>
+          </section>
+          <section>
+            <h3><span class="code">app/routes.ts</span></h3>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="3"><script type="text/template">
+import { type RouteConfig, index } from "@react-router/dev/routes";
+
+export default [index("routes/home.tsx")] satisfies RouteConfig;
+          </script></code></pre>
           </section>
           <section>
             <h3><span class="code">react-router.config.ts</span></h3>
@@ -481,8 +489,8 @@ export default [
           <section>
             <p><span class="code">blog.$slug.tsx</span></p>
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,4,10|2,5-9|2,13-15" data-id="code"><script type="text/template">
-              import type { LoaderFunctionArgs } from "@remix-run/node";
-              import { json, useLoaderData } from "@remix-run/node";
+              import type { LoaderFunctionArgs } from "react-router";
+              import { json, useLoaderData } from "react-router";
 
               export async function loader({ request, params, context }: LoaderFunctionArgs) {
                 if (!params.slug) throw new Error("slug is required");
@@ -633,18 +641,7 @@ export default [
         <section>
           <section>
             <h2>Solution</h2>
-            <p>Matches the solution branch chapter-10-framework-mode</p>
           </section>
-          <!-- 
-          <section>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="6" data-id="code"><script type="text/template">
-              app/routes/
-                  ├── _index.tsx
-                  ├── pokemon._index.tsx
-                  ├── pokemon.$pokemonName.tsx
-                  └── profile.tsx
-            </script></code></pre>
-          </section> -->
 
           <section>
             <p><span class="code">root.tsx</span></p>
