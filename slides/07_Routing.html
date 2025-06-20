@@ -84,14 +84,15 @@
             </aside>
           </section>
           <section>
-            <p>React Router can be used in two different manners:</p>
+            <p>React Router can be used in two different modes:</p>
             <div class="comparison">
               <div class="fragment">
-                <h2 class="hl">Library</h2>
+                <h2 class="hl">Data</h2>
                 <ul>
                   <li>'Classic' React Router</li>
                   <li>For client-side-rendered React apps</li>
                   <li>Focused on routing</li>
+                  <li>Enables clientLoaders / clientActions</li>
                 </ul>
                 <p>We will start with this.</p>
               </div>
@@ -99,18 +100,30 @@
                 <h2 class="hl">Framework</h2>
                 <ul>
                   <li>
-                    Integrated solution with data fetching, actions, bundling,
-                    etc.
+                    Brings loaders/actions (server), typesafety and intelligent
+                    code splitting
                   </li>
-                  <li>Enables server-side rendering (SSR)</li>
+                  <li>
+                    Enables server-side rendering & static site generation
+                  </li>
+                  <li>Wraps the data mode</li>
                   <li>Previously known as <span class="hl">Remix</span></li>
                 </ul>
                 <p>
                   &rarr; Will be covered in
-                  <a href="./12_Remix.html">chapter 10</a>
+                  <a href="./12_SSR.html">chapter 10</a>
                 </p>
               </div>
             </div>
+            <aside class="notes">
+              <p>
+                There is also an older <span class="hl">Declerative mode</span>,
+                but it shouldn't be used anymore as it is quite limited and
+                holds little relevance in the future react-router journey. It is
+                based on <span class="code">&lt;Routes&gt;</span> and
+                <span class="code">&lt;Route&gt;</span> components
+              </p>
+            </aside>
           </section>
         </section>
         <section>
@@ -126,7 +139,7 @@
         </script></code></pre>
           </section>
           <section data-auto-animate>
-            <h3>How to Define Routes</h3>
+            <h3>How to define Routes</h3>
 
             <pre
               data-id="code"
@@ -139,7 +152,7 @@
             </script></code></pre>
           </section>
           <section data-auto-animate>
-            <h3>How to Define Routes</h3>
+            <h3>How to define Routes</h3>
 
             <pre
               data-id="code"
@@ -162,7 +175,7 @@
           </section>
 
           <section data-auto-animate>
-            <h3>How to Define Routes</h3>
+            <h3>How to define Routes</h3>
 
             <pre
               data-id="code"
@@ -189,7 +202,7 @@
             </p>
           </section>
           <section data-auto-animate>
-            <h3>How to Define Routes</h3>
+            <h3>How to define Routes</h3>
 
             <pre
               data-id="code"
