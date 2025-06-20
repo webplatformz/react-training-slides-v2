@@ -91,7 +91,7 @@
                   <li>'Classic' React Router</li>
                   <li>For client-side-rendered React apps</li>
                   <li>Focused on routing</li>
-                  <li>Provides API to optimize data fetching</li>
+                  <li>Enables clientLoaders / clientActions</li>
                 </ul>
                 <p>
                   &rarr; We used that in
@@ -101,7 +101,10 @@
               <div class="fragment">
                 <h2 class="hl">Framework</h2>
                 <ul>
-                  <li>Brings typesafety and intelligent code splitting</li>
+                  <li>
+                    Brings loaders/actions (server), typesafety and intelligent
+                    code splitting
+                  </li>
                   <li>Enables SSR & static site generation</li>
                   <li>Wraps the data mode</li>
                   <li>Previously known as <span class="hl">Remix</span></li>
@@ -1080,7 +1083,7 @@ export function loader() {
           </div>
           <p class="fragment tip">
             If unsure, go for client side rendering with framework mode (and
-            loaders)
+            clientLoaders)
           </p>
         </section>
         <section>
