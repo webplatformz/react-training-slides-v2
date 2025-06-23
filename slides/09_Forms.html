@@ -189,7 +189,7 @@
 
               function MyForm() {
                 const { register, handleSubmit, formState } = useForm<FormValues>();
-                const onSubmit: SubmitHandler<FormValues> = (data) => { console.log(data); };
+                const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
                 const onError: SubmitErrorHandler<FormValues> = (errors) => console.warn(errors);
 
                 return (

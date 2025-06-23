@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>First Components | Essential React</title>
+    <title>First components | Essential React</title>
 
     <link rel="icon" href="../img/zuehlke_logo.jpg" />
 
@@ -20,12 +20,12 @@
     <div class="reveal">
       <div class="slides">
         <section class="title-slide">
-          <h1>First Components</h1>
+          <h1>First components</h1>
           <h2>Essential React</h2>
         </section>
         <section>
           <section>
-            <h2>Simple React Component</h2>
+            <h2>Simple React component</h2>
             <span class="code">Greeting.tsx</span>
             <!-- prettier-ignore -->
             <pre>
@@ -69,7 +69,7 @@
             </aside>
           </section>
           <section>
-            <h3>Component Splitting</h3>
+            <h3>Component splitting</h3>
             <p>Importing another component</p>
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
@@ -215,30 +215,83 @@
           </section>
           <section>
             <h3>Define Props on a component</h3>
-
-            <p></p>
-            <!-- prettier-ignore -->
             <pre><code class="hljs jsx" data-trim><script type="text/template">
-                          type MyComponentProps = {
-                              name: string; // required prop
-                              age?: number; // optional prop
-                              wearsHat?: boolean; // optional prop with default value
-                          };
-  
-                          export function MyComponent({
-                            name,
-                            age,
-                            wearsHat = false,
-                          }: MyComponentProps) {
-                              return (
-                                <div>
-                                  <p>Name: {name}</p>
-                                  <p>Age: {age !== undefined ? age : "unknown"}</p>
-                                  <p>Wears hat: {wearsHat ? "yes" : "no"}</p>
-                                </div>
-                              );
-                          }
-                        </script></code></pre>
+              type MyComponentProps = {
+                  name: string; // required prop
+                  age?: number; // optional prop
+                  wearsHat?: boolean; // optional prop with default value
+              };
+
+              export function MyComponent({
+                name,
+                age,
+                wearsHat = false,
+              }: MyComponentProps) {
+                  return (
+                    <div>
+                      <p>Name: {name}</p>
+                      <p>Age: {age !== undefined ? age : "unknown"}</p>
+                      <p>Wears hat: {wearsHat ? "yes" : "no"}</p>
+                    </div>
+                  );
+              }
+            </script></code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>React render cycle</h2>
+            <p>
+              React updates the UI in two main phases:
+              <span class="hl">render</span> and <span class="hl">commit</span>.
+            </p>
+            <ul>
+              <li class="fragment">
+                <span class="hl">Render phase:</span> React calls your
+                components to figure out what to display (creates a virtual DOM
+                tree).
+              </li>
+              <li class="fragment">
+                <span class="hl">Commit phase:</span> React updates the real DOM
+                and runs effects.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>Example: Render and commit</h3>
+            <pre><code class="hljs jsx" data-trim><script type="text/template">
+              function MyComponent({ count }: {count: number}) {
+                return <h1>{count}</h1>;
+              }
+
+              export default function App() {
+                const [count, setCount] = useState(0);
+                return (
+                  <>
+                    <MyComponent count={count} />
+                    <button onClick={() => setCount(count + 1)}>
+                      Increment
+                    </button>
+                  </>
+                );
+              }
+            </script></code></pre>
+            <ul>
+              <li class="fragment">
+                Clicking the button triggers a state update.
+              </li>
+              <li class="fragment">
+                React re-runs <span class="code">App</span> and
+                <span class="code">MyComponent</span> (<span class="hl"
+                  >render phase</span
+                >).
+              </li>
+              <li class="fragment">
+                Then updates the minimal DOM (<span class="hl"
+                  >commit phase</span
+                >).
+              </li>
+            </ul>
           </section>
         </section>
         <section>
@@ -330,58 +383,47 @@
           <section>
             <h2>Testing our component</h2>
             <span class="code">Greeting.test.tsx</span>
-            <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8|"><script type="text/template">
+            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8"><script type="text/template">
               import { render, screen } from '@testing-library/react';
               import { Greeting } from './Greeting';
 
               describe('Greeting', () => {
-                  it('should render "Hello World"', () => {
-                      render(<Greeting />);
+                it('should render "Hello World"', () => {
+                  render(<Greeting />);
 
-                      expect(screen.getByText('Hello World')).toBeInTheDocument();
-                  });
+                  expect(screen.getByText('Hello World')).toBeInTheDocument();
+                });
               });
             </script></code></pre>
             <span class="code">npm run test</span>
           </section>
           <section>
-            <h2>TDD – Test Driven Development</h2>
-            <p>
-              Let us amend the component such that we can set the name through
-              an
-              <span class="code">name</span>
-              property.
-            </p>
-          </section>
-          <section>
-            <h3>Add new test case</h3>
+            <h3>Add a new test case</h3>
             <span class="code">Greeting.test.tsx</span>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs javascript" data-trim>
-                      <script type="text/template">
-                      it('should render correct name', () => {
-                        render(<Greeting name="React Master" />);
+            <pre><code class="hljs javascript" data-trim><script type="text/template">
+              it('should render correct name', () => {
+                render(<Greeting name="React Master" />);
 
-                        expect(screen.getByText("Hello React Master"))
-                          .toBeInTheDocument();
-                      });
-                      </script>
-                    </code>
-                </pre>
+                expect(screen.getByText("Hello React Master"))
+                  .toBeInTheDocument();
+              });
+            </script></code></pre>
+            <aside class="notes">
+              We could use a TDD (test driven development) approach to write an
+              additional test with the goal to amend the component such that we
+              can set the name through a name property.
+            </aside>
           </section>
           <section>
             <h3>Implement / Make the test green</h3>
             <span class="code">Greeting.tsx</span>
-            <!-- prettier-ignore -->
             <pre><code class="hljs jsx" data-trim><script type="text/template">
               type Props = {
-                  name?: string;
+                name?: string;
               };
 
               export function Greeting({ name = 'World' }: Props) {
-                  return <div>Hello {name}</div>;
+                return <div>Hello {name}</div>;
               }
             </script></code></pre>
           </section>
@@ -416,7 +458,6 @@
 
           <section>
             <h3>Follow-Up: Continuous Integration</h3>
-
             <p>
               On your CI pipeline you typically want to ensure the quality of
               the solution
@@ -435,7 +476,7 @@
 
         <section>
           <section>
-            <h2>List</h2>
+            <h2>Rendering lists</h2>
           </section>
           <section data-auto-animate>
             <p>
@@ -449,31 +490,32 @@
             <p>We can map to an HTML element or to a custom component.</p>
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,5-7|"><script type="text/template">
-                        const items = ['Apple', 'Orange', 'Mango'];
-                        export function List() {
-                            return (
-                                <ul>
-                                    {items.map(
-                                        item => <li key={item}>{item}</li>
-                                    )}
-                                </ul>
-                            );
-                        }</script></code></pre>
+              const items = ['Apple', 'Orange', 'Mango'];
+              export function List() {
+                  return (
+                      <ul>
+                          {items.map(
+                              item => <li key={item}>{item}</li>
+                          )}
+                      </ul>
+                  );
+              }
+            </script></code></pre>
           </section>
           <section data-auto-animate>
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
-                        const items = ['Apple', 'Orange', 'Mango'];
-                        export function List() {
-                            return (
-                                <ul>
-                                    {items.map(
-                                        item => <li key={item}>{item}</li>
-                                    )}
-                                </ul>
-                            );
-                        }</script></code></pre>
-
+              const items = ['Apple', 'Orange', 'Mango'];
+              export function List() {
+                  return (
+                      <ul>
+                          {items.map(
+                              item => <li key={item}>{item}</li>
+                          )}
+                      </ul>
+                  );
+              }
+            </script></code></pre>
             <p>
               The JSX element returned from
               <span class="code">map</span>
