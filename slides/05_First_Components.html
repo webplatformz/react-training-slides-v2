@@ -217,9 +217,9 @@
             <h3>Define Props on a component</h3>
             <pre><code class="hljs jsx" data-trim><script type="text/template">
               type MyComponentProps = {
-                  name: string; // required prop
-                  age?: number; // optional prop
-                  wearsHat?: boolean; // optional prop with default value
+                name: string; // required prop
+                age?: number; // optional prop
+                wearsHat?: boolean; // optional prop with default value
               };
 
               export function MyComponent({
@@ -227,14 +227,17 @@
                 age,
                 wearsHat = false,
               }: MyComponentProps) {
-                  return (
-                    <div>
-                      <p>Name: {name}</p>
-                      <p>Age: {age !== undefined ? age : "unknown"}</p>
-                      <p>Wears hat: {wearsHat ? "yes" : "no"}</p>
-                    </div>
-                  );
+                return (
+                  <div>
+                    <p>Name: {name}</p>
+                    <p>Age: {age !== undefined ? age : "unknown"}</p>
+                    <p>Wears hat: {wearsHat ? "yes" : "no"}</p>
+                  </div>
+                );
               }
+
+              // How to use the component:
+              <MyComponent name="John Wayne" age={32} wearsHat={true} />
             </script></code></pre>
           </section>
         </section>
@@ -808,8 +811,8 @@
             <pre>
                     <code class="hljs tsx" data-trim>
                         <script type="text/template">
-                        it('should render the passed pokémon name', () => {
-                            const name = 'Pickachu';
+                        it("should render the passed pokémon name", () => {
+                            const name = "Pickachu";
                             render(<PokeListEntry name={name} />);
                             expect(screen.getByText(name)).toBeInTheDocument();
                         });

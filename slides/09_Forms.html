@@ -139,7 +139,7 @@
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name</label>
                     <input id="name" type="text" ref={inputEl} />
-                    <input type="submit" value="Submit" />
+                    <button type="submit">Submit</button>
                   </form>
                 );
               }
@@ -192,6 +192,7 @@
                 const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
                 const onError: SubmitErrorHandler<FormValues> = (errors) => console.warn(errors);
 
+                // errors can be accessed using formState.errors
                 return (
                   <form onSubmit={handleSubmit(onSubmit, onError)}>
                     <input
@@ -203,7 +204,7 @@
                         },
                       })}
                     />
-                    <input type="submit" value="Submit"/>
+                    <button type="submit">Submit</button>
                   </form>
                 );
               }
@@ -233,7 +234,7 @@
             <p>
               Look at what validations
               <a
-                href="https://react-hook-form.com/api/useform/register"
+                href="https://react-hook-form.com/docs/useform/register"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -265,7 +266,7 @@
                     />
                     {errors.name && <span className={styles.errorMessage}>{errors.name.message}</span>}
                     
-                    <input type="submit" value="Save" />
+                    <button type="submit">Save</button>
                   </form>
                 );
               }
@@ -288,7 +289,7 @@
                       })}
                     />
                     {errors.email && <span className={styles.errorMessage}>{errors.email.message}</span>}
-                    <input type="submit" value="Save" />
+                    <button type="submit">Save</button>
                   </form>
                 );
               }
