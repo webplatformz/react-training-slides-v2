@@ -609,16 +609,16 @@
                 <script type="text/template">
                 import { PropsWithChildren } from "react"
 
-                type ContentContainerProps = PropsWithChildren<{
+                type PageLayoutProps = PropsWithChildren<{
                   title: string
                 }>;
 
-                function ContentContainer({
+                function PageLayout({
                   title,
                   children,
-                }: ContentContainerProps) {
+                }: PageLayoutProps) {
                   return (
-                    <div className="content-container">
+                    <div className="page-layout">
                       …
                     </div>
                   );
@@ -631,18 +631,18 @@
             <pre>
             <code class="hljs jsx" data-trim data-line-numbers="3,11" data-id="code">
                 <script type="text/template">
-                function ContentContainer({
+                function PageLayout({
                   title,
                   children,
-                }: ContentContainerProps) {
+                }: PageLayoutProps) {
                   return (
-                    <div className="content-container">
-                      <div className="heading">
+                    <div className="page-layout">
+                      <header>
                         <h1>{title}</h1>
-                      </div>
-                      <div className="content">
+                      </header>
+                      <main>
                         {children}
-                      </div>
+                      </main>
                     </div>
                   );
                 }
