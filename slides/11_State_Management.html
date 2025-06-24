@@ -647,9 +647,31 @@
               <span class="hl">state charts</span>
             </p>
           </section>
+        </section>
+        <section>
           <section>
             <h2>Rule of Thumb</h2>
             <p>Prefer simple solutions for state management</p>
+          </section>
+          <section>
+            <h2>Different types of state</h2>
+            <p>How is the state used and what is the source of truth?</p>
+
+            <div class="fragment">
+              <p>Server State: <span class="hl">Tanstack Query</span></p>
+            </div>
+            
+            <div class="fragment">
+              <p>Client State: <span class="hl">useState/useReducer</span></p>
+            </div>
+
+            <div class="fragment">
+              <p>Location State: <span class="hl">path, search params (e.g. /pokemon?limit=5&offset=5) </span></p>
+            </div>
+            
+            <div class="fragment">
+              <p>Global State: <span class="hl">Context, Redux, ...</span></p>
+            </div>
           </section>
         </section>
         <section>
