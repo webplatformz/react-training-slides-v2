@@ -209,8 +209,8 @@
             ><code class="hljs tsx" data-trim data-line-numbers="4,8"><script type="text/template">
               import { createBrowserRouter } from "react-router";
               import { RouterProvider } from "react-router/dom";
-              import { Page1 } from "./Page1.tsx";
-              import { Page2 } from "./Page2.tsx";
+              import Page1 from "./Page1.tsx";
+              import Page2 from "./Page2.tsx";
 
               const router = createBrowserRouter([
                 { path: '/page1', element: <Page1 /> },
@@ -228,7 +228,7 @@
             <p><span class="code">Page1.tsx</span></p>
 
             <pre><code class="hljs tsx" data-trim data-line-numbers=""><script type="text/template">
-              export function Page1() {
+              export default function Page1() {
                 return <p>This is page 1.</p>;
               }
             </script></code></pre>
@@ -259,7 +259,7 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="|1,4"><script type="text/template">
               import { useParams } from "react-router";
 
-              export function CarDetailPage() {
+              export default function CarDetailPage() {
                 const { carId } = useParams<"carId">();
                 return <p>This is the car with the ID {carId}.</p>;
               }
@@ -277,8 +277,8 @@
             <pre><code class="hljs tsx" data-trim data-line-numbers="1,7"><script type="text/template">
               import { createBrowserRouter, Navigate } from "react-router";
               import { RouterProvider } from "react-router/dom";
-              import { Page1 } from "./Page1.tsx";
-              import { Page2 } from "./Page2.tsx";
+              import Page1 from "./Page1.tsx";
+              import Page2 from "./Page2.tsx";
 
               const router = createBrowserRouter([
                 {path: '/', element: <Navigate to="/page1" replace />},
@@ -460,7 +460,7 @@ function App() {
               
               type LayoutProps = PropsWithChildren;
               
-              export function Layout({ children }: LayoutProps) {
+              export default function Layout({ children }: LayoutProps) {
                 return (
                   <div>
                     <header>
@@ -472,8 +472,6 @@ function App() {
                   </div>
                 );
               }
-              
-              
             </script></code></pre>
           </section>
           <section>
@@ -481,19 +479,16 @@ function App() {
 
             <pre><code class="hljs tsx" data-trim data-line-numbers="8"><script type="text/template">
               import { Layout } from "../../components/layout/Layout";
-              import { PokeList } from "../../components/poke-list/PokeList";
+              import PokeList from "../../components/poke-list/PokeList";
               import { pokemonList } from "../../mockData/list";
               
-              function ListPage() {
+              export default function ListPage() {
                 return (
                   <Layout>
                     <PokeList pokemons={pokemonList.results} />
                   </Layout>
                 );
               }
-              
-              export { ListPage };
-              
             </script></code></pre>
           </section>
           <section>
@@ -524,9 +519,9 @@ function App() {
             <pre><code class="hljs tsx" data-trim data-line-numbers="|6|8-9|11-18|"><script type="text/template">
               import { useParams } from "react-router";
               import { pokeDetails } from "../../mockData/details";
-              import { Layout } from "../../components/layout/Layout";
+              import Layout from "../../components/layout/Layout";
               
-              function DetailPage() {
+              export default function DetailPage() {
                 const { pokemonName } = useParams<"pokemonName">();
               
                 const pokemon = pokeDetails.find((p) => p.name === pokemonName);
@@ -538,8 +533,6 @@ function App() {
                   </Layout>
                 );
               }
-              
-              export { DetailPage };
             </script></code></pre>
           </section>
         </section>
@@ -607,7 +600,7 @@ function MyComponent() {
             ><code class="hljs tsx" data-trim data-line-numbers="1,3,8"><script type="text/template">
 import { Outlet } from "react-router";
 
-function Layout() {
+export default function Layout() {
   return (<div>
 
     {/* Navbar… */}
@@ -655,7 +648,7 @@ function MyComponent() {
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="2,8"><script type="text/template">
-function MyComponent() {
+export default function MyComponent() {
   const navigate = useNavigate();
 
   return <button onClick={() => {
@@ -682,7 +675,7 @@ function MyComponent() {
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="2,4-8"><script type="text/template">
-function MyComponent() {
+export default function MyComponent() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   console.log(searchParams.get("filter"));
@@ -713,7 +706,7 @@ function MyComponent() {
                 initialIndex: 1,
               });
 
-              function MyComponent() {
+              export default function MyComponent() {
                 return <RouterProvider router={router} />;
               }
             </script></code></pre>
