@@ -33,7 +33,7 @@
                         <script type="text/template">
                         const name = 'World';
 
-                        export function Greeting() {
+                        export default function Greeting() {
                             return (
                                 <div>
                                   <h1>Hello, {name}</h1>
@@ -74,9 +74,9 @@
             <span class="code">WelcomePage.tsx</span>
             <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="1,6|"><script type="text/template">
-                        import { Greeting } from './Greeting';
+                        import Greeting from './Greeting';
 
-                        export function WelcomePage() {
+                        export default function WelcomePage() {
                             return (
                               <div>
                                 <Greeting />
@@ -222,7 +222,7 @@
                 wearsHat?: boolean; // optional prop with default value
               };
 
-              export function MyComponent({
+              export default function MyComponent({
                 name,
                 age,
                 wearsHat = false,
@@ -388,7 +388,7 @@
             <span class="code">Greeting.test.tsx</span>
             <pre><code class="hljs javascript" data-trim data-line-numbers="4,5,9,10|1,2,6|1,8"><script type="text/template">
               import { render, screen } from '@testing-library/react';
-              import { Greeting } from './Greeting';
+              import Greeting from './Greeting';
 
               describe('Greeting', () => {
                 it('should render "Hello World"', () => {
@@ -494,7 +494,7 @@
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,5-7|"><script type="text/template">
               const items = ['Apple', 'Orange', 'Mango'];
-              export function List() {
+              export default function List() {
                   return (
                       <ul>
                           {items.map(
@@ -509,7 +509,7 @@
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
               const items = ['Apple', 'Orange', 'Mango'];
-              export function List() {
+              export default function List() {
                   return (
                       <ul>
                           {items.map(
@@ -547,7 +547,7 @@
                         import { Fragment } from "react";
 
                         const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
-                        export function List() {
+                        export default function List() {
                             return (
                                 <table>
                                   <tbody>
@@ -582,7 +582,7 @@
             <pre>
             <code class="hljs jsx" data-trim>
                 <script type="text/template">
-                export function App() {
+                export default function App() {
                   return (
                     <ContentContainer title="Profile">
                       <ProfilePicture />
@@ -726,7 +726,7 @@
 
                         const pokemons = [{name: 'Bulbasaur'}, {name: 'Pikachu'}];
 
-                        export function PokeList() {
+                        export default function PokeList() {
                           return (
                             <ul>
                               {pokemons.map((pokemon) => (
@@ -752,7 +752,7 @@
                           name: string;
                         };
 
-                        export function PokeListEntry({ name }: PokeListEntryProps) {
+                        export default function PokeListEntry({ name }: PokeListEntryProps) {
                           return <li>{name}</li>;
                         }
                         </script>
@@ -767,7 +767,7 @@
                         <script type="text/template">
                         type LayoutProps = PropsWithChildren;
 
-                        export function Layout({ children }: LayoutProps) {
+                        export default function Layout({ children }: LayoutProps) {
                           return (
                             <>
                               <header>
@@ -792,7 +792,7 @@
                         import Layout from "./Layout";
                         import PokeList from "./PokeList";
   
-                        export function App() {
+                        export default function App() {
                           return (
                             <Layout>
                               <PokeList />
