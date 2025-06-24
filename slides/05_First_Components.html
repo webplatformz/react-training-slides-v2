@@ -495,13 +495,13 @@
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,5-7|"><script type="text/template">
               const items = ['Apple', 'Orange', 'Mango'];
               export default function List() {
-                  return (
-                      <ul>
-                          {items.map(
-                              item => <li key={item}>{item}</li>
-                          )}
-                      </ul>
-                  );
+                return (
+                  <ul>
+                    {items.map(
+                      item => <li key={item}>{item}</li>
+                    )}
+                  </ul>
+                );
               }
             </script></code></pre>
           </section>
@@ -510,13 +510,13 @@
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6"><script type="text/template">
               const items = ['Apple', 'Orange', 'Mango'];
               export default function List() {
-                  return (
-                      <ul>
-                          {items.map(
-                              item => <li key={item}>{item}</li>
-                          )}
-                      </ul>
-                  );
+                return (
+                  <ul>
+                    {items.map(
+                      item => <li key={item}>{item}</li>
+                    )}
+                  </ul>
+                );
               }
             </script></code></pre>
             <p>
@@ -548,20 +548,20 @@
 
                         const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
                         export default function List() {
-                            return (
-                                <table>
-                                  <tbody>
-                                    {items.map(
-                                        item => (
-                                          <Fragment key={item.id}>
-                                            <tr>…</tr>
-                                            <tr>…</tr>
-                                          </Fragment>
-                                        )
-                                    )}
-                                  <tbody>
-                                </table>
-                            );
+                          return (
+                            <table>
+                              <tbody>
+                                {items.map(
+                                  item => (
+                                    <Fragment key={item.id}>
+                                      <tr>…</tr>
+                                      <tr>…</tr>
+                                    </Fragment>
+                                  )
+                                )}
+                              <tbody>
+                            </table>
+                          );
                         }</script></code></pre>
             <p class="fragment tip">
               <span>
@@ -731,8 +731,8 @@
                             <ul>
                               {pokemons.map((pokemon) => (
                                 <PokeListEntry
-                                    key={pokemon.name}
-                                    name={pokemon.name}
+                                  key={pokemon.name}
+                                  name={pokemon.name}
                                 />
                               ))}
                             </ul>
