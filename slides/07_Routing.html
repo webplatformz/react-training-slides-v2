@@ -504,7 +504,7 @@ function App() {
               export function PokeListEntry({ name }: PokeListEntryProps) {
                 return (
                   <li>
-                    <Link className="uppercase" to={`./${name}`}>
+                    <Link to={`./${name}`}>
                       {name}
                     </Link>
                   </li>
@@ -528,7 +528,7 @@ function App() {
               
                 return (
                   <Layout>
-                    <h1 className="uppercase">{pokemonName}</h1>
+                    <h1>{pokemonName}</h1>
                     <img src={pokemon?.sprites.front_shiny} alt={pokemonName} />
                   </Layout>
                 );
