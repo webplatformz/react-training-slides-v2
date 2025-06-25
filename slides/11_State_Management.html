@@ -66,9 +66,9 @@
             <pre class="fragment">
               <code class="hljs html" data-trim>
                 <script type="text/template">
-                <YourContext.Provider value={…}>
+                <YourContext value={…}>
                   … <!-- child components -->
-                <YourContext.Provider>
+                <YourContext>
                 </script>
               </code>
             </pre>
@@ -93,9 +93,9 @@
             function Parent() {
               const [name, setName] = useState("Joe");
               return (
-                <UserContext.Provider value={{ name, setName }}>
+                <UserContext value={{ name, setName }}>
                   <Child />
-                </UserContext.Provider>)
+                </UserContext>)
             }
 
             function Child() {
@@ -193,7 +193,7 @@
                       export function App() {
                         const [username, setUsername] = useState("");
                         return (
-                          <UserContext.Provider
+                          <UserContext
                             value={{
                               username,
                               setUsername
@@ -202,7 +202,7 @@
                             <Router>
                               …
                             </Router>
-                          </UserContext.Provider>
+                          </UserContext>
                         );
                       }
                     </script></code>
