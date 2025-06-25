@@ -26,21 +26,48 @@
         </section>
         <section>
           <section>
-            <h2>useEffect</h2>
-            <p>What is it good for?</p>
-          </section>
-          <section>
-            <h3>Valid use cases</h3>
+            <h2>Why Side Effects?</h2>
             <ul>
-              <li>Subscribing to events (window, ...)</li>
-              <li>Controlling a non-React component</li>
-              <li>Manually setting up a server connection</li>
-              <li>Sending an analytics log when a component appears</li>
+              <li class="fragment">
+                Subscribing to events (window, scrolling, ...)
+              </li>
+              <li class="fragment">Controlling a non-React component</li>
+              <li class="fragment">Manually setting up a server connection</li>
+              <li class="fragment">
+                Sending an analytics log when a component appears
+              </li>
             </ul>
           </section>
-
           <section>
-            <pre><code class="hljs tsx" data-trim data-line-numbers="13-22|9-11|7,1-4|"><script type="text/template">
+            <h2>Composition of the <span class="hl">useEffect</span> Hook</h2>
+            <p><span class="code">useEffect(setup, dependencies?)</span></p>
+            <ul>
+              <li>
+                setup: function that contains your effects logic (optionally
+                returns a cleanup function)
+              </li>
+              <li class="fragment">
+                (optional) dependencies: array of reactive values contained in
+                your effect
+              </li>
+            </ul>
+            <pre
+              class="fragment"
+            ><code class="hljs tsx" data-trim data-line-numbers="4|6|8"><script type="text/template">
+              export function MyComponent() {
+                const [counter, setCounter] = useState(0);
+              
+                useEffect(() => {...});
+
+                useEffect(() => {...}, []);
+
+                useEffect(() => {...}, [counter]);
+              }
+            </script></code></pre>
+          </section>
+          <section>
+            <p><span class="hl">useEffect</span> example</p>
+            <pre><code class="hljs tsx" data-trim data-line-numbers="10-22|10-12|7,1-4|"><script type="text/template">
               function getDimensions() {
                 const { innerWidth: width, innerHeight: height } = window;
                 return { width, height };
@@ -49,11 +76,11 @@
               export function MyComponent() {
                 const [windowDimensions, setWindowDimensions] = useState(getDimensions());
               
-                const handleResize = useCallback(() => {
-                  setWindowDimensions(getDimensions());
-                }, []);
-              
                 useEffect(() => {
+                  const handleResize = () => {
+                    setWindowDimensions(getDimensions());
+                  };
+
                   console.log("useEffect: Evaluated");
                   handleResize();
                   window.addEventListener('resize', handleResize);
@@ -66,10 +93,7 @@
 
                 …
               }
-          </script></code></pre>
-            <aside class="notes">
-              <p>Explain the dependency array here</p>
-            </aside>
+            </script></code></pre>
           </section>
           <section>
             <img
@@ -91,12 +115,8 @@
             </script></code></pre>
             <p>
               In development, when using
-              <em>Strict Mode</em>
-              , components are remounted: mount, unmount, mount.
-            </p>
-            <p>
-              Purpose:
-              <span class="hl">preventing bugs</span> in the app.
+              <span class="hl">Strict Mode</span>, components are remounted:
+              mount, unmount, mount.
             </p>
           </section>
           <section data-auto-animate>
@@ -120,8 +140,12 @@
             <h3>Cleanup is necessary for...</h3>
             <ul>
               <li>Unsubscribing from a pub-sub interface</li>
-              <li>Releasing resources to prevent a memory leak</li>
-              <li>Cancelling a network request/asynchronous operation</li>
+              <li class="fragment">
+                Releasing resources to prevent a memory leak
+              </li>
+              <li class="fragment">
+                Cancelling a network request/asynchronous operation
+              </li>
             </ul>
           </section>
           <section>
@@ -137,6 +161,11 @@
               <li>
                 Don't invoke callbacks on state change, whenever possible invoke
                 callbacks as part of event handling logic
+              </li>
+              <li>
+                <a href="https://react.dev/learn/you-might-not-need-an-effect"
+                  >You might not need an Effect</a
+                >
               </li>
             </ul>
             <aside class="notes">
@@ -234,22 +263,20 @@
             <p><span class="code">useWindowPaste.ts</span></p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="1|10-13|2-8"><script type="text/template">
+            ><code class="hljs tsx" data-trim data-line-numbers="1,13|3-8|10,12"><script type="text/template">
               export function useWindowPaste(onPasted: (value: string) => void) {
-                const handlePaste = useCallback(
-                  (event: ClipboardEvent) => {
+                useEffect(() => {
+                  const handlePaste = (event: ClipboardEvent) => {
                     const value = event.clipboardData?.getData("Text");
                     if (value) {
                       onPasted(value);
                     }
-                  },
-                  [onPasted]
-                );
-              
-                useEffect(() => {
+                  });
+                  
                   window.addEventListener("paste", handlePaste);
+
                   return () => window.removeEventListener("paste", handlePaste);
-                }, [handlePaste]);
+                }, [onPasted]);
               }
             </script></code></pre>
           </section>
@@ -257,7 +284,7 @@
             <p><span class="code">Profile.tsx</span></p>
             <pre
               data-id="code"
-            ><code class="hljs tsx" data-trim data-line-numbers="6|10"><script type="text/template">
+            ><code class="hljs tsx" data-trim data-line-numbers="6,11"><script type="text/template">
               export function Profile() {
                 const {
                   register,
@@ -265,10 +292,12 @@
                   formState: { errors },
                   setValue,
                 } = useForm<FormValues>();
+
                 const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
               
                 useWindowPaste((value) => setValue("name", `Dr. ${value}`));
-                /* … */  
+                
+                …
               }
             </script></code></pre>
           </section>
