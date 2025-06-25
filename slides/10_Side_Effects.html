@@ -89,7 +89,7 @@
                     console.log("useEffect: Cleanup evaluated");
                     window.removeEventListener('resize', handleResize);
                   };
-                }, [handleResize]);
+                }, [setWindowDimensions]);
 
                 …
               }
@@ -271,7 +271,7 @@
                     if (value) {
                       onPasted(value);
                     }
-                  });
+                  };
                   
                   window.addEventListener("paste", handlePaste);
 
