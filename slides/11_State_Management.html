@@ -136,10 +136,6 @@
           <section>
             <h2>Exercise</h2>
             <ul>
-              <li>
-                Enhance the profile component by prefilling the default form
-                values
-              </li>
               <li>Display the username globally (e.g. in the header)</li>
               <li>
                 Hint 1: Provide the context in the
@@ -150,22 +146,6 @@
                 Hooks
               </li>
             </ul>
-          </section>
-          <section>
-            <p>Default values can be provided to the form like this:</p>
-            <pre>
-                    <code class="hljs tsx" data-trim data-line-numbers="6-8"><script type="text/template">
-                    const {
-                      register,
-                      handleSubmit,
-                      formState: { errors }
-                    } = useForm<FormValues>({
-                      defaultValues: {
-                        username: 'joe'
-                      }
-                    });
-                    </script></code>
-                </pre>
           </section>
         </section>
         <section>
