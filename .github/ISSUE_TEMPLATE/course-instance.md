@@ -21,11 +21,13 @@ assignees: ""
   - check with all in a non-european timezone if they're aware and fine with CET course time
   - Communicate that we appreciate participation for the full course duration and no partial participation with come&go
   - possibly with hybrid approach (exercise room in camp zulu for interested people). People have to commit to the days on site - as we will organize lunch (at least, can add croisants)
-- [ ] Order a new collectors link for the Survey Monkey feedback form. Each link is different but points to the same form (e.g., [Feedback Form](https://de.surveymonkey.com/r/PTSDCGT))
+- [ ] `This changed, Feedback through WD only now!` Order a new collectors link for the Survey Monkey feedback form. Each link is different but points to the same form (e.g., [Feedback Form](https://de.surveymonkey.com/r/PTSDCGT)) 
 
 ### Latest 1 week before course
 
-
+- [ ] Check for interested people to have an exercise room on-site in Schlieren
+- [ ] If there is an on-site group in Schlieren, make Lunch Table reservations
+- [ ] Check with Bistro to provide Coffee&Gipfeli for the Breaks or even Lunch
 - [ ] Miro board has been prepared
   - [template](https://miro.com/app/dashboard/?tpTemplate=uXjVPb8UJMw%3D&isCustom=true&share_link_id=176973458557)
 - [ ] Chapter assignments are clear
