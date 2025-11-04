@@ -33,18 +33,14 @@
             </div>
             <div>
               <span class="number">02</span>
-              <span class="title">Setup</span>
-            </div>
-            <div>
-              <span class="number">03</span>
               <span class="title">Routing</span>
             </div>
             <div>
-              <span class="number">04</span>
+              <span class="number">03</span>
               <span class="title">Data Fetching</span>
             </div>
             <div>
-              <span class="number">05</span>
+              <span class="number">04</span>
               <span class="title">Forms & Actions</span>
             </div>
           </div>
@@ -111,35 +107,6 @@
                 <p></p>
               </div>
             </div>
-          </section>
-        </section>
-
-        <section>
-          <section class="subtitle-slide">
-            <h1>Setup</h1>
-          </section>
-          <section>
-            <h3>Create from scratch</h3>
-          </section>
-          <section>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|2-3|4-5|1-5|7|8|">
-                $ npx create-react-router@latest my-react-router-app
-                  ? Initialize a new git repository?
-                    > Yes
-                  ? Install dependencies with npm?
-                    > Yes
- 
-                $ cd ./my-react-router-app
-                $ npm run dev
-            </code></pre>
-          </section>
-          <section>
-            <h3>Migrate from component Routes to Framework</h3>
-            <a
-              href="https://reactrouter.com/upgrading/component-routes"
-              target="_blank"
-              >Migration Guide</a
-            >
           </section>
         </section>
 
@@ -588,55 +555,31 @@ export default [
             <h2>Exercise</h2>
           </section>
           <section>
-            <h3>Setup & Routing</h3>
+            <h3>Checkout SSR Samplecode and analyze</h3>
             <ol>
               <li class="fragment">
-                Use the changes visible or applicable via patch file from
+                Use the sample branch for
                 <a
-                  href="https://github.com/webplatformz/react-pokedex-vite/pull/3"
+                  href="https://github.com/webplatformz/react-pokedex-vite/tree/chapter-10-framework-mode"
                   target="_blank"
-                  >chapter 10 baseline</a
+                  >chapter 10</a
                 >
-                as a starting point
               </li>
               <li class="fragment">
-                Set up routes for pokemon list, pokemon detail, and profile
-                pages & react-router.config.ts
-              </li>
-              <li class="fragment">Test the SSR mode</li>
-            </ol>
-          </section>
-          <section>
-            <h3>Data Fetching</h3>
-            <ol>
-              <li class="fragment">
-                Load the data for the list and detail pages from the Poke API
+                Use the dev tools network tab do analyze what is being fetched
+                from the server. Use a prod build:
+                <span class="code">npm run build && npm run start</span>
               </li>
               <li class="fragment">
-                Show the Not Found page if an unknown pokemon name is passed in
-                the URL
+                <span class="hl">Stretch goal:</span> Explore the
+                <span class="code">&lt;Link prefetch=""&gt;</span> attribute in
+                <span class="code">PokeListEntry.tsx</span>
               </li>
               <li class="fragment">
                 <span class="hl">Stretch goal:</span> Transform the data from
                 the PokeAPI so that only the needed data is sent to the client
               </li>
             </ol>
-            <aside class="notes">
-              <ul>
-                <li>
-                  Hint: Inspect the Network Tab to better understand how SSR
-                  works.
-                  <ul>
-                    <li>
-                      What is loaded upon redirect, document load, and
-                      subsequent navigation?
-                    </li>
-
-                    <li>Make sure to not only look at Fetch/XHR requests.</li>
-                  </ul>
-                </li>
-              </ul>
-            </aside>
           </section>
         </section>
 
