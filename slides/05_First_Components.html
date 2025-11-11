@@ -307,12 +307,12 @@
             </p>
             <pre
               data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom jsdom --save-dev</script></code></pre>
+            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest@3 @testing-library/react @testing-library/jest-dom jsdom --save-dev</script></code></pre>
           </section>
           <section data-auto-animate>
             <pre
               data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom jsdom --save-dev</script></code></pre>
+            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest@3 @testing-library/react @testing-library/jest-dom jsdom --save-dev</script></code></pre>
             <p>
               The <span class="hl">jest-dom</span> package is required to
               integrate React Testing Library with Vitest.
@@ -356,7 +356,6 @@
             <h2>Configure</h2>
             <span class="code">vite.config.ts</span>
             <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|7-11"><script type="text/template">
-              /// <reference types="vitest" />
               import { defineConfig } from "vite";
               import react from "@vitejs/plugin-react-swc";
               
