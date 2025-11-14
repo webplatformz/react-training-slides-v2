@@ -574,13 +574,6 @@
           <section>
             <h2>
               <a
-                href="https://recoiljs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Recoil</a
-              >
-              /
-              <a
                 href="https://github.com/pmndrs/jotai"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -597,19 +590,15 @@
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim><script type="text/template">
-                    const textState = atom({
-                      key: 'textState',
-                      default: '',
-                    });
+                    // Outside of a React component
+                    const textState = atom('initial value');
                 </script></code></pre>
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim><script type="text/template">
-                    const [text, setText] = useRecoilState(textState);
+                    // Within a React component
+                    const [text, setText] = useAtom(textState);
                 </script></code></pre>
-            <div class="fragment tip">
-              As of 2022 recoil is still experimental
-            </div>
           </section>
           <section>
             <h2>
