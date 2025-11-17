@@ -66,9 +66,9 @@
             <pre class="fragment">
               <code class="hljs html" data-trim>
                 <script type="text/template">
-                <YourContext.Provider value={…}>
+                <YourContext value={…}>
                   … <!-- child components -->
-                <YourContext.Provider>
+                <YourContext>
                 </script>
               </code>
             </pre>
@@ -93,9 +93,9 @@
             function Parent() {
               const [name, setName] = useState("Joe");
               return (
-                <UserContext.Provider value={{ name, setName }}>
+                <UserContext value={{ name, setName }}>
                   <Child />
-                </UserContext.Provider>)
+                </UserContext>)
             }
 
             function Child() {
@@ -163,7 +163,7 @@
                     
                     export function useUserContext(): UserContextValue {
                       const context = useContext(UserContext);
-                      if (!context) throw new Error("…");
+                      if (!context) throw new Error("The userContext is not set up with a provider");
                       return context;
                     }
                     </script></code>
@@ -193,7 +193,7 @@
                       export function App() {
                         const [username, setUsername] = useState("");
                         return (
-                          <UserContext.Provider
+                          <UserContext
                             value={{
                               username,
                               setUsername
@@ -202,7 +202,7 @@
                             <Router>
                               …
                             </Router>
-                          </UserContext.Provider>
+                          </UserContext>
                         );
                       }
                     </script></code>
@@ -574,13 +574,6 @@
           <section>
             <h2>
               <a
-                href="https://recoiljs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Recoil</a
-              >
-              /
-              <a
                 href="https://github.com/pmndrs/jotai"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -597,19 +590,15 @@
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim><script type="text/template">
-                    const textState = atom({
-                      key: 'textState',
-                      default: '',
-                    });
+                    // Outside of a React component
+                    const textState = atom('initial value');
                 </script></code></pre>
             <pre
               data-id="code"
             ><code class="hljs tsx" data-trim><script type="text/template">
-                    const [text, setText] = useRecoilState(textState);
+                    // Within a React component
+                    const [text, setText] = useAtom(textState);
                 </script></code></pre>
-            <div class="fragment tip">
-              As of 2022 recoil is still experimental
-            </div>
           </section>
           <section>
             <h2>
@@ -640,17 +629,25 @@
             <div class="fragment">
               <p>Server State: <span class="hl">Tanstack Query</span></p>
             </div>
-            
+
             <div class="fragment">
               <p>Client State: <span class="hl">useState/useReducer</span></p>
             </div>
 
             <div class="fragment">
-              <p>Location State: <span class="hl">path, search params (e.g. /pokemon?limit=5&offset=5) </span></p>
+              <p>
+                Location State:
+                <span class="hl"
+                  >path, search params (e.g. /pokemon?limit=5&offset=5)
+                </span>
+              </p>
             </div>
-            
+
             <div class="fragment">
-              <p>Global State: <span class="hl">Context, Redux, Zustand, ...</span></p>
+              <p>
+                Global State:
+                <span class="hl">Context, Redux, Zustand, ...</span>
+              </p>
             </div>
           </section>
         </section>
