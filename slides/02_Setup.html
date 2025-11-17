@@ -47,11 +47,6 @@
               compare some aspects later (chapter 10) on with React Router
               Framework.
             </p>
-            <p class="fragment tip">
-              For all those that know
-              <em>Create React App</em>, please note that this project is
-              discontinued since April 2022.
-            </p>
           </section>
           <section>
             <h2>A word about client side rendering</h2>
@@ -375,9 +370,6 @@
               <li>Programmatically manipulate components</li>
             </ul>
           </section>
-          <section>
-            <p><img src="../img/react_developer_tools.png" /></p>
-          </section>
         </section>
 
         <section>
@@ -400,21 +392,110 @@
         </section>
 
         <section>
+          <section>
+            <h2>Exercise</h2>
+          </section>
+          <section>Set up a new React project using Vite</section>
+          <section>
+            <img
+              src="../img/exercise-goal-setup.png"
+              alt="Exercise goal"
+              height="550"
+            />
+          </section>
+          <section>
+            <h3>Hints</h3>
+            <ul>
+              <li>
+                [Optional] Clone the
+                <a
+                  target="_blank"
+                  href="https://github.com/webplatformz/react-pokedex-vite"
+                  rel="noopener noreferrer"
+                  >git repository</a
+                >
+              </li>
+              <li>
+                If you're setting up from scratch open your preferrerd terminal
+                and run:
+                <pre>
+                  <code class="hljs javascript" data-trim>
+                    $ npm create vite@latest [project-name e.g. pokedex-vite]
+                      > React
+                      > Typescript + SWC
+                      > No (rolldown vite)
+                      > Yes (install and run)
+                  </code>
+                </pre>
+                If you're setting up inside the git repo you can use "." as
+                project name
+              </li>
+              <li>
+                Stretch goal: Understand the wiring of the intial files. Hint:
+                index.html and src/main.tsx
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Solution</h2>
+          </section>
+          <section>
+            <span class="code">index.html</span>
+            <pre>
+              <code class="hljs tsx" data-trim data-line-numbers="6,7">
+                <script type="text/template">
+                  <html lang="en">
+                    <head>
+                      ...
+                    </head>
+                    <body>
+                      <div id="root"></div>
+                      <script type="module" src="/src/main.tsx" />
+                    </body>
+                  </html>
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <span class="code">main.tsx</span>
+            <pre>
+              <code class="hljs tsx" data-trim data-line-numbers="5,7">
+                <script type="text/template">
+                  import { StrictMode } from 'react'
+                  import { createRoot } from 'react-dom/client'
+                  import App from './App.tsx'
+
+                  createRoot(document.getElementById('root')!).render(
+                    <StrictMode>
+                      <App />
+                    </StrictMode>,
+                  )
+                </script>
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
           <h2>Excercise App</h2>
-          <p>This is the app we will build within this course.</p>
+          <p>We will build a small pokedex app with various small features.</p>
           <p>
             It is based on the open
             <a href="https://pokeapi.co">PokeAPI</a>.
           </p>
           <p>
             If you need to have a working base for a future excercise, you can
-            build on top of a sample implementation git repo:
+            build on top of the chapter branches in the sample implementation
             <a
-              href="https://github.com/webplatformz/react-pokedex-vite"
               target="_blank"
+              href="https://github.com/webplatformz/react-pokedex-vite"
               rel="noopener noreferrer"
-              >https://github.com/webplatformz/react-pokedex-vite</a
-            >
+              >git repository</a
+            >.
           </p>
         </section>
         <section>
@@ -423,13 +504,10 @@
           <p>We learned&hellip;</p>
 
           <ul>
-            <li>How React can be used?</li>
-            <li>
-              How to
-              <span class="hl">Vite with React</span>
-            </li>
+            <li>How React can be used</li>
             <li>What the JSX syntax is</li>
             <li>Which npm scripts are available with Vite</li>
+            <li>How to set up a React Project with Vite</li>
           </ul>
         </section>
         <section class="break-slide">
