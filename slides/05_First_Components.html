@@ -27,42 +27,36 @@
           <section>
             <h2>Simple React component</h2>
             <span class="code">Greeting.tsx</span>
-            <!-- prettier-ignore -->
-            <pre>
-                    <code class="hljs jsx" data-trim>
-                        <script type="text/template">
-                        const name = 'World';
+            <pre><code class="hljs jsx" data-trim><script type="text/template">
+              const name = 'World';
 
-                        export default function Greeting() {
-                            return (
-                                <div>
-                                  <h1>Hello, {name}</h1>
-                                  <p>This is your first component!</p>
-                                </div>
-                            );
-                        }
-                        </script>
-                    </code>
-                </pre>
+              export default function Greeting() {
+                return (
+                  <div>
+                    <h1>Hello, {name}</h1>
+                    <p>This is your first component!</p>
+                  </div>
+                );
+              }
+            </script></code></pre>
           </section>
           <section>
             <h3>Single-line vs. multi-line JSX</h3>
             <p>Multi-line JSX should always be wrapped in parentheses.</p>
-            <!-- prettier-ignore -->
-            <pre><code class="hljs jsx" data-trim data-line-numbers="2,6,11|"><script type="text/template">
-                        function SingleLineComponent() {
-                            return <p>Single-line without enclosing ()</p>;
-                        }
+            <pre><code class="hljs jsx" data-trim data-line-numbers="2,6,11"><script type="text/template">
+              function SingleLineComponent() {
+                return <p>Single-line without enclosing ()</p>;
+              }
 
-                        function MultiLineComponent() {
-                            return (
-                                <div>
-                                    <h1>Heading</h1>
-                                    <p>This is a multi-line component enclosed by ().</p>
-                                </div>
-                            );
-                        }
-                        </script></code></pre>
+              function MultiLineComponent() {
+                return (
+                  <div>
+                    <h1>Heading</h1>
+                    <p>This is a multi-line component enclosed by ().</p>
+                  </div>
+                );
+              }
+            </script></code></pre>
             <aside class="notes">
               Use a code formatter like
               <em>Prettier</em> helps here.
@@ -72,21 +66,20 @@
             <h3>Component splitting</h3>
             <p>Importing another component</p>
             <span class="code">WelcomePage.tsx</span>
-            <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="1,6|"><script type="text/template">
-                        import Greeting from './Greeting';
+            <pre><code class="hljs javascript" data-trim data-line-numbers="1,6"><script type="text/template">
+              import Greeting from './Greeting';
 
-                        export default function WelcomePage() {
-                            return (
-                              <div>
-                                <Greeting />
-                                <p>Other content</p>
-                              </div>
-                            );
-                        }
-                        </script></code></pre>
+              export default function WelcomePage() {
+                  return (
+                    <div>
+                      <Greeting />
+                      <p>Other content</p>
+                    </div>
+                  );
+              }
+            </script></code></pre>
             <div class="fragment tip">
-              Don't build monoliths. Split your components!
+              Don't build huge components - split them up meaningfully!
             </div>
           </section>
           <section>
@@ -138,7 +131,7 @@
             </aside>
           </section>
           <section data-auto-animate>
-            <h3>Fragments</h3>
+            <h2>Fragments</h2>
             <p>
               Components always return a
               <em>single node</em>.
@@ -149,33 +142,31 @@
               to avoid rendering an unnecessary
               <span class="code">&lt;div&gt;</span>.
             </p>
-            <!-- prettier-ignore -->
-            <pre><code class="hljs javascript" data-trim data-line-numbers="4,5|3,6|" data-id="code"><script type="text/template">
-                        function MyComponent() {
-                            return (
-                              <>
-                                <ChildComponent />
-                                <p>Other content</p>
-                              </>
-                            );
-                        }
-                        </script></code></pre>
+            <pre><code class="hljs typescript" data-trim data-line-numbers="4,5|3,6" data-id="code"><script type="text/template">
+              function MyComponent() {
+                return (
+                  <>
+                    <ChildComponent />
+                    <p>Other content</p>
+                  </>
+                );
+              }
+            </script></code></pre>
           </section>
           <section data-auto-animate>
             <h3>Fragments</h3>
-            <!-- prettier-ignore -->
             <pre><code class="hljs javascript" data-trim data-line-numbers="1,5,8" data-id="code"><script type="text/template">
-                        import { Fragment } from "react";
+              import { Fragment } from "react";
 
-                        function MyComponent() {
-                            return (
-                              <Fragment>
-                                <ChildComponent />
-                                <p>Other content</p>
-                              </Fragment>
-                            );
-                        }
-                        </script></code></pre>
+              function MyComponent() {
+                return (
+                  <Fragment>
+                    <ChildComponent />
+                    <p>Other content</p>
+                  </Fragment>
+                );
+              }
+            </script></code></pre>
             <p>
               Using the long-form
               <span class="code">Fragment</span>
@@ -261,8 +252,11 @@
             </ul>
           </section>
           <section>
+            <img src="../img/react-render-cycle.png" alt="React render cycle" />
+          </section>
+          <section>
             <h3>Example: Render and commit</h3>
-            <pre><code class="hljs jsx" data-trim><script type="text/template">
+            <pre><code class="hljs jsx" data-trim ><script type="text/template">
               function MyComponent({ count }: {count: number}) {
                 return <h1>{count}</h1>;
               }
@@ -307,17 +301,13 @@
             </p>
             <pre
               data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom jsdom --save-dev</script></code></pre>
-          </section>
-          <section data-auto-animate>
-            <pre
-              data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">npm install vitest @testing-library/react @testing-library/jest-dom jsdom --save-dev</script></code></pre>
+            ><code class="hljs zsh" data-trim><script type="text/template">
+              npm install vitest @testing-library/react @testing-library/jest-dom jsdom --save-dev
+            </script></code></pre>
             <p>
               The <span class="hl">jest-dom</span> package is required to
               integrate React Testing Library with Vitest.
             </p>
-
             <aside class="notes">
               <p>
                 jest-dom sets up the so-called matchers (see later code
@@ -334,9 +324,13 @@
               Add in the <span class="code">package.json</span> in the scripts
               section:
             </p>
-            <pre
-              data-id="code"
-            ><code class="hljs zsh" data-trim><script type="text/template">"test": "vitest",</script></code></pre>
+            <pre><code class="hljs zsh" data-trim><script type="text/template">
+              "test": "vitest",
+            </script></code></pre>
+            <p>or run directly in the console with</p>
+            <pre><code class="hljs zsh" data-trim><script type="text/template">
+              npm run vitest
+            </script></code></pre>
           </section>
           <section>
             <h2>Configure</h2>
@@ -346,7 +340,6 @@
               import { cleanup } from "@testing-library/react";
               import "@testing-library/jest-dom/vitest";
 
-              // runs a cleanup after each test case (e.g. clearing jsdom)
               afterEach(() => {
                 cleanup();
               });
@@ -355,7 +348,7 @@
           <section>
             <h2>Configure</h2>
             <span class="code">vite.config.ts</span>
-            <pre><code class="hljs no-highlight" data-trim data-line-numbers="1|7-11"><script type="text/template">
+            <pre><code class="hljs no-highlight" data-trim data-line-numbers="7-11"><script type="text/template">
               /// <reference types="vitest" />
               import { defineConfig } from "vite";
               import react from "@vitejs/plugin-react-swc";
@@ -460,7 +453,7 @@
           </section>
 
           <section>
-            <h3>Follow-Up: Continuous Integration</h3>
+            <h3>Quick Remark: Continuous Integration</h3>
             <p>
               On your CI pipeline you typically want to ensure the quality of
               the solution
@@ -492,7 +485,7 @@
 
             <p>We can map to an HTML element or to a custom component.</p>
             <!-- prettier-ignore -->
-            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,5-7|"><script type="text/template">
+            <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="1,5-7"><script type="text/template">
               const items = ['Apple', 'Orange', 'Mango'];
               export default function List() {
                 return (
@@ -526,7 +519,6 @@
               <span class="hl">key</span>
               prop.
             </p>
-
             <p class="fragment">
               This is a special prop used by React internally to distinguish the
               elements. It must be
@@ -544,25 +536,26 @@
             </p>
             <!-- prettier-ignore -->
             <pre data-id="code"><code class="hljs javascript" data-trim data-line-numbers="6-9,11-12,14-17|1,10,13"><script type="text/template">
-                        import { Fragment } from "react";
+              import { Fragment } from "react";
 
-                        const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
-                        export default function List() {
-                          return (
-                            <table>
-                              <tbody>
-                                {items.map(
-                                  item => (
-                                    <Fragment key={item.id}>
-                                      <tr>…</tr>
-                                      <tr>…</tr>
-                                    </Fragment>
-                                  )
-                                )}
-                              <tbody>
-                            </table>
-                          );
-                        }</script></code></pre>
+              const items = [{ id: 1, … }, { id: 2, … }, { id: 3, … }];
+              export default function List() {
+                return (
+                  <table>
+                    <tbody>
+                      {items.map(
+                        item => (
+                          <Fragment key={item.id}>
+                            <tr>…</tr>
+                            <tr>…</tr>
+                          </Fragment>
+                        )
+                      )}
+                    <tbody>
+                  </table>
+                );
+              }
+            </script></code></pre>
             <p class="fragment tip">
               <span>
                 Here we can't use the shorter
