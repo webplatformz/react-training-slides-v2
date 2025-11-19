@@ -443,10 +443,12 @@
             <h3>Dispatching Reducer Actions</h3>
             <pre><code class="hljs tsx" data-trim><script type="text/template">
               useEffect(() => {
-                pokemonName && dispatch({
-                  type: "add",
-                  value: pokemonName
-                });
+                if(pokemonName){
+                  dispatch({
+                    type: "add",
+                    value: pokemonName
+                  });
+                }
               }, [dispatch, pokemonName]);      
             </script></code></pre>
 
