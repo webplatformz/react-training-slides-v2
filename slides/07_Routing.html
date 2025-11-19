@@ -320,6 +320,13 @@
                 );
               }
             </script></code></pre>
+            <aside class="notes">
+              Why not just a regular anchor Tag? <pre><code><a href="/page1">Page 1</a></code></pre>
+              Because that would cause a full page reload (browser refresh) and
+              thus lose the current state of the React application. The Link
+              component from React Router prevents this and performs a client-side
+              navigation.
+            </aside>
           </section>
           <section>
             <h3>Cheat Sheet</h3>
