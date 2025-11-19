@@ -108,9 +108,9 @@
               data-id="code"
             ><code class="hljs tsx" data-trim data-line-numbers="2,4"><script type="text/template">
               ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-                <React.StrictMode>
+                <StrictMode>
                   <App />
-                </React.StrictMode>
+                </StrictMode>
               );
             </script></code></pre>
             <p>
@@ -154,9 +154,6 @@
               <li>
                 Don't use useEffect to update state based on props or state,
                 whenever possible calculate all dependent states on the fly
-                <br />
-                (if the calculation is expensive, use the
-                <span class="hl">useMemo</span> Hook)
               </li>
               <li>
                 Don't invoke callbacks on state change, whenever possible invoke

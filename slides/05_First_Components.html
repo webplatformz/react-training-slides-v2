@@ -329,7 +329,7 @@
             </script></code></pre>
             <p>or run directly in the console with</p>
             <pre><code class="hljs zsh" data-trim><script type="text/template">
-              npm run vitest
+              npx vitest
             </script></code></pre>
           </section>
           <section>
@@ -409,19 +409,6 @@
               additional test with the goal to amend the component such that we
               can set the name through a name property.
             </aside>
-          </section>
-          <section>
-            <h3>Implement / Make the test green</h3>
-            <span class="code">Greeting.tsx</span>
-            <pre><code class="hljs jsx" data-trim><script type="text/template">
-              type Props = {
-                name?: string;
-              };
-
-              export function Greeting({ name = 'World' }: Props) {
-                return <div>Hello {name}</div>;
-              }
-            </script></code></pre>
           </section>
           <section>
             <h2>Cheat Sheet</h2>
@@ -660,8 +647,8 @@
                 dummy links)
               </li>
               <li class="fragment">
-                Stretch Goal: Test your components using Vitest and React
-                Testing Library
+                <span class="hl">Stretch goal:</span> Test your components using
+                Vitest and React Testing Library
               </li>
             </ol>
           </section>
