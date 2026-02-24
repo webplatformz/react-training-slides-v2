@@ -1,3 +1,7 @@
+**Note:** This repository has been replaced by [https://codehub.zuehlke.com/essential-react/slides](https://codehub.zuehlke.com/essential-react/slides)
+
+----
+
 # Zühlke: Essential React Course
 
 The presentation uses [reveal.js](https://revealjs.com/) and customizations from the [zuehlke-reveal-package](https://github.com/Zuehlke/zuehlke-reveal-package).
