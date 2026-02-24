@@ -147,6 +147,14 @@
               </li>
             </ul>
           </section>
+          <section>
+            <h3>Stretch Goal</h3>
+            <ul>
+              <li>
+              Initialize the Profile form with the username from the context
+              </li>
+            </ul>
+          </section>
         </section>
         <section>
           <section>
@@ -229,6 +237,23 @@
                           </div>
                         );
                       }
+                    </script></code>
+                </pre>
+          </section>
+          <section>
+            <h3>Stretch Goal Solution</h3>
+            <p><span class="code">Profile.tsx</span></p>
+            <pre>
+                    <code class="hljs javascript" data-trim data-line-numbers="2,9"><script type="text/template">
+                       export function Profile() {
+                         const { setUsername, username } = useUserContext();
+
+                         const {
+                           register,
+                           handleSubmit,
+                           formState: { errors },
+                           setValue,
+                         } = useForm<FormValues>({defaultValues: {name: username}});
                     </script></code>
                 </pre>
           </section>
@@ -443,10 +468,12 @@
             <h3>Dispatching Reducer Actions</h3>
             <pre><code class="hljs tsx" data-trim><script type="text/template">
               useEffect(() => {
-                pokemonName && dispatch({
-                  type: "add",
-                  value: pokemonName
-                });
+                if(pokemonName){
+                  dispatch({
+                    type: "add",
+                    value: pokemonName
+                  });
+                }
               }, [dispatch, pokemonName]);      
             </script></code></pre>
 
